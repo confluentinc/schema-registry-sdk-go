@@ -61,6 +61,7 @@ Class | Method | HTTP request | Description
  - [ConfigUpdateRequest](docs/ConfigUpdateRequest.md)
  - [ModeGetResponse](docs/ModeGetResponse.md)
  - [ModeUpdateRequest](docs/ModeUpdateRequest.md)
+ - [RegisterSchemaRequest](docs/RegisterSchemaRequest.md)
  - [RegisterSchemaResponse](docs/RegisterSchemaResponse.md)
  - [Schema](docs/Schema.md)
  - [SchemaString](docs/SchemaString.md)
