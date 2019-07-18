@@ -1,4 +1,4 @@
-module github.com/GIT_USER_ID/GIT_REPO_ID
+module github.com/confluentinc/schema-registry-sdk-go
 
 require (
 	github.com/antihax/optional v0.0.0-20180406194304-ca021399b1a6
