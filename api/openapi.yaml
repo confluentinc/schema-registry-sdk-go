@@ -478,6 +478,22 @@ paths:
         required: true
         schema:
           type: string
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+        description: Schema
+        required: true
       responses:
         200:
           content:
@@ -507,6 +523,7 @@ paths:
         Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
         A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
         When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+      x-codegen-request-body-name: body
   /subjects/{subject}/versions/{version}:
     delete:
       operationId: deleteSchemaVersion
@@ -700,6 +717,21 @@ components:
         mode: mode
       properties:
         mode:
+          type: string
+      type: object
+    RegisterSchemaRequest:
+      example:
+        schema: schema
+        id: 6
+        version: 0
+      properties:
+        version:
+          format: int32
+          type: integer
+        id:
+          format: int32
+          type: integer
+        schema:
           type: string
       type: object
     RegisterSchemaResponse:

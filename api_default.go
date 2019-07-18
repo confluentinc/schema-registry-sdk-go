@@ -24,6 +24,153 @@ var (
 	_ context.Context
 )
 
+type DefaultApi interface {
+    /*
+    DefaultApiService Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject Name of the Subject
+    * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    @return int32
+    */
+    DeleteSchemaVersion(ctx context.Context, subject string, version string) (int32, *http.Response, error)
+    /*
+    DefaultApiService Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject the name of the subject
+    @return []int32
+    */
+    DeleteSubject(ctx context.Context, subject string) ([]int32, *http.Response, error)
+    /*
+    DefaultApiService Schema Registry Root Resource
+    The Root resource is a no-op.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return map[string]map[string]interface{}
+    */
+    Get(ctx context.Context) (map[string]map[string]interface{}, *http.Response, error)
+    /*
+    DefaultApiService
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject
+    @return ModeGetResponse
+    */
+    GetMode(ctx context.Context, subject string) (ModeGetResponse, *http.Response, error)
+    /*
+    DefaultApiService Get the schema string identified by the input ID.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param id Globally unique identifier of the schema
+    @return SchemaString
+    */
+    GetSchema(ctx context.Context, id int32) (SchemaString, *http.Response, error)
+    /*
+    DefaultApiService Get a specific version of the schema registered under this subject.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject Name of the Subject
+    * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    @return Schema
+    */
+    GetSchemaByVersion(ctx context.Context, subject string, version string) (Schema, *http.Response, error)
+    /*
+    DefaultApiService Get the avro schema for the specified version of this subject. The unescaped schema only is returned.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject Name of the Subject
+    * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    @return string
+    */
+    GetSchemaOnly(ctx context.Context, subject string, version string) (string, *http.Response, error)
+    /*
+    DefaultApiService Get compatibility level for a subject.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject
+    @return Config
+    */
+    GetSubjectLevelConfig(ctx context.Context, subject string) (Config, *http.Response, error)
+    /*
+    DefaultApiService Get global compatibility level.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return Config
+    */
+    GetTopLevelConfig(ctx context.Context) (Config, *http.Response, error)
+    /*
+    DefaultApiService
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return ModeGetResponse
+    */
+    GetTopLevelMode(ctx context.Context) (ModeGetResponse, *http.Response, error)
+    /*
+    DefaultApiService Get a list of registered subjects.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return []string
+    */
+    List(ctx context.Context) ([]string, *http.Response, error)
+    /*
+    DefaultApiService Get a list of versions registered under the specified subject.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject Name of the Subject
+    @return []int32
+    */
+    ListVersions(ctx context.Context, subject string) ([]int32, *http.Response, error)
+    /*
+    DefaultApiService Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject Subject under which the schema will be registered
+    * @param optional nil or *LookUpSchemaUnderSubjectOpts - Optional Parameters:
+    * @param "Deleted" (optional.Bool) - 
+    */
+    LookUpSchemaUnderSubject(ctx context.Context, subject string, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*http.Response, error)
+    /*
+    DefaultApiService
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return map[string]string
+    */
+    Post(ctx context.Context) (map[string]string, *http.Response, error)
+    /*
+    DefaultApiService Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject Name of the Subject
+    * @param body Schema
+    @return RegisterSchemaResponse
+    */
+    Register(ctx context.Context, subject string, body RegisterSchemaRequest) (RegisterSchemaResponse, *http.Response, error)
+    /*
+    DefaultApiService Test input schema against a particular version of a subject's schema for compatibility.
+    the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject&#39;s compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject Subject of the schema version against which compatibility is to be tested
+    * @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
+    * @param optional nil or *TestCompatabilityBySubjectNameOpts - Optional Parameters:
+    * @param "ContentType" (optional.String) - 
+    * @param "Accept" (optional.String) - 
+    @return CompatibilityCheckResponse
+    */
+    TestCompatabilityBySubjectName(ctx context.Context, subject string, version string, localVarOptionals *TestCompatabilityBySubjectNameOpts) (CompatibilityCheckResponse, *http.Response, error)
+    /*
+    DefaultApiService
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject
+    @return ModeUpdateRequest
+    */
+    UpdateMode(ctx context.Context, subject string) (ModeUpdateRequest, *http.Response, error)
+    /*
+    DefaultApiService Update compatibility level for the specified subject.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject Name of the Subject
+    @return ConfigUpdateRequest
+    */
+    UpdateSubjectLevelConfig(ctx context.Context, subject string) (ConfigUpdateRequest, *http.Response, error)
+    /*
+    DefaultApiService Update global compatibility level.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return ConfigUpdateRequest
+    */
+    UpdateTopLevelConfig(ctx context.Context) (ConfigUpdateRequest, *http.Response, error)
+    /*
+    DefaultApiService
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return ModeUpdateRequest
+    */
+    UpdateTopLevelMode(ctx context.Context) (ModeUpdateRequest, *http.Response, error)
+}
+
 type DefaultApiService service
 
 /*
@@ -33,7 +180,7 @@ DefaultApiService Deletes a specific version of the schema registered under this
  * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
 @return int32
 */
-func (a *DefaultApiService) DeleteSchemaVersion(ctx context.Context, subject string, version string) (int32, *http.Response, error) {
+func (a DefaultApiService) DeleteSchemaVersion(ctx context.Context, subject string, version string) (int32, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -121,7 +268,7 @@ DefaultApiService Deletes the specified subject and its associated compatibility
  * @param subject the name of the subject
 @return []int32
 */
-func (a *DefaultApiService) DeleteSubject(ctx context.Context, subject string) ([]int32, *http.Response, error) {
+func (a DefaultApiService) DeleteSubject(ctx context.Context, subject string) ([]int32, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -208,7 +355,7 @@ The Root resource is a no-op.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return map[string]map[string]interface{}
 */
-func (a *DefaultApiService) Get(ctx context.Context) (map[string]map[string]interface{}, *http.Response, error) {
+func (a DefaultApiService) Get(ctx context.Context) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -294,7 +441,7 @@ DefaultApiService
  * @param subject
 @return ModeGetResponse
 */
-func (a *DefaultApiService) GetMode(ctx context.Context, subject string) (ModeGetResponse, *http.Response, error) {
+func (a DefaultApiService) GetMode(ctx context.Context, subject string) (ModeGetResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -381,7 +528,7 @@ DefaultApiService Get the schema string identified by the input ID.
  * @param id Globally unique identifier of the schema
 @return SchemaString
 */
-func (a *DefaultApiService) GetSchema(ctx context.Context, id int32) (SchemaString, *http.Response, error) {
+func (a DefaultApiService) GetSchema(ctx context.Context, id int32) (SchemaString, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -469,7 +616,7 @@ DefaultApiService Get a specific version of the schema registered under this sub
  * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
 @return Schema
 */
-func (a *DefaultApiService) GetSchemaByVersion(ctx context.Context, subject string, version string) (Schema, *http.Response, error) {
+func (a DefaultApiService) GetSchemaByVersion(ctx context.Context, subject string, version string) (Schema, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -558,7 +705,7 @@ DefaultApiService Get the avro schema for the specified version of this subject.
  * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
 @return string
 */
-func (a *DefaultApiService) GetSchemaOnly(ctx context.Context, subject string, version string) (string, *http.Response, error) {
+func (a DefaultApiService) GetSchemaOnly(ctx context.Context, subject string, version string) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -646,7 +793,7 @@ DefaultApiService Get compatibility level for a subject.
  * @param subject
 @return Config
 */
-func (a *DefaultApiService) GetSubjectLevelConfig(ctx context.Context, subject string) (Config, *http.Response, error) {
+func (a DefaultApiService) GetSubjectLevelConfig(ctx context.Context, subject string) (Config, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -732,7 +879,7 @@ DefaultApiService Get global compatibility level.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return Config
 */
-func (a *DefaultApiService) GetTopLevelConfig(ctx context.Context) (Config, *http.Response, error) {
+func (a DefaultApiService) GetTopLevelConfig(ctx context.Context) (Config, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -817,7 +964,7 @@ DefaultApiService
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ModeGetResponse
 */
-func (a *DefaultApiService) GetTopLevelMode(ctx context.Context) (ModeGetResponse, *http.Response, error) {
+func (a DefaultApiService) GetTopLevelMode(ctx context.Context) (ModeGetResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -902,7 +1049,7 @@ DefaultApiService Get a list of registered subjects.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return []string
 */
-func (a *DefaultApiService) List(ctx context.Context) ([]string, *http.Response, error) {
+func (a DefaultApiService) List(ctx context.Context) ([]string, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -988,7 +1135,7 @@ DefaultApiService Get a list of versions registered under the specified subject.
  * @param subject Name of the Subject
 @return []int32
 */
-func (a *DefaultApiService) ListVersions(ctx context.Context, subject string) ([]int32, *http.Response, error) {
+func (a DefaultApiService) ListVersions(ctx context.Context, subject string) ([]int32, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1081,7 +1228,7 @@ type LookUpSchemaUnderSubjectOpts struct {
 	Deleted optional.Bool
 }
 
-func (a *DefaultApiService) LookUpSchemaUnderSubject(ctx context.Context, subject string, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*http.Response, error) {
+func (a DefaultApiService) LookUpSchemaUnderSubject(ctx context.Context, subject string, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1160,7 +1307,7 @@ DefaultApiService
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return map[string]string
 */
-func (a *DefaultApiService) Post(ctx context.Context) (map[string]string, *http.Response, error) {
+func (a DefaultApiService) Post(ctx context.Context) (map[string]string, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1244,9 +1391,10 @@ func (a *DefaultApiService) Post(ctx context.Context) (map[string]string, *http.
 DefaultApiService Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject Name of the Subject
+ * @param body Schema
 @return RegisterSchemaResponse
 */
-func (a *DefaultApiService) Register(ctx context.Context, subject string) (RegisterSchemaResponse, *http.Response, error) {
+func (a DefaultApiService) Register(ctx context.Context, subject string, body RegisterSchemaRequest) (RegisterSchemaResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1265,7 +1413,7 @@ func (a *DefaultApiService) Register(ctx context.Context, subject string) (Regis
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -1281,6 +1429,8 @@ func (a *DefaultApiService) Register(ctx context.Context, subject string) (Regis
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1344,7 +1494,7 @@ type TestCompatabilityBySubjectNameOpts struct {
 	Accept optional.String
 }
 
-func (a *DefaultApiService) TestCompatabilityBySubjectName(ctx context.Context, subject string, version string, localVarOptionals *TestCompatabilityBySubjectNameOpts) (CompatibilityCheckResponse, *http.Response, error) {
+func (a DefaultApiService) TestCompatabilityBySubjectName(ctx context.Context, subject string, version string, localVarOptionals *TestCompatabilityBySubjectNameOpts) (CompatibilityCheckResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1438,7 +1588,7 @@ DefaultApiService
  * @param subject
 @return ModeUpdateRequest
 */
-func (a *DefaultApiService) UpdateMode(ctx context.Context, subject string) (ModeUpdateRequest, *http.Response, error) {
+func (a DefaultApiService) UpdateMode(ctx context.Context, subject string) (ModeUpdateRequest, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1525,7 +1675,7 @@ DefaultApiService Update compatibility level for the specified subject.
  * @param subject Name of the Subject
 @return ConfigUpdateRequest
 */
-func (a *DefaultApiService) UpdateSubjectLevelConfig(ctx context.Context, subject string) (ConfigUpdateRequest, *http.Response, error) {
+func (a DefaultApiService) UpdateSubjectLevelConfig(ctx context.Context, subject string) (ConfigUpdateRequest, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1611,7 +1761,7 @@ DefaultApiService Update global compatibility level.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ConfigUpdateRequest
 */
-func (a *DefaultApiService) UpdateTopLevelConfig(ctx context.Context) (ConfigUpdateRequest, *http.Response, error) {
+func (a DefaultApiService) UpdateTopLevelConfig(ctx context.Context) (ConfigUpdateRequest, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1696,7 +1846,7 @@ DefaultApiService
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return ModeUpdateRequest
 */
-func (a *DefaultApiService) UpdateTopLevelMode(ctx context.Context) (ModeUpdateRequest, *http.Response, error) {
+func (a DefaultApiService) UpdateTopLevelMode(ctx context.Context) (ModeUpdateRequest, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
