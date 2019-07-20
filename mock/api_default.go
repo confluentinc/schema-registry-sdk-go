@@ -51,7 +51,7 @@ type DefaultApi struct {
 	ListVersionsFunc func(ctx context.Context, subject string) ([]int32, *net_http.Response, error)
 
 	lockLookUpSchemaUnderSubject sync.Mutex
-	LookUpSchemaUnderSubjectFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error)
+	LookUpSchemaUnderSubjectFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error)
 
 	lockPost sync.Mutex
 	PostFunc func(ctx context.Context) (map[string]string, *net_http.Response, error)
@@ -60,16 +60,16 @@ type DefaultApi struct {
 	RegisterFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error)
 
 	lockTestCompatabilityBySubjectName sync.Mutex
-	TestCompatabilityBySubjectNameFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatabilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error)
+	TestCompatabilityBySubjectNameFunc func(ctx context.Context, subject, version string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatabilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error)
 
 	lockUpdateMode sync.Mutex
 	UpdateModeFunc func(ctx context.Context, subject string) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
 
 	lockUpdateSubjectLevelConfig sync.Mutex
-	UpdateSubjectLevelConfigFunc func(ctx context.Context, subject string) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
+	UpdateSubjectLevelConfigFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTopLevelConfig sync.Mutex
-	UpdateTopLevelConfigFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
+	UpdateTopLevelConfigFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTopLevelMode sync.Mutex
 	UpdateTopLevelModeFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
@@ -125,6 +125,7 @@ type DefaultApi struct {
 		LookUpSchemaUnderSubject []struct {
 			Ctx               context.Context
 			Subject           string
+			Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts
 		}
 		Post []struct {
@@ -139,6 +140,7 @@ type DefaultApi struct {
 			Ctx               context.Context
 			Subject           string
 			Version           string
+			Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatabilityBySubjectNameOpts
 		}
 		UpdateMode []struct {
@@ -148,9 +150,11 @@ type DefaultApi struct {
 		UpdateSubjectLevelConfig []struct {
 			Ctx     context.Context
 			Subject string
+			Body    github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 		}
 		UpdateTopLevelConfig []struct {
-			Ctx context.Context
+			Ctx  context.Context
+			Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 		}
 		UpdateTopLevelMode []struct {
 			Ctx context.Context
@@ -648,7 +652,7 @@ func (m *DefaultApi) ListVersionsCalls() []struct {
 }
 
 // LookUpSchemaUnderSubject mocks base method by wrapping the associated func.
-func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error) {
+func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error) {
 	m.lockLookUpSchemaUnderSubject.Lock()
 	defer m.lockLookUpSchemaUnderSubject.Unlock()
 
@@ -659,16 +663,18 @@ func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject strin
 	call := struct {
 		Ctx               context.Context
 		Subject           string
+		Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
+		Body:              body,
 		LocalVarOptionals: localVarOptionals,
 	}
 
 	m.calls.LookUpSchemaUnderSubject = append(m.calls.LookUpSchemaUnderSubject, call)
 
-	return m.LookUpSchemaUnderSubjectFunc(ctx, subject, localVarOptionals)
+	return m.LookUpSchemaUnderSubjectFunc(ctx, subject, body, localVarOptionals)
 }
 
 // LookUpSchemaUnderSubjectCalled returns true if LookUpSchemaUnderSubject was called at least once.
@@ -683,6 +689,7 @@ func (m *DefaultApi) LookUpSchemaUnderSubjectCalled() bool {
 func (m *DefaultApi) LookUpSchemaUnderSubjectCalls() []struct {
 	Ctx               context.Context
 	Subject           string
+	Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts
 } {
 	m.lockLookUpSchemaUnderSubject.Lock()
@@ -774,7 +781,7 @@ func (m *DefaultApi) RegisterCalls() []struct {
 }
 
 // TestCompatabilityBySubjectName mocks base method by wrapping the associated func.
-func (m *DefaultApi) TestCompatabilityBySubjectName(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatabilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error) {
+func (m *DefaultApi) TestCompatabilityBySubjectName(ctx context.Context, subject, version string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatabilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error) {
 	m.lockTestCompatabilityBySubjectName.Lock()
 	defer m.lockTestCompatabilityBySubjectName.Unlock()
 
@@ -786,17 +793,19 @@ func (m *DefaultApi) TestCompatabilityBySubjectName(ctx context.Context, subject
 		Ctx               context.Context
 		Subject           string
 		Version           string
+		Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatabilityBySubjectNameOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
 		Version:           version,
+		Body:              body,
 		LocalVarOptionals: localVarOptionals,
 	}
 
 	m.calls.TestCompatabilityBySubjectName = append(m.calls.TestCompatabilityBySubjectName, call)
 
-	return m.TestCompatabilityBySubjectNameFunc(ctx, subject, version, localVarOptionals)
+	return m.TestCompatabilityBySubjectNameFunc(ctx, subject, version, body, localVarOptionals)
 }
 
 // TestCompatabilityBySubjectNameCalled returns true if TestCompatabilityBySubjectName was called at least once.
@@ -812,6 +821,7 @@ func (m *DefaultApi) TestCompatabilityBySubjectNameCalls() []struct {
 	Ctx               context.Context
 	Subject           string
 	Version           string
+	Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatabilityBySubjectNameOpts
 } {
 	m.lockTestCompatabilityBySubjectName.Lock()
@@ -862,7 +872,7 @@ func (m *DefaultApi) UpdateModeCalls() []struct {
 }
 
 // UpdateSubjectLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject string) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateSubjectLevelConfig.Lock()
 	defer m.lockUpdateSubjectLevelConfig.Unlock()
 
@@ -873,14 +883,16 @@ func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject strin
 	call := struct {
 		Ctx     context.Context
 		Subject string
+		Body    github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
+		Body:    body,
 	}
 
 	m.calls.UpdateSubjectLevelConfig = append(m.calls.UpdateSubjectLevelConfig, call)
 
-	return m.UpdateSubjectLevelConfigFunc(ctx, subject)
+	return m.UpdateSubjectLevelConfigFunc(ctx, subject, body)
 }
 
 // UpdateSubjectLevelConfigCalled returns true if UpdateSubjectLevelConfig was called at least once.
@@ -895,6 +907,7 @@ func (m *DefaultApi) UpdateSubjectLevelConfigCalled() bool {
 func (m *DefaultApi) UpdateSubjectLevelConfigCalls() []struct {
 	Ctx     context.Context
 	Subject string
+	Body    github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 } {
 	m.lockUpdateSubjectLevelConfig.Lock()
 	defer m.lockUpdateSubjectLevelConfig.Unlock()
@@ -903,7 +916,7 @@ func (m *DefaultApi) UpdateSubjectLevelConfigCalls() []struct {
 }
 
 // UpdateTopLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
 
@@ -912,14 +925,16 @@ func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context) (github_com_confl
 	}
 
 	call := struct {
-		Ctx context.Context
+		Ctx  context.Context
+		Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 	}{
-		Ctx: ctx,
+		Ctx:  ctx,
+		Body: body,
 	}
 
 	m.calls.UpdateTopLevelConfig = append(m.calls.UpdateTopLevelConfig, call)
 
-	return m.UpdateTopLevelConfigFunc(ctx)
+	return m.UpdateTopLevelConfigFunc(ctx, body)
 }
 
 // UpdateTopLevelConfigCalled returns true if UpdateTopLevelConfig was called at least once.
@@ -932,7 +947,8 @@ func (m *DefaultApi) UpdateTopLevelConfigCalled() bool {
 
 // UpdateTopLevelConfigCalls returns the calls made to UpdateTopLevelConfig.
 func (m *DefaultApi) UpdateTopLevelConfigCalls() []struct {
-	Ctx context.Context
+	Ctx  context.Context
+	Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 } {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
