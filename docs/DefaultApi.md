@@ -390,7 +390,7 @@ No authorization required
 
 ## LookUpSchemaUnderSubject
 
-> LookUpSchemaUnderSubject(ctx, subject, optional)
+> LookUpSchemaUnderSubject(ctx, subject, body, optional)
 Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
 
 ### Required Parameters
@@ -400,6 +400,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **subject** | **string**| Subject under which the schema will be registered | 
+**body** | [**RegisterSchemaRequest**](RegisterSchemaRequest.md)| Schema | 
  **optional** | ***LookUpSchemaUnderSubjectOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -409,6 +410,7 @@ Optional parameters are passed through a pointer to a LookUpSchemaUnderSubjectOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
  **deleted** | **optional.Bool**|  | 
 
@@ -422,7 +424,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json, application/octet-stream
 - **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -491,7 +493,7 @@ No authorization required
 
 ## TestCompatabilityBySubjectName
 
-> CompatibilityCheckResponse TestCompatabilityBySubjectName(ctx, subject, version, optional)
+> CompatibilityCheckResponse TestCompatabilityBySubjectName(ctx, subject, version, body, optional)
 Test input schema against a particular version of a subject's schema for compatibility.
 
 the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
@@ -504,6 +506,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **subject** | **string**| Subject of the schema version against which compatibility is to be tested | 
 **version** | **string**| Version of the subject&#39;s schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \&quot;latest\&quot;.\&quot;latest\&quot; checks compatibility of the input schema with the last registered schema under the specified subject | 
+**body** | [**RegisterSchemaRequest**](RegisterSchemaRequest.md)| Schema | 
  **optional** | ***TestCompatabilityBySubjectNameOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -513,6 +516,7 @@ Optional parameters are passed through a pointer to a TestCompatabilityBySubject
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
 
  **contentType** | **optional.String**|  | 
@@ -528,7 +532,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json, application/octet-stream
 - **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -569,7 +573,7 @@ No authorization required
 
 ## UpdateSubjectLevelConfig
 
-> ConfigUpdateRequest UpdateSubjectLevelConfig(ctx, subject)
+> ConfigUpdateRequest UpdateSubjectLevelConfig(ctx, subject, body)
 Update compatibility level for the specified subject.
 
 ### Required Parameters
@@ -579,6 +583,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **subject** | **string**| Name of the Subject | 
+**body** | [**ConfigUpdateRequest**](ConfigUpdateRequest.md)| Config Update Request | 
 
 ### Return type
 
@@ -590,7 +595,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json, application/octet-stream
 - **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -600,12 +605,16 @@ No authorization required
 
 ## UpdateTopLevelConfig
 
-> ConfigUpdateRequest UpdateTopLevelConfig(ctx, )
+> ConfigUpdateRequest UpdateTopLevelConfig(ctx, body)
 Update global compatibility level.
 
 ### Required Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**body** | [**ConfigUpdateRequest**](ConfigUpdateRequest.md)| Config Update Request | 
 
 ### Return type
 
@@ -617,7 +626,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json, application/octet-stream
 - **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

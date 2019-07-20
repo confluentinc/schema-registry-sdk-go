@@ -113,10 +113,11 @@ type DefaultApi interface {
     DefaultApiService Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param subject Subject under which the schema will be registered
+    * @param body Schema
     * @param optional nil or *LookUpSchemaUnderSubjectOpts - Optional Parameters:
     * @param "Deleted" (optional.Bool) - 
     */
-    LookUpSchemaUnderSubject(ctx context.Context, subject string, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*http.Response, error)
+    LookUpSchemaUnderSubject(ctx context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*http.Response, error)
     /*
     DefaultApiService
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -137,12 +138,13 @@ type DefaultApi interface {
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param subject Subject of the schema version against which compatibility is to be tested
     * @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
+    * @param body Schema
     * @param optional nil or *TestCompatabilityBySubjectNameOpts - Optional Parameters:
     * @param "ContentType" (optional.String) - 
     * @param "Accept" (optional.String) - 
     @return CompatibilityCheckResponse
     */
-    TestCompatabilityBySubjectName(ctx context.Context, subject string, version string, localVarOptionals *TestCompatabilityBySubjectNameOpts) (CompatibilityCheckResponse, *http.Response, error)
+    TestCompatabilityBySubjectName(ctx context.Context, subject string, version string, body RegisterSchemaRequest, localVarOptionals *TestCompatabilityBySubjectNameOpts) (CompatibilityCheckResponse, *http.Response, error)
     /*
     DefaultApiService
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -154,15 +156,17 @@ type DefaultApi interface {
     DefaultApiService Update compatibility level for the specified subject.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param subject Name of the Subject
+    * @param body Config Update Request
     @return ConfigUpdateRequest
     */
-    UpdateSubjectLevelConfig(ctx context.Context, subject string) (ConfigUpdateRequest, *http.Response, error)
+    UpdateSubjectLevelConfig(ctx context.Context, subject string, body ConfigUpdateRequest) (ConfigUpdateRequest, *http.Response, error)
     /*
     DefaultApiService Update global compatibility level.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param body Config Update Request
     @return ConfigUpdateRequest
     */
-    UpdateTopLevelConfig(ctx context.Context) (ConfigUpdateRequest, *http.Response, error)
+    UpdateTopLevelConfig(ctx context.Context, body ConfigUpdateRequest) (ConfigUpdateRequest, *http.Response, error)
     /*
     DefaultApiService
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1220,6 +1224,7 @@ func (a DefaultApiService) ListVersions(ctx context.Context, subject string) ([]
 DefaultApiService Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject Subject under which the schema will be registered
+ * @param body Schema
  * @param optional nil or *LookUpSchemaUnderSubjectOpts - Optional Parameters:
  * @param "Deleted" (optional.Bool) - 
 */
@@ -1228,7 +1233,7 @@ type LookUpSchemaUnderSubjectOpts struct {
 	Deleted optional.Bool
 }
 
-func (a DefaultApiService) LookUpSchemaUnderSubject(ctx context.Context, subject string, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*http.Response, error) {
+func (a DefaultApiService) LookUpSchemaUnderSubject(ctx context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1249,7 +1254,7 @@ func (a DefaultApiService) LookUpSchemaUnderSubject(ctx context.Context, subject
 		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
 	}
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -1265,6 +1270,8 @@ func (a DefaultApiService) LookUpSchemaUnderSubject(ctx context.Context, subject
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return nil, err
@@ -1483,6 +1490,7 @@ the compatibility level applied for the check is the configured compatibility le
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject Subject of the schema version against which compatibility is to be tested
  * @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
+ * @param body Schema
  * @param optional nil or *TestCompatabilityBySubjectNameOpts - Optional Parameters:
  * @param "ContentType" (optional.String) - 
  * @param "Accept" (optional.String) - 
@@ -1494,7 +1502,7 @@ type TestCompatabilityBySubjectNameOpts struct {
 	Accept optional.String
 }
 
-func (a DefaultApiService) TestCompatabilityBySubjectName(ctx context.Context, subject string, version string, localVarOptionals *TestCompatabilityBySubjectNameOpts) (CompatibilityCheckResponse, *http.Response, error) {
+func (a DefaultApiService) TestCompatabilityBySubjectName(ctx context.Context, subject string, version string, body RegisterSchemaRequest, localVarOptionals *TestCompatabilityBySubjectNameOpts) (CompatibilityCheckResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1514,7 +1522,7 @@ func (a DefaultApiService) TestCompatabilityBySubjectName(ctx context.Context, s
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -1536,6 +1544,8 @@ func (a DefaultApiService) TestCompatabilityBySubjectName(ctx context.Context, s
 	if localVarOptionals != nil && localVarOptionals.Accept.IsSet() {
 		localVarHeaderParams["Accept"] = parameterToString(localVarOptionals.Accept.Value(), "")
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1673,9 +1683,10 @@ func (a DefaultApiService) UpdateMode(ctx context.Context, subject string) (Mode
 DefaultApiService Update compatibility level for the specified subject.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject Name of the Subject
+ * @param body Config Update Request
 @return ConfigUpdateRequest
 */
-func (a DefaultApiService) UpdateSubjectLevelConfig(ctx context.Context, subject string) (ConfigUpdateRequest, *http.Response, error) {
+func (a DefaultApiService) UpdateSubjectLevelConfig(ctx context.Context, subject string, body ConfigUpdateRequest) (ConfigUpdateRequest, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1694,7 +1705,7 @@ func (a DefaultApiService) UpdateSubjectLevelConfig(ctx context.Context, subject
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -1710,6 +1721,8 @@ func (a DefaultApiService) UpdateSubjectLevelConfig(ctx context.Context, subject
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1759,9 +1772,10 @@ func (a DefaultApiService) UpdateSubjectLevelConfig(ctx context.Context, subject
 /*
 DefaultApiService Update global compatibility level.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body Config Update Request
 @return ConfigUpdateRequest
 */
-func (a DefaultApiService) UpdateTopLevelConfig(ctx context.Context) (ConfigUpdateRequest, *http.Response, error) {
+func (a DefaultApiService) UpdateTopLevelConfig(ctx context.Context, body ConfigUpdateRequest) (ConfigUpdateRequest, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1779,7 +1793,7 @@ func (a DefaultApiService) UpdateTopLevelConfig(ctx context.Context) (ConfigUpda
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -1795,6 +1809,8 @@ func (a DefaultApiService) UpdateTopLevelConfig(ctx context.Context) (ConfigUpda
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

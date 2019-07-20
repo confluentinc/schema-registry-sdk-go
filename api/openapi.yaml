@@ -85,6 +85,22 @@ paths:
         required: true
         schema:
           type: string
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+        description: Schema
+        required: true
       responses:
         200:
           content:
@@ -113,6 +129,7 @@ paths:
           description: Error code 50001 -- Error in the backend data store
       summary: Test input schema against a particular version of a subject's schema
         for compatibility.
+      x-codegen-request-body-name: body
   /config:
     get:
       operationId: getTopLevelConfig
@@ -135,6 +152,22 @@ paths:
       summary: Get global compatibility level.
     put:
       operationId: updateTopLevelConfig
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/ConfigUpdateRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/ConfigUpdateRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigUpdateRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/ConfigUpdateRequest'
+        description: Config Update Request
+        required: true
       responses:
         200:
           content:
@@ -157,6 +190,7 @@ paths:
             Error code 50001 -- Error in the backend data store
             Error code 50003 -- Error while forwarding the request to the primary
       summary: Update global compatibility level.
+      x-codegen-request-body-name: body
   /config/{subject}:
     get:
       operationId: getSubjectLevelConfig
@@ -195,6 +229,22 @@ paths:
         required: true
         schema:
           type: string
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/ConfigUpdateRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/ConfigUpdateRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigUpdateRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/ConfigUpdateRequest'
+        description: Config Update Request
+        required: true
       responses:
         200:
           content:
@@ -219,6 +269,7 @@ paths:
             Error code 50001 -- Error in the backend data store
             Error code 50003 -- Error while forwarding the request to the primary
       summary: Update compatibility level for the specified subject.
+      x-codegen-request-body-name: body
   /mode:
     get:
       operationId: getTopLevelMode
@@ -409,6 +460,22 @@ paths:
         name: deleted
         schema:
           type: boolean
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+        description: Schema
+        required: true
       responses:
         404:
           content: {}
@@ -430,6 +497,7 @@ paths:
       summary: Check if a schema has already been registered under the specified subject.
         If so, this returns the schema string along with its globally unique identifier,
         its version under this subject and the subject name.
+      x-codegen-request-body-name: body
   /subjects/{subject}/versions:
     get:
       operationId: listVersions
