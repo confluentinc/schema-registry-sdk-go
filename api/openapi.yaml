@@ -288,6 +288,22 @@ paths:
           description: successful operation
     put:
       operationId: updateTopLevelMode
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/ModeUpdateRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/ModeUpdateRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModeUpdateRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/ModeUpdateRequest'
+        description: Update Request
+        required: true
       responses:
         200:
           content:
@@ -301,6 +317,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ModeUpdateRequest'
           description: successful operation
+      x-codegen-request-body-name: body
   /mode/{subject}:
     get:
       operationId: getMode
@@ -331,6 +348,22 @@ paths:
         required: true
         schema:
           type: string
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/ModeUpdateRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/ModeUpdateRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModeUpdateRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/ModeUpdateRequest'
+        description: Update Request
+        required: true
       responses:
         200:
           content:
@@ -344,6 +377,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ModeUpdateRequest'
           description: successful operation
+      x-codegen-request-body-name: body
   /schemas/ids/{id}:
     get:
       operationId: getSchema
