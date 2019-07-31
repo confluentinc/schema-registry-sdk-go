@@ -63,7 +63,7 @@ type DefaultApi struct {
 	TestCompatabilityBySubjectNameFunc func(ctx context.Context, subject, version string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatabilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error)
 
 	lockUpdateMode sync.Mutex
-	UpdateModeFunc func(ctx context.Context, subject string) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
+	UpdateModeFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
 
 	lockUpdateSubjectLevelConfig sync.Mutex
 	UpdateSubjectLevelConfigFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
@@ -72,7 +72,7 @@ type DefaultApi struct {
 	UpdateTopLevelConfigFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTopLevelMode sync.Mutex
-	UpdateTopLevelModeFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
+	UpdateTopLevelModeFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
 
 	calls struct {
 		DeleteSchemaVersion []struct {
@@ -146,6 +146,7 @@ type DefaultApi struct {
 		UpdateMode []struct {
 			Ctx     context.Context
 			Subject string
+			Body    github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 		}
 		UpdateSubjectLevelConfig []struct {
 			Ctx     context.Context
@@ -157,7 +158,8 @@ type DefaultApi struct {
 			Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 		}
 		UpdateTopLevelMode []struct {
-			Ctx context.Context
+			Ctx  context.Context
+			Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 		}
 	}
 }
@@ -831,7 +833,7 @@ func (m *DefaultApi) TestCompatabilityBySubjectNameCalls() []struct {
 }
 
 // UpdateMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateMode(ctx context.Context, subject string) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateMode(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateMode.Lock()
 	defer m.lockUpdateMode.Unlock()
 
@@ -842,14 +844,16 @@ func (m *DefaultApi) UpdateMode(ctx context.Context, subject string) (github_com
 	call := struct {
 		Ctx     context.Context
 		Subject string
+		Body    github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
+		Body:    body,
 	}
 
 	m.calls.UpdateMode = append(m.calls.UpdateMode, call)
 
-	return m.UpdateModeFunc(ctx, subject)
+	return m.UpdateModeFunc(ctx, subject, body)
 }
 
 // UpdateModeCalled returns true if UpdateMode was called at least once.
@@ -864,6 +868,7 @@ func (m *DefaultApi) UpdateModeCalled() bool {
 func (m *DefaultApi) UpdateModeCalls() []struct {
 	Ctx     context.Context
 	Subject string
+	Body    github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 } {
 	m.lockUpdateMode.Lock()
 	defer m.lockUpdateMode.Unlock()
@@ -957,7 +962,7 @@ func (m *DefaultApi) UpdateTopLevelConfigCalls() []struct {
 }
 
 // UpdateTopLevelMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateTopLevelMode.Lock()
 	defer m.lockUpdateTopLevelMode.Unlock()
 
@@ -966,14 +971,16 @@ func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context) (github_com_conflue
 	}
 
 	call := struct {
-		Ctx context.Context
+		Ctx  context.Context
+		Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 	}{
-		Ctx: ctx,
+		Ctx:  ctx,
+		Body: body,
 	}
 
 	m.calls.UpdateTopLevelMode = append(m.calls.UpdateTopLevelMode, call)
 
-	return m.UpdateTopLevelModeFunc(ctx)
+	return m.UpdateTopLevelModeFunc(ctx, body)
 }
 
 // UpdateTopLevelModeCalled returns true if UpdateTopLevelMode was called at least once.
@@ -986,7 +993,8 @@ func (m *DefaultApi) UpdateTopLevelModeCalled() bool {
 
 // UpdateTopLevelModeCalls returns the calls made to UpdateTopLevelMode.
 func (m *DefaultApi) UpdateTopLevelModeCalls() []struct {
-	Ctx context.Context
+	Ctx  context.Context
+	Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 } {
 	m.lockUpdateTopLevelMode.Lock()
 	defer m.lockUpdateTopLevelMode.Unlock()

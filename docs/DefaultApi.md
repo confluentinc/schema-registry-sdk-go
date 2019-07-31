@@ -542,7 +542,7 @@ No authorization required
 
 ## UpdateMode
 
-> ModeUpdateRequest UpdateMode(ctx, subject)
+> ModeUpdateRequest UpdateMode(ctx, subject, body)
 
 
 ### Required Parameters
@@ -552,6 +552,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **subject** | **string**|  | 
+**body** | [**ModeUpdateRequest**](ModeUpdateRequest.md)| Update Request | 
 
 ### Return type
 
@@ -563,7 +564,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json, application/octet-stream
 - **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -636,12 +637,16 @@ No authorization required
 
 ## UpdateTopLevelMode
 
-> ModeUpdateRequest UpdateTopLevelMode(ctx, )
+> ModeUpdateRequest UpdateTopLevelMode(ctx, body)
 
 
 ### Required Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**body** | [**ModeUpdateRequest**](ModeUpdateRequest.md)| Update Request | 
 
 ### Return type
 
@@ -653,7 +658,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json, application/octet-stream
 - **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

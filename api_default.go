@@ -149,9 +149,10 @@ type DefaultApi interface {
     DefaultApiService
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param subject
+    * @param body Update Request
     @return ModeUpdateRequest
     */
-    UpdateMode(ctx context.Context, subject string) (ModeUpdateRequest, *http.Response, error)
+    UpdateMode(ctx context.Context, subject string, body ModeUpdateRequest) (ModeUpdateRequest, *http.Response, error)
     /*
     DefaultApiService Update compatibility level for the specified subject.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -170,9 +171,10 @@ type DefaultApi interface {
     /*
     DefaultApiService
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param body Update Request
     @return ModeUpdateRequest
     */
-    UpdateTopLevelMode(ctx context.Context) (ModeUpdateRequest, *http.Response, error)
+    UpdateTopLevelMode(ctx context.Context, body ModeUpdateRequest) (ModeUpdateRequest, *http.Response, error)
 }
 
 type DefaultApiService service
@@ -1596,9 +1598,10 @@ func (a DefaultApiService) TestCompatabilityBySubjectName(ctx context.Context, s
 DefaultApiService
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject
+ * @param body Update Request
 @return ModeUpdateRequest
 */
-func (a DefaultApiService) UpdateMode(ctx context.Context, subject string) (ModeUpdateRequest, *http.Response, error) {
+func (a DefaultApiService) UpdateMode(ctx context.Context, subject string, body ModeUpdateRequest) (ModeUpdateRequest, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1617,7 +1620,7 @@ func (a DefaultApiService) UpdateMode(ctx context.Context, subject string) (Mode
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -1633,6 +1636,8 @@ func (a DefaultApiService) UpdateMode(ctx context.Context, subject string) (Mode
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1860,9 +1865,10 @@ func (a DefaultApiService) UpdateTopLevelConfig(ctx context.Context, body Config
 /*
 DefaultApiService
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param body Update Request
 @return ModeUpdateRequest
 */
-func (a DefaultApiService) UpdateTopLevelMode(ctx context.Context) (ModeUpdateRequest, *http.Response, error) {
+func (a DefaultApiService) UpdateTopLevelMode(ctx context.Context, body ModeUpdateRequest) (ModeUpdateRequest, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -1880,7 +1886,7 @@ func (a DefaultApiService) UpdateTopLevelMode(ctx context.Context) (ModeUpdateRe
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -1896,6 +1902,8 @@ func (a DefaultApiService) UpdateTopLevelMode(ctx context.Context) (ModeUpdateRe
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &body
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
