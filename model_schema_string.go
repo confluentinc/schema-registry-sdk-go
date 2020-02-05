@@ -10,6 +10,12 @@
 package schemaregistry
 
 type SchemaString struct {
+	// Schema type
+	SchemaType string `json:"schemaType,omitempty"`
 	// Schema string identified by the ID
 	Schema string `json:"schema,omitempty"`
+	// Schema references
+	References []SchemaReference `json:"references,omitempty"`
+	// Maximum ID
+	MaxId int32 `json:"maxId,omitempty"`
 }

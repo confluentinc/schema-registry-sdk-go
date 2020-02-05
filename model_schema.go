@@ -13,5 +13,7 @@ type Schema struct {
 	Subject string `json:"subject,omitempty"`
 	Version int32 `json:"version,omitempty"`
 	Id int32 `json:"id,omitempty"`
+	SchemaType string `json:"schemaType,omitempty"`
+	References []SchemaReference `json:"references,omitempty"`
 	Schema string `json:"schema,omitempty"`
 }

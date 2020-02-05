@@ -59,7 +59,7 @@ paths:
         compatibility level for the subject (http:get:: /config/(string: subject)).
         If this subject''s compatibility level was never changed, then the global
         compatibility level applies (http:get:: /config).'
-      operationId: testCompatabilityBySubjectName
+      operationId: testCompatibilityBySubjectName
       parameters:
       - in: header
         name: Content-Type
@@ -200,6 +200,10 @@ paths:
         required: true
         schema:
           type: string
+      - in: query
+        name: defaultToGlobal
+        schema:
+          type: boolean
       responses:
         200:
           content:
@@ -389,6 +393,11 @@ paths:
         schema:
           format: int32
           type: integer
+      - in: query
+        name: fetchMaxId
+        schema:
+          default: false
+          type: boolean
       responses:
         200:
           content:
@@ -411,6 +420,48 @@ paths:
           description: |
             Error code 50001 -- Error in the backend data store
       summary: Get the schema string identified by the input ID.
+  /schemas/ids/{id}/subjects:
+    get:
+      operationId: getSubjects
+      parameters:
+      - description: Globally unique identifier of the schema
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  type: string
+                type: array
+                uniqueItems: true
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  type: string
+                type: array
+                uniqueItems: true
+            application/json; qs=0.5:
+              schema:
+                items:
+                  type: string
+                type: array
+                uniqueItems: true
+          description: successful operation
+        404:
+          content: {}
+          description: |
+            Error code 40403 -- Schema not found
+        500:
+          content: {}
+          description: |
+            Error code 50001 -- Error in the backend data store
+      summary: Get all the subjects associated with the input ID.
   /subjects:
     get:
       operationId: list
@@ -696,6 +747,10 @@ paths:
         required: true
         schema:
           type: string
+      - in: query
+        name: deleted
+        schema:
+          type: boolean
       responses:
         200:
           content:
@@ -740,6 +795,10 @@ paths:
         required: true
         schema:
           type: string
+      - in: query
+        name: deleted
+        schema:
+          type: boolean
       responses:
         200:
           content:
@@ -766,6 +825,27 @@ paths:
           description: Error code 50001 -- Error in the backend data store
       summary: Get the avro schema for the specified version of this subject. The
         unescaped schema only is returned.
+  /v1/metadata/id:
+    get:
+      operationId: getClusterId
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ServerClusterId'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ServerClusterId'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ServerClusterId'
+          description: successful operation
+        500:
+          content: {}
+          description: |
+            Error code 50001 -- Error in the backend data store
+      summary: Get the server metadata
 components:
   schemas:
     CompatibilityCheckResponse:
@@ -824,6 +904,14 @@ components:
     RegisterSchemaRequest:
       example:
         schema: schema
+        references:
+        - subject: subject
+          name: name
+          version: 1
+        - subject: subject
+          name: name
+          version: 1
+        schemaType: schemaType
         id: 6
         version: 0
       properties:
@@ -833,6 +921,12 @@ components:
         id:
           format: int32
           type: integer
+        schemaType:
+          type: string
+        references:
+          items:
+            $ref: '#/components/schemas/SchemaReference'
+          type: array
         schema:
           type: string
       type: object
@@ -847,7 +941,15 @@ components:
     Schema:
       example:
         schema: schema
+        references:
+        - subject: subject
+          name: name
+          version: 1
+        - subject: subject
+          name: name
+          version: 1
         subject: subject
+        schemaType: schemaType
         id: 6
         version: 0
       properties:
@@ -859,14 +961,71 @@ components:
         id:
           format: int32
           type: integer
+        schemaType:
+          type: string
+        references:
+          items:
+            $ref: '#/components/schemas/SchemaReference'
+          type: array
         schema:
           type: string
+      type: object
+    SchemaReference:
+      example:
+        subject: subject
+        name: name
+        version: 1
+      properties:
+        name:
+          type: string
+        subject:
+          type: string
+        version:
+          format: int32
+          minimum: 1
+          type: integer
       type: object
     SchemaString:
       example:
         schema: schema
+        maxId: 0
+        references:
+        - subject: subject
+          name: name
+          version: 1
+        - subject: subject
+          name: name
+          version: 1
+        schemaType: schemaType
       properties:
+        schemaType:
+          description: Schema type
+          type: string
         schema:
           description: Schema string identified by the ID
+          type: string
+        references:
+          description: Schema references
+          items:
+            $ref: '#/components/schemas/SchemaReference'
+          type: array
+        maxId:
+          description: Maximum ID
+          format: int32
+          type: integer
+      type: object
+    ServerClusterId:
+      example:
+        scope:
+          key: '{}'
+        id: id
+      properties:
+        scope:
+          additionalProperties:
+            properties: {}
+            type: object
+          readOnly: true
+          type: object
+        id:
           type: string
       type: object
