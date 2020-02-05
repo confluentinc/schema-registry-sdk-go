@@ -9,11 +9,8 @@
 
 package schemaregistry
 
-type Schema struct {
+type SchemaReference struct {
+	Name string `json:"name,omitempty"`
 	Subject string `json:"subject,omitempty"`
 	Version int32 `json:"version,omitempty"`
-	Id int32 `json:"id,omitempty"`
-	SchemaType string `json:"schemaType,omitempty"`
-	References []SchemaReference `json:"references,omitempty"`
-	Schema string `json:"schema,omitempty"`
 }
