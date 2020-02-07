@@ -1,0 +1,35 @@
+version: v1.0
+name: schema-registry-sdk-go
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Build
+    task:
+      secrets:
+        - name: semaphore-secrets-global
+        - name: artifactory-docker-helm
+        - name: aws_credentials
+        - name: cpd_gcloud
+        - name: ssh_id_rsa
+        - name: netrc
+        - name: ssh_config
+        - name: gitconfig
+      prologue:
+        commands:
+          - sem-version go 1.12
+          - export "GOPATH=$(go env GOPATH)"
+          - export "SEMAPHORE_GIT_DIR=${GOPATH}/src/github.com/confluentinc/${SEMAPHORE_PROJECT_NAME}"
+          - export "PATH=${GOPATH}/bin:${PATH}"
+          - mkdir -vp "${SEMAPHORE_GIT_DIR}" "${GOPATH}/bin"
+          - git config --global url."git@github.com:".insteadOf "https://github.com/"
+          - chmod 400 ~/.ssh/id_rsa
+          - export SEMAPHORE_CACHE_DIR=/home/semaphore
+      jobs:
+        - commands:
+            - checkout
+            - sem-version go 1.12
+            - go get -t -d -v ./...
+            - go build -v ./...
+            - go test -v ./...
