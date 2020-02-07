@@ -7,15 +7,6 @@ agent:
 blocks:
   - name: Build
     task:
-      secrets:
-        - name: semaphore-secrets-global
-        - name: artifactory-docker-helm
-        - name: aws_credentials
-        - name: cpd_gcloud
-        - name: ssh_id_rsa
-        - name: netrc
-        - name: ssh_config
-        - name: gitconfig
       prologue:
         commands:
           - sem-version go 1.12
