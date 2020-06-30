@@ -122,7 +122,7 @@ paths:
         422:
           content: {}
           description: |-
-            Error code 42201 -- Invalid Avro schema
+            Error code 42201 -- Invalid schema or schema type
             Error code 42202 -- Invalid version
         500:
           content: {}
@@ -394,6 +394,10 @@ paths:
           format: int32
           type: integer
       - in: query
+        name: format
+        schema:
+          type: string
+      - in: query
         name: fetchMaxId
         schema:
           default: false
@@ -462,9 +466,83 @@ paths:
           description: |
             Error code 50001 -- Error in the backend data store
       summary: Get all the subjects associated with the input ID.
+  /schemas/ids/{id}/versions:
+    get:
+      operationId: getVersions
+      parameters:
+      - description: Globally unique identifier of the schema
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int32
+          type: integer
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SubjectVersion'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SubjectVersion'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SubjectVersion'
+                type: array
+          description: successful operation
+        404:
+          content: {}
+          description: |
+            Error code 40403 -- Schema not found
+        500:
+          content: {}
+          description: |
+            Error code 50001 -- Error in the backend data store
+      summary: Get all the subject-version pairs associated with the input ID.
+  /schemas/types:
+    get:
+      operationId: getSchemaTypes
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  type: string
+                type: array
+                uniqueItems: true
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  type: string
+                type: array
+                uniqueItems: true
+            application/json; qs=0.5:
+              schema:
+                items:
+                  type: string
+                type: array
+                uniqueItems: true
+          description: successful operation
+        500:
+          content: {}
+          description: |
+            Error code 50001 -- Error in the backend data store
+      summary: Get the schema types supported by this registry.
   /subjects:
     get:
       operationId: list
+      parameters:
+      - in: query
+        name: deleted
+        schema:
+          type: boolean
       responses:
         200:
           content:
@@ -501,6 +579,10 @@ paths:
         required: true
         schema:
           type: string
+      - in: query
+        name: permanent
+        schema:
+          type: boolean
       responses:
         200:
           content:
@@ -593,6 +675,10 @@ paths:
         required: true
         schema:
           type: string
+      - in: query
+        name: deleted
+        schema:
+          type: boolean
       responses:
         200:
           content:
@@ -662,10 +748,10 @@ paths:
           description: successful operation
         409:
           content: {}
-          description: Incompatible Avro schema
+          description: Incompatible schema
         422:
           content: {}
-          description: Error code 42201 -- Invalid Avro schema
+          description: Error code 42201 -- Invalid schema or schema type
         500:
           content: {}
           description: |-
@@ -696,6 +782,10 @@ paths:
         required: true
         schema:
           type: string
+      - in: query
+        name: permanent
+        schema:
+          type: boolean
       responses:
         200:
           content:
@@ -776,6 +866,59 @@ paths:
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Get a specific version of the schema registered under this subject.
+  /subjects/{subject}/versions/{version}/referencedby:
+    get:
+      operationId: getReferencedBy
+      parameters:
+      - description: Name of the Subject
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+      - description: Version of the schema to be returned. Valid values for versionId
+          are between [1,2^31-1] or the string "latest". "latest" returns the last
+          registered schema under the specified subject. Note that there may be a
+          new latest schema that gets registered right after this request is served.
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  format: int32
+                  type: integer
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  format: int32
+                  type: integer
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  format: int32
+                  type: integer
+                type: array
+          description: successful operation
+        404:
+          content: {}
+          description: |-
+            Error code 40401 -- Subject not found
+            Error code 40402 -- Version not found
+        422:
+          content: {}
+          description: Error code 42202 -- Invalid version
+        500:
+          content: {}
+          description: Error code 50001 -- Error in the backend data store
+      summary: Get the schemas that reference the specified schema.
   /subjects/{subject}/versions/{version}/schema:
     get:
       operationId: getSchemaOnly
@@ -823,8 +966,8 @@ paths:
         500:
           content: {}
           description: Error code 50001 -- Error in the backend data store
-      summary: Get the avro schema for the specified version of this subject. The
-        unescaped schema only is returned.
+      summary: Get the schema for the specified version of this subject. The unescaped
+        schema only is returned.
   /v1/metadata/id:
     get:
       operationId: getClusterId
@@ -982,7 +1125,6 @@ components:
           type: string
         version:
           format: int32
-          minimum: 1
           type: integer
       type: object
     SchemaString:
@@ -1028,4 +1170,15 @@ components:
           type: object
         id:
           type: string
+      type: object
+    SubjectVersion:
+      example:
+        subject: subject
+        version: 0
+      properties:
+        subject:
+          type: string
+        version:
+          format: int32
+          type: integer
       type: object
