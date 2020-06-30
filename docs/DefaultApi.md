@@ -9,13 +9,16 @@ Method | HTTP request | Description
 [**Get**](DefaultApi.md#Get) | **Get** / | Schema Registry Root Resource
 [**GetClusterId**](DefaultApi.md#GetClusterId) | **Get** /v1/metadata/id | Get the server metadata
 [**GetMode**](DefaultApi.md#GetMode) | **Get** /mode/{subject} | 
+[**GetReferencedBy**](DefaultApi.md#GetReferencedBy) | **Get** /subjects/{subject}/versions/{version}/referencedby | Get the schemas that reference the specified schema.
 [**GetSchema**](DefaultApi.md#GetSchema) | **Get** /schemas/ids/{id} | Get the schema string identified by the input ID.
 [**GetSchemaByVersion**](DefaultApi.md#GetSchemaByVersion) | **Get** /subjects/{subject}/versions/{version} | Get a specific version of the schema registered under this subject.
-[**GetSchemaOnly**](DefaultApi.md#GetSchemaOnly) | **Get** /subjects/{subject}/versions/{version}/schema | Get the avro schema for the specified version of this subject. The unescaped schema only is returned.
+[**GetSchemaOnly**](DefaultApi.md#GetSchemaOnly) | **Get** /subjects/{subject}/versions/{version}/schema | Get the schema for the specified version of this subject. The unescaped schema only is returned.
+[**GetSchemaTypes**](DefaultApi.md#GetSchemaTypes) | **Get** /schemas/types | Get the schema types supported by this registry.
 [**GetSubjectLevelConfig**](DefaultApi.md#GetSubjectLevelConfig) | **Get** /config/{subject} | Get compatibility level for a subject.
 [**GetSubjects**](DefaultApi.md#GetSubjects) | **Get** /schemas/ids/{id}/subjects | Get all the subjects associated with the input ID.
 [**GetTopLevelConfig**](DefaultApi.md#GetTopLevelConfig) | **Get** /config | Get global compatibility level.
 [**GetTopLevelMode**](DefaultApi.md#GetTopLevelMode) | **Get** /mode | 
+[**GetVersions**](DefaultApi.md#GetVersions) | **Get** /schemas/ids/{id}/versions | Get all the subject-version pairs associated with the input ID.
 [**List**](DefaultApi.md#List) | **Get** /subjects | Get a list of registered subjects.
 [**ListVersions**](DefaultApi.md#ListVersions) | **Get** /subjects/{subject}/versions | Get a list of versions registered under the specified subject.
 [**LookUpSchemaUnderSubject**](DefaultApi.md#LookUpSchemaUnderSubject) | **Post** /subjects/{subject} | Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
@@ -31,7 +34,7 @@ Method | HTTP request | Description
 
 ## DeleteSchemaVersion
 
-> int32 DeleteSchemaVersion(ctx, subject, version)
+> int32 DeleteSchemaVersion(ctx, subject, version, optional)
 Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 
 ### Required Parameters
@@ -42,6 +45,18 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **subject** | **string**| Name of the Subject | 
 **version** | **string**| Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \&quot;latest\&quot;. \&quot;latest\&quot; returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served. | 
+ **optional** | ***DeleteSchemaVersionOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a DeleteSchemaVersionOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **permanent** | **optional.Bool**|  | 
 
 ### Return type
 
@@ -63,7 +78,7 @@ No authorization required
 
 ## DeleteSubject
 
-> []int32 DeleteSubject(ctx, subject)
+> []int32 DeleteSubject(ctx, subject, optional)
 Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 
 ### Required Parameters
@@ -73,6 +88,17 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **subject** | **string**| the name of the subject | 
+ **optional** | ***DeleteSubjectOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a DeleteSubjectOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **permanent** | **optional.Bool**|  | 
 
 ### Return type
 
@@ -179,6 +205,38 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## GetReferencedBy
+
+> []int32 GetReferencedBy(ctx, subject, version)
+Get the schemas that reference the specified schema.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**subject** | **string**| Name of the Subject | 
+**version** | **string**| Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \&quot;latest\&quot;. \&quot;latest\&quot; returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served. | 
+
+### Return type
+
+**[]int32**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetSchema
 
 > SchemaString GetSchema(ctx, id, optional)
@@ -201,6 +259,7 @@ Optional parameters are passed through a pointer to a GetSchemaOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **format** | **optional.String**|  | 
  **fetchMaxId** | **optional.Bool**|  | [default to false]
 
 ### Return type
@@ -268,7 +327,7 @@ No authorization required
 ## GetSchemaOnly
 
 > string GetSchemaOnly(ctx, subject, version, optional)
-Get the avro schema for the specified version of this subject. The unescaped schema only is returned.
+Get the schema for the specified version of this subject. The unescaped schema only is returned.
 
 ### Required Parameters
 
@@ -294,6 +353,33 @@ Name | Type | Description  | Notes
 ### Return type
 
 **string**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSchemaTypes
+
+> []string GetSchemaTypes(ctx, )
+Get the schema types supported by this registry.
+
+### Required Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**[]string**
 
 ### Authorization
 
@@ -436,14 +522,58 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## GetVersions
+
+> []SubjectVersion GetVersions(ctx, id)
+Get all the subject-version pairs associated with the input ID.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **int32**| Globally unique identifier of the schema | 
+
+### Return type
+
+[**[]SubjectVersion**](SubjectVersion.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## List
 
-> []string List(ctx, )
+> []string List(ctx, optional)
 Get a list of registered subjects.
 
 ### Required Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***ListOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **deleted** | **optional.Bool**|  | 
 
 ### Return type
 
@@ -465,7 +595,7 @@ No authorization required
 
 ## ListVersions
 
-> []int32 ListVersions(ctx, subject)
+> []int32 ListVersions(ctx, subject, optional)
 Get a list of versions registered under the specified subject.
 
 ### Required Parameters
@@ -475,6 +605,17 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **subject** | **string**| Name of the Subject | 
+ **optional** | ***ListVersionsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListVersionsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **deleted** | **optional.Bool**|  | 
 
 ### Return type
 

@@ -30,16 +30,20 @@ type DefaultApi interface {
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param subject Name of the Subject
     * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    * @param optional nil or *DeleteSchemaVersionOpts - Optional Parameters:
+    * @param "Permanent" (optional.Bool) - 
     @return int32
     */
-    DeleteSchemaVersion(ctx context.Context, subject string, version string) (int32, *http.Response, error)
+    DeleteSchemaVersion(ctx context.Context, subject string, version string, localVarOptionals *DeleteSchemaVersionOpts) (int32, *http.Response, error)
     /*
     DefaultApiService Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param subject the name of the subject
+    * @param optional nil or *DeleteSubjectOpts - Optional Parameters:
+    * @param "Permanent" (optional.Bool) - 
     @return []int32
     */
-    DeleteSubject(ctx context.Context, subject string) ([]int32, *http.Response, error)
+    DeleteSubject(ctx context.Context, subject string, localVarOptionals *DeleteSubjectOpts) ([]int32, *http.Response, error)
     /*
     DefaultApiService Schema Registry Root Resource
     The Root resource is a no-op.
@@ -61,10 +65,19 @@ type DefaultApi interface {
     */
     GetMode(ctx context.Context, subject string) (ModeGetResponse, *http.Response, error)
     /*
+    DefaultApiService Get the schemas that reference the specified schema.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param subject Name of the Subject
+    * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    @return []int32
+    */
+    GetReferencedBy(ctx context.Context, subject string, version string) ([]int32, *http.Response, error)
+    /*
     DefaultApiService Get the schema string identified by the input ID.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param id Globally unique identifier of the schema
     * @param optional nil or *GetSchemaOpts - Optional Parameters:
+    * @param "Format" (optional.String) - 
     * @param "FetchMaxId" (optional.Bool) - 
     @return SchemaString
     */
@@ -80,7 +93,7 @@ type DefaultApi interface {
     */
     GetSchemaByVersion(ctx context.Context, subject string, version string, localVarOptionals *GetSchemaByVersionOpts) (Schema, *http.Response, error)
     /*
-    DefaultApiService Get the avro schema for the specified version of this subject. The unescaped schema only is returned.
+    DefaultApiService Get the schema for the specified version of this subject. The unescaped schema only is returned.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param subject Name of the Subject
     * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
@@ -89,6 +102,12 @@ type DefaultApi interface {
     @return string
     */
     GetSchemaOnly(ctx context.Context, subject string, version string, localVarOptionals *GetSchemaOnlyOpts) (string, *http.Response, error)
+    /*
+    DefaultApiService Get the schema types supported by this registry.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return []string
+    */
+    GetSchemaTypes(ctx context.Context) ([]string, *http.Response, error)
     /*
     DefaultApiService Get compatibility level for a subject.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -118,18 +137,29 @@ type DefaultApi interface {
     */
     GetTopLevelMode(ctx context.Context) (ModeGetResponse, *http.Response, error)
     /*
+    DefaultApiService Get all the subject-version pairs associated with the input ID.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param id Globally unique identifier of the schema
+    @return []SubjectVersion
+    */
+    GetVersions(ctx context.Context, id int32) ([]SubjectVersion, *http.Response, error)
+    /*
     DefaultApiService Get a list of registered subjects.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param optional nil or *ListOpts - Optional Parameters:
+    * @param "Deleted" (optional.Bool) - 
     @return []string
     */
-    List(ctx context.Context) ([]string, *http.Response, error)
+    List(ctx context.Context, localVarOptionals *ListOpts) ([]string, *http.Response, error)
     /*
     DefaultApiService Get a list of versions registered under the specified subject.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param subject Name of the Subject
+    * @param optional nil or *ListVersionsOpts - Optional Parameters:
+    * @param "Deleted" (optional.Bool) - 
     @return []int32
     */
-    ListVersions(ctx context.Context, subject string) ([]int32, *http.Response, error)
+    ListVersions(ctx context.Context, subject string, localVarOptionals *ListVersionsOpts) ([]int32, *http.Response, error)
     /*
     DefaultApiService Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -205,9 +235,16 @@ DefaultApiService Deletes a specific version of the schema registered under this
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject Name of the Subject
  * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+ * @param optional nil or *DeleteSchemaVersionOpts - Optional Parameters:
+ * @param "Permanent" (optional.Bool) - 
 @return int32
 */
-func (a *DefaultApiService) DeleteSchemaVersion(ctx context.Context, subject string, version string) (int32, *http.Response, error) {
+
+type DeleteSchemaVersionOpts struct {
+	Permanent optional.Bool
+}
+
+func (a *DefaultApiService) DeleteSchemaVersion(ctx context.Context, subject string, version string, localVarOptionals *DeleteSchemaVersionOpts) (int32, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -226,6 +263,9 @@ func (a *DefaultApiService) DeleteSchemaVersion(ctx context.Context, subject str
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Permanent.IsSet() {
+		localVarQueryParams.Add("permanent", parameterToString(localVarOptionals.Permanent.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -293,9 +333,16 @@ func (a *DefaultApiService) DeleteSchemaVersion(ctx context.Context, subject str
 DefaultApiService Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject the name of the subject
+ * @param optional nil or *DeleteSubjectOpts - Optional Parameters:
+ * @param "Permanent" (optional.Bool) - 
 @return []int32
 */
-func (a *DefaultApiService) DeleteSubject(ctx context.Context, subject string) ([]int32, *http.Response, error) {
+
+type DeleteSubjectOpts struct {
+	Permanent optional.Bool
+}
+
+func (a *DefaultApiService) DeleteSubject(ctx context.Context, subject string, localVarOptionals *DeleteSubjectOpts) ([]int32, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -313,6 +360,9 @@ func (a *DefaultApiService) DeleteSubject(ctx context.Context, subject string) (
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Permanent.IsSet() {
+		localVarQueryParams.Add("permanent", parameterToString(localVarOptionals.Permanent.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -635,15 +685,106 @@ func (a *DefaultApiService) GetMode(ctx context.Context, subject string) (ModeGe
 }
 
 /*
+DefaultApiService Get the schemas that reference the specified schema.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param subject Name of the Subject
+ * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+@return []int32
+*/
+func (a *DefaultApiService) GetReferencedBy(ctx context.Context, subject string, version string) ([]int32, *http.Response, error) {
+	var (
+		localVarHttpMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []int32
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/subjects/{subject}/versions/{version}/referencedby"
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", fmt.Sprintf("%v", subject), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", fmt.Sprintf("%v", version), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []int32
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
 DefaultApiService Get the schema string identified by the input ID.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Globally unique identifier of the schema
  * @param optional nil or *GetSchemaOpts - Optional Parameters:
+ * @param "Format" (optional.String) - 
  * @param "FetchMaxId" (optional.Bool) - 
 @return SchemaString
 */
 
 type GetSchemaOpts struct {
+	Format optional.String
 	FetchMaxId optional.Bool
 }
 
@@ -665,6 +806,9 @@ func (a *DefaultApiService) GetSchema(ctx context.Context, id int32, localVarOpt
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Format.IsSet() {
+		localVarQueryParams.Add("format", parameterToString(localVarOptionals.Format.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.FetchMaxId.IsSet() {
 		localVarQueryParams.Add("fetchMaxId", parameterToString(localVarOptionals.FetchMaxId.Value(), ""))
 	}
@@ -831,7 +975,7 @@ func (a *DefaultApiService) GetSchemaByVersion(ctx context.Context, subject stri
 }
 
 /*
-DefaultApiService Get the avro schema for the specified version of this subject. The unescaped schema only is returned.
+DefaultApiService Get the schema for the specified version of this subject. The unescaped schema only is returned.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject Name of the Subject
  * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
@@ -906,6 +1050,91 @@ func (a *DefaultApiService) GetSchemaOnly(ctx context.Context, subject string, v
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v string
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+DefaultApiService Get the schema types supported by this registry.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return []string
+*/
+func (a *DefaultApiService) GetSchemaTypes(ctx context.Context) ([]string, *http.Response, error) {
+	var (
+		localVarHttpMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []string
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/schemas/types"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []string
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1284,11 +1513,105 @@ func (a *DefaultApiService) GetTopLevelMode(ctx context.Context) (ModeGetRespons
 }
 
 /*
+DefaultApiService Get all the subject-version pairs associated with the input ID.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param id Globally unique identifier of the schema
+@return []SubjectVersion
+*/
+func (a *DefaultApiService) GetVersions(ctx context.Context, id int32) ([]SubjectVersion, *http.Response, error) {
+	var (
+		localVarHttpMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []SubjectVersion
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/schemas/ids/{id}/versions"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", fmt.Sprintf("%v", id), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []SubjectVersion
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
 DefaultApiService Get a list of registered subjects.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *ListOpts - Optional Parameters:
+ * @param "Deleted" (optional.Bool) - 
 @return []string
 */
-func (a *DefaultApiService) List(ctx context.Context) ([]string, *http.Response, error) {
+
+type ListOpts struct {
+	Deleted optional.Bool
+}
+
+func (a *DefaultApiService) List(ctx context.Context, localVarOptionals *ListOpts) ([]string, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1305,6 +1628,9 @@ func (a *DefaultApiService) List(ctx context.Context) ([]string, *http.Response,
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Deleted.IsSet() {
+		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -1372,9 +1698,16 @@ func (a *DefaultApiService) List(ctx context.Context) ([]string, *http.Response,
 DefaultApiService Get a list of versions registered under the specified subject.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject Name of the Subject
+ * @param optional nil or *ListVersionsOpts - Optional Parameters:
+ * @param "Deleted" (optional.Bool) - 
 @return []int32
 */
-func (a *DefaultApiService) ListVersions(ctx context.Context, subject string) ([]int32, *http.Response, error) {
+
+type ListVersionsOpts struct {
+	Deleted optional.Bool
+}
+
+func (a *DefaultApiService) ListVersions(ctx context.Context, subject string, localVarOptionals *ListVersionsOpts) ([]int32, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1392,6 +1725,9 @@ func (a *DefaultApiService) ListVersions(ctx context.Context, subject string) ([
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Deleted.IsSet() {
+		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
