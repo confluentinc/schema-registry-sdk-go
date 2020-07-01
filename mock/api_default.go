@@ -8,98 +8,96 @@ import (
 	context "context"
 	net_http "net/http"
 	sync "sync"
-
-	api_default_go "api_default.go"
 )
 
 // DefaultApi is a mock of DefaultApi interface
 type DefaultApi struct {
 	lockDeleteSchemaVersion sync.Mutex
-	DeleteSchemaVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *api_default_go.DeleteSchemaVersionOpts) (int32, *net_http.Response, error)
+	DeleteSchemaVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *DeleteSchemaVersionOpts) (int32, *net_http.Response, error)
 
 	lockDeleteSubject sync.Mutex
-	DeleteSubjectFunc func(ctx context.Context, subject string, localVarOptionals *api_default_go.DeleteSubjectOpts) ([]int32, *net_http.Response, error)
+	DeleteSubjectFunc func(ctx context.Context, subject string, localVarOptionals *DeleteSubjectOpts) ([]int32, *net_http.Response, error)
 
 	lockGet sync.Mutex
 	GetFunc func(ctx context.Context) (map[string]map[string]interface{}, *net_http.Response, error)
 
 	lockGetClusterId sync.Mutex
-	GetClusterIdFunc func(ctx context.Context) (api_default_go.ServerClusterId, *net_http.Response, error)
+	GetClusterIdFunc func(ctx context.Context) (ServerClusterId, *net_http.Response, error)
 
 	lockGetMode sync.Mutex
-	GetModeFunc func(ctx context.Context, subject string) (api_default_go.ModeGetResponse, *net_http.Response, error)
+	GetModeFunc func(ctx context.Context, subject string) (ModeGetResponse, *net_http.Response, error)
 
 	lockGetReferencedBy sync.Mutex
 	GetReferencedByFunc func(ctx context.Context, subject, version string) ([]int32, *net_http.Response, error)
 
 	lockGetSchema sync.Mutex
-	GetSchemaFunc func(ctx context.Context, id int32, localVarOptionals *api_default_go.GetSchemaOpts) (api_default_go.SchemaString, *net_http.Response, error)
+	GetSchemaFunc func(ctx context.Context, id int32, localVarOptionals *GetSchemaOpts) (SchemaString, *net_http.Response, error)
 
 	lockGetSchemaByVersion sync.Mutex
-	GetSchemaByVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *api_default_go.GetSchemaByVersionOpts) (api_default_go.Schema, *net_http.Response, error)
+	GetSchemaByVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *GetSchemaByVersionOpts) (Schema, *net_http.Response, error)
 
 	lockGetSchemaOnly sync.Mutex
-	GetSchemaOnlyFunc func(ctx context.Context, subject, version string, localVarOptionals *api_default_go.GetSchemaOnlyOpts) (string, *net_http.Response, error)
+	GetSchemaOnlyFunc func(ctx context.Context, subject, version string, localVarOptionals *GetSchemaOnlyOpts) (string, *net_http.Response, error)
 
 	lockGetSchemaTypes sync.Mutex
 	GetSchemaTypesFunc func(ctx context.Context) ([]string, *net_http.Response, error)
 
 	lockGetSubjectLevelConfig sync.Mutex
-	GetSubjectLevelConfigFunc func(ctx context.Context, subject string, localVarOptionals *api_default_go.GetSubjectLevelConfigOpts) (api_default_go.Config, *net_http.Response, error)
+	GetSubjectLevelConfigFunc func(ctx context.Context, subject string, localVarOptionals *GetSubjectLevelConfigOpts) (Config, *net_http.Response, error)
 
 	lockGetSubjects sync.Mutex
 	GetSubjectsFunc func(ctx context.Context, id int32) ([]string, *net_http.Response, error)
 
 	lockGetTopLevelConfig sync.Mutex
-	GetTopLevelConfigFunc func(ctx context.Context) (api_default_go.Config, *net_http.Response, error)
+	GetTopLevelConfigFunc func(ctx context.Context) (Config, *net_http.Response, error)
 
 	lockGetTopLevelMode sync.Mutex
-	GetTopLevelModeFunc func(ctx context.Context) (api_default_go.ModeGetResponse, *net_http.Response, error)
+	GetTopLevelModeFunc func(ctx context.Context) (ModeGetResponse, *net_http.Response, error)
 
 	lockGetVersions sync.Mutex
-	GetVersionsFunc func(ctx context.Context, id int32) ([]api_default_go.SubjectVersion, *net_http.Response, error)
+	GetVersionsFunc func(ctx context.Context, id int32) ([]SubjectVersion, *net_http.Response, error)
 
 	lockList sync.Mutex
-	ListFunc func(ctx context.Context, localVarOptionals *api_default_go.ListOpts) ([]string, *net_http.Response, error)
+	ListFunc func(ctx context.Context, localVarOptionals *ListOpts) ([]string, *net_http.Response, error)
 
 	lockListVersions sync.Mutex
-	ListVersionsFunc func(ctx context.Context, subject string, localVarOptionals *api_default_go.ListVersionsOpts) ([]int32, *net_http.Response, error)
+	ListVersionsFunc func(ctx context.Context, subject string, localVarOptionals *ListVersionsOpts) ([]int32, *net_http.Response, error)
 
 	lockLookUpSchemaUnderSubject sync.Mutex
-	LookUpSchemaUnderSubjectFunc func(ctx context.Context, subject string, body api_default_go.RegisterSchemaRequest, localVarOptionals *api_default_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error)
+	LookUpSchemaUnderSubjectFunc func(ctx context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*net_http.Response, error)
 
 	lockPost sync.Mutex
 	PostFunc func(ctx context.Context) (map[string]string, *net_http.Response, error)
 
 	lockRegister sync.Mutex
-	RegisterFunc func(ctx context.Context, subject string, body api_default_go.RegisterSchemaRequest) (api_default_go.RegisterSchemaResponse, *net_http.Response, error)
+	RegisterFunc func(ctx context.Context, subject string, body RegisterSchemaRequest) (RegisterSchemaResponse, *net_http.Response, error)
 
 	lockTestCompatibilityBySubjectName sync.Mutex
-	TestCompatibilityBySubjectNameFunc func(ctx context.Context, subject, version string, body api_default_go.RegisterSchemaRequest, localVarOptionals *api_default_go.TestCompatibilityBySubjectNameOpts) (api_default_go.CompatibilityCheckResponse, *net_http.Response, error)
+	TestCompatibilityBySubjectNameFunc func(ctx context.Context, subject, version string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityBySubjectNameOpts) (CompatibilityCheckResponse, *net_http.Response, error)
 
 	lockUpdateMode sync.Mutex
-	UpdateModeFunc func(ctx context.Context, subject string, body api_default_go.ModeUpdateRequest) (api_default_go.ModeUpdateRequest, *net_http.Response, error)
+	UpdateModeFunc func(ctx context.Context, subject string, body ModeUpdateRequest) (ModeUpdateRequest, *net_http.Response, error)
 
 	lockUpdateSubjectLevelConfig sync.Mutex
-	UpdateSubjectLevelConfigFunc func(ctx context.Context, subject string, body api_default_go.ConfigUpdateRequest) (api_default_go.ConfigUpdateRequest, *net_http.Response, error)
+	UpdateSubjectLevelConfigFunc func(ctx context.Context, subject string, body ConfigUpdateRequest) (ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTopLevelConfig sync.Mutex
-	UpdateTopLevelConfigFunc func(ctx context.Context, body api_default_go.ConfigUpdateRequest) (api_default_go.ConfigUpdateRequest, *net_http.Response, error)
+	UpdateTopLevelConfigFunc func(ctx context.Context, body ConfigUpdateRequest) (ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTopLevelMode sync.Mutex
-	UpdateTopLevelModeFunc func(ctx context.Context, body api_default_go.ModeUpdateRequest) (api_default_go.ModeUpdateRequest, *net_http.Response, error)
+	UpdateTopLevelModeFunc func(ctx context.Context, body ModeUpdateRequest) (ModeUpdateRequest, *net_http.Response, error)
 
 	calls struct {
 		DeleteSchemaVersion []struct {
 			Ctx               context.Context
 			Subject           string
 			Version           string
-			LocalVarOptionals *api_default_go.DeleteSchemaVersionOpts
+			LocalVarOptionals *DeleteSchemaVersionOpts
 		}
 		DeleteSubject []struct {
 			Ctx               context.Context
 			Subject           string
-			LocalVarOptionals *api_default_go.DeleteSubjectOpts
+			LocalVarOptionals *DeleteSubjectOpts
 		}
 		Get []struct {
 			Ctx context.Context
@@ -119,19 +117,19 @@ type DefaultApi struct {
 		GetSchema []struct {
 			Ctx               context.Context
 			Id                int32
-			LocalVarOptionals *api_default_go.GetSchemaOpts
+			LocalVarOptionals *GetSchemaOpts
 		}
 		GetSchemaByVersion []struct {
 			Ctx               context.Context
 			Subject           string
 			Version           string
-			LocalVarOptionals *api_default_go.GetSchemaByVersionOpts
+			LocalVarOptionals *GetSchemaByVersionOpts
 		}
 		GetSchemaOnly []struct {
 			Ctx               context.Context
 			Subject           string
 			Version           string
-			LocalVarOptionals *api_default_go.GetSchemaOnlyOpts
+			LocalVarOptionals *GetSchemaOnlyOpts
 		}
 		GetSchemaTypes []struct {
 			Ctx context.Context
@@ -139,7 +137,7 @@ type DefaultApi struct {
 		GetSubjectLevelConfig []struct {
 			Ctx               context.Context
 			Subject           string
-			LocalVarOptionals *api_default_go.GetSubjectLevelConfigOpts
+			LocalVarOptionals *GetSubjectLevelConfigOpts
 		}
 		GetSubjects []struct {
 			Ctx context.Context
@@ -157,18 +155,18 @@ type DefaultApi struct {
 		}
 		List []struct {
 			Ctx               context.Context
-			LocalVarOptionals *api_default_go.ListOpts
+			LocalVarOptionals *ListOpts
 		}
 		ListVersions []struct {
 			Ctx               context.Context
 			Subject           string
-			LocalVarOptionals *api_default_go.ListVersionsOpts
+			LocalVarOptionals *ListVersionsOpts
 		}
 		LookUpSchemaUnderSubject []struct {
 			Ctx               context.Context
 			Subject           string
-			Body              api_default_go.RegisterSchemaRequest
-			LocalVarOptionals *api_default_go.LookUpSchemaUnderSubjectOpts
+			Body              RegisterSchemaRequest
+			LocalVarOptionals *LookUpSchemaUnderSubjectOpts
 		}
 		Post []struct {
 			Ctx context.Context
@@ -176,38 +174,38 @@ type DefaultApi struct {
 		Register []struct {
 			Ctx     context.Context
 			Subject string
-			Body    api_default_go.RegisterSchemaRequest
+			Body    RegisterSchemaRequest
 		}
 		TestCompatibilityBySubjectName []struct {
 			Ctx               context.Context
 			Subject           string
 			Version           string
-			Body              api_default_go.RegisterSchemaRequest
-			LocalVarOptionals *api_default_go.TestCompatibilityBySubjectNameOpts
+			Body              RegisterSchemaRequest
+			LocalVarOptionals *TestCompatibilityBySubjectNameOpts
 		}
 		UpdateMode []struct {
 			Ctx     context.Context
 			Subject string
-			Body    api_default_go.ModeUpdateRequest
+			Body    ModeUpdateRequest
 		}
 		UpdateSubjectLevelConfig []struct {
 			Ctx     context.Context
 			Subject string
-			Body    api_default_go.ConfigUpdateRequest
+			Body    ConfigUpdateRequest
 		}
 		UpdateTopLevelConfig []struct {
 			Ctx  context.Context
-			Body api_default_go.ConfigUpdateRequest
+			Body ConfigUpdateRequest
 		}
 		UpdateTopLevelMode []struct {
 			Ctx  context.Context
-			Body api_default_go.ModeUpdateRequest
+			Body ModeUpdateRequest
 		}
 	}
 }
 
 // DeleteSchemaVersion mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteSchemaVersion(ctx context.Context, subject, version string, localVarOptionals *api_default_go.DeleteSchemaVersionOpts) (int32, *net_http.Response, error) {
+func (m *DefaultApi) DeleteSchemaVersion(ctx context.Context, subject, version string, localVarOptionals *DeleteSchemaVersionOpts) (int32, *net_http.Response, error) {
 	m.lockDeleteSchemaVersion.Lock()
 	defer m.lockDeleteSchemaVersion.Unlock()
 
@@ -219,7 +217,7 @@ func (m *DefaultApi) DeleteSchemaVersion(ctx context.Context, subject, version s
 		Ctx               context.Context
 		Subject           string
 		Version           string
-		LocalVarOptionals *api_default_go.DeleteSchemaVersionOpts
+		LocalVarOptionals *DeleteSchemaVersionOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -245,7 +243,7 @@ func (m *DefaultApi) DeleteSchemaVersionCalls() []struct {
 	Ctx               context.Context
 	Subject           string
 	Version           string
-	LocalVarOptionals *api_default_go.DeleteSchemaVersionOpts
+	LocalVarOptionals *DeleteSchemaVersionOpts
 } {
 	m.lockDeleteSchemaVersion.Lock()
 	defer m.lockDeleteSchemaVersion.Unlock()
@@ -254,7 +252,7 @@ func (m *DefaultApi) DeleteSchemaVersionCalls() []struct {
 }
 
 // DeleteSubject mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteSubject(ctx context.Context, subject string, localVarOptionals *api_default_go.DeleteSubjectOpts) ([]int32, *net_http.Response, error) {
+func (m *DefaultApi) DeleteSubject(ctx context.Context, subject string, localVarOptionals *DeleteSubjectOpts) ([]int32, *net_http.Response, error) {
 	m.lockDeleteSubject.Lock()
 	defer m.lockDeleteSubject.Unlock()
 
@@ -265,7 +263,7 @@ func (m *DefaultApi) DeleteSubject(ctx context.Context, subject string, localVar
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		LocalVarOptionals *api_default_go.DeleteSubjectOpts
+		LocalVarOptionals *DeleteSubjectOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -289,7 +287,7 @@ func (m *DefaultApi) DeleteSubjectCalled() bool {
 func (m *DefaultApi) DeleteSubjectCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	LocalVarOptionals *api_default_go.DeleteSubjectOpts
+	LocalVarOptionals *DeleteSubjectOpts
 } {
 	m.lockDeleteSubject.Lock()
 	defer m.lockDeleteSubject.Unlock()
@@ -336,7 +334,7 @@ func (m *DefaultApi) GetCalls() []struct {
 }
 
 // GetClusterId mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetClusterId(ctx context.Context) (api_default_go.ServerClusterId, *net_http.Response, error) {
+func (m *DefaultApi) GetClusterId(ctx context.Context) (ServerClusterId, *net_http.Response, error) {
 	m.lockGetClusterId.Lock()
 	defer m.lockGetClusterId.Unlock()
 
@@ -374,7 +372,7 @@ func (m *DefaultApi) GetClusterIdCalls() []struct {
 }
 
 // GetMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetMode(ctx context.Context, subject string) (api_default_go.ModeGetResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetMode(ctx context.Context, subject string) (ModeGetResponse, *net_http.Response, error) {
 	m.lockGetMode.Lock()
 	defer m.lockGetMode.Unlock()
 
@@ -459,7 +457,7 @@ func (m *DefaultApi) GetReferencedByCalls() []struct {
 }
 
 // GetSchema mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchema(ctx context.Context, id int32, localVarOptionals *api_default_go.GetSchemaOpts) (api_default_go.SchemaString, *net_http.Response, error) {
+func (m *DefaultApi) GetSchema(ctx context.Context, id int32, localVarOptionals *GetSchemaOpts) (SchemaString, *net_http.Response, error) {
 	m.lockGetSchema.Lock()
 	defer m.lockGetSchema.Unlock()
 
@@ -470,7 +468,7 @@ func (m *DefaultApi) GetSchema(ctx context.Context, id int32, localVarOptionals 
 	call := struct {
 		Ctx               context.Context
 		Id                int32
-		LocalVarOptionals *api_default_go.GetSchemaOpts
+		LocalVarOptionals *GetSchemaOpts
 	}{
 		Ctx:               ctx,
 		Id:                id,
@@ -494,7 +492,7 @@ func (m *DefaultApi) GetSchemaCalled() bool {
 func (m *DefaultApi) GetSchemaCalls() []struct {
 	Ctx               context.Context
 	Id                int32
-	LocalVarOptionals *api_default_go.GetSchemaOpts
+	LocalVarOptionals *GetSchemaOpts
 } {
 	m.lockGetSchema.Lock()
 	defer m.lockGetSchema.Unlock()
@@ -503,7 +501,7 @@ func (m *DefaultApi) GetSchemaCalls() []struct {
 }
 
 // GetSchemaByVersion mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchemaByVersion(ctx context.Context, subject, version string, localVarOptionals *api_default_go.GetSchemaByVersionOpts) (api_default_go.Schema, *net_http.Response, error) {
+func (m *DefaultApi) GetSchemaByVersion(ctx context.Context, subject, version string, localVarOptionals *GetSchemaByVersionOpts) (Schema, *net_http.Response, error) {
 	m.lockGetSchemaByVersion.Lock()
 	defer m.lockGetSchemaByVersion.Unlock()
 
@@ -515,7 +513,7 @@ func (m *DefaultApi) GetSchemaByVersion(ctx context.Context, subject, version st
 		Ctx               context.Context
 		Subject           string
 		Version           string
-		LocalVarOptionals *api_default_go.GetSchemaByVersionOpts
+		LocalVarOptionals *GetSchemaByVersionOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -541,7 +539,7 @@ func (m *DefaultApi) GetSchemaByVersionCalls() []struct {
 	Ctx               context.Context
 	Subject           string
 	Version           string
-	LocalVarOptionals *api_default_go.GetSchemaByVersionOpts
+	LocalVarOptionals *GetSchemaByVersionOpts
 } {
 	m.lockGetSchemaByVersion.Lock()
 	defer m.lockGetSchemaByVersion.Unlock()
@@ -550,7 +548,7 @@ func (m *DefaultApi) GetSchemaByVersionCalls() []struct {
 }
 
 // GetSchemaOnly mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchemaOnly(ctx context.Context, subject, version string, localVarOptionals *api_default_go.GetSchemaOnlyOpts) (string, *net_http.Response, error) {
+func (m *DefaultApi) GetSchemaOnly(ctx context.Context, subject, version string, localVarOptionals *GetSchemaOnlyOpts) (string, *net_http.Response, error) {
 	m.lockGetSchemaOnly.Lock()
 	defer m.lockGetSchemaOnly.Unlock()
 
@@ -562,7 +560,7 @@ func (m *DefaultApi) GetSchemaOnly(ctx context.Context, subject, version string,
 		Ctx               context.Context
 		Subject           string
 		Version           string
-		LocalVarOptionals *api_default_go.GetSchemaOnlyOpts
+		LocalVarOptionals *GetSchemaOnlyOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -588,7 +586,7 @@ func (m *DefaultApi) GetSchemaOnlyCalls() []struct {
 	Ctx               context.Context
 	Subject           string
 	Version           string
-	LocalVarOptionals *api_default_go.GetSchemaOnlyOpts
+	LocalVarOptionals *GetSchemaOnlyOpts
 } {
 	m.lockGetSchemaOnly.Lock()
 	defer m.lockGetSchemaOnly.Unlock()
@@ -635,7 +633,7 @@ func (m *DefaultApi) GetSchemaTypesCalls() []struct {
 }
 
 // GetSubjectLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSubjectLevelConfig(ctx context.Context, subject string, localVarOptionals *api_default_go.GetSubjectLevelConfigOpts) (api_default_go.Config, *net_http.Response, error) {
+func (m *DefaultApi) GetSubjectLevelConfig(ctx context.Context, subject string, localVarOptionals *GetSubjectLevelConfigOpts) (Config, *net_http.Response, error) {
 	m.lockGetSubjectLevelConfig.Lock()
 	defer m.lockGetSubjectLevelConfig.Unlock()
 
@@ -646,7 +644,7 @@ func (m *DefaultApi) GetSubjectLevelConfig(ctx context.Context, subject string, 
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		LocalVarOptionals *api_default_go.GetSubjectLevelConfigOpts
+		LocalVarOptionals *GetSubjectLevelConfigOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -670,7 +668,7 @@ func (m *DefaultApi) GetSubjectLevelConfigCalled() bool {
 func (m *DefaultApi) GetSubjectLevelConfigCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	LocalVarOptionals *api_default_go.GetSubjectLevelConfigOpts
+	LocalVarOptionals *GetSubjectLevelConfigOpts
 } {
 	m.lockGetSubjectLevelConfig.Lock()
 	defer m.lockGetSubjectLevelConfig.Unlock()
@@ -720,7 +718,7 @@ func (m *DefaultApi) GetSubjectsCalls() []struct {
 }
 
 // GetTopLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTopLevelConfig(ctx context.Context) (api_default_go.Config, *net_http.Response, error) {
+func (m *DefaultApi) GetTopLevelConfig(ctx context.Context) (Config, *net_http.Response, error) {
 	m.lockGetTopLevelConfig.Lock()
 	defer m.lockGetTopLevelConfig.Unlock()
 
@@ -758,7 +756,7 @@ func (m *DefaultApi) GetTopLevelConfigCalls() []struct {
 }
 
 // GetTopLevelMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTopLevelMode(ctx context.Context) (api_default_go.ModeGetResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetTopLevelMode(ctx context.Context) (ModeGetResponse, *net_http.Response, error) {
 	m.lockGetTopLevelMode.Lock()
 	defer m.lockGetTopLevelMode.Unlock()
 
@@ -796,7 +794,7 @@ func (m *DefaultApi) GetTopLevelModeCalls() []struct {
 }
 
 // GetVersions mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetVersions(ctx context.Context, id int32) ([]api_default_go.SubjectVersion, *net_http.Response, error) {
+func (m *DefaultApi) GetVersions(ctx context.Context, id int32) ([]SubjectVersion, *net_http.Response, error) {
 	m.lockGetVersions.Lock()
 	defer m.lockGetVersions.Unlock()
 
@@ -837,7 +835,7 @@ func (m *DefaultApi) GetVersionsCalls() []struct {
 }
 
 // List mocks base method by wrapping the associated func.
-func (m *DefaultApi) List(ctx context.Context, localVarOptionals *api_default_go.ListOpts) ([]string, *net_http.Response, error) {
+func (m *DefaultApi) List(ctx context.Context, localVarOptionals *ListOpts) ([]string, *net_http.Response, error) {
 	m.lockList.Lock()
 	defer m.lockList.Unlock()
 
@@ -847,7 +845,7 @@ func (m *DefaultApi) List(ctx context.Context, localVarOptionals *api_default_go
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *api_default_go.ListOpts
+		LocalVarOptionals *ListOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -869,7 +867,7 @@ func (m *DefaultApi) ListCalled() bool {
 // ListCalls returns the calls made to List.
 func (m *DefaultApi) ListCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *api_default_go.ListOpts
+	LocalVarOptionals *ListOpts
 } {
 	m.lockList.Lock()
 	defer m.lockList.Unlock()
@@ -878,7 +876,7 @@ func (m *DefaultApi) ListCalls() []struct {
 }
 
 // ListVersions mocks base method by wrapping the associated func.
-func (m *DefaultApi) ListVersions(ctx context.Context, subject string, localVarOptionals *api_default_go.ListVersionsOpts) ([]int32, *net_http.Response, error) {
+func (m *DefaultApi) ListVersions(ctx context.Context, subject string, localVarOptionals *ListVersionsOpts) ([]int32, *net_http.Response, error) {
 	m.lockListVersions.Lock()
 	defer m.lockListVersions.Unlock()
 
@@ -889,7 +887,7 @@ func (m *DefaultApi) ListVersions(ctx context.Context, subject string, localVarO
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		LocalVarOptionals *api_default_go.ListVersionsOpts
+		LocalVarOptionals *ListVersionsOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -913,7 +911,7 @@ func (m *DefaultApi) ListVersionsCalled() bool {
 func (m *DefaultApi) ListVersionsCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	LocalVarOptionals *api_default_go.ListVersionsOpts
+	LocalVarOptionals *ListVersionsOpts
 } {
 	m.lockListVersions.Lock()
 	defer m.lockListVersions.Unlock()
@@ -922,7 +920,7 @@ func (m *DefaultApi) ListVersionsCalls() []struct {
 }
 
 // LookUpSchemaUnderSubject mocks base method by wrapping the associated func.
-func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject string, body api_default_go.RegisterSchemaRequest, localVarOptionals *api_default_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error) {
+func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*net_http.Response, error) {
 	m.lockLookUpSchemaUnderSubject.Lock()
 	defer m.lockLookUpSchemaUnderSubject.Unlock()
 
@@ -933,8 +931,8 @@ func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject strin
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		Body              api_default_go.RegisterSchemaRequest
-		LocalVarOptionals *api_default_go.LookUpSchemaUnderSubjectOpts
+		Body              RegisterSchemaRequest
+		LocalVarOptionals *LookUpSchemaUnderSubjectOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -959,8 +957,8 @@ func (m *DefaultApi) LookUpSchemaUnderSubjectCalled() bool {
 func (m *DefaultApi) LookUpSchemaUnderSubjectCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	Body              api_default_go.RegisterSchemaRequest
-	LocalVarOptionals *api_default_go.LookUpSchemaUnderSubjectOpts
+	Body              RegisterSchemaRequest
+	LocalVarOptionals *LookUpSchemaUnderSubjectOpts
 } {
 	m.lockLookUpSchemaUnderSubject.Lock()
 	defer m.lockLookUpSchemaUnderSubject.Unlock()
@@ -1007,7 +1005,7 @@ func (m *DefaultApi) PostCalls() []struct {
 }
 
 // Register mocks base method by wrapping the associated func.
-func (m *DefaultApi) Register(ctx context.Context, subject string, body api_default_go.RegisterSchemaRequest) (api_default_go.RegisterSchemaResponse, *net_http.Response, error) {
+func (m *DefaultApi) Register(ctx context.Context, subject string, body RegisterSchemaRequest) (RegisterSchemaResponse, *net_http.Response, error) {
 	m.lockRegister.Lock()
 	defer m.lockRegister.Unlock()
 
@@ -1018,7 +1016,7 @@ func (m *DefaultApi) Register(ctx context.Context, subject string, body api_defa
 	call := struct {
 		Ctx     context.Context
 		Subject string
-		Body    api_default_go.RegisterSchemaRequest
+		Body    RegisterSchemaRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
@@ -1042,7 +1040,7 @@ func (m *DefaultApi) RegisterCalled() bool {
 func (m *DefaultApi) RegisterCalls() []struct {
 	Ctx     context.Context
 	Subject string
-	Body    api_default_go.RegisterSchemaRequest
+	Body    RegisterSchemaRequest
 } {
 	m.lockRegister.Lock()
 	defer m.lockRegister.Unlock()
@@ -1051,7 +1049,7 @@ func (m *DefaultApi) RegisterCalls() []struct {
 }
 
 // TestCompatibilityBySubjectName mocks base method by wrapping the associated func.
-func (m *DefaultApi) TestCompatibilityBySubjectName(ctx context.Context, subject, version string, body api_default_go.RegisterSchemaRequest, localVarOptionals *api_default_go.TestCompatibilityBySubjectNameOpts) (api_default_go.CompatibilityCheckResponse, *net_http.Response, error) {
+func (m *DefaultApi) TestCompatibilityBySubjectName(ctx context.Context, subject, version string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityBySubjectNameOpts) (CompatibilityCheckResponse, *net_http.Response, error) {
 	m.lockTestCompatibilityBySubjectName.Lock()
 	defer m.lockTestCompatibilityBySubjectName.Unlock()
 
@@ -1063,8 +1061,8 @@ func (m *DefaultApi) TestCompatibilityBySubjectName(ctx context.Context, subject
 		Ctx               context.Context
 		Subject           string
 		Version           string
-		Body              api_default_go.RegisterSchemaRequest
-		LocalVarOptionals *api_default_go.TestCompatibilityBySubjectNameOpts
+		Body              RegisterSchemaRequest
+		LocalVarOptionals *TestCompatibilityBySubjectNameOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -1091,8 +1089,8 @@ func (m *DefaultApi) TestCompatibilityBySubjectNameCalls() []struct {
 	Ctx               context.Context
 	Subject           string
 	Version           string
-	Body              api_default_go.RegisterSchemaRequest
-	LocalVarOptionals *api_default_go.TestCompatibilityBySubjectNameOpts
+	Body              RegisterSchemaRequest
+	LocalVarOptionals *TestCompatibilityBySubjectNameOpts
 } {
 	m.lockTestCompatibilityBySubjectName.Lock()
 	defer m.lockTestCompatibilityBySubjectName.Unlock()
@@ -1101,7 +1099,7 @@ func (m *DefaultApi) TestCompatibilityBySubjectNameCalls() []struct {
 }
 
 // UpdateMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateMode(ctx context.Context, subject string, body api_default_go.ModeUpdateRequest) (api_default_go.ModeUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateMode(ctx context.Context, subject string, body ModeUpdateRequest) (ModeUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateMode.Lock()
 	defer m.lockUpdateMode.Unlock()
 
@@ -1112,7 +1110,7 @@ func (m *DefaultApi) UpdateMode(ctx context.Context, subject string, body api_de
 	call := struct {
 		Ctx     context.Context
 		Subject string
-		Body    api_default_go.ModeUpdateRequest
+		Body    ModeUpdateRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
@@ -1136,7 +1134,7 @@ func (m *DefaultApi) UpdateModeCalled() bool {
 func (m *DefaultApi) UpdateModeCalls() []struct {
 	Ctx     context.Context
 	Subject string
-	Body    api_default_go.ModeUpdateRequest
+	Body    ModeUpdateRequest
 } {
 	m.lockUpdateMode.Lock()
 	defer m.lockUpdateMode.Unlock()
@@ -1145,7 +1143,7 @@ func (m *DefaultApi) UpdateModeCalls() []struct {
 }
 
 // UpdateSubjectLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject string, body api_default_go.ConfigUpdateRequest) (api_default_go.ConfigUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject string, body ConfigUpdateRequest) (ConfigUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateSubjectLevelConfig.Lock()
 	defer m.lockUpdateSubjectLevelConfig.Unlock()
 
@@ -1156,7 +1154,7 @@ func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject strin
 	call := struct {
 		Ctx     context.Context
 		Subject string
-		Body    api_default_go.ConfigUpdateRequest
+		Body    ConfigUpdateRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
@@ -1180,7 +1178,7 @@ func (m *DefaultApi) UpdateSubjectLevelConfigCalled() bool {
 func (m *DefaultApi) UpdateSubjectLevelConfigCalls() []struct {
 	Ctx     context.Context
 	Subject string
-	Body    api_default_go.ConfigUpdateRequest
+	Body    ConfigUpdateRequest
 } {
 	m.lockUpdateSubjectLevelConfig.Lock()
 	defer m.lockUpdateSubjectLevelConfig.Unlock()
@@ -1189,7 +1187,7 @@ func (m *DefaultApi) UpdateSubjectLevelConfigCalls() []struct {
 }
 
 // UpdateTopLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body api_default_go.ConfigUpdateRequest) (api_default_go.ConfigUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body ConfigUpdateRequest) (ConfigUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
 
@@ -1199,7 +1197,7 @@ func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body api_default_
 
 	call := struct {
 		Ctx  context.Context
-		Body api_default_go.ConfigUpdateRequest
+		Body ConfigUpdateRequest
 	}{
 		Ctx:  ctx,
 		Body: body,
@@ -1221,7 +1219,7 @@ func (m *DefaultApi) UpdateTopLevelConfigCalled() bool {
 // UpdateTopLevelConfigCalls returns the calls made to UpdateTopLevelConfig.
 func (m *DefaultApi) UpdateTopLevelConfigCalls() []struct {
 	Ctx  context.Context
-	Body api_default_go.ConfigUpdateRequest
+	Body ConfigUpdateRequest
 } {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
@@ -1230,7 +1228,7 @@ func (m *DefaultApi) UpdateTopLevelConfigCalls() []struct {
 }
 
 // UpdateTopLevelMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context, body api_default_go.ModeUpdateRequest) (api_default_go.ModeUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context, body ModeUpdateRequest) (ModeUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateTopLevelMode.Lock()
 	defer m.lockUpdateTopLevelMode.Unlock()
 
@@ -1240,7 +1238,7 @@ func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context, body api_default_go
 
 	call := struct {
 		Ctx  context.Context
-		Body api_default_go.ModeUpdateRequest
+		Body ModeUpdateRequest
 	}{
 		Ctx:  ctx,
 		Body: body,
@@ -1262,7 +1260,7 @@ func (m *DefaultApi) UpdateTopLevelModeCalled() bool {
 // UpdateTopLevelModeCalls returns the calls made to UpdateTopLevelMode.
 func (m *DefaultApi) UpdateTopLevelModeCalls() []struct {
 	Ctx  context.Context
-	Body api_default_go.ModeUpdateRequest
+	Body ModeUpdateRequest
 } {
 	m.lockUpdateTopLevelMode.Lock()
 	defer m.lockUpdateTopLevelMode.Unlock()
