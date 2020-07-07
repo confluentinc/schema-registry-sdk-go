@@ -40,13 +40,16 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**Get**](docs/DefaultApi.md#get) | **Get** / | Schema Registry Root Resource
 *DefaultApi* | [**GetClusterId**](docs/DefaultApi.md#getclusterid) | **Get** /v1/metadata/id | Get the server metadata
 *DefaultApi* | [**GetMode**](docs/DefaultApi.md#getmode) | **Get** /mode/{subject} | 
+*DefaultApi* | [**GetReferencedBy**](docs/DefaultApi.md#getreferencedby) | **Get** /subjects/{subject}/versions/{version}/referencedby | Get the schemas that reference the specified schema.
 *DefaultApi* | [**GetSchema**](docs/DefaultApi.md#getschema) | **Get** /schemas/ids/{id} | Get the schema string identified by the input ID.
 *DefaultApi* | [**GetSchemaByVersion**](docs/DefaultApi.md#getschemabyversion) | **Get** /subjects/{subject}/versions/{version} | Get a specific version of the schema registered under this subject.
-*DefaultApi* | [**GetSchemaOnly**](docs/DefaultApi.md#getschemaonly) | **Get** /subjects/{subject}/versions/{version}/schema | Get the avro schema for the specified version of this subject. The unescaped schema only is returned.
+*DefaultApi* | [**GetSchemaOnly**](docs/DefaultApi.md#getschemaonly) | **Get** /subjects/{subject}/versions/{version}/schema | Get the schema for the specified version of this subject. The unescaped schema only is returned.
+*DefaultApi* | [**GetSchemaTypes**](docs/DefaultApi.md#getschematypes) | **Get** /schemas/types | Get the schema types supported by this registry.
 *DefaultApi* | [**GetSubjectLevelConfig**](docs/DefaultApi.md#getsubjectlevelconfig) | **Get** /config/{subject} | Get compatibility level for a subject.
 *DefaultApi* | [**GetSubjects**](docs/DefaultApi.md#getsubjects) | **Get** /schemas/ids/{id}/subjects | Get all the subjects associated with the input ID.
 *DefaultApi* | [**GetTopLevelConfig**](docs/DefaultApi.md#gettoplevelconfig) | **Get** /config | Get global compatibility level.
 *DefaultApi* | [**GetTopLevelMode**](docs/DefaultApi.md#gettoplevelmode) | **Get** /mode | 
+*DefaultApi* | [**GetVersions**](docs/DefaultApi.md#getversions) | **Get** /schemas/ids/{id}/versions | Get all the subject-version pairs associated with the input ID.
 *DefaultApi* | [**List**](docs/DefaultApi.md#list) | **Get** /subjects | Get a list of registered subjects.
 *DefaultApi* | [**ListVersions**](docs/DefaultApi.md#listversions) | **Get** /subjects/{subject}/versions | Get a list of versions registered under the specified subject.
 *DefaultApi* | [**LookUpSchemaUnderSubject**](docs/DefaultApi.md#lookupschemaundersubject) | **Post** /subjects/{subject} | Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
@@ -72,6 +75,7 @@ Class | Method | HTTP request | Description
  - [SchemaReference](docs/SchemaReference.md)
  - [SchemaString](docs/SchemaString.md)
  - [ServerClusterId](docs/ServerClusterId.md)
+ - [SubjectVersion](docs/SubjectVersion.md)
 
 
 ## Documentation For Authorization
