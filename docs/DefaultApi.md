@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**GetSchemaByVersion**](DefaultApi.md#GetSchemaByVersion) | **Get** /subjects/{subject}/versions/{version} | Get a specific version of the schema registered under this subject.
 [**GetSchemaOnly**](DefaultApi.md#GetSchemaOnly) | **Get** /subjects/{subject}/versions/{version}/schema | Get the schema for the specified version of this subject. The unescaped schema only is returned.
 [**GetSchemaTypes**](DefaultApi.md#GetSchemaTypes) | **Get** /schemas/types | Get the schema types supported by this registry.
+[**GetSchemas**](DefaultApi.md#GetSchemas) | **Get** /schemas | Get the schemas.
 [**GetSubjectLevelConfig**](DefaultApi.md#GetSubjectLevelConfig) | **Get** /config/{subject} | Get compatibility level for a subject.
 [**GetSubjects**](DefaultApi.md#GetSubjects) | **Get** /schemas/ids/{id}/subjects | Get all the subjects associated with the input ID.
 [**GetTopLevelConfig**](DefaultApi.md#GetTopLevelConfig) | **Get** /config | Get global compatibility level.
@@ -395,6 +396,50 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## GetSchemas
+
+> []Schema GetSchemas(ctx, optional)
+Get the schemas.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***GetSchemasOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetSchemasOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subjectPrefix** | **optional.String**|  | 
+ **deleted** | **optional.Bool**|  | [default to false]
+ **latestOnly** | **optional.Bool**|  | [default to false]
+ **offset** | **optional.Int32**|  | [default to 0]
+ **limit** | **optional.Int32**|  | [default to -1]
+
+### Return type
+
+[**[]Schema**](Schema.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetSubjectLevelConfig
 
 > Config GetSubjectLevelConfig(ctx, subject, optional)
@@ -439,7 +484,7 @@ No authorization required
 
 ## GetSubjects
 
-> []string GetSubjects(ctx, id)
+> []string GetSubjects(ctx, id, optional)
 Get all the subjects associated with the input ID.
 
 ### Required Parameters
@@ -449,6 +494,17 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **id** | **int32**| Globally unique identifier of the schema | 
+ **optional** | ***GetSubjectsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetSubjectsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **deleted** | **optional.Bool**|  | 
 
 ### Return type
 
@@ -524,7 +580,7 @@ No authorization required
 
 ## GetVersions
 
-> []SubjectVersion GetVersions(ctx, id)
+> []SubjectVersion GetVersions(ctx, id, optional)
 Get all the subject-version pairs associated with the input ID.
 
 ### Required Parameters
@@ -534,6 +590,17 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **id** | **int32**| Globally unique identifier of the schema | 
+ **optional** | ***GetVersionsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetVersionsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **deleted** | **optional.Bool**|  | 
 
 ### Return type
 
@@ -768,6 +835,7 @@ Name | Type | Description  | Notes
 
  **contentType** | **optional.String**|  | 
  **accept** | **optional.String**|  | 
+ **verbose** | **optional.Bool**|  | 
 
 ### Return type
 
