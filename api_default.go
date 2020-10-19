@@ -109,6 +109,18 @@ type DefaultApi interface {
     */
     GetSchemaTypes(ctx context.Context) ([]string, *http.Response, error)
     /*
+    DefaultApiService Get the schemas.
+    * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    * @param optional nil or *GetSchemasOpts - Optional Parameters:
+    * @param "SubjectPrefix" (optional.String) - 
+    * @param "Deleted" (optional.Bool) - 
+    * @param "LatestOnly" (optional.Bool) - 
+    * @param "Offset" (optional.Int32) - 
+    * @param "Limit" (optional.Int32) - 
+    @return []Schema
+    */
+    GetSchemas(ctx context.Context, localVarOptionals *GetSchemasOpts) ([]Schema, *http.Response, error)
+    /*
     DefaultApiService Get compatibility level for a subject.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param subject
@@ -121,9 +133,11 @@ type DefaultApi interface {
     DefaultApiService Get all the subjects associated with the input ID.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param id Globally unique identifier of the schema
+    * @param optional nil or *GetSubjectsOpts - Optional Parameters:
+    * @param "Deleted" (optional.Bool) - 
     @return []string
     */
-    GetSubjects(ctx context.Context, id int32) ([]string, *http.Response, error)
+    GetSubjects(ctx context.Context, id int32, localVarOptionals *GetSubjectsOpts) ([]string, *http.Response, error)
     /*
     DefaultApiService Get global compatibility level.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -140,9 +154,11 @@ type DefaultApi interface {
     DefaultApiService Get all the subject-version pairs associated with the input ID.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
     * @param id Globally unique identifier of the schema
+    * @param optional nil or *GetVersionsOpts - Optional Parameters:
+    * @param "Deleted" (optional.Bool) - 
     @return []SubjectVersion
     */
-    GetVersions(ctx context.Context, id int32) ([]SubjectVersion, *http.Response, error)
+    GetVersions(ctx context.Context, id int32, localVarOptionals *GetVersionsOpts) ([]SubjectVersion, *http.Response, error)
     /*
     DefaultApiService Get a list of registered subjects.
     * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -193,6 +209,7 @@ type DefaultApi interface {
     * @param optional nil or *TestCompatibilityBySubjectNameOpts - Optional Parameters:
     * @param "ContentType" (optional.String) - 
     * @param "Accept" (optional.String) - 
+    * @param "Verbose" (optional.Bool) - 
     @return CompatibilityCheckResponse
     */
     TestCompatibilityBySubjectName(ctx context.Context, subject string, version string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityBySubjectNameOpts) (CompatibilityCheckResponse, *http.Response, error)
@@ -1159,6 +1176,121 @@ func (a *DefaultApiService) GetSchemaTypes(ctx context.Context) ([]string, *http
 }
 
 /*
+DefaultApiService Get the schemas.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *GetSchemasOpts - Optional Parameters:
+ * @param "SubjectPrefix" (optional.String) - 
+ * @param "Deleted" (optional.Bool) - 
+ * @param "LatestOnly" (optional.Bool) - 
+ * @param "Offset" (optional.Int32) - 
+ * @param "Limit" (optional.Int32) - 
+@return []Schema
+*/
+
+type GetSchemasOpts struct {
+	SubjectPrefix optional.String
+	Deleted optional.Bool
+	LatestOnly optional.Bool
+	Offset optional.Int32
+	Limit optional.Int32
+}
+
+func (a *DefaultApiService) GetSchemas(ctx context.Context, localVarOptionals *GetSchemasOpts) ([]Schema, *http.Response, error) {
+	var (
+		localVarHttpMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []Schema
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/schemas"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.SubjectPrefix.IsSet() {
+		localVarQueryParams.Add("subjectPrefix", parameterToString(localVarOptionals.SubjectPrefix.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Deleted.IsSet() {
+		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.LatestOnly.IsSet() {
+		localVarQueryParams.Add("latestOnly", parameterToString(localVarOptionals.LatestOnly.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []Schema
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
 DefaultApiService Get compatibility level for a subject.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject
@@ -1259,9 +1391,16 @@ func (a *DefaultApiService) GetSubjectLevelConfig(ctx context.Context, subject s
 DefaultApiService Get all the subjects associated with the input ID.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Globally unique identifier of the schema
+ * @param optional nil or *GetSubjectsOpts - Optional Parameters:
+ * @param "Deleted" (optional.Bool) - 
 @return []string
 */
-func (a *DefaultApiService) GetSubjects(ctx context.Context, id int32) ([]string, *http.Response, error) {
+
+type GetSubjectsOpts struct {
+	Deleted optional.Bool
+}
+
+func (a *DefaultApiService) GetSubjects(ctx context.Context, id int32, localVarOptionals *GetSubjectsOpts) ([]string, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1279,6 +1418,9 @@ func (a *DefaultApiService) GetSubjects(ctx context.Context, id int32) ([]string
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Deleted.IsSet() {
+		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -1516,9 +1658,16 @@ func (a *DefaultApiService) GetTopLevelMode(ctx context.Context) (ModeGetRespons
 DefaultApiService Get all the subject-version pairs associated with the input ID.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Globally unique identifier of the schema
+ * @param optional nil or *GetVersionsOpts - Optional Parameters:
+ * @param "Deleted" (optional.Bool) - 
 @return []SubjectVersion
 */
-func (a *DefaultApiService) GetVersions(ctx context.Context, id int32) ([]SubjectVersion, *http.Response, error) {
+
+type GetVersionsOpts struct {
+	Deleted optional.Bool
+}
+
+func (a *DefaultApiService) GetVersions(ctx context.Context, id int32, localVarOptionals *GetVersionsOpts) ([]SubjectVersion, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1536,6 +1685,9 @@ func (a *DefaultApiService) GetVersions(ctx context.Context, id int32) ([]Subjec
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Deleted.IsSet() {
+		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -2065,12 +2217,14 @@ the compatibility level applied for the check is the configured compatibility le
  * @param optional nil or *TestCompatibilityBySubjectNameOpts - Optional Parameters:
  * @param "ContentType" (optional.String) - 
  * @param "Accept" (optional.String) - 
+ * @param "Verbose" (optional.Bool) - 
 @return CompatibilityCheckResponse
 */
 
 type TestCompatibilityBySubjectNameOpts struct {
 	ContentType optional.String
 	Accept optional.String
+	Verbose optional.Bool
 }
 
 func (a *DefaultApiService) TestCompatibilityBySubjectName(ctx context.Context, subject string, version string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityBySubjectNameOpts) (CompatibilityCheckResponse, *http.Response, error) {
@@ -2092,6 +2246,9 @@ func (a *DefaultApiService) TestCompatibilityBySubjectName(ctx context.Context, 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Verbose.IsSet() {
+		localVarQueryParams.Add("verbose", parameterToString(localVarOptionals.Verbose.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
 
