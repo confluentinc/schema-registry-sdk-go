@@ -85,6 +85,10 @@ paths:
         required: true
         schema:
           type: string
+      - in: query
+        name: verbose
+        schema:
+          type: boolean
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -382,6 +386,60 @@ paths:
                 $ref: '#/components/schemas/ModeUpdateRequest'
           description: successful operation
       x-codegen-request-body-name: body
+  /schemas:
+    get:
+      operationId: getSchemas
+      parameters:
+      - in: query
+        name: subjectPrefix
+        schema:
+          type: string
+      - in: query
+        name: deleted
+        schema:
+          default: false
+          type: boolean
+      - in: query
+        name: latestOnly
+        schema:
+          default: false
+          type: boolean
+      - in: query
+        name: offset
+        schema:
+          default: 0
+          format: int32
+          type: integer
+      - in: query
+        name: limit
+        schema:
+          default: -1
+          format: int32
+          type: integer
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Schema'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Schema'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Schema'
+                type: array
+          description: successful operation
+        500:
+          content: {}
+          description: |
+            Error code 50001 -- Error in the backend data store
+      summary: Get the schemas.
   /schemas/ids/{id}:
     get:
       operationId: getSchema
@@ -435,6 +493,10 @@ paths:
         schema:
           format: int32
           type: integer
+      - in: query
+        name: deleted
+        schema:
+          type: boolean
       responses:
         200:
           content:
@@ -477,6 +539,10 @@ paths:
         schema:
           format: int32
           type: integer
+      - in: query
+        name: deleted
+        schema:
+          type: boolean
       responses:
         200:
           content:
@@ -994,9 +1060,16 @@ components:
     CompatibilityCheckResponse:
       example:
         is_compatible: true
+        messages:
+        - messages
+        - messages
       properties:
         is_compatible:
           type: boolean
+        messages:
+          items:
+            type: string
+          type: array
       type: object
     Config:
       example:

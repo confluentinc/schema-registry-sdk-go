@@ -45,6 +45,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetSchemaByVersion**](docs/DefaultApi.md#getschemabyversion) | **Get** /subjects/{subject}/versions/{version} | Get a specific version of the schema registered under this subject.
 *DefaultApi* | [**GetSchemaOnly**](docs/DefaultApi.md#getschemaonly) | **Get** /subjects/{subject}/versions/{version}/schema | Get the schema for the specified version of this subject. The unescaped schema only is returned.
 *DefaultApi* | [**GetSchemaTypes**](docs/DefaultApi.md#getschematypes) | **Get** /schemas/types | Get the schema types supported by this registry.
+*DefaultApi* | [**GetSchemas**](docs/DefaultApi.md#getschemas) | **Get** /schemas | Get the schemas.
 *DefaultApi* | [**GetSubjectLevelConfig**](docs/DefaultApi.md#getsubjectlevelconfig) | **Get** /config/{subject} | Get compatibility level for a subject.
 *DefaultApi* | [**GetSubjects**](docs/DefaultApi.md#getsubjects) | **Get** /schemas/ids/{id}/subjects | Get all the subjects associated with the input ID.
 *DefaultApi* | [**GetTopLevelConfig**](docs/DefaultApi.md#gettoplevelconfig) | **Get** /config | Get global compatibility level.
