@@ -53,6 +53,74 @@ paths:
                   type: string
                 type: object
           description: successful operation
+  /compatibility/subjects/{subject}/versions:
+    post:
+      description: 'the compatibility level applied for the check is the configured
+        compatibility level for the subject (http:get:: /config/(string: subject)).
+        If this subject''s compatibility level was never changed, then the global
+        compatibility level applies (http:get:: /config).'
+      operationId: testCompatibilityForSubject
+      parameters:
+      - in: header
+        name: Content-Type
+        schema:
+          type: string
+      - in: header
+        name: Accept
+        schema:
+          type: string
+      - description: Subject of the schema version against which compatibility is
+          to be tested
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: verbose
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaRequest'
+        description: Schema
+        required: true
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/CompatibilityCheckResponse'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/CompatibilityCheckResponse'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/CompatibilityCheckResponse'
+          description: successful operation
+        422:
+          content: {}
+          description: |-
+            Error code 42201 -- Invalid schema or schema type
+            Error code 42202 -- Invalid version
+        500:
+          content: {}
+          description: Error code 50001 -- Error in the backend data store
+      summary: Test input schema against a subject's schemas for compatibility, based
+        on the compatibility level of the subject configured. In other word, it will
+        perform the same compatibility check as register for that subject
+      x-codegen-request-body-name: body
   /compatibility/subjects/{subject}/versions/{version}:
     post:
       description: 'the compatibility level applied for the check is the configured
@@ -196,6 +264,60 @@ paths:
       summary: Update global compatibility level.
       x-codegen-request-body-name: body
   /config/{subject}:
+    delete:
+      operationId: deleteSubjectConfig
+      parameters:
+      - description: the name of the subject
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                enum:
+                - NONE
+                - BACKWARD
+                - BACKWARD_TRANSITIVE
+                - FORWARD
+                - FORWARD_TRANSITIVE
+                - FULL
+                - FULL_TRANSITIVE
+                type: string
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                enum:
+                - NONE
+                - BACKWARD
+                - BACKWARD_TRANSITIVE
+                - FORWARD
+                - FORWARD_TRANSITIVE
+                - FULL
+                - FULL_TRANSITIVE
+                type: string
+            application/json; qs=0.5:
+              schema:
+                enum:
+                - NONE
+                - BACKWARD
+                - BACKWARD_TRANSITIVE
+                - FORWARD
+                - FORWARD_TRANSITIVE
+                - FULL
+                - FULL_TRANSITIVE
+                type: string
+          description: successful operation
+        404:
+          content: {}
+          description: Error code 40401 -- Subject not found
+        500:
+          content: {}
+          description: Error code 50001 -- Error in the backend datastore
+      summary: Deletes the specified subject-level compatibility level config and
+        revert to the global default.
     get:
       operationId: getSubjectLevelConfig
       parameters:
@@ -278,6 +400,32 @@ paths:
             Error code 50003 -- Error while forwarding the request to the primary
       summary: Update compatibility level for the specified subject.
       x-codegen-request-body-name: body
+  /contexts:
+    get:
+      operationId: listContexts
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: successful operation
+        500:
+          content: {}
+          description: Error code 50001 -- Error in the backend datastore
+      summary: Get a list of contexts.
   /mode:
     get:
       operationId: getTopLevelMode
@@ -286,14 +434,18 @@ paths:
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
-                $ref: '#/components/schemas/ModeGetResponse'
+                $ref: '#/components/schemas/Mode'
             application/vnd.schemaregistry+json; qs=0.9:
               schema:
-                $ref: '#/components/schemas/ModeGetResponse'
+                $ref: '#/components/schemas/Mode'
             application/json; qs=0.5:
               schema:
-                $ref: '#/components/schemas/ModeGetResponse'
+                $ref: '#/components/schemas/Mode'
           description: successful operation
+        500:
+          content: {}
+          description: Error code 50001 -- Error in the backend data store
+      summary: Get global mode.
     put:
       operationId: updateTopLevelMode
       requestBody:
@@ -325,12 +477,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/ModeUpdateRequest'
           description: successful operation
+        422:
+          content: {}
+          description: |-
+            Error code 42204 -- Invalid mode
+            Error code 42205 -- Operation not permitted
+        500:
+          content: {}
+          description: |-
+            Error code 50001 -- Error in the backend data store
+            Error code 50003 -- Error while forwarding the request to the primary
+            Error code 50004 -- Unknown leader
+      summary: Update global mode.
       x-codegen-request-body-name: body
   /mode/{subject}:
-    get:
-      operationId: getMode
+    delete:
+      operationId: deleteSubjectMode
       parameters:
-      - in: path
+      - description: the name of the subject
+        in: path
         name: subject
         required: true
         schema:
@@ -340,18 +505,74 @@ paths:
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
-                $ref: '#/components/schemas/ModeGetResponse'
+                enum:
+                - READWRITE
+                - READONLY
+                - READONLY_OVERRIDE
+                - IMPORT
+                type: string
             application/vnd.schemaregistry+json; qs=0.9:
               schema:
-                $ref: '#/components/schemas/ModeGetResponse'
+                enum:
+                - READWRITE
+                - READONLY
+                - READONLY_OVERRIDE
+                - IMPORT
+                type: string
             application/json; qs=0.5:
               schema:
-                $ref: '#/components/schemas/ModeGetResponse'
+                enum:
+                - READWRITE
+                - READONLY
+                - READONLY_OVERRIDE
+                - IMPORT
+                type: string
           description: successful operation
+        404:
+          content: {}
+          description: Error code 40401 -- Subject not found
+        500:
+          content: {}
+          description: Error code 50001 -- Error in the backend datastore
+      summary: Deletes the specified subject-level mode and revert to the global default.
+    get:
+      operationId: getMode
+      parameters:
+      - description: Name of the Subject
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: defaultToGlobal
+        schema:
+          type: boolean
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Mode'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Mode'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Mode'
+          description: successful operation
+        404:
+          content: {}
+          description: Subject not found
+        500:
+          content: {}
+          description: Error code 50001 -- Error in the backend data store
+      summary: Get mode for a subject.
     put:
       operationId: updateMode
       parameters:
-      - in: path
+      - description: Name of the Subject
+        in: path
         name: subject
         required: true
         schema:
@@ -385,6 +606,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ModeUpdateRequest'
           description: successful operation
+        422:
+          content: {}
+          description: |-
+            Error code 42204 -- Invalid mode
+            Error code 42205 -- Operation not permitted
+        500:
+          content: {}
+          description: |-
+            Error code 50001 -- Error in the backend data store
+            Error code 50003 -- Error while forwarding the request to the primary
+            Error code 50004 -- Unknown leader
+      summary: Update mode for the specified subject.
       x-codegen-request-body-name: body
   /schemas:
     get:
@@ -452,6 +685,10 @@ paths:
           format: int32
           type: integer
       - in: query
+        name: subject
+        schema:
+          type: string
+      - in: query
         name: format
         schema:
           type: string
@@ -493,6 +730,10 @@ paths:
         schema:
           format: int32
           type: integer
+      - in: query
+        name: subject
+        schema:
+          type: string
       - in: query
         name: deleted
         schema:
@@ -539,6 +780,10 @@ paths:
         schema:
           format: int32
           type: integer
+      - in: query
+        name: subject
+        schema:
+          type: string
       - in: query
         name: deleted
         schema:
@@ -605,6 +850,10 @@ paths:
     get:
       operationId: list
       parameters:
+      - in: query
+        name: subjectPrefix
+        schema:
+          type: string
       - in: query
         name: deleted
         schema:
@@ -1055,6 +1304,335 @@ paths:
           description: |
             Error code 50001 -- Error in the backend data store
       summary: Get the server metadata
+  /exporters:
+    get:
+      operationId: getExporters
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: successful operation
+      summary: Get a list of exporter names.
+    post:
+      operationId: createExporter
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/CreateExporterRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/CreateExporterRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExporterRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/CreateExporterRequest'
+        description: Info
+        required: true
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/CreateExporterResponse'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/CreateExporterResponse'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/CreateExporterResponse'
+          description: successful operation
+      summary: Create an exporter.
+      x-codegen-request-body-name: body
+  /exporters/{name}:
+    delete:
+      operationId: deleteExporter
+      parameters:
+      - description: Name of the exporter
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        404:
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Delete an exporter.
+    get:
+      operationId: getExporterInfo
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ExporterInfo'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ExporterInfo'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ExporterInfo'
+          description: successful operation
+        404:
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Get the info for an exporter.
+    put:
+      operationId: putExporter
+      parameters:
+      - description: Name of the exporter
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/UpdateExporterRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/UpdateExporterRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExporterRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/UpdateExporterRequest'
+        description: Info
+        required: true
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+          description: successful operation
+        404:
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Alters an exporter.
+      x-codegen-request-body-name: body
+  /exporters/{name}/config:
+    get:
+      operationId: getExporterConfig
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            application/json; qs=0.5:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+          description: successful operation
+        404:
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Get the config for an exporter.
+    put:
+      operationId: putExporterConfig
+      parameters:
+      - description: Name of the exporter
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              additionalProperties:
+                type: string
+              type: object
+          application/vnd.schemaregistry+json:
+            schema:
+              additionalProperties:
+                type: string
+              type: object
+          application/json:
+            schema:
+              additionalProperties:
+                type: string
+              type: object
+          application/octet-stream:
+            schema:
+              additionalProperties:
+                type: string
+              type: object
+        description: Config
+        required: true
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+          description: successful operation
+        404:
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Alters the config of an exporter.
+      x-codegen-request-body-name: body
+  /exporters/{name}/pause:
+    put:
+      operationId: pauseExporter
+      parameters:
+      - description: Name of the exporter
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+          description: successful operation
+        404:
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Pause an exporter.
+  /exporters/{name}/reset:
+    put:
+      operationId: resetExporter
+      parameters:
+      - description: Name of the exporter
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+          description: successful operation
+        404:
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Reset an exporter.
+  /exporters/{name}/resume:
+    put:
+      operationId: resumeExporter
+      parameters:
+      - description: Name of the exporter
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/UpdateExporterResponse'
+          description: successful operation
+        404:
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Resume an exporter.
+  /exporters/{name}/status:
+    get:
+      operationId: getExporterStatus
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ExporterStatus'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ExporterStatus'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ExporterStatus'
+          description: successful operation
+        404:
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Get the status for an exporter.
 components:
   schemas:
     CompatibilityCheckResponse:
@@ -1103,7 +1681,7 @@ components:
           - NONE
           type: string
       type: object
-    ModeGetResponse:
+    Mode:
       example:
         mode: mode
       properties:
@@ -1254,4 +1832,133 @@ components:
         version:
           format: int32
           type: integer
+      type: object
+    CreateExporterRequest:
+      example:
+        subjects:
+        - subjects
+        - subjects
+        contextType: NONE
+        name: name
+        context: context
+        config:
+          key: config
+      properties:
+        name:
+          type: string
+        subjects:
+          items:
+            type: string
+          type: array
+        contextType:
+          enum:
+          - NONE
+          - AUTO
+          - CUSTOM
+          type: string
+        context:
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    CreateExporterResponse:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      type: object
+    ExporterInfo:
+      example:
+        subjects:
+        - subjects
+        - subjects
+        contextType: NONE
+        name: name
+        context: context
+        config:
+          key: config
+      properties:
+        name:
+          type: string
+        subjects:
+          items:
+            type: string
+          type: array
+        contextType:
+          enum:
+          - NONE
+          - AUTO
+          - CUSTOM
+          type: string
+        context:
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    ExporterStatus:
+      example:
+        trace: trace
+        offset: 0
+        name: name
+        state: UNASSIGNED
+        ts: 6
+      properties:
+        name:
+          type: string
+        state:
+          enum:
+          - UNASSIGNED
+          - STARTING
+          - RUNNING
+          - PAUSED
+          type: string
+        offset:
+          format: int64
+          type: integer
+        ts:
+          format: int64
+          type: integer
+        trace:
+          type: string
+      type: object
+    SchemaRegistry:
+      type: object
+    UpdateExporterRequest:
+      example:
+        subjects:
+        - subjects
+        - subjects
+        contextType: NONE
+        context: context
+        config:
+          key: config
+      properties:
+        subjects:
+          items:
+            type: string
+          type: array
+        contextType:
+          enum:
+          - NONE
+          - AUTO
+          - CUSTOM
+          type: string
+        context:
+          type: string
+        config:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    UpdateExporterResponse:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
       type: object
