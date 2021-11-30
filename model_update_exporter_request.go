@@ -13,5 +13,6 @@ type UpdateExporterRequest struct {
 	Subjects []string `json:"subjects,omitempty"`
 	ContextType string `json:"contextType,omitempty"`
 	Context string `json:"context,omitempty"`
+	SubjectRenameFormat string `json:"subjectRenameFormat,omitempty"`
 	Config map[string]string `json:"config,omitempty"`
 }

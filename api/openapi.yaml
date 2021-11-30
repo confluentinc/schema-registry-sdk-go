@@ -1358,6 +1358,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateExporterResponse'
           description: successful operation
+        409:
+          content: {}
+          description: Error code 409 -- Exporter exists
       summary: Create an exporter.
       x-codegen-request-body-name: body
   /exporters/{name}:
@@ -1835,6 +1838,7 @@ components:
       type: object
     CreateExporterRequest:
       example:
+        subjectRenameFormat: subjectRenameFormat
         subjects:
         - subjects
         - subjects
@@ -1857,6 +1861,8 @@ components:
           - CUSTOM
           type: string
         context:
+          type: string
+        subjectRenameFormat:
           type: string
         config:
           additionalProperties:
@@ -1872,6 +1878,7 @@ components:
       type: object
     ExporterInfo:
       example:
+        subjectRenameFormat: subjectRenameFormat
         subjects:
         - subjects
         - subjects
@@ -1894,6 +1901,8 @@ components:
           - CUSTOM
           type: string
         context:
+          type: string
+        subjectRenameFormat:
           type: string
         config:
           additionalProperties:
@@ -1930,6 +1939,7 @@ components:
       type: object
     UpdateExporterRequest:
       example:
+        subjectRenameFormat: subjectRenameFormat
         subjects:
         - subjects
         - subjects
@@ -1949,6 +1959,8 @@ components:
           - CUSTOM
           type: string
         context:
+          type: string
+        subjectRenameFormat:
           type: string
         config:
           additionalProperties:
