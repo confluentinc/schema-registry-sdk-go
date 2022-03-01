@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// CompatibilityCheckResponse struct for CompatibilityCheckResponse
 type CompatibilityCheckResponse struct {
 	IsCompatible bool `json:"is_compatible,omitempty"`
 	Messages []string `json:"messages,omitempty"`

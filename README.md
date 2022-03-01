@@ -102,6 +102,7 @@ Class | Method | HTTP request | Description
  Endpoints do not require authorization.
 
 
+
 ## Author
 
 

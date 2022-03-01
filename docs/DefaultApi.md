@@ -51,6 +51,7 @@ Method | HTTP request | Description
 ## CreateExporter
 
 > CreateExporterResponse CreateExporter(ctx, body)
+
 Create an exporter.
 
 ### Required Parameters
@@ -82,6 +83,7 @@ No authorization required
 ## DeleteExporter
 
 > DeleteExporter(ctx, name)
+
 Delete an exporter.
 
 ### Required Parameters
@@ -113,6 +115,7 @@ No authorization required
 ## DeleteSchemaVersion
 
 > int32 DeleteSchemaVersion(ctx, subject, version, optional)
+
 Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 
 ### Required Parameters
@@ -157,6 +160,7 @@ No authorization required
 ## DeleteSubject
 
 > []int32 DeleteSubject(ctx, subject, optional)
+
 Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 
 ### Required Parameters
@@ -199,6 +203,7 @@ No authorization required
 ## DeleteSubjectConfig
 
 > string DeleteSubjectConfig(ctx, subject)
+
 Deletes the specified subject-level compatibility level config and revert to the global default.
 
 ### Required Parameters
@@ -230,6 +235,7 @@ No authorization required
 ## DeleteSubjectMode
 
 > string DeleteSubjectMode(ctx, subject)
+
 Deletes the specified subject-level mode and revert to the global default.
 
 ### Required Parameters
@@ -261,6 +267,7 @@ No authorization required
 ## Get
 
 > map[string]map[string]interface{} Get(ctx, )
+
 Schema Registry Root Resource
 
 The Root resource is a no-op.
@@ -271,7 +278,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**map[string]map[string]interface{}**](map[string]interface{}.md)
+**map[string]map[string]interface{}**
 
 ### Authorization
 
@@ -290,6 +297,7 @@ No authorization required
 ## GetClusterId
 
 > ServerClusterId GetClusterId(ctx, )
+
 Get the server metadata
 
 ### Required Parameters
@@ -317,6 +325,7 @@ No authorization required
 ## GetExporterConfig
 
 > map[string]string GetExporterConfig(ctx, name)
+
 Get the config for an exporter.
 
 ### Required Parameters
@@ -348,6 +357,7 @@ No authorization required
 ## GetExporterInfo
 
 > ExporterInfo GetExporterInfo(ctx, name)
+
 Get the info for an exporter.
 
 ### Required Parameters
@@ -379,6 +389,7 @@ No authorization required
 ## GetExporterStatus
 
 > ExporterStatus GetExporterStatus(ctx, name)
+
 Get the status for an exporter.
 
 ### Required Parameters
@@ -410,6 +421,7 @@ No authorization required
 ## GetExporters
 
 > []string GetExporters(ctx, )
+
 Get a list of exporter names.
 
 ### Required Parameters
@@ -437,6 +449,7 @@ No authorization required
 ## GetMode
 
 > Mode GetMode(ctx, subject, optional)
+
 Get mode for a subject.
 
 ### Required Parameters
@@ -479,6 +492,7 @@ No authorization required
 ## GetReferencedBy
 
 > []int32 GetReferencedBy(ctx, subject, version)
+
 Get the schemas that reference the specified schema.
 
 ### Required Parameters
@@ -511,6 +525,7 @@ No authorization required
 ## GetSchema
 
 > SchemaString GetSchema(ctx, id, optional)
+
 Get the schema string identified by the input ID.
 
 ### Required Parameters
@@ -555,6 +570,7 @@ No authorization required
 ## GetSchemaByVersion
 
 > Schema GetSchemaByVersion(ctx, subject, version, optional)
+
 Get a specific version of the schema registered under this subject.
 
 ### Required Parameters
@@ -599,6 +615,7 @@ No authorization required
 ## GetSchemaOnly
 
 > string GetSchemaOnly(ctx, subject, version, optional)
+
 Get the schema for the specified version of this subject. The unescaped schema only is returned.
 
 ### Required Parameters
@@ -643,6 +660,7 @@ No authorization required
 ## GetSchemaTypes
 
 > []string GetSchemaTypes(ctx, )
+
 Get the schema types supported by this registry.
 
 ### Required Parameters
@@ -670,6 +688,7 @@ No authorization required
 ## GetSchemas
 
 > []Schema GetSchemas(ctx, optional)
+
 Get the schemas.
 
 ### Required Parameters
@@ -714,6 +733,7 @@ No authorization required
 ## GetSubjectLevelConfig
 
 > Config GetSubjectLevelConfig(ctx, subject, optional)
+
 Get compatibility level for a subject.
 
 ### Required Parameters
@@ -756,6 +776,7 @@ No authorization required
 ## GetSubjects
 
 > []string GetSubjects(ctx, id, optional)
+
 Get all the subjects associated with the input ID.
 
 ### Required Parameters
@@ -799,6 +820,7 @@ No authorization required
 ## GetTopLevelConfig
 
 > Config GetTopLevelConfig(ctx, )
+
 Get global compatibility level.
 
 ### Required Parameters
@@ -826,6 +848,7 @@ No authorization required
 ## GetTopLevelMode
 
 > Mode GetTopLevelMode(ctx, )
+
 Get global mode.
 
 ### Required Parameters
@@ -853,6 +876,7 @@ No authorization required
 ## GetVersions
 
 > []SubjectVersion GetVersions(ctx, id, optional)
+
 Get all the subject-version pairs associated with the input ID.
 
 ### Required Parameters
@@ -896,6 +920,7 @@ No authorization required
 ## List
 
 > []string List(ctx, optional)
+
 Get a list of registered subjects.
 
 ### Required Parameters
@@ -937,6 +962,7 @@ No authorization required
 ## ListContexts
 
 > []string ListContexts(ctx, )
+
 Get a list of contexts.
 
 ### Required Parameters
@@ -964,6 +990,7 @@ No authorization required
 ## ListVersions
 
 > []int32 ListVersions(ctx, subject, optional)
+
 Get a list of versions registered under the specified subject.
 
 ### Required Parameters
@@ -1006,6 +1033,7 @@ No authorization required
 ## LookUpSchemaUnderSubject
 
 > LookUpSchemaUnderSubject(ctx, subject, body, optional)
+
 Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
 
 ### Required Parameters
@@ -1050,6 +1078,7 @@ No authorization required
 ## PauseExporter
 
 > UpdateExporterResponse PauseExporter(ctx, name)
+
 Pause an exporter.
 
 ### Required Parameters
@@ -1083,6 +1112,7 @@ No authorization required
 > map[string]string Post(ctx, )
 
 
+
 ### Required Parameters
 
 This endpoint does not need any parameter.
@@ -1108,6 +1138,7 @@ No authorization required
 ## PutExporter
 
 > UpdateExporterResponse PutExporter(ctx, name, body)
+
 Alters an exporter.
 
 ### Required Parameters
@@ -1140,6 +1171,7 @@ No authorization required
 ## PutExporterConfig
 
 > UpdateExporterResponse PutExporterConfig(ctx, name, body)
+
 Alters the config of an exporter.
 
 ### Required Parameters
@@ -1172,6 +1204,7 @@ No authorization required
 ## Register
 
 > RegisterSchemaResponse Register(ctx, subject, body)
+
 Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
 
 ### Required Parameters
@@ -1204,6 +1237,7 @@ No authorization required
 ## ResetExporter
 
 > UpdateExporterResponse ResetExporter(ctx, name)
+
 Reset an exporter.
 
 ### Required Parameters
@@ -1235,6 +1269,7 @@ No authorization required
 ## ResumeExporter
 
 > UpdateExporterResponse ResumeExporter(ctx, name)
+
 Resume an exporter.
 
 ### Required Parameters
@@ -1266,6 +1301,7 @@ No authorization required
 ## TestCompatibilityBySubjectName
 
 > CompatibilityCheckResponse TestCompatibilityBySubjectName(ctx, subject, version, body, optional)
+
 Test input schema against a particular version of a subject's schema for compatibility.
 
 the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
@@ -1316,6 +1352,7 @@ No authorization required
 ## TestCompatibilityForSubject
 
 > CompatibilityCheckResponse TestCompatibilityForSubject(ctx, subject, body, optional)
+
 Test input schema against a subject's schemas for compatibility, based on the compatibility level of the subject configured. In other word, it will perform the same compatibility check as register for that subject
 
 the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
@@ -1364,6 +1401,7 @@ No authorization required
 ## UpdateMode
 
 > ModeUpdateRequest UpdateMode(ctx, subject, body)
+
 Update mode for the specified subject.
 
 ### Required Parameters
@@ -1396,6 +1434,7 @@ No authorization required
 ## UpdateSubjectLevelConfig
 
 > ConfigUpdateRequest UpdateSubjectLevelConfig(ctx, subject, body)
+
 Update compatibility level for the specified subject.
 
 ### Required Parameters
@@ -1428,6 +1467,7 @@ No authorization required
 ## UpdateTopLevelConfig
 
 > ConfigUpdateRequest UpdateTopLevelConfig(ctx, body)
+
 Update global compatibility level.
 
 ### Required Parameters
@@ -1459,6 +1499,7 @@ No authorization required
 ## UpdateTopLevelMode
 
 > ModeUpdateRequest UpdateTopLevelMode(ctx, body)
+
 Update global mode.
 
 ### Required Parameters

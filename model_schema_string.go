@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// SchemaString struct for SchemaString
 type SchemaString struct {
 	// Schema type
 	SchemaType string `json:"schemaType,omitempty"`

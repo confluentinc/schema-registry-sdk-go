@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// ExporterInfo struct for ExporterInfo
 type ExporterInfo struct {
 	Name string `json:"name,omitempty"`
 	Subjects []string `json:"subjects,omitempty"`
