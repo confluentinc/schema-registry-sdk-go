@@ -10,7 +10,7 @@ paths:
       description: The Root resource is a no-op.
       operationId: get
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -35,7 +35,7 @@ paths:
     post:
       operationId: post
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -61,25 +61,36 @@ paths:
         compatibility level applies (http:get:: /config).'
       operationId: testCompatibilityForSubject
       parameters:
-      - in: header
+      - explode: false
+        in: header
         name: Content-Type
+        required: false
         schema:
           type: string
-      - in: header
+        style: simple
+      - explode: false
+        in: header
         name: Accept
+        required: false
         schema:
           type: string
+        style: simple
       - description: Subject of the schema version against which compatibility is
           to be tested
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: verbose
+        required: false
         schema:
           type: boolean
+        style: form
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -97,7 +108,7 @@ paths:
         description: Schema
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -109,12 +120,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/CompatibilityCheckResponse'
           description: successful operation
-        422:
+        "422":
           content: {}
           description: |-
             Error code 42201 -- Invalid schema or schema type
             Error code 42202 -- Invalid version
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Test input schema against a subject's schemas for compatibility, based
@@ -129,34 +140,47 @@ paths:
         compatibility level applies (http:get:: /config).'
       operationId: testCompatibilityBySubjectName
       parameters:
-      - in: header
+      - explode: false
+        in: header
         name: Content-Type
+        required: false
         schema:
           type: string
-      - in: header
+        style: simple
+      - explode: false
+        in: header
         name: Accept
+        required: false
         schema:
           type: string
+        style: simple
       - description: Subject of the schema version against which compatibility is
           to be tested
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the subject's schema against which compatibility is
           to be tested. Valid values for versionId are between [1,2^31-1] or the string
           "latest"."latest" checks compatibility of the input schema with the last
           registered schema under the specified subject
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: verbose
+        required: false
         schema:
           type: boolean
+        style: form
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -174,7 +198,7 @@ paths:
         description: Schema
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -186,17 +210,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/CompatibilityCheckResponse'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: |-
             Error code 40401 -- Subject not found
             Error code 40402 -- Version not found
-        422:
+        "422":
           content: {}
           description: |-
             Error code 42201 -- Invalid schema or schema type
             Error code 42202 -- Invalid version
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Test input schema against a particular version of a subject's schema
@@ -206,7 +230,7 @@ paths:
     get:
       operationId: getTopLevelConfig
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -218,7 +242,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Config'
           description: successful operation
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Get global compatibility level.
@@ -241,7 +265,7 @@ paths:
         description: Config Update Request
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -253,10 +277,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConfigUpdateRequest'
           description: successful operation
-        422:
+        "422":
           content: {}
           description: Error code 42203 -- Invalid compatibility level
-        500:
+        "500":
           content: {}
           description: |
             Error code 50001 -- Error in the backend data store
@@ -268,13 +292,15 @@ paths:
       operationId: deleteSubjectConfig
       parameters:
       - description: the name of the subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -310,10 +336,10 @@ paths:
                 - FULL_TRANSITIVE
                 type: string
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40401 -- Subject not found
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend datastore
       summary: Deletes the specified subject-level compatibility level config and
@@ -321,17 +347,22 @@ paths:
     get:
       operationId: getSubjectLevelConfig
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: defaultToGlobal
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -343,10 +374,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Config'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Subject not found
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Get compatibility level for a subject.
@@ -354,11 +385,13 @@ paths:
       operationId: updateSubjectLevelConfig
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -376,7 +409,7 @@ paths:
         description: Config Update Request
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -388,12 +421,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConfigUpdateRequest'
           description: successful operation
-        422:
+        "422":
           content: {}
           description: |-
             Error code 42203 -- Invalid compatibility level
             Error code 40402 -- Version not found
-        500:
+        "500":
           content: {}
           description: |-
             Error code 50001 -- Error in the backend data store
@@ -404,7 +437,7 @@ paths:
     get:
       operationId: listContexts
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -422,7 +455,7 @@ paths:
                   type: string
                 type: array
           description: successful operation
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend datastore
       summary: Get a list of contexts.
@@ -430,7 +463,7 @@ paths:
     get:
       operationId: getTopLevelMode
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -442,7 +475,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Mode'
           description: successful operation
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Get global mode.
@@ -465,7 +498,7 @@ paths:
         description: Update Request
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -477,12 +510,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ModeUpdateRequest'
           description: successful operation
-        422:
+        "422":
           content: {}
           description: |-
             Error code 42204 -- Invalid mode
             Error code 42205 -- Operation not permitted
-        500:
+        "500":
           content: {}
           description: |-
             Error code 50001 -- Error in the backend data store
@@ -495,13 +528,15 @@ paths:
       operationId: deleteSubjectMode
       parameters:
       - description: the name of the subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -528,10 +563,10 @@ paths:
                 - IMPORT
                 type: string
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40401 -- Subject not found
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend datastore
       summary: Deletes the specified subject-level mode and revert to the global default.
@@ -539,17 +574,22 @@ paths:
       operationId: getMode
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: defaultToGlobal
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -561,10 +601,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Mode'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Subject not found
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Get mode for a subject.
@@ -572,11 +612,13 @@ paths:
       operationId: updateMode
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -594,7 +636,7 @@ paths:
         description: Update Request
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -606,12 +648,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ModeUpdateRequest'
           description: successful operation
-        422:
+        "422":
           content: {}
           description: |-
             Error code 42204 -- Invalid mode
             Error code 42205 -- Operation not permitted
-        500:
+        "500":
           content: {}
           description: |-
             Error code 50001 -- Error in the backend data store
@@ -623,34 +665,49 @@ paths:
     get:
       operationId: getSchemas
       parameters:
-      - in: query
+      - explode: true
+        in: query
         name: subjectPrefix
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           default: false
           type: boolean
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: latestOnly
+        required: false
         schema:
           default: false
           type: boolean
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: offset
+        required: false
         schema:
           default: 0
           format: int32
           type: integer
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: limit
+        required: false
         schema:
           default: -1
           format: int32
           type: integer
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -668,7 +725,7 @@ paths:
                   $ref: '#/components/schemas/Schema'
                 type: array
           description: successful operation
-        500:
+        "500":
           content: {}
           description: |
             Error code 50001 -- Error in the backend data store
@@ -678,27 +735,38 @@ paths:
       operationId: getSchema
       parameters:
       - description: Globally unique identifier of the schema
+        explode: false
         in: path
         name: id
         required: true
         schema:
           format: int32
           type: integer
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: subject
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: format
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: fetchMaxId
+        required: false
         schema:
           default: false
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -710,11 +778,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/SchemaString'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: |
             Error code 40403 -- Schema not found
-        500:
+        "500":
           content: {}
           description: |
             Error code 50001 -- Error in the backend data store
@@ -724,22 +792,30 @@ paths:
       operationId: getSubjects
       parameters:
       - description: Globally unique identifier of the schema
+        explode: false
         in: path
         name: id
         required: true
         schema:
           format: int32
           type: integer
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: subject
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -760,11 +836,11 @@ paths:
                 type: array
                 uniqueItems: true
           description: successful operation
-        404:
+        "404":
           content: {}
           description: |
             Error code 40403 -- Schema not found
-        500:
+        "500":
           content: {}
           description: |
             Error code 50001 -- Error in the backend data store
@@ -774,22 +850,30 @@ paths:
       operationId: getVersions
       parameters:
       - description: Globally unique identifier of the schema
+        explode: false
         in: path
         name: id
         required: true
         schema:
           format: int32
           type: integer
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: subject
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -807,11 +891,11 @@ paths:
                   $ref: '#/components/schemas/SubjectVersion'
                 type: array
           description: successful operation
-        404:
+        "404":
           content: {}
           description: |
             Error code 40403 -- Schema not found
-        500:
+        "500":
           content: {}
           description: |
             Error code 50001 -- Error in the backend data store
@@ -820,7 +904,7 @@ paths:
     get:
       operationId: getSchemaTypes
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -841,7 +925,7 @@ paths:
                 type: array
                 uniqueItems: true
           description: successful operation
-        500:
+        "500":
           content: {}
           description: |
             Error code 50001 -- Error in the backend data store
@@ -850,16 +934,22 @@ paths:
     get:
       operationId: list
       parameters:
-      - in: query
+      - explode: true
+        in: query
         name: subjectPrefix
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -880,7 +970,7 @@ paths:
                 type: array
                 uniqueItems: true
           description: successful operation
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend datastore
       summary: Get a list of registered subjects.
@@ -889,17 +979,22 @@ paths:
       operationId: deleteSubject
       parameters:
       - description: the name of the subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: permanent
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -920,10 +1015,10 @@ paths:
                   type: integer
                 type: array
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40401 -- Subject not found
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend datastore
       summary: Deletes the specified subject and its associated compatibility level
@@ -933,15 +1028,20 @@ paths:
       operationId: lookUpSchemaUnderSubject
       parameters:
       - description: Subject under which the schema will be registered
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -959,12 +1059,12 @@ paths:
         description: Schema
         required: true
       responses:
-        404:
+        "404":
           content: {}
           description: |-
             Error code 40401 -- Subject not found
             Error code 40403 -- Schema not found
-        500:
+        "500":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -985,17 +1085,22 @@ paths:
       operationId: listVersions
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1016,10 +1121,10 @@ paths:
                   type: integer
                 type: array
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40401 -- Subject not found
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Get a list of versions registered under the specified subject.
@@ -1027,11 +1132,13 @@ paths:
       operationId: register
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -1049,7 +1156,7 @@ paths:
         description: Schema
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1061,13 +1168,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/RegisterSchemaResponse'
           description: successful operation
-        409:
+        "409":
           content: {}
           description: Incompatible schema
-        422:
+        "422":
           content: {}
           description: Error code 42201 -- Invalid schema or schema type
-        500:
+        "500":
           content: {}
           description: |-
             Error code 50001 -- Error in the backend data store
@@ -1083,26 +1190,33 @@ paths:
       operationId: deleteSchemaVersion
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the schema to be returned. Valid values for versionId
           are between [1,2^31-1] or the string "latest". "latest" returns the last
           registered schema under the specified subject. Note that there may be a
           new latest schema that gets registered right after this request is served.
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: permanent
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1117,15 +1231,15 @@ paths:
                 format: int32
                 type: integer
           description: successful operation
-        404:
+        "404":
           content: {}
           description: |-
             Error code 40401 -- Subject not found
             Error code 40402 -- Version not found
-        422:
+        "422":
           content: {}
           description: Error code 42202 -- Invalid version
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Deletes a specific version of the schema registered under this subject.
@@ -1138,26 +1252,33 @@ paths:
       operationId: getSchemaByVersion
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the schema to be returned. Valid values for versionId
           are between [1,2^31-1] or the string "latest". "latest" returns the last
           registered schema under the specified subject. Note that there may be a
           new latest schema that gets registered right after this request is served.
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1169,15 +1290,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Schema'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: |-
             Error code 40401 -- Subject not found
             Error code 40402 -- Version not found
-        422:
+        "422":
           content: {}
           description: Error code 42202 -- Invalid version
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Get a specific version of the schema registered under this subject.
@@ -1186,22 +1307,26 @@ paths:
       operationId: getReferencedBy
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the schema to be returned. Valid values for versionId
           are between [1,2^31-1] or the string "latest". "latest" returns the last
           registered schema under the specified subject. Note that there may be a
           new latest schema that gets registered right after this request is served.
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1222,15 +1347,15 @@ paths:
                   type: integer
                 type: array
           description: successful operation
-        404:
+        "404":
           content: {}
           description: |-
             Error code 40401 -- Subject not found
             Error code 40402 -- Version not found
-        422:
+        "422":
           content: {}
           description: Error code 42202 -- Invalid version
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Get the schemas that reference the specified schema.
@@ -1239,26 +1364,33 @@ paths:
       operationId: getSchemaOnly
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the schema to be returned. Valid values for versionId
           are between [1,2^31-1] or the string "latest". "latest" returns the last
           registered schema under the specified subject. Note that there may be a
           new latest schema that gets registered right after this request is served.
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1270,15 +1402,15 @@ paths:
               schema:
                 type: string
           description: successful operation
-        404:
+        "404":
           content: {}
           description: |-
             Error code 40401 -- Subject not found
             Error code 40402 -- Version not found
-        422:
+        "422":
           content: {}
           description: Error code 42202 -- Invalid version
-        500:
+        "500":
           content: {}
           description: Error code 50001 -- Error in the backend data store
       summary: Get the schema for the specified version of this subject. The unescaped
@@ -1287,7 +1419,7 @@ paths:
     get:
       operationId: getClusterId
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1299,7 +1431,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServerClusterId'
           description: successful operation
-        500:
+        "500":
           content: {}
           description: |
             Error code 50001 -- Error in the backend data store
@@ -1308,7 +1440,7 @@ paths:
     get:
       operationId: getExporters
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1346,7 +1478,7 @@ paths:
         description: Info
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1358,7 +1490,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateExporterResponse'
           description: successful operation
-        409:
+        "409":
           content: {}
           description: Error code 409 -- Exporter exists
       summary: Create an exporter.
@@ -1368,26 +1500,30 @@ paths:
       operationId: deleteExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        404:
+        "404":
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Delete an exporter.
     get:
       operationId: getExporterInfo
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1399,7 +1535,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExporterInfo'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Get the info for an exporter.
@@ -1407,11 +1543,13 @@ paths:
       operationId: putExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -1429,7 +1567,7 @@ paths:
         description: Info
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1441,7 +1579,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateExporterResponse'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Alters an exporter.
@@ -1450,13 +1588,15 @@ paths:
     get:
       operationId: getExporterConfig
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1474,7 +1614,7 @@ paths:
                   type: string
                 type: object
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Get the config for an exporter.
@@ -1482,11 +1622,13 @@ paths:
       operationId: putExporterConfig
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -1512,7 +1654,7 @@ paths:
         description: Config
         required: true
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1524,7 +1666,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateExporterResponse'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Alters the config of an exporter.
@@ -1534,13 +1676,15 @@ paths:
       operationId: pauseExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1552,7 +1696,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateExporterResponse'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Pause an exporter.
@@ -1561,13 +1705,15 @@ paths:
       operationId: resetExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1579,7 +1725,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateExporterResponse'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Reset an exporter.
@@ -1588,13 +1734,15 @@ paths:
       operationId: resumeExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1606,7 +1754,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateExporterResponse'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Resume an exporter.
@@ -1614,13 +1762,15 @@ paths:
     get:
       operationId: getExporterStatus
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
-        200:
+        "200":
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
@@ -1632,7 +1782,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExporterStatus'
           description: successful operation
-        404:
+        "404":
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Get the status for an exporter.
