@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// SubjectVersion struct for SubjectVersion
 type SubjectVersion struct {
 	Subject string `json:"subject,omitempty"`
 	Version int32 `json:"version,omitempty"`

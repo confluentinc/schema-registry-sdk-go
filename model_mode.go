@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// Mode struct for Mode
 type Mode struct {
 	Mode string `json:"mode,omitempty"`
 }

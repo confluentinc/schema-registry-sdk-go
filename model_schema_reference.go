@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// SchemaReference struct for SchemaReference
 type SchemaReference struct {
 	Name string `json:"name,omitempty"`
 	Subject string `json:"subject,omitempty"`

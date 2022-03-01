@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// UpdateExporterRequest struct for UpdateExporterRequest
 type UpdateExporterRequest struct {
 	Subjects []string `json:"subjects,omitempty"`
 	ContextType string `json:"contextType,omitempty"`

@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// RegisterSchemaRequest struct for RegisterSchemaRequest
 type RegisterSchemaRequest struct {
 	Version int32 `json:"version,omitempty"`
 	Id int32 `json:"id,omitempty"`
