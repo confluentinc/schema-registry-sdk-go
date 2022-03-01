@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// Schema struct for Schema
 type Schema struct {
 	Subject string `json:"subject,omitempty"`
 	Version int32 `json:"version,omitempty"`

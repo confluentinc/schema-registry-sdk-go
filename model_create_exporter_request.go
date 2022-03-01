@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// CreateExporterRequest struct for CreateExporterRequest
 type CreateExporterRequest struct {
 	Name string `json:"name,omitempty"`
 	Subjects []string `json:"subjects,omitempty"`

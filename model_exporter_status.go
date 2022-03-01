@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// ExporterStatus struct for ExporterStatus
 type ExporterStatus struct {
 	Name string `json:"name,omitempty"`
 	State string `json:"state,omitempty"`

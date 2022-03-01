@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// ServerClusterId struct for ServerClusterId
 type ServerClusterId struct {
 	Scope map[string]map[string]interface{} `json:"scope,omitempty"`
 	Id string `json:"id,omitempty"`
