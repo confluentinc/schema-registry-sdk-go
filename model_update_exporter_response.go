@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// UpdateExporterResponse struct for UpdateExporterResponse
 type UpdateExporterResponse struct {
 	Name string `json:"name,omitempty"`
 }

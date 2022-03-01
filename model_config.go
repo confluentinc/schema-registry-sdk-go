@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// Config struct for Config
 type Config struct {
 	// Compatability Level
 	CompatibilityLevel string `json:"compatibilityLevel,omitempty"`

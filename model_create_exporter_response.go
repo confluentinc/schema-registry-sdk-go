@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// CreateExporterResponse struct for CreateExporterResponse
 type CreateExporterResponse struct {
 	Name string `json:"name,omitempty"`
 }

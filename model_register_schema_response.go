@@ -8,7 +8,7 @@
  */
 
 package schemaregistry
-
+// RegisterSchemaResponse struct for RegisterSchemaResponse
 type RegisterSchemaResponse struct {
 	Id int32 `json:"id,omitempty"`
 }
