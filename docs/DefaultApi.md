@@ -4,13 +4,28 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateBusinessMetadata**](DefaultApi.md#CreateBusinessMetadata) | **Post** /catalog/v1/entity/businessmetadata | Bulk API to create multiple business metadata.
+[**CreateBusinessMetadataDefs**](DefaultApi.md#CreateBusinessMetadataDefs) | **Post** /catalog/v1/types/businessmetadatadefs | Bulk create API for business metadata definitions.
 [**CreateExporter**](DefaultApi.md#CreateExporter) | **Post** /exporters | Create an exporter.
+[**CreateOrUpdate**](DefaultApi.md#CreateOrUpdate) | **Post** /catalog/v1/entity | 
+[**CreateTagDefs**](DefaultApi.md#CreateTagDefs) | **Post** /catalog/v1/types/tagdefs | Bulk create API for tag definitions.
+[**CreateTags**](DefaultApi.md#CreateTags) | **Post** /catalog/v1/entity/tags | Bulk API to create multiple tags.
+[**DeleteBusinessMetadata**](DefaultApi.md#DeleteBusinessMetadata) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName} | Delete a business metadata on an entity.
+[**DeleteBusinessMetadataDef**](DefaultApi.md#DeleteBusinessMetadataDef) | **Delete** /catalog/v1/types/businessmetadatadefs/{bmName} | Delete API for business metadata definition identified by its name.
+[**DeleteByUniqueAttributes**](DefaultApi.md#DeleteByUniqueAttributes) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName} | 
 [**DeleteExporter**](DefaultApi.md#DeleteExporter) | **Delete** /exporters/{name} | Delete an exporter.
 [**DeleteSchemaVersion**](DefaultApi.md#DeleteSchemaVersion) | **Delete** /subjects/{subject}/versions/{version} | Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 [**DeleteSubject**](DefaultApi.md#DeleteSubject) | **Delete** /subjects/{subject} | Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 [**DeleteSubjectConfig**](DefaultApi.md#DeleteSubjectConfig) | **Delete** /config/{subject} | Deletes the specified subject-level compatibility level config and revert to the global default.
 [**DeleteSubjectMode**](DefaultApi.md#DeleteSubjectMode) | **Delete** /mode/{subject} | Deletes the specified subject-level mode and revert to the global default.
+[**DeleteTag**](DefaultApi.md#DeleteTag) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName} | Delete a tag on an entity.
+[**DeleteTagDef**](DefaultApi.md#DeleteTagDef) | **Delete** /catalog/v1/types/tagdefs/{tagName} | Delete API for tag definition identified by its name.
 [**Get**](DefaultApi.md#Get) | **Get** / | Schema Registry Root Resource
+[**GetAllBusinessMetadataDefs**](DefaultApi.md#GetAllBusinessMetadataDefs) | **Get** /catalog/v1/types/businessmetadatadefs | Bulk retrieval API for retrieving business metadata definitions.
+[**GetAllTagDefs**](DefaultApi.md#GetAllTagDefs) | **Get** /catalog/v1/types/tagdefs | Bulk retrieval API for retrieving tag definitions.
+[**GetBusinessMetadata**](DefaultApi.md#GetBusinessMetadata) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata | Gets the list of business metadata for a given entity represented by a qualified name.
+[**GetBusinessMetadataDefByName**](DefaultApi.md#GetBusinessMetadataDefByName) | **Get** /catalog/v1/types/businessmetadatadefs/{bmName} | Get the business metadata definition with the given name.
+[**GetByUniqueAttributes**](DefaultApi.md#GetByUniqueAttributes) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName} | Fetch complete definition of an entity given its type and unique attribute.
 [**GetClusterId**](DefaultApi.md#GetClusterId) | **Get** /v1/metadata/id | Get the server metadata
 [**GetExporterConfig**](DefaultApi.md#GetExporterConfig) | **Get** /exporters/{name}/config | Get the config for an exporter.
 [**GetExporterInfo**](DefaultApi.md#GetExporterInfo) | **Get** /exporters/{name} | Get the info for an exporter.
@@ -25,6 +40,8 @@ Method | HTTP request | Description
 [**GetSchemas**](DefaultApi.md#GetSchemas) | **Get** /schemas | Get the schemas.
 [**GetSubjectLevelConfig**](DefaultApi.md#GetSubjectLevelConfig) | **Get** /config/{subject} | Get compatibility level for a subject.
 [**GetSubjects**](DefaultApi.md#GetSubjects) | **Get** /schemas/ids/{id}/subjects | Get all the subjects associated with the input ID.
+[**GetTagDefByName**](DefaultApi.md#GetTagDefByName) | **Get** /catalog/v1/types/tagdefs/{tagName} | Get the tag definition with the given name.
+[**GetTags**](DefaultApi.md#GetTags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Gets the list of classifications for a given entity represented by a qualifed name.
 [**GetTopLevelConfig**](DefaultApi.md#GetTopLevelConfig) | **Get** /config | Get global compatibility level.
 [**GetTopLevelMode**](DefaultApi.md#GetTopLevelMode) | **Get** /mode | Get global mode.
 [**GetVersions**](DefaultApi.md#GetVersions) | **Get** /schemas/ids/{id}/versions | Get all the subject-version pairs associated with the input ID.
@@ -32,6 +49,7 @@ Method | HTTP request | Description
 [**ListContexts**](DefaultApi.md#ListContexts) | **Get** /contexts | Get a list of contexts.
 [**ListVersions**](DefaultApi.md#ListVersions) | **Get** /subjects/{subject}/versions | Get a list of versions registered under the specified subject.
 [**LookUpSchemaUnderSubject**](DefaultApi.md#LookUpSchemaUnderSubject) | **Post** /subjects/{subject} | Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
+[**PartialUpdateByUniqueAttributes**](DefaultApi.md#PartialUpdateByUniqueAttributes) | **Put** /catalog/v1/entity | 
 [**PauseExporter**](DefaultApi.md#PauseExporter) | **Put** /exporters/{name}/pause | Pause an exporter.
 [**Post**](DefaultApi.md#Post) | **Post** / | 
 [**PutExporter**](DefaultApi.md#PutExporter) | **Put** /exporters/{name} | Alters an exporter.
@@ -39,13 +57,105 @@ Method | HTTP request | Description
 [**Register**](DefaultApi.md#Register) | **Post** /subjects/{subject}/versions | Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema&#39;s version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
 [**ResetExporter**](DefaultApi.md#ResetExporter) | **Put** /exporters/{name}/reset | Reset an exporter.
 [**ResumeExporter**](DefaultApi.md#ResumeExporter) | **Put** /exporters/{name}/resume | Resume an exporter.
+[**SearchUsingAttribute**](DefaultApi.md#SearchUsingAttribute) | **Get** /catalog/v1/search/attribute | Retrieve data for the specified attribute search query.
+[**SearchUsingBasic**](DefaultApi.md#SearchUsingBasic) | **Get** /catalog/v1/search/basic | Retrieve data for the specified fulltext query.
 [**TestCompatibilityBySubjectName**](DefaultApi.md#TestCompatibilityBySubjectName) | **Post** /compatibility/subjects/{subject}/versions/{version} | Test input schema against a particular version of a subject&#39;s schema for compatibility.
 [**TestCompatibilityForSubject**](DefaultApi.md#TestCompatibilityForSubject) | **Post** /compatibility/subjects/{subject}/versions | Test input schema against a subject&#39;s schemas for compatibility, based on the compatibility level of the subject configured. In other word, it will perform the same compatibility check as register for that subject
+[**UpdateBusinessMetadata**](DefaultApi.md#UpdateBusinessMetadata) | **Put** /catalog/v1/entity/businessmetadata | Bulk API to update multiple business metadata.
+[**UpdateBusinessMetadataDefs**](DefaultApi.md#UpdateBusinessMetadataDefs) | **Put** /catalog/v1/types/businessmetadatadefs | Bulk update API for business metadata definitions.
 [**UpdateMode**](DefaultApi.md#UpdateMode) | **Put** /mode/{subject} | Update mode for the specified subject.
 [**UpdateSubjectLevelConfig**](DefaultApi.md#UpdateSubjectLevelConfig) | **Put** /config/{subject} | Update compatibility level for the specified subject.
+[**UpdateTagDefs**](DefaultApi.md#UpdateTagDefs) | **Put** /catalog/v1/types/tagdefs | Bulk update API for tag definitions.
+[**UpdateTags**](DefaultApi.md#UpdateTags) | **Put** /catalog/v1/entity/tags | Bulk API to update multiple tags.
 [**UpdateTopLevelConfig**](DefaultApi.md#UpdateTopLevelConfig) | **Put** /config | Update global compatibility level.
 [**UpdateTopLevelMode**](DefaultApi.md#UpdateTopLevelMode) | **Put** /mode | Update global mode.
 
+
+
+## CreateBusinessMetadata
+
+> []BusinessMetadataResponse CreateBusinessMetadata(ctx, optional)
+
+Bulk API to create multiple business metadata.
+
+Bulk API to create multiple business metadata.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***CreateBusinessMetadataOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateBusinessMetadataOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **businessMetadata** | [**optional.Interface of []BusinessMetadata**](BusinessMetadata.md)| The business metadata | 
+
+### Return type
+
+[**[]BusinessMetadataResponse**](BusinessMetadataResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateBusinessMetadataDefs
+
+> []BusinessMetadataDefResponse CreateBusinessMetadataDefs(ctx, optional)
+
+Bulk create API for business metadata definitions.
+
+Bulk create API for business metadata definitions.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***CreateBusinessMetadataDefsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateBusinessMetadataDefsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **atlasBusinessMetadataDef** | [**optional.Interface of []AtlasBusinessMetadataDef**](AtlasBusinessMetadataDef.md)| The business metadata definitions to create | 
+
+### Return type
+
+[**[]BusinessMetadataDefResponse**](BusinessMetadataDefResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateExporter
@@ -73,6 +183,236 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json, application/octet-stream
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateOrUpdate
+
+> CreateOrUpdate(ctx, optional)
+
+
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***CreateOrUpdateOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateOrUpdateOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **atlasEntityWithExtInfo** | [**optional.Interface of AtlasEntityWithExtInfo**](AtlasEntityWithExtInfo.md)|  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateTagDefs
+
+> []TagDefResponse CreateTagDefs(ctx, optional)
+
+Bulk create API for tag definitions.
+
+Bulk create API for tag definitions.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***CreateTagDefsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateTagDefsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tagDef** | [**optional.Interface of []TagDef**](TagDef.md)| The tag definitions to create | 
+
+### Return type
+
+[**[]TagDefResponse**](TagDefResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateTags
+
+> []TagResponse CreateTags(ctx, optional)
+
+Bulk API to create multiple tags.
+
+Bulk API to create multiple tags.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***CreateTagsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateTagsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tag** | [**optional.Interface of []Tag**](Tag.md)| The tags | 
+
+### Return type
+
+[**[]TagResponse**](TagResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteBusinessMetadata
+
+> DeleteBusinessMetadata(ctx, typeName, qualifiedName, bmName)
+
+Delete a business metadata on an entity.
+
+Delete a business metadata on an entity.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**typeName** | **string**| The type of the entity | 
+**qualifiedName** | **string**| The qualified name of the entity | 
+**bmName** | **string**| The name of the business metadata | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteBusinessMetadataDef
+
+> DeleteBusinessMetadataDef(ctx, bmName)
+
+Delete API for business metadata definition identified by its name.
+
+Delete API for business metadata definition identified by its name.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**bmName** | **string**| The name of the business metadata definition | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteByUniqueAttributes
+
+> DeleteByUniqueAttributes(ctx, typeName, qualifiedName)
+
+
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**typeName** | **string**|  | 
+**qualifiedName** | **string**|  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -264,6 +604,76 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## DeleteTag
+
+> DeleteTag(ctx, typeName, qualifiedName, tagName)
+
+Delete a tag on an entity.
+
+Delete a tag on an entity.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**typeName** | **string**| The type of the entity | 
+**qualifiedName** | **string**| The qualified name of the entity | 
+**tagName** | **string**| The name of the tag | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteTagDef
+
+> DeleteTagDef(ctx, tagName)
+
+Delete API for tag definition identified by its name.
+
+Delete API for tag definition identified by its name.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tagName** | **string**| The name of the tag definition | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## Get
 
 > map[string]map[string]interface{} Get(ctx, )
@@ -279,6 +689,209 @@ This endpoint does not need any parameter.
 ### Return type
 
 **map[string]map[string]interface{}**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllBusinessMetadataDefs
+
+> []BusinessMetadataDefResponse GetAllBusinessMetadataDefs(ctx, optional)
+
+Bulk retrieval API for retrieving business metadata definitions.
+
+Bulk retrieval API for retrieving business metadata definitions.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***GetAllBusinessMetadataDefsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetAllBusinessMetadataDefsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prefix** | **optional.String**| The prefix of a business metadata definition name | 
+
+### Return type
+
+[**[]BusinessMetadataDefResponse**](BusinessMetadataDefResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllTagDefs
+
+> []TagDefResponse GetAllTagDefs(ctx, optional)
+
+Bulk retrieval API for retrieving tag definitions.
+
+Bulk retrieval API for retrieving tag definitions.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***GetAllTagDefsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetAllTagDefsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prefix** | **optional.String**| The prefix of a tag definition name | 
+
+### Return type
+
+[**[]TagDefResponse**](TagDefResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBusinessMetadata
+
+> []BusinessMetadataResponse GetBusinessMetadata(ctx, typeName, qualifiedName)
+
+Gets the list of business metadata for a given entity represented by a qualified name.
+
+Gets the list of business metadata for a given entity represented by a qualified name.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**typeName** | **string**| The type of the entity | 
+**qualifiedName** | **string**| The qualified name of the entity | 
+
+### Return type
+
+[**[]BusinessMetadataResponse**](BusinessMetadataResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBusinessMetadataDefByName
+
+> AtlasBusinessMetadataDef GetBusinessMetadataDefByName(ctx, bmName)
+
+Get the business metadata definition with the given name.
+
+Get the business metadata definition with the given name.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**bmName** | **string**| The name of the business metadata definition | 
+
+### Return type
+
+[**AtlasBusinessMetadataDef**](AtlasBusinessMetadataDef.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetByUniqueAttributes
+
+> AtlasEntityWithExtInfo GetByUniqueAttributes(ctx, typeName, qualifiedName, optional)
+
+Fetch complete definition of an entity given its type and unique attribute.
+
+Fetch complete definition of an entity given its type and unique attribute.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**typeName** | **string**| The type of the entity | 
+**qualifiedName** | **string**| The qualified name of the entity | 
+ **optional** | ***GetByUniqueAttributesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetByUniqueAttributesOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **minExtInfo** | **optional.Bool**| Whether to only populate header and schema attributes | [default to false]
+ **ignoreRelationships** | **optional.Bool**| Whether to ignore relationships | [default to false]
+
+### Return type
+
+[**AtlasEntityWithExtInfo**](AtlasEntityWithExtInfo.md)
 
 ### Authorization
 
@@ -817,6 +1430,75 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## GetTagDefByName
+
+> TagDef GetTagDefByName(ctx, tagName)
+
+Get the tag definition with the given name.
+
+Get the tag definition with the given name.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**tagName** | **string**| The name of the tag definiton | 
+
+### Return type
+
+[**TagDef**](TagDef.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTags
+
+> []TagResponse GetTags(ctx, typeName, qualifiedName)
+
+Gets the list of classifications for a given entity represented by a qualifed name.
+
+Gets the list of classifications for a given entity represented by a qualifed name.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**typeName** | **string**| The type of the entity | 
+**qualifiedName** | **string**| The qualified name of the entity | 
+
+### Return type
+
+[**[]TagResponse**](TagResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetTopLevelConfig
 
 > Config GetTopLevelConfig(ctx, )
@@ -1075,6 +1757,47 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## PartialUpdateByUniqueAttributes
+
+> PartialUpdateByUniqueAttributes(ctx, optional)
+
+
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***PartialUpdateByUniqueAttributesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a PartialUpdateByUniqueAttributesOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **atlasEntityWithExtInfo** | [**optional.Interface of AtlasEntityWithExtInfo**](AtlasEntityWithExtInfo.md)|  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PauseExporter
 
 > UpdateExporterResponse PauseExporter(ctx, name)
@@ -1298,6 +2021,121 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## SearchUsingAttribute
+
+> SearchResult SearchUsingAttribute(ctx, optional)
+
+Retrieve data for the specified attribute search query.
+
+Retrieve data for the specified attribute search query.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***SearchUsingAttributeOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a SearchUsingAttributeOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **type_** | [**optional.Interface of []string**](string.md)| Limit the result to only entities of specified types | 
+ **types** | **optional.String**|  | 
+ **attr** | [**optional.Interface of []string**](string.md)| One of more additional attributes to return in the response | 
+ **attrs** | **optional.String**|  | 
+ **attrName** | [**optional.Interface of []string**](string.md)| The attribute to search | 
+ **attrValuePrefix** | [**optional.Interface of []string**](string.md)| The prefix for the attribute value to search | 
+ **tag** | [**optional.Interface of []string**](string.md)| Limit the result to only entities tagged with the given tag | 
+ **timeRangeType** | **optional.String**| The type of time range search, default is CUSTOM | 
+ **timeRangeAttr** | **optional.String**| The attribute for a time range search | 
+ **timeRangeStart** | **optional.Int64**| The start for a custom time range search in ms since the epoch | 
+ **timeRangeEnd** | **optional.Int64**| The end for a custom time range search in ms since the epoch | 
+ **sortBy** | **optional.String**| An attribute to sort by | 
+ **sortOrder** | **optional.String**| Sort order, either ASCENDING (default) or DESCENDING | 
+ **deleted** | **optional.Bool**| Whether to include deleted entities | 
+ **limit** | **optional.Int32**| Limit the result set to only include the specified number of entries | 
+ **offset** | **optional.Int32**| Start offset of the result set (useful for pagination) | 
+
+### Return type
+
+[**SearchResult**](SearchResult.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SearchUsingBasic
+
+> SearchResult SearchUsingBasic(ctx, optional)
+
+Retrieve data for the specified fulltext query.
+
+Retrieve data for the specified fulltext query.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***SearchUsingBasicOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a SearchUsingBasicOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **query** | **optional.String**| The full-text query | 
+ **type_** | [**optional.Interface of []string**](string.md)| Limit the result to only entities of specified types | 
+ **types** | **optional.String**|  | 
+ **attr** | [**optional.Interface of []string**](string.md)| One of more additional attributes to return in the response | 
+ **attrs** | **optional.String**|  | 
+ **tag** | [**optional.Interface of []string**](string.md)| Limit the result to only entities with the given tag | 
+ **timeRangeType** | **optional.String**| The type of time range search, default is CUSTOM | 
+ **timeRangeAttr** | **optional.String**| The attribute for a time range search | 
+ **timeRangeStart** | **optional.Int64**| The start for a custom time range search in ms since the epoch | 
+ **timeRangeEnd** | **optional.Int64**| The end for a custom time range search in ms since the epoch | 
+ **sortBy** | **optional.String**| An attribute to sort by | 
+ **sortOrder** | **optional.String**| Sort order, either ASCENDING (default) or DESCENDING | 
+ **deleted** | **optional.Bool**| Whether to include deleted entities | 
+ **limit** | **optional.Int32**| Limit the result set to only include the specified number of entries | 
+ **offset** | **optional.Int32**| Start offset of the result set (useful for pagination) | 
+
+### Return type
+
+[**SearchResult**](SearchResult.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## TestCompatibilityBySubjectName
 
 > CompatibilityCheckResponse TestCompatibilityBySubjectName(ctx, subject, version, body, optional)
@@ -1398,6 +2236,92 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## UpdateBusinessMetadata
+
+> []BusinessMetadataResponse UpdateBusinessMetadata(ctx, optional)
+
+Bulk API to update multiple business metadata.
+
+Bulk API to update multiple business metadata.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***UpdateBusinessMetadataOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a UpdateBusinessMetadataOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **businessMetadata** | [**optional.Interface of []BusinessMetadata**](BusinessMetadata.md)| The business metadata | 
+
+### Return type
+
+[**[]BusinessMetadataResponse**](BusinessMetadataResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBusinessMetadataDefs
+
+> []BusinessMetadataDefResponse UpdateBusinessMetadataDefs(ctx, optional)
+
+Bulk update API for business metadata definitions.
+
+Bulk update API for business metadata definitions.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***UpdateBusinessMetadataDefsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a UpdateBusinessMetadataDefsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **atlasBusinessMetadataDef** | [**optional.Interface of []AtlasBusinessMetadataDef**](AtlasBusinessMetadataDef.md)| The business metadata definitions to update | 
+
+### Return type
+
+[**[]BusinessMetadataDefResponse**](BusinessMetadataDefResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateMode
 
 > ModeUpdateRequest UpdateMode(ctx, subject, body)
@@ -1457,6 +2381,92 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json, application/octet-stream
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateTagDefs
+
+> []TagDefResponse UpdateTagDefs(ctx, optional)
+
+Bulk update API for tag definitions.
+
+Bulk update API for tag definitions.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***UpdateTagDefsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a UpdateTagDefsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tagDef** | [**optional.Interface of []TagDef**](TagDef.md)| The tag definitions to update | 
+
+### Return type
+
+[**[]TagDefResponse**](TagDefResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateTags
+
+> []TagResponse UpdateTags(ctx, optional)
+
+Bulk API to update multiple tags.
+
+Bulk API to update multiple tags.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***UpdateTagsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a UpdateTagsOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tag** | [**optional.Interface of []Tag**](Tag.md)| The tags | 
+
+### Return type
+
+[**[]TagResponse**](TagResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json
 - **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
