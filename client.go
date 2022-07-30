@@ -48,7 +48,7 @@ type APIClient struct {
 
 	// API Services
 
-	DefaultApi DefaultApi
+	DefaultApi *DefaultApiService
 }
 
 type service struct {

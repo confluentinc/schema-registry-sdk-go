@@ -1,4 +1,4 @@
-module github.com/confluentinc/schema-registry-sdk-go
+module github.com/confluentinc/schema-registry-sdk-go-test
 
 require (
 	github.com/antihax/optional v1.0.0
