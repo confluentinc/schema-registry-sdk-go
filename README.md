@@ -32,13 +32,28 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultApi* | [**CreateBusinessMetadata**](docs/DefaultApi.md#createbusinessmetadata) | **Post** /catalog/v1/entity/businessmetadata | Bulk API to create multiple business metadata.
+*DefaultApi* | [**CreateBusinessMetadataDefs**](docs/DefaultApi.md#createbusinessmetadatadefs) | **Post** /catalog/v1/types/businessmetadatadefs | Bulk create API for business metadata definitions.
 *DefaultApi* | [**CreateExporter**](docs/DefaultApi.md#createexporter) | **Post** /exporters | Create an exporter.
+*DefaultApi* | [**CreateOrUpdate**](docs/DefaultApi.md#createorupdate) | **Post** /catalog/v1/entity | 
+*DefaultApi* | [**CreateTagDefs**](docs/DefaultApi.md#createtagdefs) | **Post** /catalog/v1/types/tagdefs | Bulk create API for tag definitions.
+*DefaultApi* | [**CreateTags**](docs/DefaultApi.md#createtags) | **Post** /catalog/v1/entity/tags | Bulk API to create multiple tags.
+*DefaultApi* | [**DeleteBusinessMetadata**](docs/DefaultApi.md#deletebusinessmetadata) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName} | Delete a business metadata on an entity.
+*DefaultApi* | [**DeleteBusinessMetadataDef**](docs/DefaultApi.md#deletebusinessmetadatadef) | **Delete** /catalog/v1/types/businessmetadatadefs/{bmName} | Delete API for business metadata definition identified by its name.
+*DefaultApi* | [**DeleteByUniqueAttributes**](docs/DefaultApi.md#deletebyuniqueattributes) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName} | 
 *DefaultApi* | [**DeleteExporter**](docs/DefaultApi.md#deleteexporter) | **Delete** /exporters/{name} | Delete an exporter.
 *DefaultApi* | [**DeleteSchemaVersion**](docs/DefaultApi.md#deleteschemaversion) | **Delete** /subjects/{subject}/versions/{version} | Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 *DefaultApi* | [**DeleteSubject**](docs/DefaultApi.md#deletesubject) | **Delete** /subjects/{subject} | Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 *DefaultApi* | [**DeleteSubjectConfig**](docs/DefaultApi.md#deletesubjectconfig) | **Delete** /config/{subject} | Deletes the specified subject-level compatibility level config and revert to the global default.
 *DefaultApi* | [**DeleteSubjectMode**](docs/DefaultApi.md#deletesubjectmode) | **Delete** /mode/{subject} | Deletes the specified subject-level mode and revert to the global default.
+*DefaultApi* | [**DeleteTag**](docs/DefaultApi.md#deletetag) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName} | Delete a tag on an entity.
+*DefaultApi* | [**DeleteTagDef**](docs/DefaultApi.md#deletetagdef) | **Delete** /catalog/v1/types/tagdefs/{tagName} | Delete API for tag definition identified by its name.
 *DefaultApi* | [**Get**](docs/DefaultApi.md#get) | **Get** / | Schema Registry Root Resource
+*DefaultApi* | [**GetAllBusinessMetadataDefs**](docs/DefaultApi.md#getallbusinessmetadatadefs) | **Get** /catalog/v1/types/businessmetadatadefs | Bulk retrieval API for retrieving business metadata definitions.
+*DefaultApi* | [**GetAllTagDefs**](docs/DefaultApi.md#getalltagdefs) | **Get** /catalog/v1/types/tagdefs | Bulk retrieval API for retrieving tag definitions.
+*DefaultApi* | [**GetBusinessMetadata**](docs/DefaultApi.md#getbusinessmetadata) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata | Gets the list of business metadata for a given entity represented by a qualified name.
+*DefaultApi* | [**GetBusinessMetadataDefByName**](docs/DefaultApi.md#getbusinessmetadatadefbyname) | **Get** /catalog/v1/types/businessmetadatadefs/{bmName} | Get the business metadata definition with the given name.
+*DefaultApi* | [**GetByUniqueAttributes**](docs/DefaultApi.md#getbyuniqueattributes) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName} | Fetch complete definition of an entity given its type and unique attribute.
 *DefaultApi* | [**GetClusterId**](docs/DefaultApi.md#getclusterid) | **Get** /v1/metadata/id | Get the server metadata
 *DefaultApi* | [**GetExporterConfig**](docs/DefaultApi.md#getexporterconfig) | **Get** /exporters/{name}/config | Get the config for an exporter.
 *DefaultApi* | [**GetExporterInfo**](docs/DefaultApi.md#getexporterinfo) | **Get** /exporters/{name} | Get the info for an exporter.
@@ -53,6 +68,8 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetSchemas**](docs/DefaultApi.md#getschemas) | **Get** /schemas | Get the schemas.
 *DefaultApi* | [**GetSubjectLevelConfig**](docs/DefaultApi.md#getsubjectlevelconfig) | **Get** /config/{subject} | Get compatibility level for a subject.
 *DefaultApi* | [**GetSubjects**](docs/DefaultApi.md#getsubjects) | **Get** /schemas/ids/{id}/subjects | Get all the subjects associated with the input ID.
+*DefaultApi* | [**GetTagDefByName**](docs/DefaultApi.md#gettagdefbyname) | **Get** /catalog/v1/types/tagdefs/{tagName} | Get the tag definition with the given name.
+*DefaultApi* | [**GetTags**](docs/DefaultApi.md#gettags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Gets the list of classifications for a given entity represented by a qualifed name.
 *DefaultApi* | [**GetTopLevelConfig**](docs/DefaultApi.md#gettoplevelconfig) | **Get** /config | Get global compatibility level.
 *DefaultApi* | [**GetTopLevelMode**](docs/DefaultApi.md#gettoplevelmode) | **Get** /mode | Get global mode.
 *DefaultApi* | [**GetVersions**](docs/DefaultApi.md#getversions) | **Get** /schemas/ids/{id}/versions | Get all the subject-version pairs associated with the input ID.
@@ -60,6 +77,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**ListContexts**](docs/DefaultApi.md#listcontexts) | **Get** /contexts | Get a list of contexts.
 *DefaultApi* | [**ListVersions**](docs/DefaultApi.md#listversions) | **Get** /subjects/{subject}/versions | Get a list of versions registered under the specified subject.
 *DefaultApi* | [**LookUpSchemaUnderSubject**](docs/DefaultApi.md#lookupschemaundersubject) | **Post** /subjects/{subject} | Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
+*DefaultApi* | [**PartialUpdateByUniqueAttributes**](docs/DefaultApi.md#partialupdatebyuniqueattributes) | **Put** /catalog/v1/entity | 
 *DefaultApi* | [**PauseExporter**](docs/DefaultApi.md#pauseexporter) | **Put** /exporters/{name}/pause | Pause an exporter.
 *DefaultApi* | [**Post**](docs/DefaultApi.md#post) | **Post** / | 
 *DefaultApi* | [**PutExporter**](docs/DefaultApi.md#putexporter) | **Put** /exporters/{name} | Alters an exporter.
@@ -67,21 +85,39 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**Register**](docs/DefaultApi.md#register) | **Post** /subjects/{subject}/versions | Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema&#39;s version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
 *DefaultApi* | [**ResetExporter**](docs/DefaultApi.md#resetexporter) | **Put** /exporters/{name}/reset | Reset an exporter.
 *DefaultApi* | [**ResumeExporter**](docs/DefaultApi.md#resumeexporter) | **Put** /exporters/{name}/resume | Resume an exporter.
+*DefaultApi* | [**SearchUsingAttribute**](docs/DefaultApi.md#searchusingattribute) | **Get** /catalog/v1/search/attribute | Retrieve data for the specified attribute search query.
+*DefaultApi* | [**SearchUsingBasic**](docs/DefaultApi.md#searchusingbasic) | **Get** /catalog/v1/search/basic | Retrieve data for the specified fulltext query.
 *DefaultApi* | [**TestCompatibilityBySubjectName**](docs/DefaultApi.md#testcompatibilitybysubjectname) | **Post** /compatibility/subjects/{subject}/versions/{version} | Test input schema against a particular version of a subject&#39;s schema for compatibility.
 *DefaultApi* | [**TestCompatibilityForSubject**](docs/DefaultApi.md#testcompatibilityforsubject) | **Post** /compatibility/subjects/{subject}/versions | Test input schema against a subject&#39;s schemas for compatibility, based on the compatibility level of the subject configured. In other word, it will perform the same compatibility check as register for that subject
+*DefaultApi* | [**UpdateBusinessMetadata**](docs/DefaultApi.md#updatebusinessmetadata) | **Put** /catalog/v1/entity/businessmetadata | Bulk API to update multiple business metadata.
+*DefaultApi* | [**UpdateBusinessMetadataDefs**](docs/DefaultApi.md#updatebusinessmetadatadefs) | **Put** /catalog/v1/types/businessmetadatadefs | Bulk update API for business metadata definitions.
 *DefaultApi* | [**UpdateMode**](docs/DefaultApi.md#updatemode) | **Put** /mode/{subject} | Update mode for the specified subject.
 *DefaultApi* | [**UpdateSubjectLevelConfig**](docs/DefaultApi.md#updatesubjectlevelconfig) | **Put** /config/{subject} | Update compatibility level for the specified subject.
+*DefaultApi* | [**UpdateTagDefs**](docs/DefaultApi.md#updatetagdefs) | **Put** /catalog/v1/types/tagdefs | Bulk update API for tag definitions.
+*DefaultApi* | [**UpdateTags**](docs/DefaultApi.md#updatetags) | **Put** /catalog/v1/entity/tags | Bulk API to update multiple tags.
 *DefaultApi* | [**UpdateTopLevelConfig**](docs/DefaultApi.md#updatetoplevelconfig) | **Put** /config | Update global compatibility level.
 *DefaultApi* | [**UpdateTopLevelMode**](docs/DefaultApi.md#updatetoplevelmode) | **Put** /mode | Update global mode.
 
 
 ## Documentation For Models
 
+ - [AtlasAttributeDef](docs/AtlasAttributeDef.md)
+ - [AtlasBusinessMetadataDef](docs/AtlasBusinessMetadataDef.md)
+ - [AtlasClassification](docs/AtlasClassification.md)
+ - [AtlasConstraintDef](docs/AtlasConstraintDef.md)
+ - [AtlasEntity](docs/AtlasEntity.md)
+ - [AtlasEntityHeader](docs/AtlasEntityHeader.md)
+ - [AtlasEntityWithExtInfo](docs/AtlasEntityWithExtInfo.md)
+ - [AtlasTermAssignmentHeader](docs/AtlasTermAssignmentHeader.md)
+ - [BusinessMetadata](docs/BusinessMetadata.md)
+ - [BusinessMetadataDefResponse](docs/BusinessMetadataDefResponse.md)
+ - [BusinessMetadataResponse](docs/BusinessMetadataResponse.md)
  - [CompatibilityCheckResponse](docs/CompatibilityCheckResponse.md)
  - [Config](docs/Config.md)
  - [ConfigUpdateRequest](docs/ConfigUpdateRequest.md)
  - [CreateExporterRequest](docs/CreateExporterRequest.md)
  - [CreateExporterResponse](docs/CreateExporterResponse.md)
+ - [ErrorMessage](docs/ErrorMessage.md)
  - [ExporterInfo](docs/ExporterInfo.md)
  - [ExporterStatus](docs/ExporterStatus.md)
  - [Mode](docs/Mode.md)
@@ -91,8 +127,15 @@ Class | Method | HTTP request | Description
  - [Schema](docs/Schema.md)
  - [SchemaReference](docs/SchemaReference.md)
  - [SchemaString](docs/SchemaString.md)
+ - [SearchParams](docs/SearchParams.md)
+ - [SearchResult](docs/SearchResult.md)
  - [ServerClusterId](docs/ServerClusterId.md)
  - [SubjectVersion](docs/SubjectVersion.md)
+ - [Tag](docs/Tag.md)
+ - [TagDef](docs/TagDef.md)
+ - [TagDefResponse](docs/TagDefResponse.md)
+ - [TagResponse](docs/TagResponse.md)
+ - [TimeBoundary](docs/TimeBoundary.md)
  - [UpdateExporterRequest](docs/UpdateExporterRequest.md)
  - [UpdateExporterResponse](docs/UpdateExporterResponse.md)
 
