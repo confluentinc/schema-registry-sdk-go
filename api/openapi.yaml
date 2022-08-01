@@ -5,6 +5,103 @@ info:
 servers:
 - url: /
 paths:
+  /catalog/v1/entity/businessmetadata:
+    post:
+      description: Bulk API to create multiple business metadata.
+      operationId: createBusinessMetadata
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/BusinessMetadata'
+              type: array
+          application/vnd.schemaregistry+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/BusinessMetadata'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/BusinessMetadata'
+              type: array
+        description: The business metadata
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataResponse'
+                type: array
+          description: The business metadata. Errored business metadata will have
+            an additional error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk API to create multiple business metadata.
+    put:
+      description: Bulk API to update multiple business metadata.
+      operationId: updateBusinessMetadata
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/BusinessMetadata'
+              type: array
+          application/vnd.schemaregistry+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/BusinessMetadata'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/BusinessMetadata'
+              type: array
+        description: The business metadata
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataResponse'
+                type: array
+          description: The business metadata. Errored business metadata will have
+            an additional error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk API to update multiple business metadata.
   /:
     get:
       description: The Root resource is a no-op.
@@ -61,25 +158,36 @@ paths:
         compatibility level applies (http:get:: /config).'
       operationId: testCompatibilityForSubject
       parameters:
-      - in: header
+      - explode: false
+        in: header
         name: Content-Type
+        required: false
         schema:
           type: string
-      - in: header
+        style: simple
+      - explode: false
+        in: header
         name: Accept
+        required: false
         schema:
           type: string
+        style: simple
       - description: Subject of the schema version against which compatibility is
           to be tested
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: verbose
+        required: false
         schema:
           type: boolean
+        style: form
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -129,34 +237,47 @@ paths:
         compatibility level applies (http:get:: /config).'
       operationId: testCompatibilityBySubjectName
       parameters:
-      - in: header
+      - explode: false
+        in: header
         name: Content-Type
+        required: false
         schema:
           type: string
-      - in: header
+        style: simple
+      - explode: false
+        in: header
         name: Accept
+        required: false
         schema:
           type: string
+        style: simple
       - description: Subject of the schema version against which compatibility is
           to be tested
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the subject's schema against which compatibility is
           to be tested. Valid values for versionId are between [1,2^31-1] or the string
           "latest"."latest" checks compatibility of the input schema with the last
           registered schema under the specified subject
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: verbose
+        required: false
         schema:
           type: boolean
+        style: form
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -268,11 +389,13 @@ paths:
       operationId: deleteSubjectConfig
       parameters:
       - description: the name of the subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -321,15 +444,20 @@ paths:
     get:
       operationId: getSubjectLevelConfig
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: defaultToGlobal
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -354,11 +482,13 @@ paths:
       operationId: updateSubjectLevelConfig
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -495,11 +625,13 @@ paths:
       operationId: deleteSubjectMode
       parameters:
       - description: the name of the subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -539,15 +671,20 @@ paths:
       operationId: getMode
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: defaultToGlobal
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -572,11 +709,13 @@ paths:
       operationId: updateMode
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -623,32 +762,47 @@ paths:
     get:
       operationId: getSchemas
       parameters:
-      - in: query
+      - explode: true
+        in: query
         name: subjectPrefix
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           default: false
           type: boolean
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: latestOnly
+        required: false
         schema:
           default: false
           type: boolean
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: offset
+        required: false
         schema:
           default: 0
           format: int32
           type: integer
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: limit
+        required: false
         schema:
           default: -1
           format: int32
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -678,25 +832,36 @@ paths:
       operationId: getSchema
       parameters:
       - description: Globally unique identifier of the schema
+        explode: false
         in: path
         name: id
         required: true
         schema:
           format: int32
           type: integer
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: subject
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: format
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: fetchMaxId
+        required: false
         schema:
           default: false
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -724,20 +889,28 @@ paths:
       operationId: getSubjects
       parameters:
       - description: Globally unique identifier of the schema
+        explode: false
         in: path
         name: id
         required: true
         schema:
           format: int32
           type: integer
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: subject
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -774,20 +947,28 @@ paths:
       operationId: getVersions
       parameters:
       - description: Globally unique identifier of the schema
+        explode: false
         in: path
         name: id
         required: true
         schema:
           format: int32
           type: integer
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: subject
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -850,14 +1031,20 @@ paths:
     get:
       operationId: list
       parameters:
-      - in: query
+      - explode: true
+        in: query
         name: subjectPrefix
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -889,15 +1076,20 @@ paths:
       operationId: deleteSubject
       parameters:
       - description: the name of the subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: permanent
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -933,15 +1125,20 @@ paths:
       operationId: lookUpSchemaUnderSubject
       parameters:
       - description: Subject under which the schema will be registered
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -985,15 +1182,20 @@ paths:
       operationId: listVersions
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1027,11 +1229,13 @@ paths:
       operationId: register
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -1083,24 +1287,31 @@ paths:
       operationId: deleteSchemaVersion
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the schema to be returned. Valid values for versionId
           are between [1,2^31-1] or the string "latest". "latest" returns the last
           registered schema under the specified subject. Note that there may be a
           new latest schema that gets registered right after this request is served.
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: permanent
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1138,24 +1349,31 @@ paths:
       operationId: getSchemaByVersion
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the schema to be returned. Valid values for versionId
           are between [1,2^31-1] or the string "latest". "latest" returns the last
           registered schema under the specified subject. Note that there may be a
           new latest schema that gets registered right after this request is served.
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1186,20 +1404,24 @@ paths:
       operationId: getReferencedBy
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the schema to be returned. Valid values for versionId
           are between [1,2^31-1] or the string "latest". "latest" returns the last
           registered schema under the specified subject. Note that there may be a
           new latest schema that gets registered right after this request is served.
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -1239,24 +1461,31 @@ paths:
       operationId: getSchemaOnly
       parameters:
       - description: Name of the Subject
+        explode: false
         in: path
         name: subject
         required: true
         schema:
           type: string
+        style: simple
       - description: Version of the schema to be returned. Valid values for versionId
           are between [1,2^31-1] or the string "latest". "latest" returns the last
           registered schema under the specified subject. Note that there may be a
           new latest schema that gets registered right after this request is served.
+        explode: false
         in: path
         name: version
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: deleted
+        required: false
         schema:
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1368,11 +1597,13 @@ paths:
       operationId: deleteExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "404":
           content: {}
@@ -1381,11 +1612,13 @@ paths:
     get:
       operationId: getExporterInfo
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -1407,11 +1640,13 @@ paths:
       operationId: putExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -1450,11 +1685,13 @@ paths:
     get:
       operationId: getExporterConfig
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -1482,11 +1719,13 @@ paths:
       operationId: putExporterConfig
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -1534,11 +1773,13 @@ paths:
       operationId: pauseExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -1561,11 +1802,13 @@ paths:
       operationId: resetExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -1588,11 +1831,13 @@ paths:
       operationId: resumeExporter
       parameters:
       - description: Name of the exporter
+        explode: false
         in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -1614,11 +1859,13 @@ paths:
     get:
       operationId: getExporterStatus
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: name
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -1636,6 +1883,1150 @@ paths:
           content: {}
           description: Error code 40450 -- Exporter not found
       summary: Get the status for an exporter.
+  /catalog/v1/entity/tags:
+    post:
+      description: Bulk API to create multiple tags.
+      operationId: createTags
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Tag'
+              type: array
+          application/vnd.schemaregistry+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Tag'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Tag'
+              type: array
+        description: The tags
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+          description: The tags. Errored tags will have an additional error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk API to create multiple tags.
+    put:
+      description: Bulk API to update multiple tags.
+      operationId: updateTags
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Tag'
+              type: array
+          application/vnd.schemaregistry+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Tag'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Tag'
+              type: array
+        description: The tags
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+          description: The tags. Errored tags will have an additional error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk API to update multiple tags.
+  /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}:
+    delete:
+      description: Delete a business metadata on an entity.
+      operationId: deleteBusinessMetadata
+      parameters:
+      - description: The type of the entity
+        explode: false
+        in: path
+        name: typeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The qualified name of the entity
+        explode: false
+        in: path
+        name: qualifiedName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the business metadata
+        explode: false
+        in: path
+        name: bmName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Delete a business metadata on an entity.
+  /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}:
+    delete:
+      description: Delete a tag on an entity.
+      operationId: deleteTag
+      parameters:
+      - description: The type of the entity
+        explode: false
+        in: path
+        name: typeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The qualified name of the entity
+        explode: false
+        in: path
+        name: qualifiedName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the tag
+        explode: false
+        in: path
+        name: tagName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Delete a tag on an entity.
+  /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata:
+    get:
+      description: Gets the list of business metadata for a given entity represented
+        by a qualified name.
+      operationId: getBusinessMetadata
+      parameters:
+      - description: The type of the entity
+        explode: false
+        in: path
+        name: typeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The qualified name of the entity
+        explode: false
+        in: path
+        name: qualifiedName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataResponse'
+                type: array
+          description: The business metadata
+        "400":
+          description: Bad Request
+        "404":
+          description: Entity not found
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Gets the list of business metadata for a given entity represented by
+        a qualified name.
+  /catalog/v1/entity/type/{typeName}/name/{qualifiedName}:
+    delete:
+      operationId: deleteByUniqueAttributes
+      parameters:
+      - explode: false
+        in: path
+        name: typeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: qualifiedName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        default:
+          content:
+            application/vnd.schemaregistry.v1+json: {}
+            application/vnd.schemaregistry+json; qs=0.9: {}
+            application/json; qs=0.5: {}
+          description: default response
+    get:
+      description: Fetch complete definition of an entity given its type and unique
+        attribute.
+      operationId: getByUniqueAttributes
+      parameters:
+      - description: The type of the entity
+        explode: false
+        in: path
+        name: typeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The qualified name of the entity
+        explode: false
+        in: path
+        name: qualifiedName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to only populate header and schema attributes
+        explode: true
+        in: query
+        name: minExtInfo
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - description: Whether to ignore relationships
+        explode: true
+        in: query
+        name: ignoreRelationships
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/AtlasEntityWithExtInfo'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/AtlasEntityWithExtInfo'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/AtlasEntityWithExtInfo'
+          description: The entity
+        "400":
+          description: Bad Request
+        "404":
+          description: Entity not found
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Fetch complete definition of an entity given its type and unique attribute.
+  /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags:
+    get:
+      description: Gets the list of classifications for a given entity represented
+        by a qualifed name.
+      operationId: getTags
+      parameters:
+      - description: The type of the entity
+        explode: false
+        in: path
+        name: typeName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The qualified name of the entity
+        explode: false
+        in: path
+        name: qualifiedName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagResponse'
+                type: array
+          description: The tags
+        "400":
+          description: Bad Request
+        "404":
+          description: Entity not found
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Gets the list of classifications for a given entity represented by
+        a qualifed name.
+  /catalog/v1/entity:
+    post:
+      operationId: createOrUpdate
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/AtlasEntityWithExtInfo'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/AtlasEntityWithExtInfo'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtlasEntityWithExtInfo'
+      responses:
+        default:
+          content:
+            application/vnd.schemaregistry.v1+json: {}
+            application/vnd.schemaregistry+json; qs=0.9: {}
+            application/json; qs=0.5: {}
+          description: default response
+    put:
+      operationId: partialUpdateByUniqueAttributes
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/AtlasEntityWithExtInfo'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/AtlasEntityWithExtInfo'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtlasEntityWithExtInfo'
+      responses:
+        default:
+          content:
+            application/vnd.schemaregistry.v1+json: {}
+            application/vnd.schemaregistry+json; qs=0.9: {}
+            application/json; qs=0.5: {}
+          description: default response
+  /catalog/v1/search/attribute:
+    get:
+      description: Retrieve data for the specified attribute search query.
+      operationId: searchUsingAttribute
+      parameters:
+      - description: Limit the result to only entities of specified types
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: types
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: One of more additional attributes to return in the response
+        explode: true
+        in: query
+        name: attr
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: attrs
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The attribute to search
+        explode: true
+        in: query
+        name: attrName
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The prefix for the attribute value to search
+        explode: true
+        in: query
+        name: attrValuePrefix
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Limit the result to only entities tagged with the given tag
+        explode: true
+        in: query
+        name: tag
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The type of time range search, default is CUSTOM
+        explode: true
+        in: query
+        name: timeRangeType
+        required: false
+        schema:
+          enum:
+          - CUSTOM
+          - LAST_7_DAYS
+          - LAST_30_DAYS
+          - LAST_MONTH
+          - THIS_MONTH
+          - TODAY
+          - YESTERDAY
+          - THIS_YEAR
+          - LAST_YEAR
+          - THIS_QUARTER
+          - LAST_QUARTER
+          - LAST_3_MONTHS
+          - LAST_6_MONTHS
+          - LAST_12_MONTHS
+          type: string
+        style: form
+      - description: The attribute for a time range search
+        explode: true
+        in: query
+        name: timeRangeAttr
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The start for a custom time range search in ms since the epoch
+        explode: true
+        in: query
+        name: timeRangeStart
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: The end for a custom time range search in ms since the epoch
+        explode: true
+        in: query
+        name: timeRangeEnd
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: An attribute to sort by
+        explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Sort order, either ASCENDING (default) or DESCENDING
+        explode: true
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          enum:
+          - ASCENDING
+          - DESCENDING
+          type: string
+        style: form
+      - description: Whether to include deleted entities
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Limit the result set to only include the specified number of
+          entries
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Start offset of the result set (useful for pagination)
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+          description: On successful search query with some results, might return
+            an empty list if execution succeeded without any results
+        "400":
+          description: Invalid wildcard or query parameters
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Retrieve data for the specified attribute search query.
+  /catalog/v1/search/basic:
+    get:
+      description: Retrieve data for the specified fulltext query.
+      operationId: searchUsingBasic
+      parameters:
+      - description: The full-text query
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Limit the result to only entities of specified types
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: types
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: One of more additional attributes to return in the response
+        explode: true
+        in: query
+        name: attr
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: attrs
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Limit the result to only entities with the given tag
+        explode: true
+        in: query
+        name: tag
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: The type of time range search, default is CUSTOM
+        explode: true
+        in: query
+        name: timeRangeType
+        required: false
+        schema:
+          enum:
+          - CUSTOM
+          - LAST_7_DAYS
+          - LAST_30_DAYS
+          - LAST_MONTH
+          - THIS_MONTH
+          - TODAY
+          - YESTERDAY
+          - THIS_YEAR
+          - LAST_YEAR
+          - THIS_QUARTER
+          - LAST_QUARTER
+          - LAST_3_MONTHS
+          - LAST_6_MONTHS
+          - LAST_12_MONTHS
+          type: string
+        style: form
+      - description: The attribute for a time range search
+        explode: true
+        in: query
+        name: timeRangeAttr
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The start for a custom time range search in ms since the epoch
+        explode: true
+        in: query
+        name: timeRangeStart
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: The end for a custom time range search in ms since the epoch
+        explode: true
+        in: query
+        name: timeRangeEnd
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - description: An attribute to sort by
+        explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Sort order, either ASCENDING (default) or DESCENDING
+        explode: true
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          enum:
+          - ASCENDING
+          - DESCENDING
+          type: string
+        style: form
+      - description: Whether to include deleted entities
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Limit the result set to only include the specified number of
+          entries
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Start offset of the result set (useful for pagination)
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+          description: On successful fulltext query with some results, might return
+            an empty list if execution succeeded without any results
+        "400":
+          description: Invalid fulltext or query parameters
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Retrieve data for the specified fulltext query.
+  /catalog/v1/types/businessmetadatadefs:
+    get:
+      description: Bulk retrieval API for retrieving business metadata definitions.
+      operationId: getAllBusinessMetadataDefs
+      parameters:
+      - description: The prefix of a business metadata definition name
+        explode: true
+        in: query
+        name: prefix
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataDefResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataDefResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataDefResponse'
+                type: array
+          description: The business metadata definitions
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk retrieval API for retrieving business metadata definitions.
+    post:
+      description: Bulk create API for business metadata definitions.
+      operationId: createBusinessMetadataDefs
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AtlasBusinessMetadataDef'
+              type: array
+          application/vnd.schemaregistry+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AtlasBusinessMetadataDef'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AtlasBusinessMetadataDef'
+              type: array
+        description: The business metadata definitions to create
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataDefResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataDefResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataDefResponse'
+                type: array
+          description: The business metadata definitions. Errored business metadata
+            definitions will have an additional error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk create API for business metadata definitions.
+    put:
+      description: Bulk update API for business metadata definitions.
+      operationId: updateBusinessMetadataDefs
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AtlasBusinessMetadataDef'
+              type: array
+          application/vnd.schemaregistry+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AtlasBusinessMetadataDef'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/AtlasBusinessMetadataDef'
+              type: array
+        description: The business metadata definitions to update
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataDefResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataDefResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusinessMetadataDefResponse'
+                type: array
+          description: The business metadata definitions. Errored business metadata
+            definitions will have an additional error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk update API for business metadata definitions.
+  /catalog/v1/types/tagdefs:
+    get:
+      description: Bulk retrieval API for retrieving tag definitions.
+      operationId: getAllTagDefs
+      parameters:
+      - description: The prefix of a tag definition name
+        explode: true
+        in: query
+        name: prefix
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+          description: The tag definitions
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk retrieval API for retrieving tag definitions.
+    post:
+      description: Bulk create API for tag definitions.
+      operationId: createTagDefs
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/TagDef'
+              type: array
+          application/vnd.schemaregistry+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/TagDef'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/TagDef'
+              type: array
+        description: The tag definitions to create
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+          description: The tag definitions. Errored tag definitions will have an additional
+            error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk create API for tag definitions.
+    put:
+      description: Bulk update API for tag definitions.
+      operationId: updateTagDefs
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/TagDef'
+              type: array
+          application/vnd.schemaregistry+json:
+            schema:
+              items:
+                $ref: '#/components/schemas/TagDef'
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/TagDef'
+              type: array
+        description: The tag definitions to update
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagDefResponse'
+                type: array
+          description: The tag definitions. Errored tag definitions will have an additional
+            error property.
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Bulk update API for tag definitions.
+  /catalog/v1/types/businessmetadatadefs/{bmName}:
+    delete:
+      description: Delete API for business metadata definition identified by its name.
+      operationId: deleteBusinessMetadataDef
+      parameters:
+      - description: The name of the business metadata definition
+        explode: false
+        in: path
+        name: bmName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Delete API for business metadata definition identified by its name.
+    get:
+      description: Get the business metadata definition with the given name.
+      operationId: getBusinessMetadataDefByName
+      parameters:
+      - description: The name of the business metadata definition
+        explode: false
+        in: path
+        name: bmName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/AtlasBusinessMetadataDef'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/AtlasBusinessMetadataDef'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/AtlasBusinessMetadataDef'
+          description: The business metadata definition
+        "400":
+          description: Bad Request
+        "404":
+          description: Business metadata definition not found
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Get the business metadata definition with the given name.
+  /catalog/v1/types/tagdefs/{tagName}:
+    delete:
+      description: Delete API for tag definition identified by its name.
+      operationId: deleteTagDef
+      parameters:
+      - description: The name of the tag definition
+        explode: false
+        in: path
+        name: tagName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Delete API for tag definition identified by its name.
+    get:
+      description: Get the tag definition with the given name.
+      operationId: getTagDefByName
+      parameters:
+      - description: The name of the tag definiton
+        explode: false
+        in: path
+        name: tagName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/TagDef'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/TagDef'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/TagDef'
+          description: The tag definition
+        "400":
+          description: Bad Request
+        "404":
+          description: Tag definition not found
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
+      summary: Get the tag definition with the given name.
 components:
   schemas:
     CompatibilityCheckResponse:
@@ -1973,4 +3364,1499 @@ components:
       properties:
         name:
           type: string
+      type: object
+    BusinessMetadataResponse:
+      example:
+        entityType: entityType
+        entityName: entityName
+        typeName: typeName
+        attributes:
+          key: '{}'
+        error:
+          error_code: 0
+          message: message
+      properties:
+        typeName:
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          type: object
+        entityType:
+          type: string
+        entityName:
+          type: string
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+      type: object
+    ErrorMessage:
+      example:
+        error_code: 0
+        message: message
+      properties:
+        error_code:
+          format: int32
+          type: integer
+        message:
+          type: string
+      type: object
+    BusinessMetadata:
+      example:
+        entityType: entityType
+        entityName: entityName
+        typeName: typeName
+        attributes:
+          key: '{}'
+      properties:
+        typeName:
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          type: object
+        entityType:
+          type: string
+        entityName:
+          type: string
+      type: object
+    TagResponse:
+      example:
+        removePropagationsOnEntityDelete: true
+        entityStatus: ACTIVE
+        entityType: entityType
+        entityName: entityName
+        typeName: typeName
+        entityGuid: entityGuid
+        propagate: true
+        validityPeriods:
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        attributes:
+          key: '{}'
+        error:
+          error_code: 0
+          message: message
+      properties:
+        typeName:
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          type: object
+        entityGuid:
+          type: string
+        entityStatus:
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        propagate:
+          type: boolean
+        validityPeriods:
+          items:
+            $ref: '#/components/schemas/TimeBoundary'
+          type: array
+        removePropagationsOnEntityDelete:
+          type: boolean
+        entityType:
+          type: string
+        entityName:
+          type: string
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+      type: object
+    TimeBoundary:
+      example:
+        timeZone: timeZone
+        startTime: startTime
+        endTime: endTime
+      properties:
+        startTime:
+          type: string
+        endTime:
+          type: string
+        timeZone:
+          type: string
+      type: object
+    Tag:
+      example:
+        removePropagationsOnEntityDelete: true
+        entityStatus: ACTIVE
+        entityType: entityType
+        entityName: entityName
+        typeName: typeName
+        entityGuid: entityGuid
+        propagate: true
+        validityPeriods:
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        attributes:
+          key: '{}'
+      properties:
+        typeName:
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          type: object
+        entityGuid:
+          type: string
+        entityStatus:
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        propagate:
+          type: boolean
+        validityPeriods:
+          items:
+            $ref: '#/components/schemas/TimeBoundary'
+          type: array
+        removePropagationsOnEntityDelete:
+          type: boolean
+        entityType:
+          type: string
+        entityName:
+          type: string
+      type: object
+    AtlasClassification:
+      example:
+        removePropagationsOnEntityDelete: true
+        entityStatus: ACTIVE
+        typeName: typeName
+        entityGuid: entityGuid
+        propagate: true
+        validityPeriods:
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        - timeZone: timeZone
+          startTime: startTime
+          endTime: endTime
+        attributes:
+          key: '{}'
+      properties:
+        typeName:
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          type: object
+        entityGuid:
+          type: string
+        entityStatus:
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        propagate:
+          type: boolean
+        validityPeriods:
+          items:
+            $ref: '#/components/schemas/TimeBoundary'
+          type: array
+        removePropagationsOnEntityDelete:
+          type: boolean
+      type: object
+    AtlasEntity:
+      example:
+        relationshipAttributes:
+          key: '{}'
+        provenanceType: 0
+        pendingTasks:
+        - pendingTasks
+        - pendingTasks
+        updatedBy: updatedBy
+        typeName: typeName
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        isProxy: true
+        version: 6
+        meanings:
+        - displayText: displayText
+          expression: expression
+          relationGuid: relationGuid
+          createdBy: createdBy
+          steward: steward
+          confidence: 1
+          description: description
+          source: source
+          termGuid: termGuid
+          status: DISCOVERED
+        - displayText: displayText
+          expression: expression
+          relationGuid: relationGuid
+          createdBy: createdBy
+          steward: steward
+          confidence: 1
+          description: description
+          source: source
+          termGuid: termGuid
+          status: DISCOVERED
+        labels:
+        - labels
+        - labels
+        businessAttributes:
+          key:
+            key: '{}'
+        classifications:
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+          validityPeriods:
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          attributes:
+            key: '{}'
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+          validityPeriods:
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          attributes:
+            key: '{}'
+        proxy: true
+        createdBy: createdBy
+        createTime: 2000-01-23T04:56:07.000+00:00
+        guid: guid
+        attributes:
+          key: '{}'
+        homeId: homeId
+        isIncomplete: true
+        status: ACTIVE
+        customAttributes:
+          key: customAttributes
+      properties:
+        typeName:
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          type: object
+        guid:
+          type: string
+        homeId:
+          type: string
+        isProxy:
+          type: boolean
+          writeOnly: true
+        isIncomplete:
+          type: boolean
+        provenanceType:
+          format: int32
+          type: integer
+        status:
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+        createTime:
+          format: date-time
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+        version:
+          format: int64
+          type: integer
+        relationshipAttributes:
+          additionalProperties:
+            type: object
+          type: object
+        classifications:
+          items:
+            $ref: '#/components/schemas/AtlasClassification'
+          type: array
+        meanings:
+          items:
+            $ref: '#/components/schemas/AtlasTermAssignmentHeader'
+          type: array
+        customAttributes:
+          additionalProperties:
+            type: string
+          type: object
+        businessAttributes:
+          additionalProperties:
+            additionalProperties:
+              type: object
+            type: object
+          type: object
+        labels:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        pendingTasks:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        proxy:
+          type: boolean
+      type: object
+    AtlasEntityWithExtInfo:
+      example:
+        referredEntities:
+          key:
+            relationshipAttributes:
+              key: '{}'
+            provenanceType: 0
+            pendingTasks:
+            - pendingTasks
+            - pendingTasks
+            updatedBy: updatedBy
+            typeName: typeName
+            updateTime: 2000-01-23T04:56:07.000+00:00
+            isProxy: true
+            version: 6
+            meanings:
+            - displayText: displayText
+              expression: expression
+              relationGuid: relationGuid
+              createdBy: createdBy
+              steward: steward
+              confidence: 1
+              description: description
+              source: source
+              termGuid: termGuid
+              status: DISCOVERED
+            - displayText: displayText
+              expression: expression
+              relationGuid: relationGuid
+              createdBy: createdBy
+              steward: steward
+              confidence: 1
+              description: description
+              source: source
+              termGuid: termGuid
+              status: DISCOVERED
+            labels:
+            - labels
+            - labels
+            businessAttributes:
+              key:
+                key: '{}'
+            classifications:
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+              validityPeriods:
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              attributes:
+                key: '{}'
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+              validityPeriods:
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              attributes:
+                key: '{}'
+            proxy: true
+            createdBy: createdBy
+            createTime: 2000-01-23T04:56:07.000+00:00
+            guid: guid
+            attributes:
+              key: '{}'
+            homeId: homeId
+            isIncomplete: true
+            status: ACTIVE
+            customAttributes:
+              key: customAttributes
+        entity:
+          relationshipAttributes:
+            key: '{}'
+          provenanceType: 0
+          pendingTasks:
+          - pendingTasks
+          - pendingTasks
+          updatedBy: updatedBy
+          typeName: typeName
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          isProxy: true
+          version: 6
+          meanings:
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 1
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 1
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          labels:
+          - labels
+          - labels
+          businessAttributes:
+            key:
+              key: '{}'
+          classifications:
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          proxy: true
+          createdBy: createdBy
+          createTime: 2000-01-23T04:56:07.000+00:00
+          guid: guid
+          attributes:
+            key: '{}'
+          homeId: homeId
+          isIncomplete: true
+          status: ACTIVE
+          customAttributes:
+            key: customAttributes
+      properties:
+        referredEntities:
+          additionalProperties:
+            $ref: '#/components/schemas/AtlasEntity'
+          type: object
+        entity:
+          $ref: '#/components/schemas/AtlasEntity'
+      type: object
+    AtlasTermAssignmentHeader:
+      example:
+        displayText: displayText
+        expression: expression
+        relationGuid: relationGuid
+        createdBy: createdBy
+        steward: steward
+        confidence: 1
+        description: description
+        source: source
+        termGuid: termGuid
+        status: DISCOVERED
+      properties:
+        termGuid:
+          type: string
+        relationGuid:
+          type: string
+        description:
+          type: string
+        displayText:
+          type: string
+        expression:
+          type: string
+        createdBy:
+          type: string
+        steward:
+          type: string
+        source:
+          type: string
+        confidence:
+          format: int32
+          type: integer
+        status:
+          enum:
+          - DISCOVERED
+          - PROPOSED
+          - IMPORTED
+          - VALIDATED
+          - DEPRECATED
+          - OBSOLETE
+          - OTHER
+          type: string
+      type: object
+    AtlasEntityHeader:
+      example:
+        displayText: displayText
+        classifications:
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+          validityPeriods:
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          attributes:
+            key: '{}'
+        - removePropagationsOnEntityDelete: true
+          entityStatus: ACTIVE
+          typeName: typeName
+          entityGuid: entityGuid
+          propagate: true
+          validityPeriods:
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          - timeZone: timeZone
+            startTime: startTime
+            endTime: endTime
+          attributes:
+            key: '{}'
+        classificationNames:
+        - classificationNames
+        - classificationNames
+        meaningNames:
+        - meaningNames
+        - meaningNames
+        typeName: typeName
+        guid: guid
+        attributes:
+          key: '{}'
+        meanings:
+        - displayText: displayText
+          expression: expression
+          relationGuid: relationGuid
+          createdBy: createdBy
+          steward: steward
+          confidence: 1
+          description: description
+          source: source
+          termGuid: termGuid
+          status: DISCOVERED
+        - displayText: displayText
+          expression: expression
+          relationGuid: relationGuid
+          createdBy: createdBy
+          steward: steward
+          confidence: 1
+          description: description
+          source: source
+          termGuid: termGuid
+          status: DISCOVERED
+        status: ACTIVE
+        isIncomplete: true
+        labels:
+        - labels
+        - labels
+      properties:
+        typeName:
+          type: string
+        attributes:
+          additionalProperties:
+            type: object
+          type: object
+        guid:
+          type: string
+        status:
+          enum:
+          - ACTIVE
+          - DELETED
+          - PURGED
+          type: string
+        displayText:
+          type: string
+        classificationNames:
+          items:
+            type: string
+          type: array
+        classifications:
+          items:
+            $ref: '#/components/schemas/AtlasClassification'
+          type: array
+        meaningNames:
+          items:
+            type: string
+          type: array
+        meanings:
+          items:
+            $ref: '#/components/schemas/AtlasTermAssignmentHeader'
+          type: array
+        isIncomplete:
+          type: boolean
+        labels:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    SearchParams:
+      example:
+        offset: 6
+        limit: 0
+        includeDeleted: true
+      properties:
+        includeDeleted:
+          type: boolean
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+      type: object
+    SearchResult:
+      example:
+        types:
+        - types
+        - types
+        entities:
+        - displayText: displayText
+          classifications:
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          classificationNames:
+          - classificationNames
+          - classificationNames
+          meaningNames:
+          - meaningNames
+          - meaningNames
+          typeName: typeName
+          guid: guid
+          attributes:
+            key: '{}'
+          meanings:
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 1
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 1
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          status: ACTIVE
+          isIncomplete: true
+          labels:
+          - labels
+          - labels
+        - displayText: displayText
+          classifications:
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          - removePropagationsOnEntityDelete: true
+            entityStatus: ACTIVE
+            typeName: typeName
+            entityGuid: entityGuid
+            propagate: true
+            validityPeriods:
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            - timeZone: timeZone
+              startTime: startTime
+              endTime: endTime
+            attributes:
+              key: '{}'
+          classificationNames:
+          - classificationNames
+          - classificationNames
+          meaningNames:
+          - meaningNames
+          - meaningNames
+          typeName: typeName
+          guid: guid
+          attributes:
+            key: '{}'
+          meanings:
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 1
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          - displayText: displayText
+            expression: expression
+            relationGuid: relationGuid
+            createdBy: createdBy
+            steward: steward
+            confidence: 1
+            description: description
+            source: source
+            termGuid: termGuid
+            status: DISCOVERED
+          status: ACTIVE
+          isIncomplete: true
+          labels:
+          - labels
+          - labels
+        searchParameters:
+          offset: 6
+          limit: 0
+          includeDeleted: true
+        referredEntities:
+          key:
+            displayText: displayText
+            classifications:
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+              validityPeriods:
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              attributes:
+                key: '{}'
+            - removePropagationsOnEntityDelete: true
+              entityStatus: ACTIVE
+              typeName: typeName
+              entityGuid: entityGuid
+              propagate: true
+              validityPeriods:
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              - timeZone: timeZone
+                startTime: startTime
+                endTime: endTime
+              attributes:
+                key: '{}'
+            classificationNames:
+            - classificationNames
+            - classificationNames
+            meaningNames:
+            - meaningNames
+            - meaningNames
+            typeName: typeName
+            guid: guid
+            attributes:
+              key: '{}'
+            meanings:
+            - displayText: displayText
+              expression: expression
+              relationGuid: relationGuid
+              createdBy: createdBy
+              steward: steward
+              confidence: 1
+              description: description
+              source: source
+              termGuid: termGuid
+              status: DISCOVERED
+            - displayText: displayText
+              expression: expression
+              relationGuid: relationGuid
+              createdBy: createdBy
+              steward: steward
+              confidence: 1
+              description: description
+              source: source
+              termGuid: termGuid
+              status: DISCOVERED
+            status: ACTIVE
+            isIncomplete: true
+            labels:
+            - labels
+            - labels
+      properties:
+        searchParameters:
+          $ref: '#/components/schemas/SearchParams'
+        types:
+          items:
+            type: string
+          type: array
+        entities:
+          items:
+            $ref: '#/components/schemas/AtlasEntityHeader'
+          type: array
+        referredEntities:
+          additionalProperties:
+            $ref: '#/components/schemas/AtlasEntityHeader'
+          type: object
+      type: object
+    AtlasAttributeDef:
+      example:
+        isIndexable: true
+        defaultValue: defaultValue
+        displayName: displayName
+        searchWeight: 5
+        typeName: typeName
+        isUnique: true
+        description: description
+        isOptional: true
+        includeInNotification: true
+        constraints:
+        - type: type
+          params:
+            key: '{}'
+        - type: type
+          params:
+            key: '{}'
+        cardinality: SINGLE
+        valuesMinCount: 6
+        indexType: DEFAULT
+        name: name
+        options:
+          key: options
+        valuesMaxCount: 1
+      properties:
+        name:
+          type: string
+        typeName:
+          type: string
+        isOptional:
+          type: boolean
+        cardinality:
+          enum:
+          - SINGLE
+          - LIST
+          - SET
+          type: string
+        valuesMinCount:
+          format: int32
+          type: integer
+        valuesMaxCount:
+          format: int32
+          type: integer
+        isUnique:
+          type: boolean
+        isIndexable:
+          type: boolean
+        includeInNotification:
+          type: boolean
+        defaultValue:
+          type: string
+        description:
+          type: string
+        searchWeight:
+          format: int32
+          type: integer
+        indexType:
+          enum:
+          - DEFAULT
+          - STRING
+          type: string
+        constraints:
+          items:
+            $ref: '#/components/schemas/AtlasConstraintDef'
+          type: array
+        options:
+          additionalProperties:
+            type: string
+          type: object
+        displayName:
+          type: string
+      type: object
+    AtlasConstraintDef:
+      example:
+        type: type
+        params:
+          key: '{}'
+      properties:
+        type:
+          type: string
+        params:
+          additionalProperties:
+            type: object
+          type: object
+      type: object
+    BusinessMetadataDefResponse:
+      example:
+        serviceType: serviceType
+        updatedBy: updatedBy
+        description: description
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        error:
+          error_code: 0
+          message: message
+        version: 0
+        typeVersion: typeVersion
+        attributeDefs:
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 5
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 6
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 1
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 5
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 6
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 1
+        createdBy: createdBy
+        createTime: 2000-01-23T04:56:07.000+00:00
+        name: name
+        options:
+          key: options
+        guid: guid
+        category: PRIMITIVE
+      properties:
+        category:
+          enum:
+          - PRIMITIVE
+          - OBJECT_ID_TYPE
+          - ENUM
+          - STRUCT
+          - CLASSIFICATION
+          - ENTITY
+          - ARRAY
+          - MAP
+          - RELATIONSHIP
+          - BUSINESS_METADATA
+          type: string
+        guid:
+          type: string
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+        createTime:
+          format: date-time
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+        version:
+          format: int64
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        typeVersion:
+          type: string
+        serviceType:
+          type: string
+        options:
+          additionalProperties:
+            type: string
+          type: object
+        attributeDefs:
+          items:
+            $ref: '#/components/schemas/AtlasAttributeDef'
+          type: array
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+      type: object
+    AtlasBusinessMetadataDef:
+      example:
+        serviceType: serviceType
+        updatedBy: updatedBy
+        description: description
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        version: 0
+        typeVersion: typeVersion
+        attributeDefs:
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 5
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 6
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 1
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 5
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 6
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 1
+        createdBy: createdBy
+        createTime: 2000-01-23T04:56:07.000+00:00
+        name: name
+        options:
+          key: options
+        guid: guid
+        category: PRIMITIVE
+      properties:
+        category:
+          enum:
+          - PRIMITIVE
+          - OBJECT_ID_TYPE
+          - ENUM
+          - STRUCT
+          - CLASSIFICATION
+          - ENTITY
+          - ARRAY
+          - MAP
+          - RELATIONSHIP
+          - BUSINESS_METADATA
+          type: string
+        guid:
+          type: string
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+        createTime:
+          format: date-time
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+        version:
+          format: int64
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        typeVersion:
+          type: string
+        serviceType:
+          type: string
+        options:
+          additionalProperties:
+            type: string
+          type: object
+        attributeDefs:
+          items:
+            $ref: '#/components/schemas/AtlasAttributeDef'
+          type: array
+      type: object
+    TagDefResponse:
+      example:
+        serviceType: serviceType
+        superTypes:
+        - superTypes
+        - superTypes
+        updatedBy: updatedBy
+        description: description
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        subTypes:
+        - subTypes
+        - subTypes
+        error:
+          error_code: 0
+          message: message
+        version: 0
+        typeVersion: typeVersion
+        attributeDefs:
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 5
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 6
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 1
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 5
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 6
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 1
+        createdBy: createdBy
+        createTime: 2000-01-23T04:56:07.000+00:00
+        name: name
+        options:
+          key: options
+        guid: guid
+        entityTypes:
+        - entityTypes
+        - entityTypes
+        category: PRIMITIVE
+      properties:
+        category:
+          enum:
+          - PRIMITIVE
+          - OBJECT_ID_TYPE
+          - ENUM
+          - STRUCT
+          - CLASSIFICATION
+          - ENTITY
+          - ARRAY
+          - MAP
+          - RELATIONSHIP
+          - BUSINESS_METADATA
+          type: string
+        guid:
+          type: string
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+        createTime:
+          format: date-time
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+        version:
+          format: int64
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        typeVersion:
+          type: string
+        serviceType:
+          type: string
+        options:
+          additionalProperties:
+            type: string
+          type: object
+        attributeDefs:
+          items:
+            $ref: '#/components/schemas/AtlasAttributeDef'
+          type: array
+        superTypes:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        entityTypes:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        subTypes:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+      type: object
+    TagDef:
+      example:
+        serviceType: serviceType
+        superTypes:
+        - superTypes
+        - superTypes
+        updatedBy: updatedBy
+        description: description
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        subTypes:
+        - subTypes
+        - subTypes
+        version: 0
+        typeVersion: typeVersion
+        attributeDefs:
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 5
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 6
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 1
+        - isIndexable: true
+          defaultValue: defaultValue
+          displayName: displayName
+          searchWeight: 5
+          typeName: typeName
+          isUnique: true
+          description: description
+          isOptional: true
+          includeInNotification: true
+          constraints:
+          - type: type
+            params:
+              key: '{}'
+          - type: type
+            params:
+              key: '{}'
+          cardinality: SINGLE
+          valuesMinCount: 6
+          indexType: DEFAULT
+          name: name
+          options:
+            key: options
+          valuesMaxCount: 1
+        createdBy: createdBy
+        createTime: 2000-01-23T04:56:07.000+00:00
+        name: name
+        options:
+          key: options
+        guid: guid
+        entityTypes:
+        - entityTypes
+        - entityTypes
+        category: PRIMITIVE
+      properties:
+        category:
+          enum:
+          - PRIMITIVE
+          - OBJECT_ID_TYPE
+          - ENUM
+          - STRUCT
+          - CLASSIFICATION
+          - ENTITY
+          - ARRAY
+          - MAP
+          - RELATIONSHIP
+          - BUSINESS_METADATA
+          type: string
+        guid:
+          type: string
+        createdBy:
+          type: string
+        updatedBy:
+          type: string
+        createTime:
+          format: date-time
+          type: string
+        updateTime:
+          format: date-time
+          type: string
+        version:
+          format: int64
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        typeVersion:
+          type: string
+        serviceType:
+          type: string
+        options:
+          additionalProperties:
+            type: string
+          type: object
+        attributeDefs:
+          items:
+            $ref: '#/components/schemas/AtlasAttributeDef'
+          type: array
+        superTypes:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        entityTypes:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        subTypes:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
       type: object
