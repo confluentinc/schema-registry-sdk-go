@@ -9,28 +9,28 @@ import (
 	net_http "net/http"
 	sync "sync"
 
-	github_com_confluentinc_schema_registry_sdk_go_test "github.com/confluentinc/schema-registry-sdk-go-test"
+	github_com_confluentinc_schema_registry_sdk_go "github.com/confluentinc/schema-registry-sdk-go"
 )
 
 // DefaultApi is a mock of DefaultApi interface
 type DefaultApi struct {
 	lockCreateBusinessMetadata sync.Mutex
-	CreateBusinessMetadataFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataResponse, *net_http.Response, error)
+	CreateBusinessMetadataFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
 
 	lockCreateBusinessMetadataDefs sync.Mutex
-	CreateBusinessMetadataDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataDefResponse, *net_http.Response, error)
+	CreateBusinessMetadataDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error)
 
 	lockCreateExporter sync.Mutex
-	CreateExporterFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go_test.CreateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go_test.CreateExporterResponse, *net_http.Response, error)
+	CreateExporterFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.CreateExporterResponse, *net_http.Response, error)
 
 	lockCreateOrUpdate sync.Mutex
-	CreateOrUpdateFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateOrUpdateOpts) (*net_http.Response, error)
+	CreateOrUpdateFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts) (*net_http.Response, error)
 
 	lockCreateTagDefs sync.Mutex
-	CreateTagDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagDefResponse, *net_http.Response, error)
+	CreateTagDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error)
 
 	lockCreateTags sync.Mutex
-	CreateTagsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagResponse, *net_http.Response, error)
+	CreateTagsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
 
 	lockDeleteBusinessMetadata sync.Mutex
 	DeleteBusinessMetadataFunc func(ctx context.Context, typeName, qualifiedName, bmName string) (*net_http.Response, error)
@@ -45,10 +45,10 @@ type DefaultApi struct {
 	DeleteExporterFunc func(ctx context.Context, name string) (*net_http.Response, error)
 
 	lockDeleteSchemaVersion sync.Mutex
-	DeleteSchemaVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSchemaVersionOpts) (int32, *net_http.Response, error)
+	DeleteSchemaVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts) (int32, *net_http.Response, error)
 
 	lockDeleteSubject sync.Mutex
-	DeleteSubjectFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSubjectOpts) ([]int32, *net_http.Response, error)
+	DeleteSubjectFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts) ([]int32, *net_http.Response, error)
 
 	lockDeleteSubjectConfig sync.Mutex
 	DeleteSubjectConfigFunc func(ctx context.Context, subject string) (string, *net_http.Response, error)
@@ -66,173 +66,173 @@ type DefaultApi struct {
 	GetFunc func(ctx context.Context) (map[string]map[string]interface{}, *net_http.Response, error)
 
 	lockGetAllBusinessMetadataDefs sync.Mutex
-	GetAllBusinessMetadataDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataDefResponse, *net_http.Response, error)
+	GetAllBusinessMetadataDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error)
 
 	lockGetAllTagDefs sync.Mutex
-	GetAllTagDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagDefResponse, *net_http.Response, error)
+	GetAllTagDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error)
 
 	lockGetBusinessMetadata sync.Mutex
-	GetBusinessMetadataFunc func(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataResponse, *net_http.Response, error)
+	GetBusinessMetadataFunc func(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
 
 	lockGetBusinessMetadataDefByName sync.Mutex
-	GetBusinessMetadataDefByNameFunc func(ctx context.Context, bmName string) (github_com_confluentinc_schema_registry_sdk_go_test.AtlasBusinessMetadataDef, *net_http.Response, error)
+	GetBusinessMetadataDefByNameFunc func(ctx context.Context, bmName string) (github_com_confluentinc_schema_registry_sdk_go.AtlasBusinessMetadataDef, *net_http.Response, error)
 
 	lockGetByUniqueAttributes sync.Mutex
-	GetByUniqueAttributesFunc func(ctx context.Context, typeName, qualifiedName string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetByUniqueAttributesOpts) (github_com_confluentinc_schema_registry_sdk_go_test.AtlasEntityWithExtInfo, *net_http.Response, error)
+	GetByUniqueAttributesFunc func(ctx context.Context, typeName, qualifiedName string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts) (github_com_confluentinc_schema_registry_sdk_go.AtlasEntityWithExtInfo, *net_http.Response, error)
 
 	lockGetClusterId sync.Mutex
-	GetClusterIdFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go_test.ServerClusterId, *net_http.Response, error)
+	GetClusterIdFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.ServerClusterId, *net_http.Response, error)
 
 	lockGetExporterConfig sync.Mutex
 	GetExporterConfigFunc func(ctx context.Context, name string) (map[string]string, *net_http.Response, error)
 
 	lockGetExporterInfo sync.Mutex
-	GetExporterInfoFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.ExporterInfo, *net_http.Response, error)
+	GetExporterInfoFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.ExporterInfo, *net_http.Response, error)
 
 	lockGetExporterStatus sync.Mutex
-	GetExporterStatusFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.ExporterStatus, *net_http.Response, error)
+	GetExporterStatusFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.ExporterStatus, *net_http.Response, error)
 
 	lockGetExporters sync.Mutex
 	GetExportersFunc func(ctx context.Context) ([]string, *net_http.Response, error)
 
 	lockGetMode sync.Mutex
-	GetModeFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetModeOpts) (github_com_confluentinc_schema_registry_sdk_go_test.Mode, *net_http.Response, error)
+	GetModeFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error)
 
 	lockGetReferencedBy sync.Mutex
 	GetReferencedByFunc func(ctx context.Context, subject, version string) ([]int32, *net_http.Response, error)
 
 	lockGetSchema sync.Mutex
-	GetSchemaFunc func(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOpts) (github_com_confluentinc_schema_registry_sdk_go_test.SchemaString, *net_http.Response, error)
+	GetSchemaFunc func(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts) (github_com_confluentinc_schema_registry_sdk_go.SchemaString, *net_http.Response, error)
 
 	lockGetSchemaByVersion sync.Mutex
-	GetSchemaByVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaByVersionOpts) (github_com_confluentinc_schema_registry_sdk_go_test.Schema, *net_http.Response, error)
+	GetSchemaByVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts) (github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error)
 
 	lockGetSchemaOnly sync.Mutex
-	GetSchemaOnlyFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOnlyOpts) (string, *net_http.Response, error)
+	GetSchemaOnlyFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts) (string, *net_http.Response, error)
 
 	lockGetSchemaTypes sync.Mutex
 	GetSchemaTypesFunc func(ctx context.Context) ([]string, *net_http.Response, error)
 
 	lockGetSchemas sync.Mutex
-	GetSchemasFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemasOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.Schema, *net_http.Response, error)
+	GetSchemasFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts) ([]github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error)
 
 	lockGetSubjectLevelConfig sync.Mutex
-	GetSubjectLevelConfigFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectLevelConfigOpts) (github_com_confluentinc_schema_registry_sdk_go_test.Config, *net_http.Response, error)
+	GetSubjectLevelConfigFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error)
 
 	lockGetSubjects sync.Mutex
-	GetSubjectsFunc func(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectsOpts) ([]string, *net_http.Response, error)
+	GetSubjectsFunc func(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts) ([]string, *net_http.Response, error)
 
 	lockGetTagDefByName sync.Mutex
-	GetTagDefByNameFunc func(ctx context.Context, tagName string) (github_com_confluentinc_schema_registry_sdk_go_test.TagDef, *net_http.Response, error)
+	GetTagDefByNameFunc func(ctx context.Context, tagName string) (github_com_confluentinc_schema_registry_sdk_go.TagDef, *net_http.Response, error)
 
 	lockGetTags sync.Mutex
-	GetTagsFunc func(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagResponse, *net_http.Response, error)
+	GetTagsFunc func(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
 
 	lockGetTopLevelConfig sync.Mutex
-	GetTopLevelConfigFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go_test.Config, *net_http.Response, error)
+	GetTopLevelConfigFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error)
 
 	lockGetTopLevelMode sync.Mutex
-	GetTopLevelModeFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go_test.Mode, *net_http.Response, error)
+	GetTopLevelModeFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error)
 
 	lockGetVersions sync.Mutex
-	GetVersionsFunc func(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetVersionsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.SubjectVersion, *net_http.Response, error)
+	GetVersionsFunc func(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.SubjectVersion, *net_http.Response, error)
 
 	lockList sync.Mutex
-	ListFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListOpts) ([]string, *net_http.Response, error)
+	ListFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts) ([]string, *net_http.Response, error)
 
 	lockListContexts sync.Mutex
 	ListContextsFunc func(ctx context.Context) ([]string, *net_http.Response, error)
 
 	lockListVersions sync.Mutex
-	ListVersionsFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListVersionsOpts) ([]int32, *net_http.Response, error)
+	ListVersionsFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts) ([]int32, *net_http.Response, error)
 
 	lockLookUpSchemaUnderSubject sync.Mutex
-	LookUpSchemaUnderSubjectFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error)
+	LookUpSchemaUnderSubjectFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error)
 
 	lockPartialUpdateByUniqueAttributes sync.Mutex
-	PartialUpdateByUniqueAttributesFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.PartialUpdateByUniqueAttributesOpts) (*net_http.Response, error)
+	PartialUpdateByUniqueAttributesFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts) (*net_http.Response, error)
 
 	lockPauseExporter sync.Mutex
-	PauseExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error)
+	PauseExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockPost sync.Mutex
 	PostFunc func(ctx context.Context) (map[string]string, *net_http.Response, error)
 
 	lockPutExporter sync.Mutex
-	PutExporterFunc func(ctx context.Context, name string, body github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error)
+	PutExporterFunc func(ctx context.Context, name string, body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockPutExporterConfig sync.Mutex
-	PutExporterConfigFunc func(ctx context.Context, name string, body map[string]string) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error)
+	PutExporterConfigFunc func(ctx context.Context, name string, body map[string]string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockRegister sync.Mutex
-	RegisterFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaResponse, *net_http.Response, error)
+	RegisterFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error)
 
 	lockResetExporter sync.Mutex
-	ResetExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error)
+	ResetExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockResumeExporter sync.Mutex
-	ResumeExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error)
+	ResumeExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockSearchUsingAttribute sync.Mutex
-	SearchUsingAttributeFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingAttributeOpts) (github_com_confluentinc_schema_registry_sdk_go_test.SearchResult, *net_http.Response, error)
+	SearchUsingAttributeFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error)
 
 	lockSearchUsingBasic sync.Mutex
-	SearchUsingBasicFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingBasicOpts) (github_com_confluentinc_schema_registry_sdk_go_test.SearchResult, *net_http.Response, error)
+	SearchUsingBasicFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error)
 
 	lockTestCompatibilityBySubjectName sync.Mutex
-	TestCompatibilityBySubjectNameFunc func(ctx context.Context, subject, version string, body github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go_test.CompatibilityCheckResponse, *net_http.Response, error)
+	TestCompatibilityBySubjectNameFunc func(ctx context.Context, subject, version string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error)
 
 	lockTestCompatibilityForSubject sync.Mutex
-	TestCompatibilityForSubjectFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityForSubjectOpts) (github_com_confluentinc_schema_registry_sdk_go_test.CompatibilityCheckResponse, *net_http.Response, error)
+	TestCompatibilityForSubjectFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error)
 
 	lockUpdateBusinessMetadata sync.Mutex
-	UpdateBusinessMetadataFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataResponse, *net_http.Response, error)
+	UpdateBusinessMetadataFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
 
 	lockUpdateBusinessMetadataDefs sync.Mutex
-	UpdateBusinessMetadataDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataDefResponse, *net_http.Response, error)
+	UpdateBusinessMetadataDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error)
 
 	lockUpdateMode sync.Mutex
-	UpdateModeFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest, *net_http.Response, error)
+	UpdateModeFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
 
 	lockUpdateSubjectLevelConfig sync.Mutex
-	UpdateSubjectLevelConfigFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest, *net_http.Response, error)
+	UpdateSubjectLevelConfigFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTagDefs sync.Mutex
-	UpdateTagDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagDefResponse, *net_http.Response, error)
+	UpdateTagDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error)
 
 	lockUpdateTags sync.Mutex
-	UpdateTagsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagResponse, *net_http.Response, error)
+	UpdateTagsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
 
 	lockUpdateTopLevelConfig sync.Mutex
-	UpdateTopLevelConfigFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest, *net_http.Response, error)
+	UpdateTopLevelConfigFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTopLevelMode sync.Mutex
-	UpdateTopLevelModeFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest, *net_http.Response, error)
+	UpdateTopLevelModeFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
 
 	calls struct {
 		CreateBusinessMetadata []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts
 		}
 		CreateBusinessMetadataDefs []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataDefsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts
 		}
 		CreateExporter []struct {
 			Ctx  context.Context
-			Body github_com_confluentinc_schema_registry_sdk_go_test.CreateExporterRequest
+			Body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest
 		}
 		CreateOrUpdate []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateOrUpdateOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts
 		}
 		CreateTagDefs []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagDefsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts
 		}
 		CreateTags []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts
 		}
 		DeleteBusinessMetadata []struct {
 			Ctx           context.Context
@@ -257,12 +257,12 @@ type DefaultApi struct {
 			Ctx               context.Context
 			Subject           string
 			Version           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSchemaVersionOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts
 		}
 		DeleteSubject []struct {
 			Ctx               context.Context
 			Subject           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSubjectOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts
 		}
 		DeleteSubjectConfig []struct {
 			Ctx     context.Context
@@ -287,11 +287,11 @@ type DefaultApi struct {
 		}
 		GetAllBusinessMetadataDefs []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllBusinessMetadataDefsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts
 		}
 		GetAllTagDefs []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllTagDefsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts
 		}
 		GetBusinessMetadata []struct {
 			Ctx           context.Context
@@ -306,7 +306,7 @@ type DefaultApi struct {
 			Ctx               context.Context
 			TypeName          string
 			QualifiedName     string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetByUniqueAttributesOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts
 		}
 		GetClusterId []struct {
 			Ctx context.Context
@@ -329,7 +329,7 @@ type DefaultApi struct {
 		GetMode []struct {
 			Ctx               context.Context
 			Subject           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetModeOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts
 		}
 		GetReferencedBy []struct {
 			Ctx     context.Context
@@ -339,36 +339,36 @@ type DefaultApi struct {
 		GetSchema []struct {
 			Ctx               context.Context
 			Id                int32
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts
 		}
 		GetSchemaByVersion []struct {
 			Ctx               context.Context
 			Subject           string
 			Version           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaByVersionOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts
 		}
 		GetSchemaOnly []struct {
 			Ctx               context.Context
 			Subject           string
 			Version           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOnlyOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts
 		}
 		GetSchemaTypes []struct {
 			Ctx context.Context
 		}
 		GetSchemas []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemasOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts
 		}
 		GetSubjectLevelConfig []struct {
 			Ctx               context.Context
 			Subject           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectLevelConfigOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts
 		}
 		GetSubjects []struct {
 			Ctx               context.Context
 			Id                int32
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts
 		}
 		GetTagDefByName []struct {
 			Ctx     context.Context
@@ -388,11 +388,11 @@ type DefaultApi struct {
 		GetVersions []struct {
 			Ctx               context.Context
 			Id                int32
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetVersionsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts
 		}
 		List []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts
 		}
 		ListContexts []struct {
 			Ctx context.Context
@@ -400,17 +400,17 @@ type DefaultApi struct {
 		ListVersions []struct {
 			Ctx               context.Context
 			Subject           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListVersionsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts
 		}
 		LookUpSchemaUnderSubject []struct {
 			Ctx               context.Context
 			Subject           string
-			Body              github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.LookUpSchemaUnderSubjectOpts
+			Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts
 		}
 		PartialUpdateByUniqueAttributes []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.PartialUpdateByUniqueAttributesOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts
 		}
 		PauseExporter []struct {
 			Ctx  context.Context
@@ -422,7 +422,7 @@ type DefaultApi struct {
 		PutExporter []struct {
 			Ctx  context.Context
 			Name string
-			Body github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterRequest
+			Body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest
 		}
 		PutExporterConfig []struct {
 			Ctx  context.Context
@@ -432,7 +432,7 @@ type DefaultApi struct {
 		Register []struct {
 			Ctx     context.Context
 			Subject string
-			Body    github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
+			Body    github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 		}
 		ResetExporter []struct {
 			Ctx  context.Context
@@ -444,64 +444,64 @@ type DefaultApi struct {
 		}
 		SearchUsingAttribute []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingAttributeOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts
 		}
 		SearchUsingBasic []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingBasicOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts
 		}
 		TestCompatibilityBySubjectName []struct {
 			Ctx               context.Context
 			Subject           string
 			Version           string
-			Body              github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityBySubjectNameOpts
+			Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts
 		}
 		TestCompatibilityForSubject []struct {
 			Ctx               context.Context
 			Subject           string
-			Body              github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityForSubjectOpts
+			Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts
 		}
 		UpdateBusinessMetadata []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts
 		}
 		UpdateBusinessMetadataDefs []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataDefsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts
 		}
 		UpdateMode []struct {
 			Ctx     context.Context
 			Subject string
-			Body    github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest
+			Body    github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 		}
 		UpdateSubjectLevelConfig []struct {
 			Ctx     context.Context
 			Subject string
-			Body    github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest
+			Body    github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 		}
 		UpdateTagDefs []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagDefsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts
 		}
 		UpdateTags []struct {
 			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagsOpts
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts
 		}
 		UpdateTopLevelConfig []struct {
 			Ctx  context.Context
-			Body github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest
+			Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 		}
 		UpdateTopLevelMode []struct {
 			Ctx  context.Context
-			Body github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest
+			Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 		}
 	}
 }
 
 // CreateBusinessMetadata mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateBusinessMetadata(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateBusinessMetadata(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error) {
 	m.lockCreateBusinessMetadata.Lock()
 	defer m.lockCreateBusinessMetadata.Unlock()
 
@@ -511,7 +511,7 @@ func (m *DefaultApi) CreateBusinessMetadata(ctx context.Context, localVarOptiona
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -533,7 +533,7 @@ func (m *DefaultApi) CreateBusinessMetadataCalled() bool {
 // CreateBusinessMetadataCalls returns the calls made to CreateBusinessMetadata.
 func (m *DefaultApi) CreateBusinessMetadataCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts
 } {
 	m.lockCreateBusinessMetadata.Lock()
 	defer m.lockCreateBusinessMetadata.Unlock()
@@ -542,7 +542,7 @@ func (m *DefaultApi) CreateBusinessMetadataCalls() []struct {
 }
 
 // CreateBusinessMetadataDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateBusinessMetadataDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateBusinessMetadataDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error) {
 	m.lockCreateBusinessMetadataDefs.Lock()
 	defer m.lockCreateBusinessMetadataDefs.Unlock()
 
@@ -552,7 +552,7 @@ func (m *DefaultApi) CreateBusinessMetadataDefs(ctx context.Context, localVarOpt
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataDefsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -574,7 +574,7 @@ func (m *DefaultApi) CreateBusinessMetadataDefsCalled() bool {
 // CreateBusinessMetadataDefsCalls returns the calls made to CreateBusinessMetadataDefs.
 func (m *DefaultApi) CreateBusinessMetadataDefsCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateBusinessMetadataDefsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts
 } {
 	m.lockCreateBusinessMetadataDefs.Lock()
 	defer m.lockCreateBusinessMetadataDefs.Unlock()
@@ -583,7 +583,7 @@ func (m *DefaultApi) CreateBusinessMetadataDefsCalls() []struct {
 }
 
 // CreateExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateExporter(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go_test.CreateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go_test.CreateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateExporter(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.CreateExporterResponse, *net_http.Response, error) {
 	m.lockCreateExporter.Lock()
 	defer m.lockCreateExporter.Unlock()
 
@@ -593,7 +593,7 @@ func (m *DefaultApi) CreateExporter(ctx context.Context, body github_com_conflue
 
 	call := struct {
 		Ctx  context.Context
-		Body github_com_confluentinc_schema_registry_sdk_go_test.CreateExporterRequest
+		Body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest
 	}{
 		Ctx:  ctx,
 		Body: body,
@@ -615,7 +615,7 @@ func (m *DefaultApi) CreateExporterCalled() bool {
 // CreateExporterCalls returns the calls made to CreateExporter.
 func (m *DefaultApi) CreateExporterCalls() []struct {
 	Ctx  context.Context
-	Body github_com_confluentinc_schema_registry_sdk_go_test.CreateExporterRequest
+	Body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest
 } {
 	m.lockCreateExporter.Lock()
 	defer m.lockCreateExporter.Unlock()
@@ -624,7 +624,7 @@ func (m *DefaultApi) CreateExporterCalls() []struct {
 }
 
 // CreateOrUpdate mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateOrUpdate(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateOrUpdateOpts) (*net_http.Response, error) {
+func (m *DefaultApi) CreateOrUpdate(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts) (*net_http.Response, error) {
 	m.lockCreateOrUpdate.Lock()
 	defer m.lockCreateOrUpdate.Unlock()
 
@@ -634,7 +634,7 @@ func (m *DefaultApi) CreateOrUpdate(ctx context.Context, localVarOptionals *gith
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateOrUpdateOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -656,7 +656,7 @@ func (m *DefaultApi) CreateOrUpdateCalled() bool {
 // CreateOrUpdateCalls returns the calls made to CreateOrUpdate.
 func (m *DefaultApi) CreateOrUpdateCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateOrUpdateOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts
 } {
 	m.lockCreateOrUpdate.Lock()
 	defer m.lockCreateOrUpdate.Unlock()
@@ -665,7 +665,7 @@ func (m *DefaultApi) CreateOrUpdateCalls() []struct {
 }
 
 // CreateTagDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateTagDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateTagDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error) {
 	m.lockCreateTagDefs.Lock()
 	defer m.lockCreateTagDefs.Unlock()
 
@@ -675,7 +675,7 @@ func (m *DefaultApi) CreateTagDefs(ctx context.Context, localVarOptionals *githu
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagDefsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -697,7 +697,7 @@ func (m *DefaultApi) CreateTagDefsCalled() bool {
 // CreateTagDefsCalls returns the calls made to CreateTagDefs.
 func (m *DefaultApi) CreateTagDefsCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagDefsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts
 } {
 	m.lockCreateTagDefs.Lock()
 	defer m.lockCreateTagDefs.Unlock()
@@ -706,7 +706,7 @@ func (m *DefaultApi) CreateTagDefsCalls() []struct {
 }
 
 // CreateTags mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateTags(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateTags(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error) {
 	m.lockCreateTags.Lock()
 	defer m.lockCreateTags.Unlock()
 
@@ -716,7 +716,7 @@ func (m *DefaultApi) CreateTags(ctx context.Context, localVarOptionals *github_c
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -738,7 +738,7 @@ func (m *DefaultApi) CreateTagsCalled() bool {
 // CreateTagsCalls returns the calls made to CreateTags.
 func (m *DefaultApi) CreateTagsCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.CreateTagsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts
 } {
 	m.lockCreateTags.Lock()
 	defer m.lockCreateTags.Unlock()
@@ -920,7 +920,7 @@ func (m *DefaultApi) DeleteExporterCalls() []struct {
 }
 
 // DeleteSchemaVersion mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteSchemaVersion(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSchemaVersionOpts) (int32, *net_http.Response, error) {
+func (m *DefaultApi) DeleteSchemaVersion(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts) (int32, *net_http.Response, error) {
 	m.lockDeleteSchemaVersion.Lock()
 	defer m.lockDeleteSchemaVersion.Unlock()
 
@@ -932,7 +932,7 @@ func (m *DefaultApi) DeleteSchemaVersion(ctx context.Context, subject, version s
 		Ctx               context.Context
 		Subject           string
 		Version           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSchemaVersionOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -958,7 +958,7 @@ func (m *DefaultApi) DeleteSchemaVersionCalls() []struct {
 	Ctx               context.Context
 	Subject           string
 	Version           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSchemaVersionOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts
 } {
 	m.lockDeleteSchemaVersion.Lock()
 	defer m.lockDeleteSchemaVersion.Unlock()
@@ -967,7 +967,7 @@ func (m *DefaultApi) DeleteSchemaVersionCalls() []struct {
 }
 
 // DeleteSubject mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteSubject(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSubjectOpts) ([]int32, *net_http.Response, error) {
+func (m *DefaultApi) DeleteSubject(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts) ([]int32, *net_http.Response, error) {
 	m.lockDeleteSubject.Lock()
 	defer m.lockDeleteSubject.Unlock()
 
@@ -978,7 +978,7 @@ func (m *DefaultApi) DeleteSubject(ctx context.Context, subject string, localVar
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSubjectOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -1002,7 +1002,7 @@ func (m *DefaultApi) DeleteSubjectCalled() bool {
 func (m *DefaultApi) DeleteSubjectCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.DeleteSubjectOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts
 } {
 	m.lockDeleteSubject.Lock()
 	defer m.lockDeleteSubject.Unlock()
@@ -1219,7 +1219,7 @@ func (m *DefaultApi) GetCalls() []struct {
 }
 
 // GetAllBusinessMetadataDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetAllBusinessMetadataDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetAllBusinessMetadataDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error) {
 	m.lockGetAllBusinessMetadataDefs.Lock()
 	defer m.lockGetAllBusinessMetadataDefs.Unlock()
 
@@ -1229,7 +1229,7 @@ func (m *DefaultApi) GetAllBusinessMetadataDefs(ctx context.Context, localVarOpt
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllBusinessMetadataDefsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -1251,7 +1251,7 @@ func (m *DefaultApi) GetAllBusinessMetadataDefsCalled() bool {
 // GetAllBusinessMetadataDefsCalls returns the calls made to GetAllBusinessMetadataDefs.
 func (m *DefaultApi) GetAllBusinessMetadataDefsCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllBusinessMetadataDefsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts
 } {
 	m.lockGetAllBusinessMetadataDefs.Lock()
 	defer m.lockGetAllBusinessMetadataDefs.Unlock()
@@ -1260,7 +1260,7 @@ func (m *DefaultApi) GetAllBusinessMetadataDefsCalls() []struct {
 }
 
 // GetAllTagDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetAllTagDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetAllTagDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error) {
 	m.lockGetAllTagDefs.Lock()
 	defer m.lockGetAllTagDefs.Unlock()
 
@@ -1270,7 +1270,7 @@ func (m *DefaultApi) GetAllTagDefs(ctx context.Context, localVarOptionals *githu
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllTagDefsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -1292,7 +1292,7 @@ func (m *DefaultApi) GetAllTagDefsCalled() bool {
 // GetAllTagDefsCalls returns the calls made to GetAllTagDefs.
 func (m *DefaultApi) GetAllTagDefsCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetAllTagDefsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts
 } {
 	m.lockGetAllTagDefs.Lock()
 	defer m.lockGetAllTagDefs.Unlock()
@@ -1301,7 +1301,7 @@ func (m *DefaultApi) GetAllTagDefsCalls() []struct {
 }
 
 // GetBusinessMetadata mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetBusinessMetadata(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetBusinessMetadata(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error) {
 	m.lockGetBusinessMetadata.Lock()
 	defer m.lockGetBusinessMetadata.Unlock()
 
@@ -1345,7 +1345,7 @@ func (m *DefaultApi) GetBusinessMetadataCalls() []struct {
 }
 
 // GetBusinessMetadataDefByName mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetBusinessMetadataDefByName(ctx context.Context, bmName string) (github_com_confluentinc_schema_registry_sdk_go_test.AtlasBusinessMetadataDef, *net_http.Response, error) {
+func (m *DefaultApi) GetBusinessMetadataDefByName(ctx context.Context, bmName string) (github_com_confluentinc_schema_registry_sdk_go.AtlasBusinessMetadataDef, *net_http.Response, error) {
 	m.lockGetBusinessMetadataDefByName.Lock()
 	defer m.lockGetBusinessMetadataDefByName.Unlock()
 
@@ -1386,7 +1386,7 @@ func (m *DefaultApi) GetBusinessMetadataDefByNameCalls() []struct {
 }
 
 // GetByUniqueAttributes mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetByUniqueAttributes(ctx context.Context, typeName, qualifiedName string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetByUniqueAttributesOpts) (github_com_confluentinc_schema_registry_sdk_go_test.AtlasEntityWithExtInfo, *net_http.Response, error) {
+func (m *DefaultApi) GetByUniqueAttributes(ctx context.Context, typeName, qualifiedName string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts) (github_com_confluentinc_schema_registry_sdk_go.AtlasEntityWithExtInfo, *net_http.Response, error) {
 	m.lockGetByUniqueAttributes.Lock()
 	defer m.lockGetByUniqueAttributes.Unlock()
 
@@ -1398,7 +1398,7 @@ func (m *DefaultApi) GetByUniqueAttributes(ctx context.Context, typeName, qualif
 		Ctx               context.Context
 		TypeName          string
 		QualifiedName     string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetByUniqueAttributesOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts
 	}{
 		Ctx:               ctx,
 		TypeName:          typeName,
@@ -1424,7 +1424,7 @@ func (m *DefaultApi) GetByUniqueAttributesCalls() []struct {
 	Ctx               context.Context
 	TypeName          string
 	QualifiedName     string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetByUniqueAttributesOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts
 } {
 	m.lockGetByUniqueAttributes.Lock()
 	defer m.lockGetByUniqueAttributes.Unlock()
@@ -1433,7 +1433,7 @@ func (m *DefaultApi) GetByUniqueAttributesCalls() []struct {
 }
 
 // GetClusterId mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetClusterId(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go_test.ServerClusterId, *net_http.Response, error) {
+func (m *DefaultApi) GetClusterId(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.ServerClusterId, *net_http.Response, error) {
 	m.lockGetClusterId.Lock()
 	defer m.lockGetClusterId.Unlock()
 
@@ -1512,7 +1512,7 @@ func (m *DefaultApi) GetExporterConfigCalls() []struct {
 }
 
 // GetExporterInfo mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetExporterInfo(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.ExporterInfo, *net_http.Response, error) {
+func (m *DefaultApi) GetExporterInfo(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.ExporterInfo, *net_http.Response, error) {
 	m.lockGetExporterInfo.Lock()
 	defer m.lockGetExporterInfo.Unlock()
 
@@ -1553,7 +1553,7 @@ func (m *DefaultApi) GetExporterInfoCalls() []struct {
 }
 
 // GetExporterStatus mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetExporterStatus(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.ExporterStatus, *net_http.Response, error) {
+func (m *DefaultApi) GetExporterStatus(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.ExporterStatus, *net_http.Response, error) {
 	m.lockGetExporterStatus.Lock()
 	defer m.lockGetExporterStatus.Unlock()
 
@@ -1632,7 +1632,7 @@ func (m *DefaultApi) GetExportersCalls() []struct {
 }
 
 // GetMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetMode(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetModeOpts) (github_com_confluentinc_schema_registry_sdk_go_test.Mode, *net_http.Response, error) {
+func (m *DefaultApi) GetMode(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error) {
 	m.lockGetMode.Lock()
 	defer m.lockGetMode.Unlock()
 
@@ -1643,7 +1643,7 @@ func (m *DefaultApi) GetMode(ctx context.Context, subject string, localVarOption
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetModeOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -1667,7 +1667,7 @@ func (m *DefaultApi) GetModeCalled() bool {
 func (m *DefaultApi) GetModeCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetModeOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts
 } {
 	m.lockGetMode.Lock()
 	defer m.lockGetMode.Unlock()
@@ -1720,7 +1720,7 @@ func (m *DefaultApi) GetReferencedByCalls() []struct {
 }
 
 // GetSchema mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchema(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOpts) (github_com_confluentinc_schema_registry_sdk_go_test.SchemaString, *net_http.Response, error) {
+func (m *DefaultApi) GetSchema(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts) (github_com_confluentinc_schema_registry_sdk_go.SchemaString, *net_http.Response, error) {
 	m.lockGetSchema.Lock()
 	defer m.lockGetSchema.Unlock()
 
@@ -1731,7 +1731,7 @@ func (m *DefaultApi) GetSchema(ctx context.Context, id int32, localVarOptionals 
 	call := struct {
 		Ctx               context.Context
 		Id                int32
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts
 	}{
 		Ctx:               ctx,
 		Id:                id,
@@ -1755,7 +1755,7 @@ func (m *DefaultApi) GetSchemaCalled() bool {
 func (m *DefaultApi) GetSchemaCalls() []struct {
 	Ctx               context.Context
 	Id                int32
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts
 } {
 	m.lockGetSchema.Lock()
 	defer m.lockGetSchema.Unlock()
@@ -1764,7 +1764,7 @@ func (m *DefaultApi) GetSchemaCalls() []struct {
 }
 
 // GetSchemaByVersion mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchemaByVersion(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaByVersionOpts) (github_com_confluentinc_schema_registry_sdk_go_test.Schema, *net_http.Response, error) {
+func (m *DefaultApi) GetSchemaByVersion(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts) (github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error) {
 	m.lockGetSchemaByVersion.Lock()
 	defer m.lockGetSchemaByVersion.Unlock()
 
@@ -1776,7 +1776,7 @@ func (m *DefaultApi) GetSchemaByVersion(ctx context.Context, subject, version st
 		Ctx               context.Context
 		Subject           string
 		Version           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaByVersionOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -1802,7 +1802,7 @@ func (m *DefaultApi) GetSchemaByVersionCalls() []struct {
 	Ctx               context.Context
 	Subject           string
 	Version           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaByVersionOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts
 } {
 	m.lockGetSchemaByVersion.Lock()
 	defer m.lockGetSchemaByVersion.Unlock()
@@ -1811,7 +1811,7 @@ func (m *DefaultApi) GetSchemaByVersionCalls() []struct {
 }
 
 // GetSchemaOnly mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchemaOnly(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOnlyOpts) (string, *net_http.Response, error) {
+func (m *DefaultApi) GetSchemaOnly(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts) (string, *net_http.Response, error) {
 	m.lockGetSchemaOnly.Lock()
 	defer m.lockGetSchemaOnly.Unlock()
 
@@ -1823,7 +1823,7 @@ func (m *DefaultApi) GetSchemaOnly(ctx context.Context, subject, version string,
 		Ctx               context.Context
 		Subject           string
 		Version           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOnlyOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -1849,7 +1849,7 @@ func (m *DefaultApi) GetSchemaOnlyCalls() []struct {
 	Ctx               context.Context
 	Subject           string
 	Version           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemaOnlyOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts
 } {
 	m.lockGetSchemaOnly.Lock()
 	defer m.lockGetSchemaOnly.Unlock()
@@ -1896,7 +1896,7 @@ func (m *DefaultApi) GetSchemaTypesCalls() []struct {
 }
 
 // GetSchemas mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchemas(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemasOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.Schema, *net_http.Response, error) {
+func (m *DefaultApi) GetSchemas(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts) ([]github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error) {
 	m.lockGetSchemas.Lock()
 	defer m.lockGetSchemas.Unlock()
 
@@ -1906,7 +1906,7 @@ func (m *DefaultApi) GetSchemas(ctx context.Context, localVarOptionals *github_c
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemasOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -1928,7 +1928,7 @@ func (m *DefaultApi) GetSchemasCalled() bool {
 // GetSchemasCalls returns the calls made to GetSchemas.
 func (m *DefaultApi) GetSchemasCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSchemasOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts
 } {
 	m.lockGetSchemas.Lock()
 	defer m.lockGetSchemas.Unlock()
@@ -1937,7 +1937,7 @@ func (m *DefaultApi) GetSchemasCalls() []struct {
 }
 
 // GetSubjectLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSubjectLevelConfig(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectLevelConfigOpts) (github_com_confluentinc_schema_registry_sdk_go_test.Config, *net_http.Response, error) {
+func (m *DefaultApi) GetSubjectLevelConfig(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error) {
 	m.lockGetSubjectLevelConfig.Lock()
 	defer m.lockGetSubjectLevelConfig.Unlock()
 
@@ -1948,7 +1948,7 @@ func (m *DefaultApi) GetSubjectLevelConfig(ctx context.Context, subject string, 
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectLevelConfigOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -1972,7 +1972,7 @@ func (m *DefaultApi) GetSubjectLevelConfigCalled() bool {
 func (m *DefaultApi) GetSubjectLevelConfigCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectLevelConfigOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts
 } {
 	m.lockGetSubjectLevelConfig.Lock()
 	defer m.lockGetSubjectLevelConfig.Unlock()
@@ -1981,7 +1981,7 @@ func (m *DefaultApi) GetSubjectLevelConfigCalls() []struct {
 }
 
 // GetSubjects mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSubjects(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectsOpts) ([]string, *net_http.Response, error) {
+func (m *DefaultApi) GetSubjects(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts) ([]string, *net_http.Response, error) {
 	m.lockGetSubjects.Lock()
 	defer m.lockGetSubjects.Unlock()
 
@@ -1992,7 +1992,7 @@ func (m *DefaultApi) GetSubjects(ctx context.Context, id int32, localVarOptional
 	call := struct {
 		Ctx               context.Context
 		Id                int32
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts
 	}{
 		Ctx:               ctx,
 		Id:                id,
@@ -2016,7 +2016,7 @@ func (m *DefaultApi) GetSubjectsCalled() bool {
 func (m *DefaultApi) GetSubjectsCalls() []struct {
 	Ctx               context.Context
 	Id                int32
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetSubjectsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts
 } {
 	m.lockGetSubjects.Lock()
 	defer m.lockGetSubjects.Unlock()
@@ -2025,7 +2025,7 @@ func (m *DefaultApi) GetSubjectsCalls() []struct {
 }
 
 // GetTagDefByName mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTagDefByName(ctx context.Context, tagName string) (github_com_confluentinc_schema_registry_sdk_go_test.TagDef, *net_http.Response, error) {
+func (m *DefaultApi) GetTagDefByName(ctx context.Context, tagName string) (github_com_confluentinc_schema_registry_sdk_go.TagDef, *net_http.Response, error) {
 	m.lockGetTagDefByName.Lock()
 	defer m.lockGetTagDefByName.Unlock()
 
@@ -2066,7 +2066,7 @@ func (m *DefaultApi) GetTagDefByNameCalls() []struct {
 }
 
 // GetTags mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTags(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetTags(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error) {
 	m.lockGetTags.Lock()
 	defer m.lockGetTags.Unlock()
 
@@ -2110,7 +2110,7 @@ func (m *DefaultApi) GetTagsCalls() []struct {
 }
 
 // GetTopLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTopLevelConfig(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go_test.Config, *net_http.Response, error) {
+func (m *DefaultApi) GetTopLevelConfig(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error) {
 	m.lockGetTopLevelConfig.Lock()
 	defer m.lockGetTopLevelConfig.Unlock()
 
@@ -2148,7 +2148,7 @@ func (m *DefaultApi) GetTopLevelConfigCalls() []struct {
 }
 
 // GetTopLevelMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTopLevelMode(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go_test.Mode, *net_http.Response, error) {
+func (m *DefaultApi) GetTopLevelMode(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error) {
 	m.lockGetTopLevelMode.Lock()
 	defer m.lockGetTopLevelMode.Unlock()
 
@@ -2186,7 +2186,7 @@ func (m *DefaultApi) GetTopLevelModeCalls() []struct {
 }
 
 // GetVersions mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetVersions(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetVersionsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.SubjectVersion, *net_http.Response, error) {
+func (m *DefaultApi) GetVersions(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.SubjectVersion, *net_http.Response, error) {
 	m.lockGetVersions.Lock()
 	defer m.lockGetVersions.Unlock()
 
@@ -2197,7 +2197,7 @@ func (m *DefaultApi) GetVersions(ctx context.Context, id int32, localVarOptional
 	call := struct {
 		Ctx               context.Context
 		Id                int32
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetVersionsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts
 	}{
 		Ctx:               ctx,
 		Id:                id,
@@ -2221,7 +2221,7 @@ func (m *DefaultApi) GetVersionsCalled() bool {
 func (m *DefaultApi) GetVersionsCalls() []struct {
 	Ctx               context.Context
 	Id                int32
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.GetVersionsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts
 } {
 	m.lockGetVersions.Lock()
 	defer m.lockGetVersions.Unlock()
@@ -2230,7 +2230,7 @@ func (m *DefaultApi) GetVersionsCalls() []struct {
 }
 
 // List mocks base method by wrapping the associated func.
-func (m *DefaultApi) List(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListOpts) ([]string, *net_http.Response, error) {
+func (m *DefaultApi) List(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts) ([]string, *net_http.Response, error) {
 	m.lockList.Lock()
 	defer m.lockList.Unlock()
 
@@ -2240,7 +2240,7 @@ func (m *DefaultApi) List(ctx context.Context, localVarOptionals *github_com_con
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -2262,7 +2262,7 @@ func (m *DefaultApi) ListCalled() bool {
 // ListCalls returns the calls made to List.
 func (m *DefaultApi) ListCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts
 } {
 	m.lockList.Lock()
 	defer m.lockList.Unlock()
@@ -2309,7 +2309,7 @@ func (m *DefaultApi) ListContextsCalls() []struct {
 }
 
 // ListVersions mocks base method by wrapping the associated func.
-func (m *DefaultApi) ListVersions(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListVersionsOpts) ([]int32, *net_http.Response, error) {
+func (m *DefaultApi) ListVersions(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts) ([]int32, *net_http.Response, error) {
 	m.lockListVersions.Lock()
 	defer m.lockListVersions.Unlock()
 
@@ -2320,7 +2320,7 @@ func (m *DefaultApi) ListVersions(ctx context.Context, subject string, localVarO
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListVersionsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -2344,7 +2344,7 @@ func (m *DefaultApi) ListVersionsCalled() bool {
 func (m *DefaultApi) ListVersionsCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.ListVersionsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts
 } {
 	m.lockListVersions.Lock()
 	defer m.lockListVersions.Unlock()
@@ -2353,7 +2353,7 @@ func (m *DefaultApi) ListVersionsCalls() []struct {
 }
 
 // LookUpSchemaUnderSubject mocks base method by wrapping the associated func.
-func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error) {
+func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error) {
 	m.lockLookUpSchemaUnderSubject.Lock()
 	defer m.lockLookUpSchemaUnderSubject.Unlock()
 
@@ -2364,8 +2364,8 @@ func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject strin
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		Body              github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.LookUpSchemaUnderSubjectOpts
+		Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -2390,8 +2390,8 @@ func (m *DefaultApi) LookUpSchemaUnderSubjectCalled() bool {
 func (m *DefaultApi) LookUpSchemaUnderSubjectCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	Body              github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.LookUpSchemaUnderSubjectOpts
+	Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts
 } {
 	m.lockLookUpSchemaUnderSubject.Lock()
 	defer m.lockLookUpSchemaUnderSubject.Unlock()
@@ -2400,7 +2400,7 @@ func (m *DefaultApi) LookUpSchemaUnderSubjectCalls() []struct {
 }
 
 // PartialUpdateByUniqueAttributes mocks base method by wrapping the associated func.
-func (m *DefaultApi) PartialUpdateByUniqueAttributes(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.PartialUpdateByUniqueAttributesOpts) (*net_http.Response, error) {
+func (m *DefaultApi) PartialUpdateByUniqueAttributes(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts) (*net_http.Response, error) {
 	m.lockPartialUpdateByUniqueAttributes.Lock()
 	defer m.lockPartialUpdateByUniqueAttributes.Unlock()
 
@@ -2410,7 +2410,7 @@ func (m *DefaultApi) PartialUpdateByUniqueAttributes(ctx context.Context, localV
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.PartialUpdateByUniqueAttributesOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -2432,7 +2432,7 @@ func (m *DefaultApi) PartialUpdateByUniqueAttributesCalled() bool {
 // PartialUpdateByUniqueAttributesCalls returns the calls made to PartialUpdateByUniqueAttributes.
 func (m *DefaultApi) PartialUpdateByUniqueAttributesCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.PartialUpdateByUniqueAttributesOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts
 } {
 	m.lockPartialUpdateByUniqueAttributes.Lock()
 	defer m.lockPartialUpdateByUniqueAttributes.Unlock()
@@ -2441,7 +2441,7 @@ func (m *DefaultApi) PartialUpdateByUniqueAttributesCalls() []struct {
 }
 
 // PauseExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) PauseExporter(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) PauseExporter(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
 	m.lockPauseExporter.Lock()
 	defer m.lockPauseExporter.Unlock()
 
@@ -2520,7 +2520,7 @@ func (m *DefaultApi) PostCalls() []struct {
 }
 
 // PutExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) PutExporter(ctx context.Context, name string, body github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) PutExporter(ctx context.Context, name string, body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
 	m.lockPutExporter.Lock()
 	defer m.lockPutExporter.Unlock()
 
@@ -2531,7 +2531,7 @@ func (m *DefaultApi) PutExporter(ctx context.Context, name string, body github_c
 	call := struct {
 		Ctx  context.Context
 		Name string
-		Body github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterRequest
+		Body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest
 	}{
 		Ctx:  ctx,
 		Name: name,
@@ -2555,7 +2555,7 @@ func (m *DefaultApi) PutExporterCalled() bool {
 func (m *DefaultApi) PutExporterCalls() []struct {
 	Ctx  context.Context
 	Name string
-	Body github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterRequest
+	Body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest
 } {
 	m.lockPutExporter.Lock()
 	defer m.lockPutExporter.Unlock()
@@ -2564,7 +2564,7 @@ func (m *DefaultApi) PutExporterCalls() []struct {
 }
 
 // PutExporterConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) PutExporterConfig(ctx context.Context, name string, body map[string]string) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) PutExporterConfig(ctx context.Context, name string, body map[string]string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
 	m.lockPutExporterConfig.Lock()
 	defer m.lockPutExporterConfig.Unlock()
 
@@ -2608,7 +2608,7 @@ func (m *DefaultApi) PutExporterConfigCalls() []struct {
 }
 
 // Register mocks base method by wrapping the associated func.
-func (m *DefaultApi) Register(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaResponse, *net_http.Response, error) {
+func (m *DefaultApi) Register(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error) {
 	m.lockRegister.Lock()
 	defer m.lockRegister.Unlock()
 
@@ -2619,7 +2619,7 @@ func (m *DefaultApi) Register(ctx context.Context, subject string, body github_c
 	call := struct {
 		Ctx     context.Context
 		Subject string
-		Body    github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
+		Body    github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
@@ -2643,7 +2643,7 @@ func (m *DefaultApi) RegisterCalled() bool {
 func (m *DefaultApi) RegisterCalls() []struct {
 	Ctx     context.Context
 	Subject string
-	Body    github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
+	Body    github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 } {
 	m.lockRegister.Lock()
 	defer m.lockRegister.Unlock()
@@ -2652,7 +2652,7 @@ func (m *DefaultApi) RegisterCalls() []struct {
 }
 
 // ResetExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) ResetExporter(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) ResetExporter(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
 	m.lockResetExporter.Lock()
 	defer m.lockResetExporter.Unlock()
 
@@ -2693,7 +2693,7 @@ func (m *DefaultApi) ResetExporterCalls() []struct {
 }
 
 // ResumeExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) ResumeExporter(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go_test.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) ResumeExporter(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
 	m.lockResumeExporter.Lock()
 	defer m.lockResumeExporter.Unlock()
 
@@ -2734,7 +2734,7 @@ func (m *DefaultApi) ResumeExporterCalls() []struct {
 }
 
 // SearchUsingAttribute mocks base method by wrapping the associated func.
-func (m *DefaultApi) SearchUsingAttribute(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingAttributeOpts) (github_com_confluentinc_schema_registry_sdk_go_test.SearchResult, *net_http.Response, error) {
+func (m *DefaultApi) SearchUsingAttribute(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error) {
 	m.lockSearchUsingAttribute.Lock()
 	defer m.lockSearchUsingAttribute.Unlock()
 
@@ -2744,7 +2744,7 @@ func (m *DefaultApi) SearchUsingAttribute(ctx context.Context, localVarOptionals
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingAttributeOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -2766,7 +2766,7 @@ func (m *DefaultApi) SearchUsingAttributeCalled() bool {
 // SearchUsingAttributeCalls returns the calls made to SearchUsingAttribute.
 func (m *DefaultApi) SearchUsingAttributeCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingAttributeOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts
 } {
 	m.lockSearchUsingAttribute.Lock()
 	defer m.lockSearchUsingAttribute.Unlock()
@@ -2775,7 +2775,7 @@ func (m *DefaultApi) SearchUsingAttributeCalls() []struct {
 }
 
 // SearchUsingBasic mocks base method by wrapping the associated func.
-func (m *DefaultApi) SearchUsingBasic(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingBasicOpts) (github_com_confluentinc_schema_registry_sdk_go_test.SearchResult, *net_http.Response, error) {
+func (m *DefaultApi) SearchUsingBasic(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error) {
 	m.lockSearchUsingBasic.Lock()
 	defer m.lockSearchUsingBasic.Unlock()
 
@@ -2785,7 +2785,7 @@ func (m *DefaultApi) SearchUsingBasic(ctx context.Context, localVarOptionals *gi
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingBasicOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -2807,7 +2807,7 @@ func (m *DefaultApi) SearchUsingBasicCalled() bool {
 // SearchUsingBasicCalls returns the calls made to SearchUsingBasic.
 func (m *DefaultApi) SearchUsingBasicCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.SearchUsingBasicOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts
 } {
 	m.lockSearchUsingBasic.Lock()
 	defer m.lockSearchUsingBasic.Unlock()
@@ -2816,7 +2816,7 @@ func (m *DefaultApi) SearchUsingBasicCalls() []struct {
 }
 
 // TestCompatibilityBySubjectName mocks base method by wrapping the associated func.
-func (m *DefaultApi) TestCompatibilityBySubjectName(ctx context.Context, subject, version string, body github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go_test.CompatibilityCheckResponse, *net_http.Response, error) {
+func (m *DefaultApi) TestCompatibilityBySubjectName(ctx context.Context, subject, version string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error) {
 	m.lockTestCompatibilityBySubjectName.Lock()
 	defer m.lockTestCompatibilityBySubjectName.Unlock()
 
@@ -2828,8 +2828,8 @@ func (m *DefaultApi) TestCompatibilityBySubjectName(ctx context.Context, subject
 		Ctx               context.Context
 		Subject           string
 		Version           string
-		Body              github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityBySubjectNameOpts
+		Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -2856,8 +2856,8 @@ func (m *DefaultApi) TestCompatibilityBySubjectNameCalls() []struct {
 	Ctx               context.Context
 	Subject           string
 	Version           string
-	Body              github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityBySubjectNameOpts
+	Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts
 } {
 	m.lockTestCompatibilityBySubjectName.Lock()
 	defer m.lockTestCompatibilityBySubjectName.Unlock()
@@ -2866,7 +2866,7 @@ func (m *DefaultApi) TestCompatibilityBySubjectNameCalls() []struct {
 }
 
 // TestCompatibilityForSubject mocks base method by wrapping the associated func.
-func (m *DefaultApi) TestCompatibilityForSubject(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityForSubjectOpts) (github_com_confluentinc_schema_registry_sdk_go_test.CompatibilityCheckResponse, *net_http.Response, error) {
+func (m *DefaultApi) TestCompatibilityForSubject(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error) {
 	m.lockTestCompatibilityForSubject.Lock()
 	defer m.lockTestCompatibilityForSubject.Unlock()
 
@@ -2877,8 +2877,8 @@ func (m *DefaultApi) TestCompatibilityForSubject(ctx context.Context, subject st
 	call := struct {
 		Ctx               context.Context
 		Subject           string
-		Body              github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityForSubjectOpts
+		Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts
 	}{
 		Ctx:               ctx,
 		Subject:           subject,
@@ -2903,8 +2903,8 @@ func (m *DefaultApi) TestCompatibilityForSubjectCalled() bool {
 func (m *DefaultApi) TestCompatibilityForSubjectCalls() []struct {
 	Ctx               context.Context
 	Subject           string
-	Body              github_com_confluentinc_schema_registry_sdk_go_test.RegisterSchemaRequest
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.TestCompatibilityForSubjectOpts
+	Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts
 } {
 	m.lockTestCompatibilityForSubject.Lock()
 	defer m.lockTestCompatibilityForSubject.Unlock()
@@ -2913,7 +2913,7 @@ func (m *DefaultApi) TestCompatibilityForSubjectCalls() []struct {
 }
 
 // UpdateBusinessMetadata mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateBusinessMetadata(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataResponse, *net_http.Response, error) {
+func (m *DefaultApi) UpdateBusinessMetadata(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error) {
 	m.lockUpdateBusinessMetadata.Lock()
 	defer m.lockUpdateBusinessMetadata.Unlock()
 
@@ -2923,7 +2923,7 @@ func (m *DefaultApi) UpdateBusinessMetadata(ctx context.Context, localVarOptiona
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -2945,7 +2945,7 @@ func (m *DefaultApi) UpdateBusinessMetadataCalled() bool {
 // UpdateBusinessMetadataCalls returns the calls made to UpdateBusinessMetadata.
 func (m *DefaultApi) UpdateBusinessMetadataCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts
 } {
 	m.lockUpdateBusinessMetadata.Lock()
 	defer m.lockUpdateBusinessMetadata.Unlock()
@@ -2954,7 +2954,7 @@ func (m *DefaultApi) UpdateBusinessMetadataCalls() []struct {
 }
 
 // UpdateBusinessMetadataDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateBusinessMetadataDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.BusinessMetadataDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) UpdateBusinessMetadataDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error) {
 	m.lockUpdateBusinessMetadataDefs.Lock()
 	defer m.lockUpdateBusinessMetadataDefs.Unlock()
 
@@ -2964,7 +2964,7 @@ func (m *DefaultApi) UpdateBusinessMetadataDefs(ctx context.Context, localVarOpt
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataDefsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -2986,7 +2986,7 @@ func (m *DefaultApi) UpdateBusinessMetadataDefsCalled() bool {
 // UpdateBusinessMetadataDefsCalls returns the calls made to UpdateBusinessMetadataDefs.
 func (m *DefaultApi) UpdateBusinessMetadataDefsCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateBusinessMetadataDefsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts
 } {
 	m.lockUpdateBusinessMetadataDefs.Lock()
 	defer m.lockUpdateBusinessMetadataDefs.Unlock()
@@ -2995,7 +2995,7 @@ func (m *DefaultApi) UpdateBusinessMetadataDefsCalls() []struct {
 }
 
 // UpdateMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateMode(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateMode(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateMode.Lock()
 	defer m.lockUpdateMode.Unlock()
 
@@ -3006,7 +3006,7 @@ func (m *DefaultApi) UpdateMode(ctx context.Context, subject string, body github
 	call := struct {
 		Ctx     context.Context
 		Subject string
-		Body    github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest
+		Body    github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
@@ -3030,7 +3030,7 @@ func (m *DefaultApi) UpdateModeCalled() bool {
 func (m *DefaultApi) UpdateModeCalls() []struct {
 	Ctx     context.Context
 	Subject string
-	Body    github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest
+	Body    github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 } {
 	m.lockUpdateMode.Lock()
 	defer m.lockUpdateMode.Unlock()
@@ -3039,7 +3039,7 @@ func (m *DefaultApi) UpdateModeCalls() []struct {
 }
 
 // UpdateSubjectLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateSubjectLevelConfig.Lock()
 	defer m.lockUpdateSubjectLevelConfig.Unlock()
 
@@ -3050,7 +3050,7 @@ func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject strin
 	call := struct {
 		Ctx     context.Context
 		Subject string
-		Body    github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest
+		Body    github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
@@ -3074,7 +3074,7 @@ func (m *DefaultApi) UpdateSubjectLevelConfigCalled() bool {
 func (m *DefaultApi) UpdateSubjectLevelConfigCalls() []struct {
 	Ctx     context.Context
 	Subject string
-	Body    github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest
+	Body    github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 } {
 	m.lockUpdateSubjectLevelConfig.Lock()
 	defer m.lockUpdateSubjectLevelConfig.Unlock()
@@ -3083,7 +3083,7 @@ func (m *DefaultApi) UpdateSubjectLevelConfigCalls() []struct {
 }
 
 // UpdateTagDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTagDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTagDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error) {
 	m.lockUpdateTagDefs.Lock()
 	defer m.lockUpdateTagDefs.Unlock()
 
@@ -3093,7 +3093,7 @@ func (m *DefaultApi) UpdateTagDefs(ctx context.Context, localVarOptionals *githu
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagDefsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -3115,7 +3115,7 @@ func (m *DefaultApi) UpdateTagDefsCalled() bool {
 // UpdateTagDefsCalls returns the calls made to UpdateTagDefs.
 func (m *DefaultApi) UpdateTagDefsCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagDefsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts
 } {
 	m.lockUpdateTagDefs.Lock()
 	defer m.lockUpdateTagDefs.Unlock()
@@ -3124,7 +3124,7 @@ func (m *DefaultApi) UpdateTagDefsCalls() []struct {
 }
 
 // UpdateTags mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTags(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go_test.TagResponse, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTags(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error) {
 	m.lockUpdateTags.Lock()
 	defer m.lockUpdateTags.Unlock()
 
@@ -3134,7 +3134,7 @@ func (m *DefaultApi) UpdateTags(ctx context.Context, localVarOptionals *github_c
 
 	call := struct {
 		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagsOpts
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts
 	}{
 		Ctx:               ctx,
 		LocalVarOptionals: localVarOptionals,
@@ -3156,7 +3156,7 @@ func (m *DefaultApi) UpdateTagsCalled() bool {
 // UpdateTagsCalls returns the calls made to UpdateTags.
 func (m *DefaultApi) UpdateTagsCalls() []struct {
 	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go_test.UpdateTagsOpts
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts
 } {
 	m.lockUpdateTags.Lock()
 	defer m.lockUpdateTags.Unlock()
@@ -3165,7 +3165,7 @@ func (m *DefaultApi) UpdateTagsCalls() []struct {
 }
 
 // UpdateTopLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
 
@@ -3175,7 +3175,7 @@ func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body github_com_c
 
 	call := struct {
 		Ctx  context.Context
-		Body github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest
+		Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 	}{
 		Ctx:  ctx,
 		Body: body,
@@ -3197,7 +3197,7 @@ func (m *DefaultApi) UpdateTopLevelConfigCalled() bool {
 // UpdateTopLevelConfigCalls returns the calls made to UpdateTopLevelConfig.
 func (m *DefaultApi) UpdateTopLevelConfigCalls() []struct {
 	Ctx  context.Context
-	Body github_com_confluentinc_schema_registry_sdk_go_test.ConfigUpdateRequest
+	Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 } {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
@@ -3206,7 +3206,7 @@ func (m *DefaultApi) UpdateTopLevelConfigCalls() []struct {
 }
 
 // UpdateTopLevelMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateTopLevelMode.Lock()
 	defer m.lockUpdateTopLevelMode.Unlock()
 
@@ -3216,7 +3216,7 @@ func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context, body github_com_con
 
 	call := struct {
 		Ctx  context.Context
-		Body github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest
+		Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 	}{
 		Ctx:  ctx,
 		Body: body,
@@ -3238,7 +3238,7 @@ func (m *DefaultApi) UpdateTopLevelModeCalled() bool {
 // UpdateTopLevelModeCalls returns the calls made to UpdateTopLevelMode.
 func (m *DefaultApi) UpdateTopLevelModeCalls() []struct {
 	Ctx  context.Context
-	Body github_com_confluentinc_schema_registry_sdk_go_test.ModeUpdateRequest
+	Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 } {
 	m.lockUpdateTopLevelMode.Lock()
 	defer m.lockUpdateTopLevelMode.Unlock()

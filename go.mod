@@ -1,4 +1,4 @@
-module github.com/confluentinc/schema-registry-sdk-go-test
+module github.com/confluentinc/schema-registry-sdk-go
 
 go 1.14
 
