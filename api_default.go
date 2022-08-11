@@ -16,6 +16,7 @@ import (
 	_neturl "net/url"
 	"strings"
 	"github.com/antihax/optional"
+	"reflect"
 )
 
 // Linger please
@@ -26,6 +27,30 @@ var (
 type DefaultApi interface {
 
     /*
+     * CreateBusinessMetadata Bulk API to create multiple business metadata.
+     *
+     * Bulk API to create multiple business metadata.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *CreateBusinessMetadataOpts - Optional Parameters:
+     * @param "BusinessMetadata" (optional.Interface of []BusinessMetadata) -  The business metadata
+     * @return []BusinessMetadataResponse
+     */
+    CreateBusinessMetadata(ctx _context.Context, localVarOptionals *CreateBusinessMetadataOpts) ([]BusinessMetadataResponse, *_nethttp.Response, error)
+
+    /*
+     * CreateBusinessMetadataDefs Bulk create API for business metadata definitions.
+     *
+     * Bulk create API for business metadata definitions.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *CreateBusinessMetadataDefsOpts - Optional Parameters:
+     * @param "AtlasBusinessMetadataDef" (optional.Interface of []AtlasBusinessMetadataDef) -  The business metadata definitions to create
+     * @return []BusinessMetadataDefResponse
+     */
+    CreateBusinessMetadataDefs(ctx _context.Context, localVarOptionals *CreateBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
+
+    /*
      * CreateExporter Create an exporter.
      *
      * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -33,6 +58,70 @@ type DefaultApi interface {
      * @return CreateExporterResponse
      */
     CreateExporter(ctx _context.Context, body CreateExporterRequest) (CreateExporterResponse, *_nethttp.Response, error)
+
+    /*
+     * CreateOrUpdate Method for CreateOrUpdate
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *CreateOrUpdateOpts - Optional Parameters:
+     * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) - 
+     */
+    CreateOrUpdate(ctx _context.Context, localVarOptionals *CreateOrUpdateOpts) (*_nethttp.Response, error)
+
+    /*
+     * CreateTagDefs Bulk create API for tag definitions.
+     *
+     * Bulk create API for tag definitions.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *CreateTagDefsOpts - Optional Parameters:
+     * @param "TagDef" (optional.Interface of []TagDef) -  The tag definitions to create
+     * @return []TagDefResponse
+     */
+    CreateTagDefs(ctx _context.Context, localVarOptionals *CreateTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error)
+
+    /*
+     * CreateTags Bulk API to create multiple tags.
+     *
+     * Bulk API to create multiple tags.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *CreateTagsOpts - Optional Parameters:
+     * @param "Tag" (optional.Interface of []Tag) -  The tags
+     * @return []TagResponse
+     */
+    CreateTags(ctx _context.Context, localVarOptionals *CreateTagsOpts) ([]TagResponse, *_nethttp.Response, error)
+
+    /*
+     * DeleteBusinessMetadata Delete a business metadata on an entity.
+     *
+     * Delete a business metadata on an entity.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param typeName The type of the entity
+     * @param qualifiedName The qualified name of the entity
+     * @param bmName The name of the business metadata
+     */
+    DeleteBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string, bmName string) (*_nethttp.Response, error)
+
+    /*
+     * DeleteBusinessMetadataDef Delete API for business metadata definition identified by its name.
+     *
+     * Delete API for business metadata definition identified by its name.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param bmName The name of the business metadata definition
+     */
+    DeleteBusinessMetadataDef(ctx _context.Context, bmName string) (*_nethttp.Response, error)
+
+    /*
+     * DeleteByUniqueAttributes Method for DeleteByUniqueAttributes
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param typeName
+     * @param qualifiedName
+     */
+    DeleteByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string) (*_nethttp.Response, error)
 
     /*
      * DeleteExporter Delete an exporter.
@@ -84,6 +173,28 @@ type DefaultApi interface {
     DeleteSubjectMode(ctx _context.Context, subject string) (string, *_nethttp.Response, error)
 
     /*
+     * DeleteTag Delete a tag on an entity.
+     *
+     * Delete a tag on an entity.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param typeName The type of the entity
+     * @param qualifiedName The qualified name of the entity
+     * @param tagName The name of the tag
+     */
+    DeleteTag(ctx _context.Context, typeName string, qualifiedName string, tagName string) (*_nethttp.Response, error)
+
+    /*
+     * DeleteTagDef Delete API for tag definition identified by its name.
+     *
+     * Delete API for tag definition identified by its name.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param tagName The name of the tag definition
+     */
+    DeleteTagDef(ctx _context.Context, tagName string) (*_nethttp.Response, error)
+
+    /*
      * Get Schema Registry Root Resource
      *
      * The Root resource is a no-op.
@@ -92,6 +203,68 @@ type DefaultApi interface {
      * @return map[string]map[string]interface{}
      */
     Get(ctx _context.Context) (map[string]map[string]interface{}, *_nethttp.Response, error)
+
+    /*
+     * GetAllBusinessMetadataDefs Bulk retrieval API for retrieving business metadata definitions.
+     *
+     * Bulk retrieval API for retrieving business metadata definitions.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *GetAllBusinessMetadataDefsOpts - Optional Parameters:
+     * @param "Prefix" (optional.String) -  The prefix of a business metadata definition name
+     * @return []BusinessMetadataDefResponse
+     */
+    GetAllBusinessMetadataDefs(ctx _context.Context, localVarOptionals *GetAllBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
+
+    /*
+     * GetAllTagDefs Bulk retrieval API for retrieving tag definitions.
+     *
+     * Bulk retrieval API for retrieving tag definitions.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *GetAllTagDefsOpts - Optional Parameters:
+     * @param "Prefix" (optional.String) -  The prefix of a tag definition name
+     * @return []TagDefResponse
+     */
+    GetAllTagDefs(ctx _context.Context, localVarOptionals *GetAllTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error)
+
+    /*
+     * GetBusinessMetadata Gets the list of business metadata for a given entity represented by a qualified name.
+     *
+     * Gets the list of business metadata for a given entity represented by a qualified name.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param typeName The type of the entity
+     * @param qualifiedName The qualified name of the entity
+     * @return []BusinessMetadataResponse
+     */
+    GetBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string) ([]BusinessMetadataResponse, *_nethttp.Response, error)
+
+    /*
+     * GetBusinessMetadataDefByName Get the business metadata definition with the given name.
+     *
+     * Get the business metadata definition with the given name.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param bmName The name of the business metadata definition
+     * @return AtlasBusinessMetadataDef
+     */
+    GetBusinessMetadataDefByName(ctx _context.Context, bmName string) (AtlasBusinessMetadataDef, *_nethttp.Response, error)
+
+    /*
+     * GetByUniqueAttributes Fetch complete definition of an entity given its type and unique attribute.
+     *
+     * Fetch complete definition of an entity given its type and unique attribute.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param typeName The type of the entity
+     * @param qualifiedName The qualified name of the entity
+     * @param optional nil or *GetByUniqueAttributesOpts - Optional Parameters:
+     * @param "MinExtInfo" (optional.Bool) -  Whether to only populate header and schema attributes
+     * @param "IgnoreRelationships" (optional.Bool) -  Whether to ignore relationships
+     * @return AtlasEntityWithExtInfo
+     */
+    GetByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string, localVarOptionals *GetByUniqueAttributesOpts) (AtlasEntityWithExtInfo, *_nethttp.Response, error)
 
     /*
      * GetClusterId Get the server metadata
@@ -240,6 +413,29 @@ type DefaultApi interface {
     GetSubjects(ctx _context.Context, id int32, localVarOptionals *GetSubjectsOpts) ([]string, *_nethttp.Response, error)
 
     /*
+     * GetTagDefByName Get the tag definition with the given name.
+     *
+     * Get the tag definition with the given name.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param tagName The name of the tag definiton
+     * @return TagDef
+     */
+    GetTagDefByName(ctx _context.Context, tagName string) (TagDef, *_nethttp.Response, error)
+
+    /*
+     * GetTags Gets the list of classifications for a given entity represented by a qualifed name.
+     *
+     * Gets the list of classifications for a given entity represented by a qualifed name.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param typeName The type of the entity
+     * @param qualifiedName The qualified name of the entity
+     * @return []TagResponse
+     */
+    GetTags(ctx _context.Context, typeName string, qualifiedName string) ([]TagResponse, *_nethttp.Response, error)
+
+    /*
      * GetTopLevelConfig Get global compatibility level.
      *
      * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -309,6 +505,15 @@ type DefaultApi interface {
     LookUpSchemaUnderSubject(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*_nethttp.Response, error)
 
     /*
+     * PartialUpdateByUniqueAttributes Method for PartialUpdateByUniqueAttributes
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *PartialUpdateByUniqueAttributesOpts - Optional Parameters:
+     * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) - 
+     */
+    PartialUpdateByUniqueAttributes(ctx _context.Context, localVarOptionals *PartialUpdateByUniqueAttributesOpts) (*_nethttp.Response, error)
+
+    /*
      * PauseExporter Pause an exporter.
      *
      * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -374,6 +579,59 @@ type DefaultApi interface {
     ResumeExporter(ctx _context.Context, name string) (UpdateExporterResponse, *_nethttp.Response, error)
 
     /*
+     * SearchUsingAttribute Retrieve data for the specified attribute search query.
+     *
+     * Retrieve data for the specified attribute search query.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *SearchUsingAttributeOpts - Optional Parameters:
+     * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
+     * @param "Types" (optional.String) - 
+     * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
+     * @param "Attrs" (optional.String) - 
+     * @param "AttrName" (optional.Interface of []string) -  The attribute to search
+     * @param "AttrValuePrefix" (optional.Interface of []string) -  The prefix for the attribute value to search
+     * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities tagged with the given tag
+     * @param "TimeRangeType" (optional.String) -  The type of time range search, default is CUSTOM
+     * @param "TimeRangeAttr" (optional.String) -  The attribute for a time range search
+     * @param "TimeRangeStart" (optional.Int64) -  The start for a custom time range search in ms since the epoch
+     * @param "TimeRangeEnd" (optional.Int64) -  The end for a custom time range search in ms since the epoch
+     * @param "SortBy" (optional.String) -  An attribute to sort by
+     * @param "SortOrder" (optional.String) -  Sort order, either ASCENDING (default) or DESCENDING
+     * @param "Deleted" (optional.Bool) -  Whether to include deleted entities
+     * @param "Limit" (optional.Int32) -  Limit the result set to only include the specified number of entries
+     * @param "Offset" (optional.Int32) -  Start offset of the result set (useful for pagination)
+     * @return SearchResult
+     */
+    SearchUsingAttribute(ctx _context.Context, localVarOptionals *SearchUsingAttributeOpts) (SearchResult, *_nethttp.Response, error)
+
+    /*
+     * SearchUsingBasic Retrieve data for the specified fulltext query.
+     *
+     * Retrieve data for the specified fulltext query.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *SearchUsingBasicOpts - Optional Parameters:
+     * @param "Query" (optional.String) -  The full-text query
+     * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
+     * @param "Types" (optional.String) - 
+     * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
+     * @param "Attrs" (optional.String) - 
+     * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities with the given tag
+     * @param "TimeRangeType" (optional.String) -  The type of time range search, default is CUSTOM
+     * @param "TimeRangeAttr" (optional.String) -  The attribute for a time range search
+     * @param "TimeRangeStart" (optional.Int64) -  The start for a custom time range search in ms since the epoch
+     * @param "TimeRangeEnd" (optional.Int64) -  The end for a custom time range search in ms since the epoch
+     * @param "SortBy" (optional.String) -  An attribute to sort by
+     * @param "SortOrder" (optional.String) -  Sort order, either ASCENDING (default) or DESCENDING
+     * @param "Deleted" (optional.Bool) -  Whether to include deleted entities
+     * @param "Limit" (optional.Int32) -  Limit the result set to only include the specified number of entries
+     * @param "Offset" (optional.Int32) -  Start offset of the result set (useful for pagination)
+     * @return SearchResult
+     */
+    SearchUsingBasic(ctx _context.Context, localVarOptionals *SearchUsingBasicOpts) (SearchResult, *_nethttp.Response, error)
+
+    /*
      * TestCompatibilityBySubjectName Test input schema against a particular version of a subject's schema for compatibility.
      *
      * the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject&#39;s compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
@@ -407,6 +665,30 @@ type DefaultApi interface {
     TestCompatibilityForSubject(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityForSubjectOpts) (CompatibilityCheckResponse, *_nethttp.Response, error)
 
     /*
+     * UpdateBusinessMetadata Bulk API to update multiple business metadata.
+     *
+     * Bulk API to update multiple business metadata.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *UpdateBusinessMetadataOpts - Optional Parameters:
+     * @param "BusinessMetadata" (optional.Interface of []BusinessMetadata) -  The business metadata
+     * @return []BusinessMetadataResponse
+     */
+    UpdateBusinessMetadata(ctx _context.Context, localVarOptionals *UpdateBusinessMetadataOpts) ([]BusinessMetadataResponse, *_nethttp.Response, error)
+
+    /*
+     * UpdateBusinessMetadataDefs Bulk update API for business metadata definitions.
+     *
+     * Bulk update API for business metadata definitions.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *UpdateBusinessMetadataDefsOpts - Optional Parameters:
+     * @param "AtlasBusinessMetadataDef" (optional.Interface of []AtlasBusinessMetadataDef) -  The business metadata definitions to update
+     * @return []BusinessMetadataDefResponse
+     */
+    UpdateBusinessMetadataDefs(ctx _context.Context, localVarOptionals *UpdateBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
+
+    /*
      * UpdateMode Update mode for the specified subject.
      *
      * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -425,6 +707,30 @@ type DefaultApi interface {
      * @return ConfigUpdateRequest
      */
     UpdateSubjectLevelConfig(ctx _context.Context, subject string, body ConfigUpdateRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
+
+    /*
+     * UpdateTagDefs Bulk update API for tag definitions.
+     *
+     * Bulk update API for tag definitions.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *UpdateTagDefsOpts - Optional Parameters:
+     * @param "TagDef" (optional.Interface of []TagDef) -  The tag definitions to update
+     * @return []TagDefResponse
+     */
+    UpdateTagDefs(ctx _context.Context, localVarOptionals *UpdateTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error)
+
+    /*
+     * UpdateTags Bulk API to update multiple tags.
+     *
+     * Bulk API to update multiple tags.
+     *
+     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+     * @param optional nil or *UpdateTagsOpts - Optional Parameters:
+     * @param "Tag" (optional.Interface of []Tag) -  The tags
+     * @return []TagResponse
+     */
+    UpdateTags(ctx _context.Context, localVarOptionals *UpdateTagsOpts) ([]TagResponse, *_nethttp.Response, error)
 
     /*
      * UpdateTopLevelConfig Update global compatibility level.
@@ -447,6 +753,192 @@ type DefaultApi interface {
 
 // DefaultApiService DefaultApi service
 type DefaultApiService service
+
+// CreateBusinessMetadataOpts Optional parameters for the method 'CreateBusinessMetadata'
+type CreateBusinessMetadataOpts struct {
+    BusinessMetadata optional.Interface
+}
+
+/*
+ * CreateBusinessMetadata Bulk API to create multiple business metadata.
+ *
+ * Bulk API to create multiple business metadata.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *CreateBusinessMetadataOpts - Optional Parameters:
+ * @param "BusinessMetadata" (optional.Interface of []BusinessMetadata) -  The business metadata
+ * @return []BusinessMetadataResponse
+ */
+func (a *DefaultApiService) CreateBusinessMetadata(ctx _context.Context, localVarOptionals *CreateBusinessMetadataOpts) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BusinessMetadataResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/businessmetadata"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.BusinessMetadata.IsSet() {
+		localVarOptionalBusinessMetadata, localVarOptionalBusinessMetadataok := localVarOptionals.BusinessMetadata.Value().([]BusinessMetadata)
+		if !localVarOptionalBusinessMetadataok {
+			return localVarReturnValue, nil, reportError("businessMetadata should be []BusinessMetadata")
+		}
+		localVarPostBody = &localVarOptionalBusinessMetadata
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// CreateBusinessMetadataDefsOpts Optional parameters for the method 'CreateBusinessMetadataDefs'
+type CreateBusinessMetadataDefsOpts struct {
+    AtlasBusinessMetadataDef optional.Interface
+}
+
+/*
+ * CreateBusinessMetadataDefs Bulk create API for business metadata definitions.
+ *
+ * Bulk create API for business metadata definitions.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *CreateBusinessMetadataDefsOpts - Optional Parameters:
+ * @param "AtlasBusinessMetadataDef" (optional.Interface of []AtlasBusinessMetadataDef) -  The business metadata definitions to create
+ * @return []BusinessMetadataDefResponse
+ */
+func (a *DefaultApiService) CreateBusinessMetadataDefs(ctx _context.Context, localVarOptionals *CreateBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BusinessMetadataDefResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/businessmetadatadefs"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.AtlasBusinessMetadataDef.IsSet() {
+		localVarOptionalAtlasBusinessMetadataDef, localVarOptionalAtlasBusinessMetadataDefok := localVarOptionals.AtlasBusinessMetadataDef.Value().([]AtlasBusinessMetadataDef)
+		if !localVarOptionalAtlasBusinessMetadataDefok {
+			return localVarReturnValue, nil, reportError("atlasBusinessMetadataDef should be []AtlasBusinessMetadataDef")
+		}
+		localVarPostBody = &localVarOptionalAtlasBusinessMetadataDef
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 /*
  * CreateExporter Create an exporter.
@@ -524,6 +1016,486 @@ func (a *DefaultApiService) CreateExporter(ctx _context.Context, body CreateExpo
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// CreateOrUpdateOpts Optional parameters for the method 'CreateOrUpdate'
+type CreateOrUpdateOpts struct {
+    AtlasEntityWithExtInfo optional.Interface
+}
+
+/*
+ * CreateOrUpdate Method for CreateOrUpdate
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *CreateOrUpdateOpts - Optional Parameters:
+ * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) - 
+ */
+func (a *DefaultApiService) CreateOrUpdate(ctx _context.Context, localVarOptionals *CreateOrUpdateOpts) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.AtlasEntityWithExtInfo.IsSet() {
+		localVarOptionalAtlasEntityWithExtInfo, localVarOptionalAtlasEntityWithExtInfook := localVarOptionals.AtlasEntityWithExtInfo.Value().(AtlasEntityWithExtInfo)
+		if !localVarOptionalAtlasEntityWithExtInfook {
+			return nil, reportError("atlasEntityWithExtInfo should be AtlasEntityWithExtInfo")
+		}
+		localVarPostBody = &localVarOptionalAtlasEntityWithExtInfo
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+// CreateTagDefsOpts Optional parameters for the method 'CreateTagDefs'
+type CreateTagDefsOpts struct {
+    TagDef optional.Interface
+}
+
+/*
+ * CreateTagDefs Bulk create API for tag definitions.
+ *
+ * Bulk create API for tag definitions.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *CreateTagDefsOpts - Optional Parameters:
+ * @param "TagDef" (optional.Interface of []TagDef) -  The tag definitions to create
+ * @return []TagDefResponse
+ */
+func (a *DefaultApiService) CreateTagDefs(ctx _context.Context, localVarOptionals *CreateTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []TagDefResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/tagdefs"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.TagDef.IsSet() {
+		localVarOptionalTagDef, localVarOptionalTagDefok := localVarOptionals.TagDef.Value().([]TagDef)
+		if !localVarOptionalTagDefok {
+			return localVarReturnValue, nil, reportError("tagDef should be []TagDef")
+		}
+		localVarPostBody = &localVarOptionalTagDef
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// CreateTagsOpts Optional parameters for the method 'CreateTags'
+type CreateTagsOpts struct {
+    Tag optional.Interface
+}
+
+/*
+ * CreateTags Bulk API to create multiple tags.
+ *
+ * Bulk API to create multiple tags.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *CreateTagsOpts - Optional Parameters:
+ * @param "Tag" (optional.Interface of []Tag) -  The tags
+ * @return []TagResponse
+ */
+func (a *DefaultApiService) CreateTags(ctx _context.Context, localVarOptionals *CreateTagsOpts) ([]TagResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []TagResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/tags"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Tag.IsSet() {
+		localVarOptionalTag, localVarOptionalTagok := localVarOptionals.Tag.Value().([]Tag)
+		if !localVarOptionalTagok {
+			return localVarReturnValue, nil, reportError("tag should be []Tag")
+		}
+		localVarPostBody = &localVarOptionalTag
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+ * DeleteBusinessMetadata Delete a business metadata on an entity.
+ *
+ * Delete a business metadata on an entity.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param typeName The type of the entity
+ * @param qualifiedName The qualified name of the entity
+ * @param bmName The name of the business metadata
+ */
+func (a *DefaultApiService) DeleteBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string, bmName string) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}"
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+
+	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(bmName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+/*
+ * DeleteBusinessMetadataDef Delete API for business metadata definition identified by its name.
+ *
+ * Delete API for business metadata definition identified by its name.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param bmName The name of the business metadata definition
+ */
+func (a *DefaultApiService) DeleteBusinessMetadataDef(ctx _context.Context, bmName string) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/businessmetadatadefs/{bmName}"
+	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(bmName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+/*
+ * DeleteByUniqueAttributes Method for DeleteByUniqueAttributes
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param typeName
+ * @param qualifiedName
+ */
+func (a *DefaultApiService) DeleteByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}"
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }
 
 /*
@@ -929,6 +1901,150 @@ func (a *DefaultApiService) DeleteSubjectMode(ctx _context.Context, subject stri
 }
 
 /*
+ * DeleteTag Delete a tag on an entity.
+ *
+ * Delete a tag on an entity.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param typeName The type of the entity
+ * @param qualifiedName The qualified name of the entity
+ * @param tagName The name of the tag
+ */
+func (a *DefaultApiService) DeleteTag(ctx _context.Context, typeName string, qualifiedName string, tagName string) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}"
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+
+	localVarPath = strings.Replace(localVarPath, "{"+"tagName"+"}", _neturl.PathEscape(parameterToString(tagName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+/*
+ * DeleteTagDef Delete API for tag definition identified by its name.
+ *
+ * Delete API for tag definition identified by its name.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param tagName The name of the tag definition
+ */
+func (a *DefaultApiService) DeleteTagDef(ctx _context.Context, tagName string) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/tagdefs/{tagName}"
+	localVarPath = strings.Replace(localVarPath, "{"+"tagName"+"}", _neturl.PathEscape(parameterToString(tagName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+/*
  * Get Schema Registry Root Resource
  *
  * The Root resource is a no-op.
@@ -952,6 +2068,441 @@ func (a *DefaultApiService) Get(ctx _context.Context) (map[string]map[string]int
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// GetAllBusinessMetadataDefsOpts Optional parameters for the method 'GetAllBusinessMetadataDefs'
+type GetAllBusinessMetadataDefsOpts struct {
+    Prefix optional.String
+}
+
+/*
+ * GetAllBusinessMetadataDefs Bulk retrieval API for retrieving business metadata definitions.
+ *
+ * Bulk retrieval API for retrieving business metadata definitions.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *GetAllBusinessMetadataDefsOpts - Optional Parameters:
+ * @param "Prefix" (optional.String) -  The prefix of a business metadata definition name
+ * @return []BusinessMetadataDefResponse
+ */
+func (a *DefaultApiService) GetAllBusinessMetadataDefs(ctx _context.Context, localVarOptionals *GetAllBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BusinessMetadataDefResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/businessmetadatadefs"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Prefix.IsSet() {
+		localVarQueryParams.Add("prefix", parameterToString(localVarOptionals.Prefix.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// GetAllTagDefsOpts Optional parameters for the method 'GetAllTagDefs'
+type GetAllTagDefsOpts struct {
+    Prefix optional.String
+}
+
+/*
+ * GetAllTagDefs Bulk retrieval API for retrieving tag definitions.
+ *
+ * Bulk retrieval API for retrieving tag definitions.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *GetAllTagDefsOpts - Optional Parameters:
+ * @param "Prefix" (optional.String) -  The prefix of a tag definition name
+ * @return []TagDefResponse
+ */
+func (a *DefaultApiService) GetAllTagDefs(ctx _context.Context, localVarOptionals *GetAllTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []TagDefResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/tagdefs"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Prefix.IsSet() {
+		localVarQueryParams.Add("prefix", parameterToString(localVarOptionals.Prefix.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+ * GetBusinessMetadata Gets the list of business metadata for a given entity represented by a qualified name.
+ *
+ * Gets the list of business metadata for a given entity represented by a qualified name.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param typeName The type of the entity
+ * @param qualifiedName The qualified name of the entity
+ * @return []BusinessMetadataResponse
+ */
+func (a *DefaultApiService) GetBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BusinessMetadataResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata"
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+ * GetBusinessMetadataDefByName Get the business metadata definition with the given name.
+ *
+ * Get the business metadata definition with the given name.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param bmName The name of the business metadata definition
+ * @return AtlasBusinessMetadataDef
+ */
+func (a *DefaultApiService) GetBusinessMetadataDefByName(ctx _context.Context, bmName string) (AtlasBusinessMetadataDef, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  AtlasBusinessMetadataDef
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/businessmetadatadefs/{bmName}"
+	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(bmName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// GetByUniqueAttributesOpts Optional parameters for the method 'GetByUniqueAttributes'
+type GetByUniqueAttributesOpts struct {
+    MinExtInfo optional.Bool
+    IgnoreRelationships optional.Bool
+}
+
+/*
+ * GetByUniqueAttributes Fetch complete definition of an entity given its type and unique attribute.
+ *
+ * Fetch complete definition of an entity given its type and unique attribute.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param typeName The type of the entity
+ * @param qualifiedName The qualified name of the entity
+ * @param optional nil or *GetByUniqueAttributesOpts - Optional Parameters:
+ * @param "MinExtInfo" (optional.Bool) -  Whether to only populate header and schema attributes
+ * @param "IgnoreRelationships" (optional.Bool) -  Whether to ignore relationships
+ * @return AtlasEntityWithExtInfo
+ */
+func (a *DefaultApiService) GetByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string, localVarOptionals *GetByUniqueAttributesOpts) (AtlasEntityWithExtInfo, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  AtlasEntityWithExtInfo
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}"
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.MinExtInfo.IsSet() {
+		localVarQueryParams.Add("minExtInfo", parameterToString(localVarOptionals.MinExtInfo.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.IgnoreRelationships.IsSet() {
+		localVarQueryParams.Add("ignoreRelationships", parameterToString(localVarOptionals.IgnoreRelationships.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2200,6 +3751,169 @@ func (a *DefaultApiService) GetSubjects(ctx _context.Context, id int32, localVar
 }
 
 /*
+ * GetTagDefByName Get the tag definition with the given name.
+ *
+ * Get the tag definition with the given name.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param tagName The name of the tag definiton
+ * @return TagDef
+ */
+func (a *DefaultApiService) GetTagDefByName(ctx _context.Context, tagName string) (TagDef, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  TagDef
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/tagdefs/{tagName}"
+	localVarPath = strings.Replace(localVarPath, "{"+"tagName"+"}", _neturl.PathEscape(parameterToString(tagName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+ * GetTags Gets the list of classifications for a given entity represented by a qualifed name.
+ *
+ * Gets the list of classifications for a given entity represented by a qualifed name.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param typeName The type of the entity
+ * @param qualifiedName The qualified name of the entity
+ * @return []TagResponse
+ */
+func (a *DefaultApiService) GetTags(ctx _context.Context, typeName string, qualifiedName string) ([]TagResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []TagResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags"
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
  * GetTopLevelConfig Get global compatibility level.
  *
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2784,6 +4498,86 @@ func (a *DefaultApiService) LookUpSchemaUnderSubject(ctx _context.Context, subje
 	return localVarHTTPResponse, nil
 }
 
+// PartialUpdateByUniqueAttributesOpts Optional parameters for the method 'PartialUpdateByUniqueAttributes'
+type PartialUpdateByUniqueAttributesOpts struct {
+    AtlasEntityWithExtInfo optional.Interface
+}
+
+/*
+ * PartialUpdateByUniqueAttributes Method for PartialUpdateByUniqueAttributes
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *PartialUpdateByUniqueAttributesOpts - Optional Parameters:
+ * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) - 
+ */
+func (a *DefaultApiService) PartialUpdateByUniqueAttributes(ctx _context.Context, localVarOptionals *PartialUpdateByUniqueAttributesOpts) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.AtlasEntityWithExtInfo.IsSet() {
+		localVarOptionalAtlasEntityWithExtInfo, localVarOptionalAtlasEntityWithExtInfook := localVarOptionals.AtlasEntityWithExtInfo.Value().(AtlasEntityWithExtInfo)
+		if !localVarOptionalAtlasEntityWithExtInfook {
+			return nil, reportError("atlasEntityWithExtInfo should be AtlasEntityWithExtInfo")
+		}
+		localVarPostBody = &localVarOptionalAtlasEntityWithExtInfo
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 /*
  * PauseExporter Pause an exporter.
  *
@@ -3336,6 +5130,389 @@ func (a *DefaultApiService) ResumeExporter(ctx _context.Context, name string) (U
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// SearchUsingAttributeOpts Optional parameters for the method 'SearchUsingAttribute'
+type SearchUsingAttributeOpts struct {
+    Type_ optional.Interface
+    Types optional.String
+    Attr optional.Interface
+    Attrs optional.String
+    AttrName optional.Interface
+    AttrValuePrefix optional.Interface
+    Tag optional.Interface
+    TimeRangeType optional.String
+    TimeRangeAttr optional.String
+    TimeRangeStart optional.Int64
+    TimeRangeEnd optional.Int64
+    SortBy optional.String
+    SortOrder optional.String
+    Deleted optional.Bool
+    Limit optional.Int32
+    Offset optional.Int32
+}
+
+/*
+ * SearchUsingAttribute Retrieve data for the specified attribute search query.
+ *
+ * Retrieve data for the specified attribute search query.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *SearchUsingAttributeOpts - Optional Parameters:
+ * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
+ * @param "Types" (optional.String) - 
+ * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
+ * @param "Attrs" (optional.String) - 
+ * @param "AttrName" (optional.Interface of []string) -  The attribute to search
+ * @param "AttrValuePrefix" (optional.Interface of []string) -  The prefix for the attribute value to search
+ * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities tagged with the given tag
+ * @param "TimeRangeType" (optional.String) -  The type of time range search, default is CUSTOM
+ * @param "TimeRangeAttr" (optional.String) -  The attribute for a time range search
+ * @param "TimeRangeStart" (optional.Int64) -  The start for a custom time range search in ms since the epoch
+ * @param "TimeRangeEnd" (optional.Int64) -  The end for a custom time range search in ms since the epoch
+ * @param "SortBy" (optional.String) -  An attribute to sort by
+ * @param "SortOrder" (optional.String) -  Sort order, either ASCENDING (default) or DESCENDING
+ * @param "Deleted" (optional.Bool) -  Whether to include deleted entities
+ * @param "Limit" (optional.Int32) -  Limit the result set to only include the specified number of entries
+ * @param "Offset" (optional.Int32) -  Start offset of the result set (useful for pagination)
+ * @return SearchResult
+ */
+func (a *DefaultApiService) SearchUsingAttribute(ctx _context.Context, localVarOptionals *SearchUsingAttributeOpts) (SearchResult, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  SearchResult
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/search/attribute"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
+		t:=localVarOptionals.Type_.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("type", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("type", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Types.IsSet() {
+		localVarQueryParams.Add("types", parameterToString(localVarOptionals.Types.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Attr.IsSet() {
+		t:=localVarOptionals.Attr.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("attr", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("attr", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Attrs.IsSet() {
+		localVarQueryParams.Add("attrs", parameterToString(localVarOptionals.Attrs.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.AttrName.IsSet() {
+		t:=localVarOptionals.AttrName.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("attrName", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("attrName", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.AttrValuePrefix.IsSet() {
+		t:=localVarOptionals.AttrValuePrefix.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("attrValuePrefix", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("attrValuePrefix", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Tag.IsSet() {
+		t:=localVarOptionals.Tag.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("tag", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("tag", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.TimeRangeType.IsSet() {
+		localVarQueryParams.Add("timeRangeType", parameterToString(localVarOptionals.TimeRangeType.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TimeRangeAttr.IsSet() {
+		localVarQueryParams.Add("timeRangeAttr", parameterToString(localVarOptionals.TimeRangeAttr.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TimeRangeStart.IsSet() {
+		localVarQueryParams.Add("timeRangeStart", parameterToString(localVarOptionals.TimeRangeStart.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TimeRangeEnd.IsSet() {
+		localVarQueryParams.Add("timeRangeEnd", parameterToString(localVarOptionals.TimeRangeEnd.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortBy.IsSet() {
+		localVarQueryParams.Add("sortBy", parameterToString(localVarOptionals.SortBy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortOrder.IsSet() {
+		localVarQueryParams.Add("sortOrder", parameterToString(localVarOptionals.SortOrder.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Deleted.IsSet() {
+		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// SearchUsingBasicOpts Optional parameters for the method 'SearchUsingBasic'
+type SearchUsingBasicOpts struct {
+    Query optional.String
+    Type_ optional.Interface
+    Types optional.String
+    Attr optional.Interface
+    Attrs optional.String
+    Tag optional.Interface
+    TimeRangeType optional.String
+    TimeRangeAttr optional.String
+    TimeRangeStart optional.Int64
+    TimeRangeEnd optional.Int64
+    SortBy optional.String
+    SortOrder optional.String
+    Deleted optional.Bool
+    Limit optional.Int32
+    Offset optional.Int32
+}
+
+/*
+ * SearchUsingBasic Retrieve data for the specified fulltext query.
+ *
+ * Retrieve data for the specified fulltext query.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *SearchUsingBasicOpts - Optional Parameters:
+ * @param "Query" (optional.String) -  The full-text query
+ * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
+ * @param "Types" (optional.String) - 
+ * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
+ * @param "Attrs" (optional.String) - 
+ * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities with the given tag
+ * @param "TimeRangeType" (optional.String) -  The type of time range search, default is CUSTOM
+ * @param "TimeRangeAttr" (optional.String) -  The attribute for a time range search
+ * @param "TimeRangeStart" (optional.Int64) -  The start for a custom time range search in ms since the epoch
+ * @param "TimeRangeEnd" (optional.Int64) -  The end for a custom time range search in ms since the epoch
+ * @param "SortBy" (optional.String) -  An attribute to sort by
+ * @param "SortOrder" (optional.String) -  Sort order, either ASCENDING (default) or DESCENDING
+ * @param "Deleted" (optional.Bool) -  Whether to include deleted entities
+ * @param "Limit" (optional.Int32) -  Limit the result set to only include the specified number of entries
+ * @param "Offset" (optional.Int32) -  Start offset of the result set (useful for pagination)
+ * @return SearchResult
+ */
+func (a *DefaultApiService) SearchUsingBasic(ctx _context.Context, localVarOptionals *SearchUsingBasicOpts) (SearchResult, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  SearchResult
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/search/basic"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Query.IsSet() {
+		localVarQueryParams.Add("query", parameterToString(localVarOptionals.Query.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
+		t:=localVarOptionals.Type_.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("type", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("type", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Types.IsSet() {
+		localVarQueryParams.Add("types", parameterToString(localVarOptionals.Types.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Attr.IsSet() {
+		t:=localVarOptionals.Attr.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("attr", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("attr", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Attrs.IsSet() {
+		localVarQueryParams.Add("attrs", parameterToString(localVarOptionals.Attrs.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Tag.IsSet() {
+		t:=localVarOptionals.Tag.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("tag", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("tag", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.TimeRangeType.IsSet() {
+		localVarQueryParams.Add("timeRangeType", parameterToString(localVarOptionals.TimeRangeType.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TimeRangeAttr.IsSet() {
+		localVarQueryParams.Add("timeRangeAttr", parameterToString(localVarOptionals.TimeRangeAttr.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TimeRangeStart.IsSet() {
+		localVarQueryParams.Add("timeRangeStart", parameterToString(localVarOptionals.TimeRangeStart.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TimeRangeEnd.IsSet() {
+		localVarQueryParams.Add("timeRangeEnd", parameterToString(localVarOptionals.TimeRangeEnd.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortBy.IsSet() {
+		localVarQueryParams.Add("sortBy", parameterToString(localVarOptionals.SortBy.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortOrder.IsSet() {
+		localVarQueryParams.Add("sortOrder", parameterToString(localVarOptionals.SortOrder.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Deleted.IsSet() {
+		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 // TestCompatibilityBySubjectNameOpts Optional parameters for the method 'TestCompatibilityBySubjectName'
 type TestCompatibilityBySubjectNameOpts struct {
     ContentType optional.String
@@ -3545,6 +5722,192 @@ func (a *DefaultApiService) TestCompatibilityForSubject(ctx _context.Context, su
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// UpdateBusinessMetadataOpts Optional parameters for the method 'UpdateBusinessMetadata'
+type UpdateBusinessMetadataOpts struct {
+    BusinessMetadata optional.Interface
+}
+
+/*
+ * UpdateBusinessMetadata Bulk API to update multiple business metadata.
+ *
+ * Bulk API to update multiple business metadata.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *UpdateBusinessMetadataOpts - Optional Parameters:
+ * @param "BusinessMetadata" (optional.Interface of []BusinessMetadata) -  The business metadata
+ * @return []BusinessMetadataResponse
+ */
+func (a *DefaultApiService) UpdateBusinessMetadata(ctx _context.Context, localVarOptionals *UpdateBusinessMetadataOpts) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BusinessMetadataResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/businessmetadata"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.BusinessMetadata.IsSet() {
+		localVarOptionalBusinessMetadata, localVarOptionalBusinessMetadataok := localVarOptionals.BusinessMetadata.Value().([]BusinessMetadata)
+		if !localVarOptionalBusinessMetadataok {
+			return localVarReturnValue, nil, reportError("businessMetadata should be []BusinessMetadata")
+		}
+		localVarPostBody = &localVarOptionalBusinessMetadata
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// UpdateBusinessMetadataDefsOpts Optional parameters for the method 'UpdateBusinessMetadataDefs'
+type UpdateBusinessMetadataDefsOpts struct {
+    AtlasBusinessMetadataDef optional.Interface
+}
+
+/*
+ * UpdateBusinessMetadataDefs Bulk update API for business metadata definitions.
+ *
+ * Bulk update API for business metadata definitions.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *UpdateBusinessMetadataDefsOpts - Optional Parameters:
+ * @param "AtlasBusinessMetadataDef" (optional.Interface of []AtlasBusinessMetadataDef) -  The business metadata definitions to update
+ * @return []BusinessMetadataDefResponse
+ */
+func (a *DefaultApiService) UpdateBusinessMetadataDefs(ctx _context.Context, localVarOptionals *UpdateBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BusinessMetadataDefResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/businessmetadatadefs"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.AtlasBusinessMetadataDef.IsSet() {
+		localVarOptionalAtlasBusinessMetadataDef, localVarOptionalAtlasBusinessMetadataDefok := localVarOptionals.AtlasBusinessMetadataDef.Value().([]AtlasBusinessMetadataDef)
+		if !localVarOptionalAtlasBusinessMetadataDefok {
+			return localVarReturnValue, nil, reportError("atlasBusinessMetadataDef should be []AtlasBusinessMetadataDef")
+		}
+		localVarPostBody = &localVarOptionalAtlasBusinessMetadataDef
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 /*
  * UpdateMode Update mode for the specified subject.
  *
@@ -3671,6 +6034,192 @@ func (a *DefaultApiService) UpdateSubjectLevelConfig(ctx _context.Context, subje
 	}
 	// body params
 	localVarPostBody = &body
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// UpdateTagDefsOpts Optional parameters for the method 'UpdateTagDefs'
+type UpdateTagDefsOpts struct {
+    TagDef optional.Interface
+}
+
+/*
+ * UpdateTagDefs Bulk update API for tag definitions.
+ *
+ * Bulk update API for tag definitions.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *UpdateTagDefsOpts - Optional Parameters:
+ * @param "TagDef" (optional.Interface of []TagDef) -  The tag definitions to update
+ * @return []TagDefResponse
+ */
+func (a *DefaultApiService) UpdateTagDefs(ctx _context.Context, localVarOptionals *UpdateTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []TagDefResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/tagdefs"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.TagDef.IsSet() {
+		localVarOptionalTagDef, localVarOptionalTagDefok := localVarOptionals.TagDef.Value().([]TagDef)
+		if !localVarOptionalTagDefok {
+			return localVarReturnValue, nil, reportError("tagDef should be []TagDef")
+		}
+		localVarPostBody = &localVarOptionalTagDef
+	}
+
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// UpdateTagsOpts Optional parameters for the method 'UpdateTags'
+type UpdateTagsOpts struct {
+    Tag optional.Interface
+}
+
+/*
+ * UpdateTags Bulk API to update multiple tags.
+ *
+ * Bulk API to update multiple tags.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *UpdateTagsOpts - Optional Parameters:
+ * @param "Tag" (optional.Interface of []Tag) -  The tags
+ * @return []TagResponse
+ */
+func (a *DefaultApiService) UpdateTags(ctx _context.Context, localVarOptionals *UpdateTagsOpts) ([]TagResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []TagResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/tags"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	if localVarOptionals != nil && localVarOptionals.Tag.IsSet() {
+		localVarOptionalTag, localVarOptionalTagok := localVarOptionals.Tag.Value().([]Tag)
+		if !localVarOptionalTagok {
+			return localVarReturnValue, nil, reportError("tag should be []Tag")
+		}
+		localVarPostBody = &localVarOptionalTag
+	}
+
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
