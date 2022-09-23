@@ -3679,11 +3679,11 @@ components:
         updatedBy:
           type: string
         createTime:
-          format: date-time
-          type: string
+          format: int64
+          type: integer
         updateTime:
-          format: date-time
-          type: string
+          format: int64
+          type: integer
         version:
           format: int64
           type: integer
@@ -4456,11 +4456,11 @@ components:
         updatedBy:
           type: string
         createTime:
-          format: date-time
-          type: string
+          format: int64
+          type: integer
         updateTime:
-          format: date-time
-          type: string
+          format: int64
+          type: integer
         version:
           format: int64
           type: integer
