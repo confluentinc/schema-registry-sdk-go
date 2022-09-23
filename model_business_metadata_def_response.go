@@ -8,17 +8,14 @@
  */
 
 package schemaregistry
-import (
-	"time"
-)
 // BusinessMetadataDefResponse struct for BusinessMetadataDefResponse
 type BusinessMetadataDefResponse struct {
 	Category string `json:"category,omitempty"`
 	Guid string `json:"guid,omitempty"`
 	CreatedBy string `json:"createdBy,omitempty"`
 	UpdatedBy string `json:"updatedBy,omitempty"`
-	CreateTime time.Time `json:"createTime,omitempty"`
-	UpdateTime time.Time `json:"updateTime,omitempty"`
+	CreateTime int64 `json:"createTime,omitempty"`
+	UpdateTime int64 `json:"updateTime,omitempty"`
 	Version int64 `json:"version,omitempty"`
 	Name string `json:"name,omitempty"`
 	Description string `json:"description,omitempty"`

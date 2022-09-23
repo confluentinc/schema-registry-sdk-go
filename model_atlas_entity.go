@@ -8,9 +8,6 @@
  */
 
 package schemaregistry
-import (
-	"time"
-)
 // AtlasEntity struct for AtlasEntity
 type AtlasEntity struct {
 	TypeName string `json:"typeName,omitempty"`
@@ -23,8 +20,8 @@ type AtlasEntity struct {
 	Status string `json:"status,omitempty"`
 	CreatedBy string `json:"createdBy,omitempty"`
 	UpdatedBy string `json:"updatedBy,omitempty"`
-	CreateTime time.Time `json:"createTime,omitempty"`
-	UpdateTime time.Time `json:"updateTime,omitempty"`
+	CreateTime int64 `json:"createTime,omitempty"`
+	UpdateTime int64 `json:"updateTime,omitempty"`
 	Version int64 `json:"version,omitempty"`
 	RelationshipAttributes map[string]map[string]interface{} `json:"relationshipAttributes,omitempty"`
 	Classifications []AtlasClassification `json:"classifications,omitempty"`
