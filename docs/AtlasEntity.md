@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TypeName** | **string** |  | [optional] 
-**Attributes** | **map[string]map[string]interface{}** |  | [optional] 
+**Attributes** | **map[string]interface{}** |  | [optional] 
 **Guid** | **string** |  | [optional] 
 **HomeId** | **string** |  | [optional] 
 **IsProxy** | **bool** |  | [optional] 
@@ -17,11 +17,11 @@ Name | Type | Description | Notes
 **CreateTime** | **int64** |  | [optional] 
 **UpdateTime** | **int64** |  | [optional] 
 **Version** | **int64** |  | [optional] 
-**RelationshipAttributes** | **map[string]map[string]interface{}** |  | [optional] 
+**RelationshipAttributes** | **map[string]interface{}** |  | [optional] 
 **Classifications** | [**[]AtlasClassification**](AtlasClassification.md) |  | [optional] 
 **Meanings** | [**[]AtlasTermAssignmentHeader**](AtlasTermAssignmentHeader.md) |  | [optional] 
 **CustomAttributes** | **map[string]string** |  | [optional] 
-**BusinessAttributes** | [**map[string]map[string]map[string]interface{}**](map.md) |  | [optional] 
+**BusinessAttributes** | **map[string]map[string]interface{}** |  | [optional] 
 **Labels** | **[]string** |  | [optional] 
 **PendingTasks** | **[]string** |  | [optional] 
 **Proxy** | **bool** |  | [optional] 
