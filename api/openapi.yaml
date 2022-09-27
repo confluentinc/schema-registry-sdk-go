@@ -3653,8 +3653,6 @@ components:
         typeName:
           type: string
         attributes:
-          additionalProperties:
-            type: object
           type: object
         guid:
           type: string
@@ -3688,8 +3686,6 @@ components:
           format: int64
           type: integer
         relationshipAttributes:
-          additionalProperties:
-            type: object
           type: object
         classifications:
           items:
@@ -3705,8 +3701,6 @@ components:
           type: object
         businessAttributes:
           additionalProperties:
-            additionalProperties:
-              type: object
             type: object
           type: object
         labels:
@@ -4006,8 +4000,7 @@ components:
         typeName:
           type: string
         attributes:
-          additionalProperties:
-            type: object
+          additionalProperties: true
           type: object
         guid:
           type: string

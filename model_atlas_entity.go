@@ -11,7 +11,7 @@ package schemaregistry
 // AtlasEntity struct for AtlasEntity
 type AtlasEntity struct {
 	TypeName string `json:"typeName,omitempty"`
-	Attributes map[string]map[string]interface{} `json:"attributes,omitempty"`
+	Attributes map[string]interface{} `json:"attributes,omitempty"`
 	Guid string `json:"guid,omitempty"`
 	HomeId string `json:"homeId,omitempty"`
 	IsProxy bool `json:"isProxy,omitempty"`
@@ -23,11 +23,11 @@ type AtlasEntity struct {
 	CreateTime int64 `json:"createTime,omitempty"`
 	UpdateTime int64 `json:"updateTime,omitempty"`
 	Version int64 `json:"version,omitempty"`
-	RelationshipAttributes map[string]map[string]interface{} `json:"relationshipAttributes,omitempty"`
+	RelationshipAttributes map[string]interface{} `json:"relationshipAttributes,omitempty"`
 	Classifications []AtlasClassification `json:"classifications,omitempty"`
 	Meanings []AtlasTermAssignmentHeader `json:"meanings,omitempty"`
 	CustomAttributes map[string]string `json:"customAttributes,omitempty"`
-	BusinessAttributes map[string]map[string]map[string]interface{} `json:"businessAttributes,omitempty"`
+	BusinessAttributes map[string]map[string]interface{} `json:"businessAttributes,omitempty"`
 	Labels []string `json:"labels,omitempty"`
 	PendingTasks []string `json:"pendingTasks,omitempty"`
 	Proxy bool `json:"proxy,omitempty"`
