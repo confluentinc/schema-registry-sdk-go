@@ -11,7 +11,7 @@ package schemaregistry
 // BusinessMetadataResponse struct for BusinessMetadataResponse
 type BusinessMetadataResponse struct {
 	TypeName string `json:"typeName,omitempty"`
-	Attributes map[string]map[string]interface{} `json:"attributes,omitempty"`
+	Attributes map[string]interface{} `json:"attributes,omitempty"`
 	EntityType string `json:"entityType,omitempty"`
 	EntityName string `json:"entityName,omitempty"`
 	Error ErrorMessage `json:"error,omitempty"`
