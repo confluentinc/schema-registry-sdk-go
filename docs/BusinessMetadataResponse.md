@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TypeName** | **string** |  | [optional] 
-**Attributes** | **map[string]map[string]interface{}** |  | [optional] 
+**Attributes** | **map[string]interface{}** |  | [optional] 
 **EntityType** | **string** |  | [optional] 
 **EntityName** | **string** |  | [optional] 
 **Error** | [**ErrorMessage**](ErrorMessage.md) |  | [optional] 
