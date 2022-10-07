@@ -22,6 +22,7 @@ func main() {
 			Password: "*****",
 		})
 
+	createBM(ctx, srClient)
 	listBM(ctx, srClient)
 }
 
@@ -31,9 +32,9 @@ func getConfig() *srsdk.Configuration {
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "OpenAPI-Generator/1.0.0/go",
 		Debug:         false,
-		Servers:       []srsdk.ServerConfiguration{
+		Servers: []srsdk.ServerConfiguration{
 			{
-				Url: "/",
+				Url:         "/",
 				Description: "No description provided",
 			},
 		},
@@ -76,25 +77,25 @@ func listSubject(ctx context.Context, srClient *srsdk.APIClient) {
 func createAndListBMDef(ctx context.Context, srClient *srsdk.APIClient) {
 	bmAttributeDefs := []srsdk.AtlasAttributeDef{
 		{
-			Name:                  "display_name",
-			TypeName:              "string",
-			IsOptional:            true,
-			Cardinality:           "SINGLE",
-			Options: map[string]string{"applicableEntityTypes": "[\"kafka_topic\"]"},
+			Name:        "display_name",
+			TypeName:    "string",
+			IsOptional:  true,
+			Cardinality: "SINGLE",
+			Options:     map[string]string{"applicableEntityTypes": "[\"kafka_topic\"]"},
 		},
 		{
-			Name:                  "organization_description",
-			TypeName:              "string",
-			IsOptional:            true,
-			Cardinality:           "SINGLE",
-			Options: map[string]string{"applicableEntityTypes": "[\"kafka_topic\"]"},
+			Name:        "organization_description",
+			TypeName:    "string",
+			IsOptional:  true,
+			Cardinality: "SINGLE",
+			Options:     map[string]string{"applicableEntityTypes": "[\"kafka_topic\"]"},
 		},
 		{
-			Name:                  "organization_contact_email",
-			TypeName:              "string",
-			IsOptional:            true,
-			Cardinality:           "SINGLE",
-			Options: map[string]string{"applicableEntityTypes": "[\"kafka_topic\"]"},
+			Name:        "organization_contact_email",
+			TypeName:    "string",
+			IsOptional:  true,
+			Cardinality: "SINGLE",
+			Options:     map[string]string{"applicableEntityTypes": "[\"kafka_topic\"]"},
 		},
 	}
 
@@ -133,9 +134,33 @@ func createAndListBMDef(ctx context.Context, srClient *srsdk.APIClient) {
 
 func listBM(ctx context.Context, srClient *srsdk.APIClient) {
 	log.Println("getting bm ...")
-	bmResponse, response, err := srClient.DefaultApi.GetBusinessMetadata(ctx, "kafka_topic", "lkc-pwj91m:topic_0")
+	bmResponse, response, err := srClient.DefaultApi.GetBusinessMetadata(ctx, "kafka_topic", "lkc-pwj91m:topic_1")
 	if err != nil {
 		log.Println("Got error from http get ", err)
+		panic(err)
+	}
+	log.Println(bmResponse)
+	log.Println(response)
+}
+
+func createBM(ctx context.Context, srClient *srsdk.APIClient) {
+	log.Println("creating bm ...")
+	bmResponse, response, err := srClient.DefaultApi.CreateBusinessMetadata(ctx, &srsdk.CreateBusinessMetadataOpts{
+		BusinessMetadata: optional.NewInterface([]srsdk.BusinessMetadata{
+			{
+				TypeName:   "stream_share",
+				EntityType: "kafka_topic",
+				EntityName: "lkc-pwj91m:topic_1",
+				Attributes: map[string]interface{}{
+					"display_name":               "confluent",
+					"organization_description":   "confluent inc",
+					"organization_contact_email": "test@confluent.io",
+				},
+			},
+		}),
+	})
+	if err != nil {
+		log.Println("Got error from http post ", err)
 		panic(err)
 	}
 	log.Println(bmResponse)
