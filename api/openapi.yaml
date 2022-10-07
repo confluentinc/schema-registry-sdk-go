@@ -3409,8 +3409,6 @@ components:
         typeName:
           type: string
         attributes:
-          additionalProperties:
-            type: object
           type: object
         entityType:
           type: string
