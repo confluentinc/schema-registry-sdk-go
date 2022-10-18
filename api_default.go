@@ -262,6 +262,7 @@ type DefaultApi interface {
      * @param optional nil or *GetByUniqueAttributesOpts - Optional Parameters:
      * @param "MinExtInfo" (optional.Bool) -  Whether to only populate header and schema attributes
      * @param "IgnoreRelationships" (optional.Bool) -  Whether to ignore relationships
+     * @param "IncludeInternalPrefix" (optional.String) -  If not null, include internal attributes that start with this prefix
      * @return AtlasEntityWithExtInfo
      */
     GetByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string, localVarOptionals *GetByUniqueAttributesOpts) (AtlasEntityWithExtInfo, *_nethttp.Response, error)
@@ -2462,6 +2463,7 @@ func (a *DefaultApiService) GetBusinessMetadataDefByName(ctx _context.Context, b
 type GetByUniqueAttributesOpts struct {
     MinExtInfo optional.Bool
     IgnoreRelationships optional.Bool
+    IncludeInternalPrefix optional.String
 }
 
 /*
@@ -2475,6 +2477,7 @@ type GetByUniqueAttributesOpts struct {
  * @param optional nil or *GetByUniqueAttributesOpts - Optional Parameters:
  * @param "MinExtInfo" (optional.Bool) -  Whether to only populate header and schema attributes
  * @param "IgnoreRelationships" (optional.Bool) -  Whether to ignore relationships
+ * @param "IncludeInternalPrefix" (optional.String) -  If not null, include internal attributes that start with this prefix
  * @return AtlasEntityWithExtInfo
  */
 func (a *DefaultApiService) GetByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string, localVarOptionals *GetByUniqueAttributesOpts) (AtlasEntityWithExtInfo, *_nethttp.Response, error) {
@@ -2502,6 +2505,9 @@ func (a *DefaultApiService) GetByUniqueAttributes(ctx _context.Context, typeName
 	}
 	if localVarOptionals != nil && localVarOptionals.IgnoreRelationships.IsSet() {
 		localVarQueryParams.Add("ignoreRelationships", parameterToString(localVarOptionals.IgnoreRelationships.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.IncludeInternalPrefix.IsSet() {
+		localVarQueryParams.Add("includeInternalPrefix", parameterToString(localVarOptionals.IncludeInternalPrefix.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

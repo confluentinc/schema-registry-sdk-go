@@ -888,6 +888,7 @@ Name | Type | Description  | Notes
 
  **minExtInfo** | **optional.Bool**| Whether to only populate header and schema attributes | [default to false]
  **ignoreRelationships** | **optional.Bool**| Whether to ignore relationships | [default to false]
+ **includeInternalPrefix** | **optional.String**| If not null, include internal attributes that start with this prefix | 
 
 ### Return type
 
