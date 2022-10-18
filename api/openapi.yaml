@@ -2171,6 +2171,15 @@ paths:
           default: false
           type: boolean
         style: form
+      - description: If not null, include internal attributes that start with this
+          prefix
+        explode: true
+        in: query
+        name: includeInternalPrefix
+        required: false
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
