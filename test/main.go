@@ -18,12 +18,12 @@ func main() {
 
 	ctx := context.WithValue(context.Background(), srsdk.ContextBasicAuth,
 		srsdk.BasicAuth{
-			UserName: "*****",
-			Password: "*****",
+			UserName: "**",
+			Password: "**",
 		})
 
-	createBM(ctx, srClient)
-	listBM(ctx, srClient)
+	//updateTopic(ctx, srClient)
+	listTopic(ctx, srClient)
 }
 
 func getConfig() *srsdk.Configuration {
@@ -164,5 +164,47 @@ func createBM(ctx context.Context, srClient *srsdk.APIClient) {
 		panic(err)
 	}
 	log.Println(bmResponse)
+	log.Println(response)
+}
+
+func updateTopic(ctx context.Context, srClient *srsdk.APIClient) {
+	log.Println("updating topic")
+	response, err := srClient.DefaultApi.PartialUpdateByUniqueAttributes(ctx,
+		&srsdk.PartialUpdateByUniqueAttributesOpts{
+			AtlasEntityWithExtInfo: optional.NewInterface(srsdk.AtlasEntityWithExtInfo{
+				Entity: srsdk.AtlasEntity{
+					TypeName: "kafka_topic",
+					Attributes: map[string]interface{}{
+						"qualifiedName":       "lkc-5w0p1q:test-stream-share",
+						"description":         "Test update topic description 2",
+						"__ss_orgDescription": "test add org description",
+					},
+				},
+			}),
+		})
+
+	if err != nil {
+		log.Println("Got error from http post ", err)
+		panic(err)
+	}
+	log.Println(response)
+}
+
+func listTopic(ctx context.Context, srClient *srsdk.APIClient) {
+	log.Println("listing topic")
+	listResponse, response, err := srClient.DefaultApi.GetByUniqueAttributes(ctx,
+		"kafka_topic",
+		"lkc-35dnvo:topic_0",
+		&srsdk.GetByUniqueAttributesOpts{
+			MinExtInfo:            optional.NewBool(false),
+			IgnoreRelationships:   optional.NewBool(false),
+			IncludeInternalPrefix: optional.NewString("ss_"),
+		},
+	)
+	if err != nil {
+		log.Println("Got error from http post ", err)
+		panic(err)
+	}
+	log.Println(listResponse)
 	log.Println(response)
 }
