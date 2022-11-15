@@ -14,9 +14,10 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"strings"
-	"github.com/antihax/optional"
 	"reflect"
+	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -26,738 +27,813 @@ var (
 
 type DefaultApi interface {
 
-    /*
-     * CreateBusinessMetadata Bulk API to create multiple business metadata.
-     *
-     * Bulk API to create multiple business metadata.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *CreateBusinessMetadataOpts - Optional Parameters:
-     * @param "BusinessMetadata" (optional.Interface of []BusinessMetadata) -  The business metadata
-     * @return []BusinessMetadataResponse
-     */
-    CreateBusinessMetadata(ctx _context.Context, localVarOptionals *CreateBusinessMetadataOpts) ([]BusinessMetadataResponse, *_nethttp.Response, error)
-
-    /*
-     * CreateBusinessMetadataDefs Bulk create API for business metadata definitions.
-     *
-     * Bulk create API for business metadata definitions.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *CreateBusinessMetadataDefsOpts - Optional Parameters:
-     * @param "AtlasBusinessMetadataDef" (optional.Interface of []AtlasBusinessMetadataDef) -  The business metadata definitions to create
-     * @return []BusinessMetadataDefResponse
-     */
-    CreateBusinessMetadataDefs(ctx _context.Context, localVarOptionals *CreateBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
-
-    /*
-     * CreateExporter Create an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param body Info
-     * @return CreateExporterResponse
-     */
-    CreateExporter(ctx _context.Context, body CreateExporterRequest) (CreateExporterResponse, *_nethttp.Response, error)
-
-    /*
-     * CreateOrUpdate Method for CreateOrUpdate
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *CreateOrUpdateOpts - Optional Parameters:
-     * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) - 
-     */
-    CreateOrUpdate(ctx _context.Context, localVarOptionals *CreateOrUpdateOpts) (*_nethttp.Response, error)
-
-    /*
-     * CreateTagDefs Bulk create API for tag definitions.
-     *
-     * Bulk create API for tag definitions.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *CreateTagDefsOpts - Optional Parameters:
-     * @param "TagDef" (optional.Interface of []TagDef) -  The tag definitions to create
-     * @return []TagDefResponse
-     */
-    CreateTagDefs(ctx _context.Context, localVarOptionals *CreateTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error)
-
-    /*
-     * CreateTags Bulk API to create multiple tags.
-     *
-     * Bulk API to create multiple tags.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *CreateTagsOpts - Optional Parameters:
-     * @param "Tag" (optional.Interface of []Tag) -  The tags
-     * @return []TagResponse
-     */
-    CreateTags(ctx _context.Context, localVarOptionals *CreateTagsOpts) ([]TagResponse, *_nethttp.Response, error)
-
-    /*
-     * DeleteBusinessMetadata Delete a business metadata on an entity.
-     *
-     * Delete a business metadata on an entity.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param typeName The type of the entity
-     * @param qualifiedName The qualified name of the entity
-     * @param bmName The name of the business metadata
-     */
-    DeleteBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string, bmName string) (*_nethttp.Response, error)
-
-    /*
-     * DeleteBusinessMetadataDef Delete API for business metadata definition identified by its name.
-     *
-     * Delete API for business metadata definition identified by its name.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param bmName The name of the business metadata definition
-     */
-    DeleteBusinessMetadataDef(ctx _context.Context, bmName string) (*_nethttp.Response, error)
-
-    /*
-     * DeleteByUniqueAttributes Method for DeleteByUniqueAttributes
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param typeName
-     * @param qualifiedName
-     */
-    DeleteByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string) (*_nethttp.Response, error)
-
-    /*
-     * DeleteExporter Delete an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param name Name of the exporter
-     */
-    DeleteExporter(ctx _context.Context, name string) (*_nethttp.Response, error)
-
-    /*
-     * DeleteSchemaVersion Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Name of the Subject
-     * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-     * @param optional nil or *DeleteSchemaVersionOpts - Optional Parameters:
-     * @param "Permanent" (optional.Bool) - 
-     * @return int32
-     */
-    DeleteSchemaVersion(ctx _context.Context, subject string, version string, localVarOptionals *DeleteSchemaVersionOpts) (int32, *_nethttp.Response, error)
-
-    /*
-     * DeleteSubject Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject the name of the subject
-     * @param optional nil or *DeleteSubjectOpts - Optional Parameters:
-     * @param "Permanent" (optional.Bool) - 
-     * @return []int32
-     */
-    DeleteSubject(ctx _context.Context, subject string, localVarOptionals *DeleteSubjectOpts) ([]int32, *_nethttp.Response, error)
-
-    /*
-     * DeleteSubjectConfig Deletes the specified subject-level compatibility level config and revert to the global default.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject the name of the subject
-     * @return string
-     */
-    DeleteSubjectConfig(ctx _context.Context, subject string) (string, *_nethttp.Response, error)
-
-    /*
-     * DeleteSubjectMode Deletes the specified subject-level mode and revert to the global default.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject the name of the subject
-     * @return string
-     */
-    DeleteSubjectMode(ctx _context.Context, subject string) (string, *_nethttp.Response, error)
-
-    /*
-     * DeleteTag Delete a tag on an entity.
-     *
-     * Delete a tag on an entity.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param typeName The type of the entity
-     * @param qualifiedName The qualified name of the entity
-     * @param tagName The name of the tag
-     */
-    DeleteTag(ctx _context.Context, typeName string, qualifiedName string, tagName string) (*_nethttp.Response, error)
-
-    /*
-     * DeleteTagDef Delete API for tag definition identified by its name.
-     *
-     * Delete API for tag definition identified by its name.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param tagName The name of the tag definition
-     */
-    DeleteTagDef(ctx _context.Context, tagName string) (*_nethttp.Response, error)
-
-    /*
-     * Get Schema Registry Root Resource
-     *
-     * The Root resource is a no-op.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @return map[string]map[string]interface{}
-     */
-    Get(ctx _context.Context) (map[string]map[string]interface{}, *_nethttp.Response, error)
-
-    /*
-     * GetAllBusinessMetadataDefs Bulk retrieval API for retrieving business metadata definitions.
-     *
-     * Bulk retrieval API for retrieving business metadata definitions.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *GetAllBusinessMetadataDefsOpts - Optional Parameters:
-     * @param "Prefix" (optional.String) -  The prefix of a business metadata definition name
-     * @return []BusinessMetadataDefResponse
-     */
-    GetAllBusinessMetadataDefs(ctx _context.Context, localVarOptionals *GetAllBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
-
-    /*
-     * GetAllTagDefs Bulk retrieval API for retrieving tag definitions.
-     *
-     * Bulk retrieval API for retrieving tag definitions.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *GetAllTagDefsOpts - Optional Parameters:
-     * @param "Prefix" (optional.String) -  The prefix of a tag definition name
-     * @return []TagDefResponse
-     */
-    GetAllTagDefs(ctx _context.Context, localVarOptionals *GetAllTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error)
-
-    /*
-     * GetBusinessMetadata Gets the list of business metadata for a given entity represented by a qualified name.
-     *
-     * Gets the list of business metadata for a given entity represented by a qualified name.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param typeName The type of the entity
-     * @param qualifiedName The qualified name of the entity
-     * @return []BusinessMetadataResponse
-     */
-    GetBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string) ([]BusinessMetadataResponse, *_nethttp.Response, error)
-
-    /*
-     * GetBusinessMetadataDefByName Get the business metadata definition with the given name.
-     *
-     * Get the business metadata definition with the given name.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param bmName The name of the business metadata definition
-     * @return AtlasBusinessMetadataDef
-     */
-    GetBusinessMetadataDefByName(ctx _context.Context, bmName string) (AtlasBusinessMetadataDef, *_nethttp.Response, error)
-
-    /*
-     * GetByUniqueAttributes Fetch complete definition of an entity given its type and unique attribute.
-     *
-     * Fetch complete definition of an entity given its type and unique attribute.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param typeName The type of the entity
-     * @param qualifiedName The qualified name of the entity
-     * @param optional nil or *GetByUniqueAttributesOpts - Optional Parameters:
-     * @param "MinExtInfo" (optional.Bool) -  Whether to only populate header and schema attributes
-     * @param "IgnoreRelationships" (optional.Bool) -  Whether to ignore relationships
-     * @param "IncludeInternalPrefix" (optional.String) -  If not null, include internal attributes that start with this prefix
-     * @return AtlasEntityWithExtInfo
-     */
-    GetByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string, localVarOptionals *GetByUniqueAttributesOpts) (AtlasEntityWithExtInfo, *_nethttp.Response, error)
-
-    /*
-     * GetClusterId Get the server metadata
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @return ServerClusterId
-     */
-    GetClusterId(ctx _context.Context) (ServerClusterId, *_nethttp.Response, error)
-
-    /*
-     * GetExporterConfig Get the config for an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param name
-     * @return map[string]string
-     */
-    GetExporterConfig(ctx _context.Context, name string) (map[string]string, *_nethttp.Response, error)
-
-    /*
-     * GetExporterInfo Get the info for an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param name
-     * @return ExporterInfo
-     */
-    GetExporterInfo(ctx _context.Context, name string) (ExporterInfo, *_nethttp.Response, error)
-
-    /*
-     * GetExporterStatus Get the status for an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param name
-     * @return ExporterStatus
-     */
-    GetExporterStatus(ctx _context.Context, name string) (ExporterStatus, *_nethttp.Response, error)
-
-    /*
-     * GetExporters Get a list of exporter names.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @return []string
-     */
-    GetExporters(ctx _context.Context) ([]string, *_nethttp.Response, error)
-
-    /*
-     * GetMode Get mode for a subject.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Name of the Subject
-     * @param optional nil or *GetModeOpts - Optional Parameters:
-     * @param "DefaultToGlobal" (optional.Bool) - 
-     * @return Mode
-     */
-    GetMode(ctx _context.Context, subject string, localVarOptionals *GetModeOpts) (Mode, *_nethttp.Response, error)
-
-    /*
-     * GetReferencedBy Get the schemas that reference the specified schema.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Name of the Subject
-     * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-     * @return []int32
-     */
-    GetReferencedBy(ctx _context.Context, subject string, version string) ([]int32, *_nethttp.Response, error)
-
-    /*
-     * GetSchema Get the schema string identified by the input ID.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param id Globally unique identifier of the schema
-     * @param optional nil or *GetSchemaOpts - Optional Parameters:
-     * @param "Subject" (optional.String) - 
-     * @param "Format" (optional.String) - 
-     * @param "FetchMaxId" (optional.Bool) - 
-     * @return SchemaString
-     */
-    GetSchema(ctx _context.Context, id int32, localVarOptionals *GetSchemaOpts) (SchemaString, *_nethttp.Response, error)
-
-    /*
-     * GetSchemaByVersion Get a specific version of the schema registered under this subject.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Name of the Subject
-     * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-     * @param optional nil or *GetSchemaByVersionOpts - Optional Parameters:
-     * @param "Deleted" (optional.Bool) - 
-     * @return Schema
-     */
-    GetSchemaByVersion(ctx _context.Context, subject string, version string, localVarOptionals *GetSchemaByVersionOpts) (Schema, *_nethttp.Response, error)
-
-    /*
-     * GetSchemaOnly Get the schema for the specified version of this subject. The unescaped schema only is returned.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Name of the Subject
-     * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-     * @param optional nil or *GetSchemaOnlyOpts - Optional Parameters:
-     * @param "Deleted" (optional.Bool) - 
-     * @return string
-     */
-    GetSchemaOnly(ctx _context.Context, subject string, version string, localVarOptionals *GetSchemaOnlyOpts) (string, *_nethttp.Response, error)
-
-    /*
-     * GetSchemaTypes Get the schema types supported by this registry.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @return []string
-     */
-    GetSchemaTypes(ctx _context.Context) ([]string, *_nethttp.Response, error)
-
-    /*
-     * GetSchemas Get the schemas.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *GetSchemasOpts - Optional Parameters:
-     * @param "SubjectPrefix" (optional.String) - 
-     * @param "Deleted" (optional.Bool) - 
-     * @param "LatestOnly" (optional.Bool) - 
-     * @param "Offset" (optional.Int32) - 
-     * @param "Limit" (optional.Int32) - 
-     * @return []Schema
-     */
-    GetSchemas(ctx _context.Context, localVarOptionals *GetSchemasOpts) ([]Schema, *_nethttp.Response, error)
-
-    /*
-     * GetSubjectLevelConfig Get compatibility level for a subject.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject
-     * @param optional nil or *GetSubjectLevelConfigOpts - Optional Parameters:
-     * @param "DefaultToGlobal" (optional.Bool) - 
-     * @return Config
-     */
-    GetSubjectLevelConfig(ctx _context.Context, subject string, localVarOptionals *GetSubjectLevelConfigOpts) (Config, *_nethttp.Response, error)
-
-    /*
-     * GetSubjects Get all the subjects associated with the input ID.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param id Globally unique identifier of the schema
-     * @param optional nil or *GetSubjectsOpts - Optional Parameters:
-     * @param "Subject" (optional.String) - 
-     * @param "Deleted" (optional.Bool) - 
-     * @return []string
-     */
-    GetSubjects(ctx _context.Context, id int32, localVarOptionals *GetSubjectsOpts) ([]string, *_nethttp.Response, error)
-
-    /*
-     * GetTagDefByName Get the tag definition with the given name.
-     *
-     * Get the tag definition with the given name.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param tagName The name of the tag definiton
-     * @return TagDef
-     */
-    GetTagDefByName(ctx _context.Context, tagName string) (TagDef, *_nethttp.Response, error)
-
-    /*
-     * GetTags Gets the list of classifications for a given entity represented by a qualifed name.
-     *
-     * Gets the list of classifications for a given entity represented by a qualifed name.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param typeName The type of the entity
-     * @param qualifiedName The qualified name of the entity
-     * @return []TagResponse
-     */
-    GetTags(ctx _context.Context, typeName string, qualifiedName string) ([]TagResponse, *_nethttp.Response, error)
-
-    /*
-     * GetTopLevelConfig Get global compatibility level.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @return Config
-     */
-    GetTopLevelConfig(ctx _context.Context) (Config, *_nethttp.Response, error)
-
-    /*
-     * GetTopLevelMode Get global mode.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @return Mode
-     */
-    GetTopLevelMode(ctx _context.Context) (Mode, *_nethttp.Response, error)
-
-    /*
-     * GetVersions Get all the subject-version pairs associated with the input ID.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param id Globally unique identifier of the schema
-     * @param optional nil or *GetVersionsOpts - Optional Parameters:
-     * @param "Subject" (optional.String) - 
-     * @param "Deleted" (optional.Bool) - 
-     * @return []SubjectVersion
-     */
-    GetVersions(ctx _context.Context, id int32, localVarOptionals *GetVersionsOpts) ([]SubjectVersion, *_nethttp.Response, error)
-
-    /*
-     * List Get a list of registered subjects.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *ListOpts - Optional Parameters:
-     * @param "SubjectPrefix" (optional.String) - 
-     * @param "Deleted" (optional.Bool) - 
-     * @return []string
-     */
-    List(ctx _context.Context, localVarOptionals *ListOpts) ([]string, *_nethttp.Response, error)
-
-    /*
-     * ListContexts Get a list of contexts.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @return []string
-     */
-    ListContexts(ctx _context.Context) ([]string, *_nethttp.Response, error)
-
-    /*
-     * ListVersions Get a list of versions registered under the specified subject.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Name of the Subject
-     * @param optional nil or *ListVersionsOpts - Optional Parameters:
-     * @param "Deleted" (optional.Bool) - 
-     * @return []int32
-     */
-    ListVersions(ctx _context.Context, subject string, localVarOptionals *ListVersionsOpts) ([]int32, *_nethttp.Response, error)
-
-    /*
-     * LookUpSchemaUnderSubject Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Subject under which the schema will be registered
-     * @param body Schema
-     * @param optional nil or *LookUpSchemaUnderSubjectOpts - Optional Parameters:
-     * @param "Deleted" (optional.Bool) - 
-     */
-    LookUpSchemaUnderSubject(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*_nethttp.Response, error)
-
-    /*
-     * PartialUpdateByUniqueAttributes Method for PartialUpdateByUniqueAttributes
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *PartialUpdateByUniqueAttributesOpts - Optional Parameters:
-     * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) - 
-     */
-    PartialUpdateByUniqueAttributes(ctx _context.Context, localVarOptionals *PartialUpdateByUniqueAttributesOpts) (*_nethttp.Response, error)
-
-    /*
-     * PauseExporter Pause an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param name Name of the exporter
-     * @return UpdateExporterResponse
-     */
-    PauseExporter(ctx _context.Context, name string) (UpdateExporterResponse, *_nethttp.Response, error)
-
-    /*
-     * Post Method for Post
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @return map[string]string
-     */
-    Post(ctx _context.Context) (map[string]string, *_nethttp.Response, error)
-
-    /*
-     * PutExporter Alters an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param name Name of the exporter
-     * @param body Info
-     * @return UpdateExporterResponse
-     */
-    PutExporter(ctx _context.Context, name string, body UpdateExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error)
-
-    /*
-     * PutExporterConfig Alters the config of an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param name Name of the exporter
-     * @param body Config
-     * @return UpdateExporterResponse
-     */
-    PutExporterConfig(ctx _context.Context, name string, body map[string]string) (UpdateExporterResponse, *_nethttp.Response, error)
-
-    /*
-     * Register Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Name of the Subject
-     * @param body Schema
-     * @return RegisterSchemaResponse
-     */
-    Register(ctx _context.Context, subject string, body RegisterSchemaRequest) (RegisterSchemaResponse, *_nethttp.Response, error)
-
-    /*
-     * ResetExporter Reset an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param name Name of the exporter
-     * @return UpdateExporterResponse
-     */
-    ResetExporter(ctx _context.Context, name string) (UpdateExporterResponse, *_nethttp.Response, error)
-
-    /*
-     * ResumeExporter Resume an exporter.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param name Name of the exporter
-     * @return UpdateExporterResponse
-     */
-    ResumeExporter(ctx _context.Context, name string) (UpdateExporterResponse, *_nethttp.Response, error)
-
-    /*
-     * SearchUsingAttribute Retrieve data for the specified attribute search query.
-     *
-     * Retrieve data for the specified attribute search query.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *SearchUsingAttributeOpts - Optional Parameters:
-     * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
-     * @param "Types" (optional.String) - 
-     * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
-     * @param "Attrs" (optional.String) - 
-     * @param "AttrName" (optional.Interface of []string) -  The attribute to search
-     * @param "AttrValuePrefix" (optional.Interface of []string) -  The prefix for the attribute value to search
-     * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities tagged with the given tag
-     * @param "TimeRangeType" (optional.String) -  The type of time range search, default is CUSTOM
-     * @param "TimeRangeAttr" (optional.String) -  The attribute for a time range search
-     * @param "TimeRangeStart" (optional.Int64) -  The start for a custom time range search in ms since the epoch
-     * @param "TimeRangeEnd" (optional.Int64) -  The end for a custom time range search in ms since the epoch
-     * @param "SortBy" (optional.String) -  An attribute to sort by
-     * @param "SortOrder" (optional.String) -  Sort order, either ASCENDING (default) or DESCENDING
-     * @param "Deleted" (optional.Bool) -  Whether to include deleted entities
-     * @param "Limit" (optional.Int32) -  Limit the result set to only include the specified number of entries
-     * @param "Offset" (optional.Int32) -  Start offset of the result set (useful for pagination)
-     * @return SearchResult
-     */
-    SearchUsingAttribute(ctx _context.Context, localVarOptionals *SearchUsingAttributeOpts) (SearchResult, *_nethttp.Response, error)
-
-    /*
-     * SearchUsingBasic Retrieve data for the specified fulltext query.
-     *
-     * Retrieve data for the specified fulltext query.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *SearchUsingBasicOpts - Optional Parameters:
-     * @param "Query" (optional.String) -  The full-text query
-     * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
-     * @param "Types" (optional.String) - 
-     * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
-     * @param "Attrs" (optional.String) - 
-     * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities with the given tag
-     * @param "TimeRangeType" (optional.String) -  The type of time range search, default is CUSTOM
-     * @param "TimeRangeAttr" (optional.String) -  The attribute for a time range search
-     * @param "TimeRangeStart" (optional.Int64) -  The start for a custom time range search in ms since the epoch
-     * @param "TimeRangeEnd" (optional.Int64) -  The end for a custom time range search in ms since the epoch
-     * @param "SortBy" (optional.String) -  An attribute to sort by
-     * @param "SortOrder" (optional.String) -  Sort order, either ASCENDING (default) or DESCENDING
-     * @param "Deleted" (optional.Bool) -  Whether to include deleted entities
-     * @param "Limit" (optional.Int32) -  Limit the result set to only include the specified number of entries
-     * @param "Offset" (optional.Int32) -  Start offset of the result set (useful for pagination)
-     * @return SearchResult
-     */
-    SearchUsingBasic(ctx _context.Context, localVarOptionals *SearchUsingBasicOpts) (SearchResult, *_nethttp.Response, error)
-
-    /*
-     * TestCompatibilityBySubjectName Test input schema against a particular version of a subject's schema for compatibility.
-     *
-     * the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject&#39;s compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Subject of the schema version against which compatibility is to be tested
-     * @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
-     * @param body Schema
-     * @param optional nil or *TestCompatibilityBySubjectNameOpts - Optional Parameters:
-     * @param "ContentType" (optional.String) - 
-     * @param "Accept" (optional.String) - 
-     * @param "Verbose" (optional.Bool) - 
-     * @return CompatibilityCheckResponse
-     */
-    TestCompatibilityBySubjectName(ctx _context.Context, subject string, version string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityBySubjectNameOpts) (CompatibilityCheckResponse, *_nethttp.Response, error)
-
-    /*
-     * TestCompatibilityForSubject Test input schema against a subject's schemas for compatibility, based on the compatibility level of the subject configured. In other word, it will perform the same compatibility check as register for that subject
-     *
-     * the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject&#39;s compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Subject of the schema version against which compatibility is to be tested
-     * @param body Schema
-     * @param optional nil or *TestCompatibilityForSubjectOpts - Optional Parameters:
-     * @param "ContentType" (optional.String) - 
-     * @param "Accept" (optional.String) - 
-     * @param "Verbose" (optional.Bool) - 
-     * @return CompatibilityCheckResponse
-     */
-    TestCompatibilityForSubject(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityForSubjectOpts) (CompatibilityCheckResponse, *_nethttp.Response, error)
-
-    /*
-     * UpdateBusinessMetadata Bulk API to update multiple business metadata.
-     *
-     * Bulk API to update multiple business metadata.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *UpdateBusinessMetadataOpts - Optional Parameters:
-     * @param "BusinessMetadata" (optional.Interface of []BusinessMetadata) -  The business metadata
-     * @return []BusinessMetadataResponse
-     */
-    UpdateBusinessMetadata(ctx _context.Context, localVarOptionals *UpdateBusinessMetadataOpts) ([]BusinessMetadataResponse, *_nethttp.Response, error)
-
-    /*
-     * UpdateBusinessMetadataDefs Bulk update API for business metadata definitions.
-     *
-     * Bulk update API for business metadata definitions.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *UpdateBusinessMetadataDefsOpts - Optional Parameters:
-     * @param "AtlasBusinessMetadataDef" (optional.Interface of []AtlasBusinessMetadataDef) -  The business metadata definitions to update
-     * @return []BusinessMetadataDefResponse
-     */
-    UpdateBusinessMetadataDefs(ctx _context.Context, localVarOptionals *UpdateBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
-
-    /*
-     * UpdateMode Update mode for the specified subject.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Name of the Subject
-     * @param body Update Request
-     * @return ModeUpdateRequest
-     */
-    UpdateMode(ctx _context.Context, subject string, body ModeUpdateRequest) (ModeUpdateRequest, *_nethttp.Response, error)
-
-    /*
-     * UpdateSubjectLevelConfig Update compatibility level for the specified subject.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param subject Name of the Subject
-     * @param body Config Update Request
-     * @return ConfigUpdateRequest
-     */
-    UpdateSubjectLevelConfig(ctx _context.Context, subject string, body ConfigUpdateRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
-
-    /*
-     * UpdateTagDefs Bulk update API for tag definitions.
-     *
-     * Bulk update API for tag definitions.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *UpdateTagDefsOpts - Optional Parameters:
-     * @param "TagDef" (optional.Interface of []TagDef) -  The tag definitions to update
-     * @return []TagDefResponse
-     */
-    UpdateTagDefs(ctx _context.Context, localVarOptionals *UpdateTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error)
-
-    /*
-     * UpdateTags Bulk API to update multiple tags.
-     *
-     * Bulk API to update multiple tags.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param optional nil or *UpdateTagsOpts - Optional Parameters:
-     * @param "Tag" (optional.Interface of []Tag) -  The tags
-     * @return []TagResponse
-     */
-    UpdateTags(ctx _context.Context, localVarOptionals *UpdateTagsOpts) ([]TagResponse, *_nethttp.Response, error)
-
-    /*
-     * UpdateTopLevelConfig Update global compatibility level.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param body Config Update Request
-     * @return ConfigUpdateRequest
-     */
-    UpdateTopLevelConfig(ctx _context.Context, body ConfigUpdateRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
-
-    /*
-     * UpdateTopLevelMode Update global mode.
-     *
-     * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-     * @param body Update Request
-     * @return ModeUpdateRequest
-     */
-    UpdateTopLevelMode(ctx _context.Context, body ModeUpdateRequest) (ModeUpdateRequest, *_nethttp.Response, error)
+	/*
+	 * AsyncapiPut Method for AsyncapiPut
+	 *
+	 * Get number of times the cli tool is used to export/produce the spec file
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 */
+	AsyncapiPut(ctx _context.Context) (*_nethttp.Response, error)
+
+	/*
+	 * CreateBusinessMetadata Bulk API to create multiple business metadata.
+	 *
+	 * Bulk API to create multiple business metadata.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *CreateBusinessMetadataOpts - Optional Parameters:
+	 * @param "BusinessMetadata" (optional.Interface of []BusinessMetadata) -  The business metadata
+	 * @return []BusinessMetadataResponse
+	 */
+	CreateBusinessMetadata(ctx _context.Context, localVarOptionals *CreateBusinessMetadataOpts) ([]BusinessMetadataResponse, *_nethttp.Response, error)
+
+	/*
+	 * CreateBusinessMetadataDefs Bulk create API for business metadata definitions.
+	 *
+	 * Bulk create API for business metadata definitions.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *CreateBusinessMetadataDefsOpts - Optional Parameters:
+	 * @param "AtlasBusinessMetadataDef" (optional.Interface of []AtlasBusinessMetadataDef) -  The business metadata definitions to create
+	 * @return []BusinessMetadataDefResponse
+	 */
+	CreateBusinessMetadataDefs(ctx _context.Context, localVarOptionals *CreateBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
+
+	/*
+	 * CreateExporter Create an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param body Info
+	 * @return CreateExporterResponse
+	 */
+	CreateExporter(ctx _context.Context, body CreateExporterRequest) (CreateExporterResponse, *_nethttp.Response, error)
+
+	/*
+	 * CreateOrUpdate Method for CreateOrUpdate
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *CreateOrUpdateOpts - Optional Parameters:
+	 * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) -
+	 */
+	CreateOrUpdate(ctx _context.Context, localVarOptionals *CreateOrUpdateOpts) (*_nethttp.Response, error)
+
+	/*
+	 * CreateTagDefs Bulk create API for tag definitions.
+	 *
+	 * Bulk create API for tag definitions.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *CreateTagDefsOpts - Optional Parameters:
+	 * @param "TagDef" (optional.Interface of []TagDef) -  The tag definitions to create
+	 * @return []TagDefResponse
+	 */
+	CreateTagDefs(ctx _context.Context, localVarOptionals *CreateTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error)
+
+	/*
+	 * CreateTags Bulk API to create multiple tags.
+	 *
+	 * Bulk API to create multiple tags.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *CreateTagsOpts - Optional Parameters:
+	 * @param "Tag" (optional.Interface of []Tag) -  The tags
+	 * @return []TagResponse
+	 */
+	CreateTags(ctx _context.Context, localVarOptionals *CreateTagsOpts) ([]TagResponse, *_nethttp.Response, error)
+
+	/*
+	 * DeleteBusinessMetadata Delete a business metadata on an entity.
+	 *
+	 * Delete a business metadata on an entity.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param typeName The type of the entity
+	 * @param qualifiedName The qualified name of the entity
+	 * @param bmName The name of the business metadata
+	 */
+	DeleteBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string, bmName string) (*_nethttp.Response, error)
+
+	/*
+	 * DeleteBusinessMetadataDef Delete API for business metadata definition identified by its name.
+	 *
+	 * Delete API for business metadata definition identified by its name.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param bmName The name of the business metadata definition
+	 */
+	DeleteBusinessMetadataDef(ctx _context.Context, bmName string) (*_nethttp.Response, error)
+
+	/*
+	 * DeleteByUniqueAttributes Method for DeleteByUniqueAttributes
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param typeName
+	 * @param qualifiedName
+	 */
+	DeleteByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string) (*_nethttp.Response, error)
+
+	/*
+	 * DeleteExporter Delete an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param name Name of the exporter
+	 */
+	DeleteExporter(ctx _context.Context, name string) (*_nethttp.Response, error)
+
+	/*
+	 * DeleteSchemaVersion Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Name of the Subject
+	 * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	 * @param optional nil or *DeleteSchemaVersionOpts - Optional Parameters:
+	 * @param "Permanent" (optional.Bool) -
+	 * @return int32
+	 */
+	DeleteSchemaVersion(ctx _context.Context, subject string, version string, localVarOptionals *DeleteSchemaVersionOpts) (int32, *_nethttp.Response, error)
+
+	/*
+	 * DeleteSubject Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject the name of the subject
+	 * @param optional nil or *DeleteSubjectOpts - Optional Parameters:
+	 * @param "Permanent" (optional.Bool) -
+	 * @return []int32
+	 */
+	DeleteSubject(ctx _context.Context, subject string, localVarOptionals *DeleteSubjectOpts) ([]int32, *_nethttp.Response, error)
+
+	/*
+	 * DeleteSubjectConfig Deletes the specified subject-level compatibility level config and revert to the global default.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject the name of the subject
+	 * @return string
+	 */
+	DeleteSubjectConfig(ctx _context.Context, subject string) (string, *_nethttp.Response, error)
+
+	/*
+	 * DeleteSubjectMode Deletes the specified subject-level mode and revert to the global default.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject the name of the subject
+	 * @return string
+	 */
+	DeleteSubjectMode(ctx _context.Context, subject string) (string, *_nethttp.Response, error)
+
+	/*
+	 * DeleteTag Delete a tag on an entity.
+	 *
+	 * Delete a tag on an entity.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param typeName The type of the entity
+	 * @param qualifiedName The qualified name of the entity
+	 * @param tagName The name of the tag
+	 */
+	DeleteTag(ctx _context.Context, typeName string, qualifiedName string, tagName string) (*_nethttp.Response, error)
+
+	/*
+	 * DeleteTagDef Delete API for tag definition identified by its name.
+	 *
+	 * Delete API for tag definition identified by its name.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param tagName The name of the tag definition
+	 */
+	DeleteTagDef(ctx _context.Context, tagName string) (*_nethttp.Response, error)
+
+	/*
+	 * Get Schema Registry Root Resource
+	 *
+	 * The Root resource is a no-op.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return map[string]map[string]interface{}
+	 */
+	Get(ctx _context.Context) (map[string]map[string]interface{}, *_nethttp.Response, error)
+
+	/*
+	 * GetAllBusinessMetadataDefs Bulk retrieval API for retrieving business metadata definitions.
+	 *
+	 * Bulk retrieval API for retrieving business metadata definitions.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *GetAllBusinessMetadataDefsOpts - Optional Parameters:
+	 * @param "Prefix" (optional.String) -  The prefix of a business metadata definition name
+	 * @return []BusinessMetadataDefResponse
+	 */
+	GetAllBusinessMetadataDefs(ctx _context.Context, localVarOptionals *GetAllBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
+
+	/*
+	 * GetAllTagDefs Bulk retrieval API for retrieving tag definitions.
+	 *
+	 * Bulk retrieval API for retrieving tag definitions.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *GetAllTagDefsOpts - Optional Parameters:
+	 * @param "Prefix" (optional.String) -  The prefix of a tag definition name
+	 * @return []TagDefResponse
+	 */
+	GetAllTagDefs(ctx _context.Context, localVarOptionals *GetAllTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error)
+
+	/*
+	 * GetBusinessMetadata Gets the list of business metadata for a given entity represented by a qualified name.
+	 *
+	 * Gets the list of business metadata for a given entity represented by a qualified name.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param typeName The type of the entity
+	 * @param qualifiedName The qualified name of the entity
+	 * @return []BusinessMetadataResponse
+	 */
+	GetBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string) ([]BusinessMetadataResponse, *_nethttp.Response, error)
+
+	/*
+	 * GetBusinessMetadataDefByName Get the business metadata definition with the given name.
+	 *
+	 * Get the business metadata definition with the given name.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param bmName The name of the business metadata definition
+	 * @return AtlasBusinessMetadataDef
+	 */
+	GetBusinessMetadataDefByName(ctx _context.Context, bmName string) (AtlasBusinessMetadataDef, *_nethttp.Response, error)
+
+	/*
+	 * GetByUniqueAttributes Fetch complete definition of an entity given its type and unique attribute.
+	 *
+	 * Fetch complete definition of an entity given its type and unique attribute.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param typeName The type of the entity
+	 * @param qualifiedName The qualified name of the entity
+	 * @param optional nil or *GetByUniqueAttributesOpts - Optional Parameters:
+	 * @param "MinExtInfo" (optional.Bool) -  Whether to only populate header and schema attributes
+	 * @param "IgnoreRelationships" (optional.Bool) -  Whether to ignore relationships
+	 * @param "IncludeInternalPrefix" (optional.String) -  If not null, include internal attributes that start with this prefix
+	 * @return AtlasEntityWithExtInfo
+	 */
+	GetByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string, localVarOptionals *GetByUniqueAttributesOpts) (AtlasEntityWithExtInfo, *_nethttp.Response, error)
+
+	/*
+	 * GetClusterId Get the server metadata
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return ServerClusterId
+	 */
+	GetClusterId(ctx _context.Context) (ServerClusterId, *_nethttp.Response, error)
+
+	/*
+	 * GetExporterConfig Get the config for an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param name
+	 * @return map[string]string
+	 */
+	GetExporterConfig(ctx _context.Context, name string) (map[string]string, *_nethttp.Response, error)
+
+	/*
+	 * GetExporterInfo Get the info for an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param name
+	 * @return ExporterInfo
+	 */
+	GetExporterInfo(ctx _context.Context, name string) (ExporterInfo, *_nethttp.Response, error)
+
+	/*
+	 * GetExporterStatus Get the status for an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param name
+	 * @return ExporterStatus
+	 */
+	GetExporterStatus(ctx _context.Context, name string) (ExporterStatus, *_nethttp.Response, error)
+
+	/*
+	 * GetExporters Get a list of exporter names.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return []string
+	 */
+	GetExporters(ctx _context.Context) ([]string, *_nethttp.Response, error)
+
+	/*
+	 * GetMode Get mode for a subject.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Name of the Subject
+	 * @param optional nil or *GetModeOpts - Optional Parameters:
+	 * @param "DefaultToGlobal" (optional.Bool) -
+	 * @return Mode
+	 */
+	GetMode(ctx _context.Context, subject string, localVarOptionals *GetModeOpts) (Mode, *_nethttp.Response, error)
+
+	/*
+	 * GetReferencedBy Get the schemas that reference the specified schema.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Name of the Subject
+	 * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	 * @return []int32
+	 */
+	GetReferencedBy(ctx _context.Context, subject string, version string) ([]int32, *_nethttp.Response, error)
+
+	/*
+	 * GetSchema Get the schema string identified by the input ID.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param id Globally unique identifier of the schema
+	 * @param optional nil or *GetSchemaOpts - Optional Parameters:
+	 * @param "Subject" (optional.String) -
+	 * @param "Format" (optional.String) -
+	 * @param "FetchMaxId" (optional.Bool) -
+	 * @return SchemaString
+	 */
+	GetSchema(ctx _context.Context, id int32, localVarOptionals *GetSchemaOpts) (SchemaString, *_nethttp.Response, error)
+
+	/*
+	 * GetSchemaByVersion Get a specific version of the schema registered under this subject.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Name of the Subject
+	 * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	 * @param optional nil or *GetSchemaByVersionOpts - Optional Parameters:
+	 * @param "Deleted" (optional.Bool) -
+	 * @return Schema
+	 */
+	GetSchemaByVersion(ctx _context.Context, subject string, version string, localVarOptionals *GetSchemaByVersionOpts) (Schema, *_nethttp.Response, error)
+
+	/*
+	 * GetSchemaOnly Get the schema for the specified version of this subject. The unescaped schema only is returned.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Name of the Subject
+	 * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	 * @param optional nil or *GetSchemaOnlyOpts - Optional Parameters:
+	 * @param "Deleted" (optional.Bool) -
+	 * @return string
+	 */
+	GetSchemaOnly(ctx _context.Context, subject string, version string, localVarOptionals *GetSchemaOnlyOpts) (string, *_nethttp.Response, error)
+
+	/*
+	 * GetSchemaTypes Get the schema types supported by this registry.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return []string
+	 */
+	GetSchemaTypes(ctx _context.Context) ([]string, *_nethttp.Response, error)
+
+	/*
+	 * GetSchemas Get the schemas.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *GetSchemasOpts - Optional Parameters:
+	 * @param "SubjectPrefix" (optional.String) -
+	 * @param "Deleted" (optional.Bool) -
+	 * @param "LatestOnly" (optional.Bool) -
+	 * @param "Offset" (optional.Int32) -
+	 * @param "Limit" (optional.Int32) -
+	 * @return []Schema
+	 */
+	GetSchemas(ctx _context.Context, localVarOptionals *GetSchemasOpts) ([]Schema, *_nethttp.Response, error)
+
+	/*
+	 * GetSubjectLevelConfig Get compatibility level for a subject.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject
+	 * @param optional nil or *GetSubjectLevelConfigOpts - Optional Parameters:
+	 * @param "DefaultToGlobal" (optional.Bool) -
+	 * @return Config
+	 */
+	GetSubjectLevelConfig(ctx _context.Context, subject string, localVarOptionals *GetSubjectLevelConfigOpts) (Config, *_nethttp.Response, error)
+
+	/*
+	 * GetSubjects Get all the subjects associated with the input ID.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param id Globally unique identifier of the schema
+	 * @param optional nil or *GetSubjectsOpts - Optional Parameters:
+	 * @param "Subject" (optional.String) -
+	 * @param "Deleted" (optional.Bool) -
+	 * @return []string
+	 */
+	GetSubjects(ctx _context.Context, id int32, localVarOptionals *GetSubjectsOpts) ([]string, *_nethttp.Response, error)
+
+	/*
+	 * GetTagDefByName Get the tag definition with the given name.
+	 *
+	 * Get the tag definition with the given name.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param tagName The name of the tag definiton
+	 * @return TagDef
+	 */
+	GetTagDefByName(ctx _context.Context, tagName string) (TagDef, *_nethttp.Response, error)
+
+	/*
+	 * GetTags Gets the list of classifications for a given entity represented by a qualifed name.
+	 *
+	 * Gets the list of classifications for a given entity represented by a qualifed name.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param typeName The type of the entity
+	 * @param qualifiedName The qualified name of the entity
+	 * @return []TagResponse
+	 */
+	GetTags(ctx _context.Context, typeName string, qualifiedName string) ([]TagResponse, *_nethttp.Response, error)
+
+	/*
+	 * GetTopLevelConfig Get global compatibility level.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return Config
+	 */
+	GetTopLevelConfig(ctx _context.Context) (Config, *_nethttp.Response, error)
+
+	/*
+	 * GetTopLevelMode Get global mode.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return Mode
+	 */
+	GetTopLevelMode(ctx _context.Context) (Mode, *_nethttp.Response, error)
+
+	/*
+	 * GetVersions Get all the subject-version pairs associated with the input ID.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param id Globally unique identifier of the schema
+	 * @param optional nil or *GetVersionsOpts - Optional Parameters:
+	 * @param "Subject" (optional.String) -
+	 * @param "Deleted" (optional.Bool) -
+	 * @return []SubjectVersion
+	 */
+	GetVersions(ctx _context.Context, id int32, localVarOptionals *GetVersionsOpts) ([]SubjectVersion, *_nethttp.Response, error)
+
+	/*
+	 * List Get a list of registered subjects.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *ListOpts - Optional Parameters:
+	 * @param "SubjectPrefix" (optional.String) -
+	 * @param "Deleted" (optional.Bool) -
+	 * @return []string
+	 */
+	List(ctx _context.Context, localVarOptionals *ListOpts) ([]string, *_nethttp.Response, error)
+
+	/*
+	 * ListContexts Get a list of contexts.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return []string
+	 */
+	ListContexts(ctx _context.Context) ([]string, *_nethttp.Response, error)
+
+	/*
+	 * ListVersions Get a list of versions registered under the specified subject.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Name of the Subject
+	 * @param optional nil or *ListVersionsOpts - Optional Parameters:
+	 * @param "Deleted" (optional.Bool) -
+	 * @return []int32
+	 */
+	ListVersions(ctx _context.Context, subject string, localVarOptionals *ListVersionsOpts) ([]int32, *_nethttp.Response, error)
+
+	/*
+	 * LookUpSchemaUnderSubject Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Subject under which the schema will be registered
+	 * @param body Schema
+	 * @param optional nil or *LookUpSchemaUnderSubjectOpts - Optional Parameters:
+	 * @param "Deleted" (optional.Bool) -
+	 */
+	LookUpSchemaUnderSubject(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*_nethttp.Response, error)
+
+	/*
+	 * PartialUpdateByUniqueAttributes Method for PartialUpdateByUniqueAttributes
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *PartialUpdateByUniqueAttributesOpts - Optional Parameters:
+	 * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) -
+	 */
+	PartialUpdateByUniqueAttributes(ctx _context.Context, localVarOptionals *PartialUpdateByUniqueAttributesOpts) (*_nethttp.Response, error)
+
+	/*
+	 * PauseExporter Pause an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param name Name of the exporter
+	 * @return UpdateExporterResponse
+	 */
+	PauseExporter(ctx _context.Context, name string) (UpdateExporterResponse, *_nethttp.Response, error)
+
+	/*
+	 * Post Method for Post
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return map[string]string
+	 */
+	Post(ctx _context.Context) (map[string]string, *_nethttp.Response, error)
+
+	/*
+	 * PutExporter Alters an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param name Name of the exporter
+	 * @param body Info
+	 * @return UpdateExporterResponse
+	 */
+	PutExporter(ctx _context.Context, name string, body UpdateExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error)
+
+	/*
+	 * PutExporterConfig Alters the config of an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param name Name of the exporter
+	 * @param body Config
+	 * @return UpdateExporterResponse
+	 */
+	PutExporterConfig(ctx _context.Context, name string, body map[string]string) (UpdateExporterResponse, *_nethttp.Response, error)
+
+	/*
+	 * Register Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Name of the Subject
+	 * @param body Schema
+	 * @return RegisterSchemaResponse
+	 */
+	Register(ctx _context.Context, subject string, body RegisterSchemaRequest) (RegisterSchemaResponse, *_nethttp.Response, error)
+
+	/*
+	 * ResetExporter Reset an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param name Name of the exporter
+	 * @return UpdateExporterResponse
+	 */
+	ResetExporter(ctx _context.Context, name string) (UpdateExporterResponse, *_nethttp.Response, error)
+
+	/*
+	 * ResumeExporter Resume an exporter.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param name Name of the exporter
+	 * @return UpdateExporterResponse
+	 */
+	ResumeExporter(ctx _context.Context, name string) (UpdateExporterResponse, *_nethttp.Response, error)
+
+	/*
+	 * SearchUsingAttribute Retrieve data for the specified attribute search query.
+	 *
+	 * Retrieve data for the specified attribute search query.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *SearchUsingAttributeOpts - Optional Parameters:
+	 * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
+	 * @param "Types" (optional.String) -
+	 * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
+	 * @param "Attrs" (optional.String) -
+	 * @param "AttrName" (optional.Interface of []string) -  The attribute to search
+	 * @param "AttrValuePrefix" (optional.Interface of []string) -  The prefix for the attribute value to search
+	 * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities tagged with the given tag
+	 * @param "TimeRangeType" (optional.String) -  The type of time range search, default is CUSTOM
+	 * @param "TimeRangeAttr" (optional.String) -  The attribute for a time range search
+	 * @param "TimeRangeStart" (optional.Int64) -  The start for a custom time range search in ms since the epoch
+	 * @param "TimeRangeEnd" (optional.Int64) -  The end for a custom time range search in ms since the epoch
+	 * @param "SortBy" (optional.String) -  An attribute to sort by
+	 * @param "SortOrder" (optional.String) -  Sort order, either ASCENDING (default) or DESCENDING
+	 * @param "Deleted" (optional.Bool) -  Whether to include deleted entities
+	 * @param "Limit" (optional.Int32) -  Limit the result set to only include the specified number of entries
+	 * @param "Offset" (optional.Int32) -  Start offset of the result set (useful for pagination)
+	 * @return SearchResult
+	 */
+	SearchUsingAttribute(ctx _context.Context, localVarOptionals *SearchUsingAttributeOpts) (SearchResult, *_nethttp.Response, error)
+
+	/*
+	 * SearchUsingBasic Retrieve data for the specified fulltext query.
+	 *
+	 * Retrieve data for the specified fulltext query.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *SearchUsingBasicOpts - Optional Parameters:
+	 * @param "Query" (optional.String) -  The full-text query
+	 * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
+	 * @param "Types" (optional.String) -
+	 * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
+	 * @param "Attrs" (optional.String) -
+	 * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities with the given tag
+	 * @param "TimeRangeType" (optional.String) -  The type of time range search, default is CUSTOM
+	 * @param "TimeRangeAttr" (optional.String) -  The attribute for a time range search
+	 * @param "TimeRangeStart" (optional.Int64) -  The start for a custom time range search in ms since the epoch
+	 * @param "TimeRangeEnd" (optional.Int64) -  The end for a custom time range search in ms since the epoch
+	 * @param "SortBy" (optional.String) -  An attribute to sort by
+	 * @param "SortOrder" (optional.String) -  Sort order, either ASCENDING (default) or DESCENDING
+	 * @param "Deleted" (optional.Bool) -  Whether to include deleted entities
+	 * @param "Limit" (optional.Int32) -  Limit the result set to only include the specified number of entries
+	 * @param "Offset" (optional.Int32) -  Start offset of the result set (useful for pagination)
+	 * @return SearchResult
+	 */
+	SearchUsingBasic(ctx _context.Context, localVarOptionals *SearchUsingBasicOpts) (SearchResult, *_nethttp.Response, error)
+
+	/*
+	 * TestCompatibilityBySubjectName Test input schema against a particular version of a subject's schema for compatibility.
+	 *
+	 * the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject&#39;s compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Subject of the schema version against which compatibility is to be tested
+	 * @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
+	 * @param body Schema
+	 * @param optional nil or *TestCompatibilityBySubjectNameOpts - Optional Parameters:
+	 * @param "ContentType" (optional.String) -
+	 * @param "Accept" (optional.String) -
+	 * @param "Verbose" (optional.Bool) -
+	 * @return CompatibilityCheckResponse
+	 */
+	TestCompatibilityBySubjectName(ctx _context.Context, subject string, version string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityBySubjectNameOpts) (CompatibilityCheckResponse, *_nethttp.Response, error)
+
+	/*
+	 * TestCompatibilityForSubject Test input schema against a subject's schemas for compatibility, based on the compatibility level of the subject configured. In other word, it will perform the same compatibility check as register for that subject
+	 *
+	 * the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject&#39;s compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Subject of the schema version against which compatibility is to be tested
+	 * @param body Schema
+	 * @param optional nil or *TestCompatibilityForSubjectOpts - Optional Parameters:
+	 * @param "ContentType" (optional.String) -
+	 * @param "Accept" (optional.String) -
+	 * @param "Verbose" (optional.Bool) -
+	 * @return CompatibilityCheckResponse
+	 */
+	TestCompatibilityForSubject(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityForSubjectOpts) (CompatibilityCheckResponse, *_nethttp.Response, error)
+
+	/*
+	 * UpdateBusinessMetadata Bulk API to update multiple business metadata.
+	 *
+	 * Bulk API to update multiple business metadata.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *UpdateBusinessMetadataOpts - Optional Parameters:
+	 * @param "BusinessMetadata" (optional.Interface of []BusinessMetadata) -  The business metadata
+	 * @return []BusinessMetadataResponse
+	 */
+	UpdateBusinessMetadata(ctx _context.Context, localVarOptionals *UpdateBusinessMetadataOpts) ([]BusinessMetadataResponse, *_nethttp.Response, error)
+
+	/*
+	 * UpdateBusinessMetadataDefs Bulk update API for business metadata definitions.
+	 *
+	 * Bulk update API for business metadata definitions.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *UpdateBusinessMetadataDefsOpts - Optional Parameters:
+	 * @param "AtlasBusinessMetadataDef" (optional.Interface of []AtlasBusinessMetadataDef) -  The business metadata definitions to update
+	 * @return []BusinessMetadataDefResponse
+	 */
+	UpdateBusinessMetadataDefs(ctx _context.Context, localVarOptionals *UpdateBusinessMetadataDefsOpts) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
+
+	/*
+	 * UpdateMode Update mode for the specified subject.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Name of the Subject
+	 * @param body Update Request
+	 * @return ModeUpdateRequest
+	 */
+	UpdateMode(ctx _context.Context, subject string, body ModeUpdateRequest) (ModeUpdateRequest, *_nethttp.Response, error)
+
+	/*
+	 * UpdateSubjectLevelConfig Update compatibility level for the specified subject.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param subject Name of the Subject
+	 * @param body Config Update Request
+	 * @return ConfigUpdateRequest
+	 */
+	UpdateSubjectLevelConfig(ctx _context.Context, subject string, body ConfigUpdateRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
+
+	/*
+	 * UpdateTagDefs Bulk update API for tag definitions.
+	 *
+	 * Bulk update API for tag definitions.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *UpdateTagDefsOpts - Optional Parameters:
+	 * @param "TagDef" (optional.Interface of []TagDef) -  The tag definitions to update
+	 * @return []TagDefResponse
+	 */
+	UpdateTagDefs(ctx _context.Context, localVarOptionals *UpdateTagDefsOpts) ([]TagDefResponse, *_nethttp.Response, error)
+
+	/*
+	 * UpdateTags Bulk API to update multiple tags.
+	 *
+	 * Bulk API to update multiple tags.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param optional nil or *UpdateTagsOpts - Optional Parameters:
+	 * @param "Tag" (optional.Interface of []Tag) -  The tags
+	 * @return []TagResponse
+	 */
+	UpdateTags(ctx _context.Context, localVarOptionals *UpdateTagsOpts) ([]TagResponse, *_nethttp.Response, error)
+
+	/*
+	 * UpdateTopLevelConfig Update global compatibility level.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param body Config Update Request
+	 * @return ConfigUpdateRequest
+	 */
+	UpdateTopLevelConfig(ctx _context.Context, body ConfigUpdateRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
+
+	/*
+	 * UpdateTopLevelMode Update global mode.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param body Update Request
+	 * @return ModeUpdateRequest
+	 */
+	UpdateTopLevelMode(ctx _context.Context, body ModeUpdateRequest) (ModeUpdateRequest, *_nethttp.Response, error)
 }
 
 // DefaultApiService DefaultApi service
 type DefaultApiService service
 
+/*
+ * AsyncapiPut Method for AsyncapiPut
+ *
+ * Get number of times the cli tool is used to export/produce the spec file
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ */
+func (a *DefaultApiService) AsyncapiPut(ctx _context.Context) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/asyncapi"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 // CreateBusinessMetadataOpts Optional parameters for the method 'CreateBusinessMetadata'
 type CreateBusinessMetadataOpts struct {
-    BusinessMetadata optional.Interface
+	BusinessMetadata optional.Interface
 }
 
 /*
@@ -850,7 +926,7 @@ func (a *DefaultApiService) CreateBusinessMetadata(ctx _context.Context, localVa
 
 // CreateBusinessMetadataDefsOpts Optional parameters for the method 'CreateBusinessMetadataDefs'
 type CreateBusinessMetadataDefsOpts struct {
-    AtlasBusinessMetadataDef optional.Interface
+	AtlasBusinessMetadataDef optional.Interface
 }
 
 /*
@@ -1021,7 +1097,7 @@ func (a *DefaultApiService) CreateExporter(ctx _context.Context, body CreateExpo
 
 // CreateOrUpdateOpts Optional parameters for the method 'CreateOrUpdate'
 type CreateOrUpdateOpts struct {
-    AtlasEntityWithExtInfo optional.Interface
+	AtlasEntityWithExtInfo optional.Interface
 }
 
 /*
@@ -1029,7 +1105,7 @@ type CreateOrUpdateOpts struct {
  *
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *CreateOrUpdateOpts - Optional Parameters:
- * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) - 
+ * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) -
  */
 func (a *DefaultApiService) CreateOrUpdate(ctx _context.Context, localVarOptionals *CreateOrUpdateOpts) (*_nethttp.Response, error) {
 	var (
@@ -1101,7 +1177,7 @@ func (a *DefaultApiService) CreateOrUpdate(ctx _context.Context, localVarOptiona
 
 // CreateTagDefsOpts Optional parameters for the method 'CreateTagDefs'
 type CreateTagDefsOpts struct {
-    TagDef optional.Interface
+	TagDef optional.Interface
 }
 
 /*
@@ -1194,7 +1270,7 @@ func (a *DefaultApiService) CreateTagDefs(ctx _context.Context, localVarOptional
 
 // CreateTagsOpts Optional parameters for the method 'CreateTags'
 type CreateTagsOpts struct {
-    Tag optional.Interface
+	Tag optional.Interface
 }
 
 /*
@@ -1306,11 +1382,11 @@ func (a *DefaultApiService) DeleteBusinessMetadata(ctx _context.Context, typeNam
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata/{bmName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(bmName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(bmName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1379,7 +1455,7 @@ func (a *DefaultApiService) DeleteBusinessMetadataDef(ctx _context.Context, bmNa
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/businessmetadatadefs/{bmName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(bmName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(bmName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1447,9 +1523,9 @@ func (a *DefaultApiService) DeleteByUniqueAttributes(ctx _context.Context, typeN
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1516,7 +1592,7 @@ func (a *DefaultApiService) DeleteExporter(ctx _context.Context, name string) (*
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/exporters/{name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1568,7 +1644,7 @@ func (a *DefaultApiService) DeleteExporter(ctx _context.Context, name string) (*
 
 // DeleteSchemaVersionOpts Optional parameters for the method 'DeleteSchemaVersion'
 type DeleteSchemaVersionOpts struct {
-    Permanent optional.Bool
+	Permanent optional.Bool
 }
 
 /*
@@ -1578,7 +1654,7 @@ type DeleteSchemaVersionOpts struct {
  * @param subject Name of the Subject
  * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
  * @param optional nil or *DeleteSchemaVersionOpts - Optional Parameters:
- * @param "Permanent" (optional.Bool) - 
+ * @param "Permanent" (optional.Bool) -
  * @return int32
  */
 func (a *DefaultApiService) DeleteSchemaVersion(ctx _context.Context, subject string, version string, localVarOptionals *DeleteSchemaVersionOpts) (int32, *_nethttp.Response, error) {
@@ -1593,9 +1669,9 @@ func (a *DefaultApiService) DeleteSchemaVersion(ctx _context.Context, subject st
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subjects/{subject}/versions/{version}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1659,7 +1735,7 @@ func (a *DefaultApiService) DeleteSchemaVersion(ctx _context.Context, subject st
 
 // DeleteSubjectOpts Optional parameters for the method 'DeleteSubject'
 type DeleteSubjectOpts struct {
-    Permanent optional.Bool
+	Permanent optional.Bool
 }
 
 /*
@@ -1668,7 +1744,7 @@ type DeleteSubjectOpts struct {
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject the name of the subject
  * @param optional nil or *DeleteSubjectOpts - Optional Parameters:
- * @param "Permanent" (optional.Bool) - 
+ * @param "Permanent" (optional.Bool) -
  * @return []int32
  */
 func (a *DefaultApiService) DeleteSubject(ctx _context.Context, subject string, localVarOptionals *DeleteSubjectOpts) ([]int32, *_nethttp.Response, error) {
@@ -1683,7 +1759,7 @@ func (a *DefaultApiService) DeleteSubject(ctx _context.Context, subject string, 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subjects/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1764,7 +1840,7 @@ func (a *DefaultApiService) DeleteSubjectConfig(ctx _context.Context, subject st
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/config/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1842,7 +1918,7 @@ func (a *DefaultApiService) DeleteSubjectMode(ctx _context.Context, subject stri
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/mode/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1922,11 +1998,11 @@ func (a *DefaultApiService) DeleteTag(ctx _context.Context, typeName string, qua
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"tagName"+"}", _neturl.PathEscape(parameterToString(tagName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tagName"+"}", _neturl.PathEscape(parameterToString(tagName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1995,7 +2071,7 @@ func (a *DefaultApiService) DeleteTagDef(ctx _context.Context, tagName string) (
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/tagdefs/{tagName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tagName"+"}", _neturl.PathEscape(parameterToString(tagName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tagName"+"}", _neturl.PathEscape(parameterToString(tagName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2124,7 +2200,7 @@ func (a *DefaultApiService) Get(ctx _context.Context) (map[string]map[string]int
 
 // GetAllBusinessMetadataDefsOpts Optional parameters for the method 'GetAllBusinessMetadataDefs'
 type GetAllBusinessMetadataDefsOpts struct {
-    Prefix optional.String
+	Prefix optional.String
 }
 
 /*
@@ -2211,7 +2287,7 @@ func (a *DefaultApiService) GetAllBusinessMetadataDefs(ctx _context.Context, loc
 
 // GetAllTagDefsOpts Optional parameters for the method 'GetAllTagDefs'
 type GetAllTagDefsOpts struct {
-    Prefix optional.String
+	Prefix optional.String
 }
 
 /*
@@ -2318,9 +2394,9 @@ func (a *DefaultApiService) GetBusinessMetadata(ctx _context.Context, typeName s
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/businessmetadata"
-	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2400,7 +2476,7 @@ func (a *DefaultApiService) GetBusinessMetadataDefByName(ctx _context.Context, b
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/businessmetadatadefs/{bmName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(bmName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"bmName"+"}", _neturl.PathEscape(parameterToString(bmName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2461,9 +2537,9 @@ func (a *DefaultApiService) GetBusinessMetadataDefByName(ctx _context.Context, b
 
 // GetByUniqueAttributesOpts Optional parameters for the method 'GetByUniqueAttributes'
 type GetByUniqueAttributesOpts struct {
-    MinExtInfo optional.Bool
-    IgnoreRelationships optional.Bool
-    IncludeInternalPrefix optional.String
+	MinExtInfo            optional.Bool
+	IgnoreRelationships   optional.Bool
+	IncludeInternalPrefix optional.String
 }
 
 /*
@@ -2492,9 +2568,9 @@ func (a *DefaultApiService) GetByUniqueAttributes(ctx _context.Context, typeName
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2656,7 +2732,7 @@ func (a *DefaultApiService) GetExporterConfig(ctx _context.Context, name string)
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/exporters/{name}/config"
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2734,7 +2810,7 @@ func (a *DefaultApiService) GetExporterInfo(ctx _context.Context, name string) (
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/exporters/{name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2812,7 +2888,7 @@ func (a *DefaultApiService) GetExporterStatus(ctx _context.Context, name string)
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/exporters/{name}/status"
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -2948,7 +3024,7 @@ func (a *DefaultApiService) GetExporters(ctx _context.Context) ([]string, *_neth
 
 // GetModeOpts Optional parameters for the method 'GetMode'
 type GetModeOpts struct {
-    DefaultToGlobal optional.Bool
+	DefaultToGlobal optional.Bool
 }
 
 /*
@@ -2957,7 +3033,7 @@ type GetModeOpts struct {
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject Name of the Subject
  * @param optional nil or *GetModeOpts - Optional Parameters:
- * @param "DefaultToGlobal" (optional.Bool) - 
+ * @param "DefaultToGlobal" (optional.Bool) -
  * @return Mode
  */
 func (a *DefaultApiService) GetMode(ctx _context.Context, subject string, localVarOptionals *GetModeOpts) (Mode, *_nethttp.Response, error) {
@@ -2972,7 +3048,7 @@ func (a *DefaultApiService) GetMode(ctx _context.Context, subject string, localV
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/mode/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3054,9 +3130,9 @@ func (a *DefaultApiService) GetReferencedBy(ctx _context.Context, subject string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subjects/{subject}/versions/{version}/referencedby"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3117,9 +3193,9 @@ func (a *DefaultApiService) GetReferencedBy(ctx _context.Context, subject string
 
 // GetSchemaOpts Optional parameters for the method 'GetSchema'
 type GetSchemaOpts struct {
-    Subject optional.String
-    Format optional.String
-    FetchMaxId optional.Bool
+	Subject    optional.String
+	Format     optional.String
+	FetchMaxId optional.Bool
 }
 
 /*
@@ -3128,9 +3204,9 @@ type GetSchemaOpts struct {
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Globally unique identifier of the schema
  * @param optional nil or *GetSchemaOpts - Optional Parameters:
- * @param "Subject" (optional.String) - 
- * @param "Format" (optional.String) - 
- * @param "FetchMaxId" (optional.Bool) - 
+ * @param "Subject" (optional.String) -
+ * @param "Format" (optional.String) -
+ * @param "FetchMaxId" (optional.Bool) -
  * @return SchemaString
  */
 func (a *DefaultApiService) GetSchema(ctx _context.Context, id int32, localVarOptionals *GetSchemaOpts) (SchemaString, *_nethttp.Response, error) {
@@ -3145,7 +3221,7 @@ func (a *DefaultApiService) GetSchema(ctx _context.Context, id int32, localVarOp
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/schemas/ids/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3215,7 +3291,7 @@ func (a *DefaultApiService) GetSchema(ctx _context.Context, id int32, localVarOp
 
 // GetSchemaByVersionOpts Optional parameters for the method 'GetSchemaByVersion'
 type GetSchemaByVersionOpts struct {
-    Deleted optional.Bool
+	Deleted optional.Bool
 }
 
 /*
@@ -3225,7 +3301,7 @@ type GetSchemaByVersionOpts struct {
  * @param subject Name of the Subject
  * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
  * @param optional nil or *GetSchemaByVersionOpts - Optional Parameters:
- * @param "Deleted" (optional.Bool) - 
+ * @param "Deleted" (optional.Bool) -
  * @return Schema
  */
 func (a *DefaultApiService) GetSchemaByVersion(ctx _context.Context, subject string, version string, localVarOptionals *GetSchemaByVersionOpts) (Schema, *_nethttp.Response, error) {
@@ -3240,9 +3316,9 @@ func (a *DefaultApiService) GetSchemaByVersion(ctx _context.Context, subject str
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subjects/{subject}/versions/{version}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3306,7 +3382,7 @@ func (a *DefaultApiService) GetSchemaByVersion(ctx _context.Context, subject str
 
 // GetSchemaOnlyOpts Optional parameters for the method 'GetSchemaOnly'
 type GetSchemaOnlyOpts struct {
-    Deleted optional.Bool
+	Deleted optional.Bool
 }
 
 /*
@@ -3316,7 +3392,7 @@ type GetSchemaOnlyOpts struct {
  * @param subject Name of the Subject
  * @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
  * @param optional nil or *GetSchemaOnlyOpts - Optional Parameters:
- * @param "Deleted" (optional.Bool) - 
+ * @param "Deleted" (optional.Bool) -
  * @return string
  */
 func (a *DefaultApiService) GetSchemaOnly(ctx _context.Context, subject string, version string, localVarOptionals *GetSchemaOnlyOpts) (string, *_nethttp.Response, error) {
@@ -3331,9 +3407,9 @@ func (a *DefaultApiService) GetSchemaOnly(ctx _context.Context, subject string, 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subjects/{subject}/versions/{version}/schema"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3472,11 +3548,11 @@ func (a *DefaultApiService) GetSchemaTypes(ctx _context.Context) ([]string, *_ne
 
 // GetSchemasOpts Optional parameters for the method 'GetSchemas'
 type GetSchemasOpts struct {
-    SubjectPrefix optional.String
-    Deleted optional.Bool
-    LatestOnly optional.Bool
-    Offset optional.Int32
-    Limit optional.Int32
+	SubjectPrefix optional.String
+	Deleted       optional.Bool
+	LatestOnly    optional.Bool
+	Offset        optional.Int32
+	Limit         optional.Int32
 }
 
 /*
@@ -3484,11 +3560,11 @@ type GetSchemasOpts struct {
  *
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *GetSchemasOpts - Optional Parameters:
- * @param "SubjectPrefix" (optional.String) - 
- * @param "Deleted" (optional.Bool) - 
- * @param "LatestOnly" (optional.Bool) - 
- * @param "Offset" (optional.Int32) - 
- * @param "Limit" (optional.Int32) - 
+ * @param "SubjectPrefix" (optional.String) -
+ * @param "Deleted" (optional.Bool) -
+ * @param "LatestOnly" (optional.Bool) -
+ * @param "Offset" (optional.Int32) -
+ * @param "Limit" (optional.Int32) -
  * @return []Schema
  */
 func (a *DefaultApiService) GetSchemas(ctx _context.Context, localVarOptionals *GetSchemasOpts) ([]Schema, *_nethttp.Response, error) {
@@ -3577,7 +3653,7 @@ func (a *DefaultApiService) GetSchemas(ctx _context.Context, localVarOptionals *
 
 // GetSubjectLevelConfigOpts Optional parameters for the method 'GetSubjectLevelConfig'
 type GetSubjectLevelConfigOpts struct {
-    DefaultToGlobal optional.Bool
+	DefaultToGlobal optional.Bool
 }
 
 /*
@@ -3586,7 +3662,7 @@ type GetSubjectLevelConfigOpts struct {
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject
  * @param optional nil or *GetSubjectLevelConfigOpts - Optional Parameters:
- * @param "DefaultToGlobal" (optional.Bool) - 
+ * @param "DefaultToGlobal" (optional.Bool) -
  * @return Config
  */
 func (a *DefaultApiService) GetSubjectLevelConfig(ctx _context.Context, subject string, localVarOptionals *GetSubjectLevelConfigOpts) (Config, *_nethttp.Response, error) {
@@ -3601,7 +3677,7 @@ func (a *DefaultApiService) GetSubjectLevelConfig(ctx _context.Context, subject 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/config/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3665,8 +3741,8 @@ func (a *DefaultApiService) GetSubjectLevelConfig(ctx _context.Context, subject 
 
 // GetSubjectsOpts Optional parameters for the method 'GetSubjects'
 type GetSubjectsOpts struct {
-    Subject optional.String
-    Deleted optional.Bool
+	Subject optional.String
+	Deleted optional.Bool
 }
 
 /*
@@ -3675,8 +3751,8 @@ type GetSubjectsOpts struct {
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Globally unique identifier of the schema
  * @param optional nil or *GetSubjectsOpts - Optional Parameters:
- * @param "Subject" (optional.String) - 
- * @param "Deleted" (optional.Bool) - 
+ * @param "Subject" (optional.String) -
+ * @param "Deleted" (optional.Bool) -
  * @return []string
  */
 func (a *DefaultApiService) GetSubjects(ctx _context.Context, id int32, localVarOptionals *GetSubjectsOpts) ([]string, *_nethttp.Response, error) {
@@ -3691,7 +3767,7 @@ func (a *DefaultApiService) GetSubjects(ctx _context.Context, id int32, localVar
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/schemas/ids/{id}/subjects"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3777,7 +3853,7 @@ func (a *DefaultApiService) GetTagDefByName(ctx _context.Context, tagName string
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/types/tagdefs/{tagName}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tagName"+"}", _neturl.PathEscape(parameterToString(tagName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tagName"+"}", _neturl.PathEscape(parameterToString(tagName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -3858,9 +3934,9 @@ func (a *DefaultApiService) GetTags(ctx _context.Context, typeName string, quali
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags"
-	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"typeName"+"}", _neturl.PathEscape(parameterToString(typeName, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"qualifiedName"+"}", _neturl.PathEscape(parameterToString(qualifiedName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -4071,8 +4147,8 @@ func (a *DefaultApiService) GetTopLevelMode(ctx _context.Context) (Mode, *_netht
 
 // GetVersionsOpts Optional parameters for the method 'GetVersions'
 type GetVersionsOpts struct {
-    Subject optional.String
-    Deleted optional.Bool
+	Subject optional.String
+	Deleted optional.Bool
 }
 
 /*
@@ -4081,8 +4157,8 @@ type GetVersionsOpts struct {
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Globally unique identifier of the schema
  * @param optional nil or *GetVersionsOpts - Optional Parameters:
- * @param "Subject" (optional.String) - 
- * @param "Deleted" (optional.Bool) - 
+ * @param "Subject" (optional.String) -
+ * @param "Deleted" (optional.Bool) -
  * @return []SubjectVersion
  */
 func (a *DefaultApiService) GetVersions(ctx _context.Context, id int32, localVarOptionals *GetVersionsOpts) ([]SubjectVersion, *_nethttp.Response, error) {
@@ -4097,7 +4173,7 @@ func (a *DefaultApiService) GetVersions(ctx _context.Context, id int32, localVar
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/schemas/ids/{id}/versions"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(id, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.PathEscape(parameterToString(id, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -4164,8 +4240,8 @@ func (a *DefaultApiService) GetVersions(ctx _context.Context, id int32, localVar
 
 // ListOpts Optional parameters for the method 'List'
 type ListOpts struct {
-    SubjectPrefix optional.String
-    Deleted optional.Bool
+	SubjectPrefix optional.String
+	Deleted       optional.Bool
 }
 
 /*
@@ -4173,8 +4249,8 @@ type ListOpts struct {
  *
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ListOpts - Optional Parameters:
- * @param "SubjectPrefix" (optional.String) - 
- * @param "Deleted" (optional.Bool) - 
+ * @param "SubjectPrefix" (optional.String) -
+ * @param "Deleted" (optional.Bool) -
  * @return []string
  */
 func (a *DefaultApiService) List(ctx _context.Context, localVarOptionals *ListOpts) ([]string, *_nethttp.Response, error) {
@@ -4329,7 +4405,7 @@ func (a *DefaultApiService) ListContexts(ctx _context.Context) ([]string, *_neth
 
 // ListVersionsOpts Optional parameters for the method 'ListVersions'
 type ListVersionsOpts struct {
-    Deleted optional.Bool
+	Deleted optional.Bool
 }
 
 /*
@@ -4338,7 +4414,7 @@ type ListVersionsOpts struct {
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param subject Name of the Subject
  * @param optional nil or *ListVersionsOpts - Optional Parameters:
- * @param "Deleted" (optional.Bool) - 
+ * @param "Deleted" (optional.Bool) -
  * @return []int32
  */
 func (a *DefaultApiService) ListVersions(ctx _context.Context, subject string, localVarOptionals *ListVersionsOpts) ([]int32, *_nethttp.Response, error) {
@@ -4353,7 +4429,7 @@ func (a *DefaultApiService) ListVersions(ctx _context.Context, subject string, l
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subjects/{subject}/versions"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -4417,7 +4493,7 @@ func (a *DefaultApiService) ListVersions(ctx _context.Context, subject string, l
 
 // LookUpSchemaUnderSubjectOpts Optional parameters for the method 'LookUpSchemaUnderSubject'
 type LookUpSchemaUnderSubjectOpts struct {
-    Deleted optional.Bool
+	Deleted optional.Bool
 }
 
 /*
@@ -4427,7 +4503,7 @@ type LookUpSchemaUnderSubjectOpts struct {
  * @param subject Subject under which the schema will be registered
  * @param body Schema
  * @param optional nil or *LookUpSchemaUnderSubjectOpts - Optional Parameters:
- * @param "Deleted" (optional.Bool) - 
+ * @param "Deleted" (optional.Bool) -
  */
 func (a *DefaultApiService) LookUpSchemaUnderSubject(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *LookUpSchemaUnderSubjectOpts) (*_nethttp.Response, error) {
 	var (
@@ -4440,7 +4516,7 @@ func (a *DefaultApiService) LookUpSchemaUnderSubject(ctx _context.Context, subje
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subjects/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -4506,7 +4582,7 @@ func (a *DefaultApiService) LookUpSchemaUnderSubject(ctx _context.Context, subje
 
 // PartialUpdateByUniqueAttributesOpts Optional parameters for the method 'PartialUpdateByUniqueAttributes'
 type PartialUpdateByUniqueAttributesOpts struct {
-    AtlasEntityWithExtInfo optional.Interface
+	AtlasEntityWithExtInfo optional.Interface
 }
 
 /*
@@ -4514,7 +4590,7 @@ type PartialUpdateByUniqueAttributesOpts struct {
  *
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *PartialUpdateByUniqueAttributesOpts - Optional Parameters:
- * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) - 
+ * @param "AtlasEntityWithExtInfo" (optional.Interface of AtlasEntityWithExtInfo) -
  */
 func (a *DefaultApiService) PartialUpdateByUniqueAttributes(ctx _context.Context, localVarOptionals *PartialUpdateByUniqueAttributesOpts) (*_nethttp.Response, error) {
 	var (
@@ -4603,7 +4679,7 @@ func (a *DefaultApiService) PauseExporter(ctx _context.Context, name string) (Up
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/exporters/{name}/pause"
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -4757,7 +4833,7 @@ func (a *DefaultApiService) PutExporter(ctx _context.Context, name string, body 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/exporters/{name}"
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -4838,7 +4914,7 @@ func (a *DefaultApiService) PutExporterConfig(ctx _context.Context, name string,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/exporters/{name}/config"
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -4919,7 +4995,7 @@ func (a *DefaultApiService) Register(ctx _context.Context, subject string, body 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/subjects/{subject}/versions"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -4999,7 +5075,7 @@ func (a *DefaultApiService) ResetExporter(ctx _context.Context, name string) (Up
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/exporters/{name}/reset"
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -5077,7 +5153,7 @@ func (a *DefaultApiService) ResumeExporter(ctx _context.Context, name string) (U
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/exporters/{name}/resume"
-	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -5138,22 +5214,22 @@ func (a *DefaultApiService) ResumeExporter(ctx _context.Context, name string) (U
 
 // SearchUsingAttributeOpts Optional parameters for the method 'SearchUsingAttribute'
 type SearchUsingAttributeOpts struct {
-    Type_ optional.Interface
-    Types optional.String
-    Attr optional.Interface
-    Attrs optional.String
-    AttrName optional.Interface
-    AttrValuePrefix optional.Interface
-    Tag optional.Interface
-    TimeRangeType optional.String
-    TimeRangeAttr optional.String
-    TimeRangeStart optional.Int64
-    TimeRangeEnd optional.Int64
-    SortBy optional.String
-    SortOrder optional.String
-    Deleted optional.Bool
-    Limit optional.Int32
-    Offset optional.Int32
+	Type_           optional.Interface
+	Types           optional.String
+	Attr            optional.Interface
+	Attrs           optional.String
+	AttrName        optional.Interface
+	AttrValuePrefix optional.Interface
+	Tag             optional.Interface
+	TimeRangeType   optional.String
+	TimeRangeAttr   optional.String
+	TimeRangeStart  optional.Int64
+	TimeRangeEnd    optional.Int64
+	SortBy          optional.String
+	SortOrder       optional.String
+	Deleted         optional.Bool
+	Limit           optional.Int32
+	Offset          optional.Int32
 }
 
 /*
@@ -5164,9 +5240,9 @@ type SearchUsingAttributeOpts struct {
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *SearchUsingAttributeOpts - Optional Parameters:
  * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
- * @param "Types" (optional.String) - 
+ * @param "Types" (optional.String) -
  * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
- * @param "Attrs" (optional.String) - 
+ * @param "Attrs" (optional.String) -
  * @param "AttrName" (optional.Interface of []string) -  The attribute to search
  * @param "AttrValuePrefix" (optional.Interface of []string) -  The prefix for the attribute value to search
  * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities tagged with the given tag
@@ -5198,7 +5274,7 @@ func (a *DefaultApiService) SearchUsingAttribute(ctx _context.Context, localVarO
 	localVarFormParams := _neturl.Values{}
 
 	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
-		t:=localVarOptionals.Type_.Value()
+		t := localVarOptionals.Type_.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
@@ -5212,7 +5288,7 @@ func (a *DefaultApiService) SearchUsingAttribute(ctx _context.Context, localVarO
 		localVarQueryParams.Add("types", parameterToString(localVarOptionals.Types.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Attr.IsSet() {
-		t:=localVarOptionals.Attr.Value()
+		t := localVarOptionals.Attr.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
@@ -5226,7 +5302,7 @@ func (a *DefaultApiService) SearchUsingAttribute(ctx _context.Context, localVarO
 		localVarQueryParams.Add("attrs", parameterToString(localVarOptionals.Attrs.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.AttrName.IsSet() {
-		t:=localVarOptionals.AttrName.Value()
+		t := localVarOptionals.AttrName.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
@@ -5237,7 +5313,7 @@ func (a *DefaultApiService) SearchUsingAttribute(ctx _context.Context, localVarO
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.AttrValuePrefix.IsSet() {
-		t:=localVarOptionals.AttrValuePrefix.Value()
+		t := localVarOptionals.AttrValuePrefix.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
@@ -5248,7 +5324,7 @@ func (a *DefaultApiService) SearchUsingAttribute(ctx _context.Context, localVarO
 		}
 	}
 	if localVarOptionals != nil && localVarOptionals.Tag.IsSet() {
-		t:=localVarOptionals.Tag.Value()
+		t := localVarOptionals.Tag.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
@@ -5340,21 +5416,21 @@ func (a *DefaultApiService) SearchUsingAttribute(ctx _context.Context, localVarO
 
 // SearchUsingBasicOpts Optional parameters for the method 'SearchUsingBasic'
 type SearchUsingBasicOpts struct {
-    Query optional.String
-    Type_ optional.Interface
-    Types optional.String
-    Attr optional.Interface
-    Attrs optional.String
-    Tag optional.Interface
-    TimeRangeType optional.String
-    TimeRangeAttr optional.String
-    TimeRangeStart optional.Int64
-    TimeRangeEnd optional.Int64
-    SortBy optional.String
-    SortOrder optional.String
-    Deleted optional.Bool
-    Limit optional.Int32
-    Offset optional.Int32
+	Query          optional.String
+	Type_          optional.Interface
+	Types          optional.String
+	Attr           optional.Interface
+	Attrs          optional.String
+	Tag            optional.Interface
+	TimeRangeType  optional.String
+	TimeRangeAttr  optional.String
+	TimeRangeStart optional.Int64
+	TimeRangeEnd   optional.Int64
+	SortBy         optional.String
+	SortOrder      optional.String
+	Deleted        optional.Bool
+	Limit          optional.Int32
+	Offset         optional.Int32
 }
 
 /*
@@ -5366,9 +5442,9 @@ type SearchUsingBasicOpts struct {
  * @param optional nil or *SearchUsingBasicOpts - Optional Parameters:
  * @param "Query" (optional.String) -  The full-text query
  * @param "Type_" (optional.Interface of []string) -  Limit the result to only entities of specified types
- * @param "Types" (optional.String) - 
+ * @param "Types" (optional.String) -
  * @param "Attr" (optional.Interface of []string) -  One of more additional attributes to return in the response
- * @param "Attrs" (optional.String) - 
+ * @param "Attrs" (optional.String) -
  * @param "Tag" (optional.Interface of []string) -  Limit the result to only entities with the given tag
  * @param "TimeRangeType" (optional.String) -  The type of time range search, default is CUSTOM
  * @param "TimeRangeAttr" (optional.String) -  The attribute for a time range search
@@ -5401,7 +5477,7 @@ func (a *DefaultApiService) SearchUsingBasic(ctx _context.Context, localVarOptio
 		localVarQueryParams.Add("query", parameterToString(localVarOptionals.Query.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
-		t:=localVarOptionals.Type_.Value()
+		t := localVarOptionals.Type_.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
@@ -5415,7 +5491,7 @@ func (a *DefaultApiService) SearchUsingBasic(ctx _context.Context, localVarOptio
 		localVarQueryParams.Add("types", parameterToString(localVarOptionals.Types.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Attr.IsSet() {
-		t:=localVarOptionals.Attr.Value()
+		t := localVarOptionals.Attr.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
@@ -5429,7 +5505,7 @@ func (a *DefaultApiService) SearchUsingBasic(ctx _context.Context, localVarOptio
 		localVarQueryParams.Add("attrs", parameterToString(localVarOptionals.Attrs.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Tag.IsSet() {
-		t:=localVarOptionals.Tag.Value()
+		t := localVarOptionals.Tag.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
@@ -5521,9 +5597,9 @@ func (a *DefaultApiService) SearchUsingBasic(ctx _context.Context, localVarOptio
 
 // TestCompatibilityBySubjectNameOpts Optional parameters for the method 'TestCompatibilityBySubjectName'
 type TestCompatibilityBySubjectNameOpts struct {
-    ContentType optional.String
-    Accept optional.String
-    Verbose optional.Bool
+	ContentType optional.String
+	Accept      optional.String
+	Verbose     optional.Bool
 }
 
 /*
@@ -5536,9 +5612,9 @@ type TestCompatibilityBySubjectNameOpts struct {
  * @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
  * @param body Schema
  * @param optional nil or *TestCompatibilityBySubjectNameOpts - Optional Parameters:
- * @param "ContentType" (optional.String) - 
- * @param "Accept" (optional.String) - 
- * @param "Verbose" (optional.Bool) - 
+ * @param "ContentType" (optional.String) -
+ * @param "Accept" (optional.String) -
+ * @param "Verbose" (optional.Bool) -
  * @return CompatibilityCheckResponse
  */
 func (a *DefaultApiService) TestCompatibilityBySubjectName(ctx _context.Context, subject string, version string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityBySubjectNameOpts) (CompatibilityCheckResponse, *_nethttp.Response, error) {
@@ -5553,9 +5629,9 @@ func (a *DefaultApiService) TestCompatibilityBySubjectName(ctx _context.Context,
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/compatibility/subjects/{subject}/versions/{version}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
-	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"version"+"}", _neturl.PathEscape(parameterToString(version, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -5627,9 +5703,9 @@ func (a *DefaultApiService) TestCompatibilityBySubjectName(ctx _context.Context,
 
 // TestCompatibilityForSubjectOpts Optional parameters for the method 'TestCompatibilityForSubject'
 type TestCompatibilityForSubjectOpts struct {
-    ContentType optional.String
-    Accept optional.String
-    Verbose optional.Bool
+	ContentType optional.String
+	Accept      optional.String
+	Verbose     optional.Bool
 }
 
 /*
@@ -5641,9 +5717,9 @@ type TestCompatibilityForSubjectOpts struct {
  * @param subject Subject of the schema version against which compatibility is to be tested
  * @param body Schema
  * @param optional nil or *TestCompatibilityForSubjectOpts - Optional Parameters:
- * @param "ContentType" (optional.String) - 
- * @param "Accept" (optional.String) - 
- * @param "Verbose" (optional.Bool) - 
+ * @param "ContentType" (optional.String) -
+ * @param "Accept" (optional.String) -
+ * @param "Verbose" (optional.Bool) -
  * @return CompatibilityCheckResponse
  */
 func (a *DefaultApiService) TestCompatibilityForSubject(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *TestCompatibilityForSubjectOpts) (CompatibilityCheckResponse, *_nethttp.Response, error) {
@@ -5658,7 +5734,7 @@ func (a *DefaultApiService) TestCompatibilityForSubject(ctx _context.Context, su
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/compatibility/subjects/{subject}/versions"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -5730,7 +5806,7 @@ func (a *DefaultApiService) TestCompatibilityForSubject(ctx _context.Context, su
 
 // UpdateBusinessMetadataOpts Optional parameters for the method 'UpdateBusinessMetadata'
 type UpdateBusinessMetadataOpts struct {
-    BusinessMetadata optional.Interface
+	BusinessMetadata optional.Interface
 }
 
 /*
@@ -5823,7 +5899,7 @@ func (a *DefaultApiService) UpdateBusinessMetadata(ctx _context.Context, localVa
 
 // UpdateBusinessMetadataDefsOpts Optional parameters for the method 'UpdateBusinessMetadataDefs'
 type UpdateBusinessMetadataDefsOpts struct {
-    AtlasBusinessMetadataDef optional.Interface
+	AtlasBusinessMetadataDef optional.Interface
 }
 
 /*
@@ -5934,7 +6010,7 @@ func (a *DefaultApiService) UpdateMode(ctx _context.Context, subject string, bod
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/mode/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -6015,7 +6091,7 @@ func (a *DefaultApiService) UpdateSubjectLevelConfig(ctx _context.Context, subje
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/config/{subject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")) , -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"subject"+"}", _neturl.PathEscape(parameterToString(subject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -6078,7 +6154,7 @@ func (a *DefaultApiService) UpdateSubjectLevelConfig(ctx _context.Context, subje
 
 // UpdateTagDefsOpts Optional parameters for the method 'UpdateTagDefs'
 type UpdateTagDefsOpts struct {
-    TagDef optional.Interface
+	TagDef optional.Interface
 }
 
 /*
@@ -6171,7 +6247,7 @@ func (a *DefaultApiService) UpdateTagDefs(ctx _context.Context, localVarOptional
 
 // UpdateTagsOpts Optional parameters for the method 'UpdateTags'
 type UpdateTagsOpts struct {
-    Tag optional.Interface
+	Tag optional.Interface
 }
 
 /*

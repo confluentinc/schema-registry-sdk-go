@@ -14,6 +14,9 @@ import (
 
 // DefaultApi is a mock of DefaultApi interface
 type DefaultApi struct {
+	lockAsyncapiPut sync.Mutex
+	AsyncapiPutFunc func(ctx context.Context) (*net_http.Response, error)
+
 	lockCreateBusinessMetadata sync.Mutex
 	CreateBusinessMetadataFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
 
@@ -210,6 +213,9 @@ type DefaultApi struct {
 	UpdateTopLevelModeFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
 
 	calls struct {
+		AsyncapiPut []struct {
+			Ctx context.Context
+		}
 		CreateBusinessMetadata []struct {
 			Ctx               context.Context
 			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts
@@ -498,6 +504,44 @@ type DefaultApi struct {
 			Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 		}
 	}
+}
+
+// AsyncapiPut mocks base method by wrapping the associated func.
+func (m *DefaultApi) AsyncapiPut(ctx context.Context) (*net_http.Response, error) {
+	m.lockAsyncapiPut.Lock()
+	defer m.lockAsyncapiPut.Unlock()
+
+	if m.AsyncapiPutFunc == nil {
+		panic("mocker: DefaultApi.AsyncapiPutFunc is nil but DefaultApi.AsyncapiPut was called.")
+	}
+
+	call := struct {
+		Ctx context.Context
+	}{
+		Ctx: ctx,
+	}
+
+	m.calls.AsyncapiPut = append(m.calls.AsyncapiPut, call)
+
+	return m.AsyncapiPutFunc(ctx)
+}
+
+// AsyncapiPutCalled returns true if AsyncapiPut was called at least once.
+func (m *DefaultApi) AsyncapiPutCalled() bool {
+	m.lockAsyncapiPut.Lock()
+	defer m.lockAsyncapiPut.Unlock()
+
+	return len(m.calls.AsyncapiPut) > 0
+}
+
+// AsyncapiPutCalls returns the calls made to AsyncapiPut.
+func (m *DefaultApi) AsyncapiPutCalls() []struct {
+	Ctx context.Context
+} {
+	m.lockAsyncapiPut.Lock()
+	defer m.lockAsyncapiPut.Unlock()
+
+	return m.calls.AsyncapiPut
 }
 
 // CreateBusinessMetadata mocks base method by wrapping the associated func.
@@ -3248,6 +3292,9 @@ func (m *DefaultApi) UpdateTopLevelModeCalls() []struct {
 
 // Reset resets the calls made to the mocked methods.
 func (m *DefaultApi) Reset() {
+	m.lockAsyncapiPut.Lock()
+	m.calls.AsyncapiPut = nil
+	m.lockAsyncapiPut.Unlock()
 	m.lockCreateBusinessMetadata.Lock()
 	m.calls.CreateBusinessMetadata = nil
 	m.lockCreateBusinessMetadata.Unlock()

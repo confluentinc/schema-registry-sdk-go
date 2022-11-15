@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AsyncapiPut**](DefaultApi.md#AsyncapiPut) | **Put** /asyncapi | 
 [**CreateBusinessMetadata**](DefaultApi.md#CreateBusinessMetadata) | **Post** /catalog/v1/entity/businessmetadata | Bulk API to create multiple business metadata.
 [**CreateBusinessMetadataDefs**](DefaultApi.md#CreateBusinessMetadataDefs) | **Post** /catalog/v1/types/businessmetadatadefs | Bulk create API for business metadata definitions.
 [**CreateExporter**](DefaultApi.md#CreateExporter) | **Post** /exporters | Create an exporter.
@@ -70,6 +71,36 @@ Method | HTTP request | Description
 [**UpdateTopLevelConfig**](DefaultApi.md#UpdateTopLevelConfig) | **Put** /config | Update global compatibility level.
 [**UpdateTopLevelMode**](DefaultApi.md#UpdateTopLevelMode) | **Put** /mode | Update global mode.
 
+
+
+## AsyncapiPut
+
+> AsyncapiPut(ctx, )
+
+
+
+Get number of times the cli tool is used to export/produce the spec file
+
+### Required Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateBusinessMetadata
