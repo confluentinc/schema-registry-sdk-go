@@ -2,7 +2,8 @@ version: v1.0
 name: schema-registry-sdk-go
 agent:
   machine:
-    type: s1-prod-ubuntu20-04-amd64-1
+    type: e1-standard-2
+    os_image: ubuntu2004
 blocks:
   - name: Build
     task:
