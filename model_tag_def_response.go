@@ -8,26 +8,24 @@
  */
 
 package schemaregistry
-import (
-	"time"
-)
+
 // TagDefResponse struct for TagDefResponse
 type TagDefResponse struct {
-	Category string `json:"category,omitempty"`
-	Guid string `json:"guid,omitempty"`
-	CreatedBy string `json:"createdBy,omitempty"`
-	UpdatedBy string `json:"updatedBy,omitempty"`
-	CreateTime time.Time `json:"createTime,omitempty"`
-	UpdateTime time.Time `json:"updateTime,omitempty"`
-	Version int64 `json:"version,omitempty"`
-	Name string `json:"name,omitempty"`
-	Description string `json:"description,omitempty"`
-	TypeVersion string `json:"typeVersion,omitempty"`
-	ServiceType string `json:"serviceType,omitempty"`
-	Options map[string]string `json:"options,omitempty"`
+	Category      string              `json:"category,omitempty"`
+	Guid          string              `json:"guid,omitempty"`
+	CreatedBy     string              `json:"createdBy,omitempty"`
+	UpdatedBy     string              `json:"updatedBy,omitempty"`
+	CreateTime    int64               `json:"createTime,omitempty"`
+	UpdateTime    int64               `json:"updateTime,omitempty"`
+	Version       int64               `json:"version,omitempty"`
+	Name          string              `json:"name,omitempty"`
+	Description   string              `json:"description,omitempty"`
+	TypeVersion   string              `json:"typeVersion,omitempty"`
+	ServiceType   string              `json:"serviceType,omitempty"`
+	Options       map[string]string   `json:"options,omitempty"`
 	AttributeDefs []AtlasAttributeDef `json:"attributeDefs,omitempty"`
-	SuperTypes []string `json:"superTypes,omitempty"`
-	EntityTypes []string `json:"entityTypes,omitempty"`
-	SubTypes []string `json:"subTypes,omitempty"`
-	Error ErrorMessage `json:"error,omitempty"`
+	SuperTypes    []string            `json:"superTypes,omitempty"`
+	EntityTypes   []string            `json:"entityTypes,omitempty"`
+	SubTypes      []string            `json:"subTypes,omitempty"`
+	Error         ErrorMessage        `json:"error,omitempty"`
 }
