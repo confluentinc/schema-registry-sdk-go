@@ -5,8 +5,3 @@ git:
   enable: true
 github:
   enable: true
-semaphore:
-  enable: true
-  pipeline_enable: false
-  triggers: []
-  branches: []
