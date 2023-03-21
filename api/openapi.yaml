@@ -3036,6 +3036,19 @@ paths:
         "500":
           description: Internal Server Error
       summary: Get the tag definition with the given name.
+  /asyncapi/parse:
+    put:
+      description: Get number of times the cli tool is used to export/produce the
+        spec file
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
   /asyncapi:
     put:
       description: Get number of times the cli tool is used to export/produce the
