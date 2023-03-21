@@ -30,7 +30,7 @@ type DefaultApi interface {
 	/*
 	 * AsyncapiParsePut Method for AsyncapiParsePut
 	 *
-	 * Get number of times the cli tool is used to export/produce the spec file
+	 * Get number of times the cli tool is used to import and parse the spec file
 	 *
 	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 */
@@ -777,7 +777,7 @@ type DefaultApiService service
 /*
  * AsyncapiParsePut Method for AsyncapiParsePut
  *
- * Get number of times the cli tool is used to export/produce the spec file
+ * Get number of times the cli tool is used to import and parse the spec file
  *
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  */

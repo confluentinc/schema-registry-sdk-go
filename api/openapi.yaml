@@ -3038,7 +3038,7 @@ paths:
       summary: Get the tag definition with the given name.
   /asyncapi/parse:
     put:
-      description: Get number of times the cli tool is used to export/produce the
+      description: Get number of times the cli tool is used to import and parse the
         spec file
       responses:
         "204":

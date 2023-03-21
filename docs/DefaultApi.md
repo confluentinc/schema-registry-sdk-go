@@ -80,7 +80,7 @@ Method | HTTP request | Description
 
 
 
-Get number of times the cli tool is used to export/produce the spec file
+Get number of times the cli tool is used to import and parse the spec file
 
 ### Required Parameters
 
