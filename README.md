@@ -32,6 +32,7 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultApi* | [**AsyncapiParsePut**](docs/DefaultApi.md#asyncapiparseput) | **Put** /asyncapi/parse | 
 *DefaultApi* | [**AsyncapiPut**](docs/DefaultApi.md#asyncapiput) | **Put** /asyncapi | 
 *DefaultApi* | [**CreateBusinessMetadata**](docs/DefaultApi.md#createbusinessmetadata) | **Post** /catalog/v1/entity/businessmetadata | Bulk API to create multiple business metadata.
 *DefaultApi* | [**CreateBusinessMetadataDefs**](docs/DefaultApi.md#createbusinessmetadatadefs) | **Post** /catalog/v1/types/businessmetadatadefs | Bulk create API for business metadata definitions.

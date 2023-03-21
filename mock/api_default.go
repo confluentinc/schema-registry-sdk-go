@@ -14,6 +14,9 @@ import (
 
 // DefaultApi is a mock of DefaultApi interface
 type DefaultApi struct {
+	lockAsyncapiParsePut sync.Mutex
+	AsyncapiParsePutFunc func(ctx context.Context) (*net_http.Response, error)
+
 	lockAsyncapiPut sync.Mutex
 	AsyncapiPutFunc func(ctx context.Context) (*net_http.Response, error)
 
@@ -213,6 +216,9 @@ type DefaultApi struct {
 	UpdateTopLevelModeFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
 
 	calls struct {
+		AsyncapiParsePut []struct {
+			Ctx context.Context
+		}
 		AsyncapiPut []struct {
 			Ctx context.Context
 		}
@@ -504,6 +510,44 @@ type DefaultApi struct {
 			Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 		}
 	}
+}
+
+// AsyncapiParsePut mocks base method by wrapping the associated func.
+func (m *DefaultApi) AsyncapiParsePut(ctx context.Context) (*net_http.Response, error) {
+	m.lockAsyncapiParsePut.Lock()
+	defer m.lockAsyncapiParsePut.Unlock()
+
+	if m.AsyncapiParsePutFunc == nil {
+		panic("mocker: DefaultApi.AsyncapiParsePutFunc is nil but DefaultApi.AsyncapiParsePut was called.")
+	}
+
+	call := struct {
+		Ctx context.Context
+	}{
+		Ctx: ctx,
+	}
+
+	m.calls.AsyncapiParsePut = append(m.calls.AsyncapiParsePut, call)
+
+	return m.AsyncapiParsePutFunc(ctx)
+}
+
+// AsyncapiParsePutCalled returns true if AsyncapiParsePut was called at least once.
+func (m *DefaultApi) AsyncapiParsePutCalled() bool {
+	m.lockAsyncapiParsePut.Lock()
+	defer m.lockAsyncapiParsePut.Unlock()
+
+	return len(m.calls.AsyncapiParsePut) > 0
+}
+
+// AsyncapiParsePutCalls returns the calls made to AsyncapiParsePut.
+func (m *DefaultApi) AsyncapiParsePutCalls() []struct {
+	Ctx context.Context
+} {
+	m.lockAsyncapiParsePut.Lock()
+	defer m.lockAsyncapiParsePut.Unlock()
+
+	return m.calls.AsyncapiParsePut
 }
 
 // AsyncapiPut mocks base method by wrapping the associated func.
@@ -3292,6 +3336,9 @@ func (m *DefaultApi) UpdateTopLevelModeCalls() []struct {
 
 // Reset resets the calls made to the mocked methods.
 func (m *DefaultApi) Reset() {
+	m.lockAsyncapiParsePut.Lock()
+	m.calls.AsyncapiParsePut = nil
+	m.lockAsyncapiParsePut.Unlock()
 	m.lockAsyncapiPut.Lock()
 	m.calls.AsyncapiPut = nil
 	m.lockAsyncapiPut.Unlock()
