@@ -1,10 +1,11 @@
-# RegisterSchemaResponse
+# RuleSet
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int32** | Globally unique identifier of the schema | [optional] 
+**MigrationRules** | [**[]Rule**](Rule.md) |  | [optional] 
+**DomainRules** | [**[]Rule**](Rule.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

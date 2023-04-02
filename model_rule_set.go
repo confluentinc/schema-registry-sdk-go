@@ -8,8 +8,8 @@
  */
 
 package schemaregistry
-// RegisterSchemaResponse Schema register response
-type RegisterSchemaResponse struct {
-	// Globally unique identifier of the schema
-	Id int32 `json:"id,omitempty"`
+// RuleSet Schema rule set
+type RuleSet struct {
+	MigrationRules []Rule `json:"migrationRules,omitempty"`
+	DomainRules []Rule `json:"domainRules,omitempty"`
 }

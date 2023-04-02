@@ -8,11 +8,18 @@
  */
 
 package schemaregistry
-// RegisterSchemaRequest struct for RegisterSchemaRequest
+// RegisterSchemaRequest Schema register request
 type RegisterSchemaRequest struct {
+	// Version number
 	Version int32 `json:"version,omitempty"`
+	// Globally unique identifier of the schema
 	Id int32 `json:"id,omitempty"`
+	// Schema type
 	SchemaType string `json:"schemaType,omitempty"`
+	// References to other schemas
 	References []SchemaReference `json:"references,omitempty"`
+	Metadata Metadata `json:"metadata,omitempty"`
+	RuleSet RuleSet `json:"ruleSet,omitempty"`
+	// Schema definition string
 	Schema string `json:"schema,omitempty"`
 }
