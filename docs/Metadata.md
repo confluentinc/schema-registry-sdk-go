@@ -1,10 +1,12 @@
-# RegisterSchemaResponse
+# Metadata
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int32** | Globally unique identifier of the schema | [optional] 
+**Tags** | [**map[string][]string**](array.md) |  | [optional] 
+**Properties** | **map[string]string** |  | [optional] 
+**Sensitive** | **[]string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
