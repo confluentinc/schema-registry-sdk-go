@@ -3205,11 +3205,12 @@ components:
           type: array
       type: object
     Config:
+      description: Config
       example:
         compatibilityLevel: BACKWARD
       properties:
         compatibilityLevel:
-          description: Compatability Level
+          description: Compatibility Level
           enum:
           - BACKWARD
           - BACKWARD_TRANSITIVE
@@ -3218,7 +3219,18 @@ components:
           - FULL
           - FULL_TRANSITIVE
           - NONE
+          example: FULL_TRANSITIVE
           type: string
+        compatibilityGroup:
+          type: string
+        defaultMetadata:
+          $ref: '#/components/schemas/Metadata'
+        overrideMetadata:
+          $ref: '#/components/schemas/Metadata'
+        defaultRuleSet:
+          $ref: '#/components/schemas/RuleSet'
+        overrideRuleSet:
+          $ref: '#/components/schemas/RuleSet'
       type: object
     ConfigUpdateRequest:
       description: Config update request
