@@ -382,8 +382,6 @@ paths:
           description: Internal Server Error. Error code 50001 indicates a failure
             in the backend data store.
       summary: Delete global compatibility level
-      tags:
-      - Config (v1)
       x-codegen-request-body-name: body
     get:
       description: Retrieves the global compatibility level.
@@ -415,8 +413,6 @@ paths:
           description: Internal Server Error. Error code 50001 indicates a failure
             in the backend data store.
       summary: Get global compatibility level
-      tags:
-      - Config (v1)
     put:
       description: Updates the global compatibility level. On success, echoes the
         original request back to the client.
@@ -478,8 +474,6 @@ paths:
             in the backend data store. Error code 50003 indicates a failure forwarding
             the request to the primary.
       summary: Update global compatibility level
-      tags:
-      - Config (v1)
   /config/{subject}:
     delete:
       operationId: deleteSubjectConfig
@@ -1413,8 +1407,6 @@ paths:
             in the backend data store.Error code 50002 indicates operation timed out.
             Error code 50003 indicates a failure forwarding the request to the primary.
       summary: Register schema under a subject
-      tags:
-      - Subjects (v1)
       x-codegen-request-body-name: body
   /subjects/{subject}/versions/{version}:
     delete:

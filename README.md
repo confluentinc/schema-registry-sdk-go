@@ -32,9 +32,6 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ConfigV1Api* | [**DeleteTopLevelConfig**](docs/ConfigV1Api.md#deletetoplevelconfig) | **Delete** /config | Delete global compatibility level
-*ConfigV1Api* | [**GetTopLevelConfig**](docs/ConfigV1Api.md#gettoplevelconfig) | **Get** /config | Get global compatibility level
-*ConfigV1Api* | [**UpdateTopLevelConfig**](docs/ConfigV1Api.md#updatetoplevelconfig) | **Put** /config | Update global compatibility level
 *DefaultApi* | [**AsyncapiParsePut**](docs/DefaultApi.md#asyncapiparseput) | **Put** /asyncapi/parse | 
 *DefaultApi* | [**AsyncapiPut**](docs/DefaultApi.md#asyncapiput) | **Put** /asyncapi | 
 *DefaultApi* | [**CreateBusinessMetadata**](docs/DefaultApi.md#createbusinessmetadata) | **Post** /catalog/v1/entity/businessmetadata | Bulk API to create multiple business metadata.
@@ -53,6 +50,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**DeleteSubjectMode**](docs/DefaultApi.md#deletesubjectmode) | **Delete** /mode/{subject} | Deletes the specified subject-level mode and revert to the global default.
 *DefaultApi* | [**DeleteTag**](docs/DefaultApi.md#deletetag) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName} | Delete a tag on an entity.
 *DefaultApi* | [**DeleteTagDef**](docs/DefaultApi.md#deletetagdef) | **Delete** /catalog/v1/types/tagdefs/{tagName} | Delete API for tag definition identified by its name.
+*DefaultApi* | [**DeleteTopLevelConfig**](docs/DefaultApi.md#deletetoplevelconfig) | **Delete** /config | Delete global compatibility level
 *DefaultApi* | [**Get**](docs/DefaultApi.md#get) | **Get** / | Schema Registry Root Resource
 *DefaultApi* | [**GetAllBusinessMetadataDefs**](docs/DefaultApi.md#getallbusinessmetadatadefs) | **Get** /catalog/v1/types/businessmetadatadefs | Bulk retrieval API for retrieving business metadata definitions.
 *DefaultApi* | [**GetAllTagDefs**](docs/DefaultApi.md#getalltagdefs) | **Get** /catalog/v1/types/tagdefs | Bulk retrieval API for retrieving tag definitions.
@@ -75,6 +73,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetSubjects**](docs/DefaultApi.md#getsubjects) | **Get** /schemas/ids/{id}/subjects | Get all the subjects associated with the input ID.
 *DefaultApi* | [**GetTagDefByName**](docs/DefaultApi.md#gettagdefbyname) | **Get** /catalog/v1/types/tagdefs/{tagName} | Get the tag definition with the given name.
 *DefaultApi* | [**GetTags**](docs/DefaultApi.md#gettags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Gets the list of classifications for a given entity represented by a qualifed name.
+*DefaultApi* | [**GetTopLevelConfig**](docs/DefaultApi.md#gettoplevelconfig) | **Get** /config | Get global compatibility level
 *DefaultApi* | [**GetTopLevelMode**](docs/DefaultApi.md#gettoplevelmode) | **Get** /mode | Get global mode.
 *DefaultApi* | [**GetVersions**](docs/DefaultApi.md#getversions) | **Get** /schemas/ids/{id}/versions | Get all the subject-version pairs associated with the input ID.
 *DefaultApi* | [**List**](docs/DefaultApi.md#list) | **Get** /subjects | Get a list of registered subjects.
@@ -86,6 +85,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**Post**](docs/DefaultApi.md#post) | **Post** / | 
 *DefaultApi* | [**PutExporter**](docs/DefaultApi.md#putexporter) | **Put** /exporters/{name} | Alters an exporter.
 *DefaultApi* | [**PutExporterConfig**](docs/DefaultApi.md#putexporterconfig) | **Put** /exporters/{name}/config | Alters the config of an exporter.
+*DefaultApi* | [**Register**](docs/DefaultApi.md#register) | **Post** /subjects/{subject}/versions | Register schema under a subject
 *DefaultApi* | [**ResetExporter**](docs/DefaultApi.md#resetexporter) | **Put** /exporters/{name}/reset | Reset an exporter.
 *DefaultApi* | [**ResumeExporter**](docs/DefaultApi.md#resumeexporter) | **Put** /exporters/{name}/resume | Resume an exporter.
 *DefaultApi* | [**SearchUsingAttribute**](docs/DefaultApi.md#searchusingattribute) | **Get** /catalog/v1/search/attribute | Retrieve data for the specified attribute search query.
@@ -98,8 +98,8 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**UpdateSubjectLevelConfig**](docs/DefaultApi.md#updatesubjectlevelconfig) | **Put** /config/{subject} | Update compatibility level for the specified subject.
 *DefaultApi* | [**UpdateTagDefs**](docs/DefaultApi.md#updatetagdefs) | **Put** /catalog/v1/types/tagdefs | Bulk update API for tag definitions.
 *DefaultApi* | [**UpdateTags**](docs/DefaultApi.md#updatetags) | **Put** /catalog/v1/entity/tags | Bulk API to update multiple tags.
+*DefaultApi* | [**UpdateTopLevelConfig**](docs/DefaultApi.md#updatetoplevelconfig) | **Put** /config | Update global compatibility level
 *DefaultApi* | [**UpdateTopLevelMode**](docs/DefaultApi.md#updatetoplevelmode) | **Put** /mode | Update global mode.
-*SubjectsV1Api* | [**Register**](docs/SubjectsV1Api.md#register) | **Post** /subjects/{subject}/versions | Register schema under a subject
 
 
 ## Documentation For Models
