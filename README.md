@@ -32,6 +32,9 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*ConfigV1Api* | [**DeleteTopLevelConfig**](docs/ConfigV1Api.md#deletetoplevelconfig) | **Delete** /config | Delete global compatibility level
+*ConfigV1Api* | [**GetTopLevelConfig**](docs/ConfigV1Api.md#gettoplevelconfig) | **Get** /config | Get global compatibility level
+*ConfigV1Api* | [**UpdateTopLevelConfig**](docs/ConfigV1Api.md#updatetoplevelconfig) | **Put** /config | Update global compatibility level
 *DefaultApi* | [**AsyncapiParsePut**](docs/DefaultApi.md#asyncapiparseput) | **Put** /asyncapi/parse | 
 *DefaultApi* | [**AsyncapiPut**](docs/DefaultApi.md#asyncapiput) | **Put** /asyncapi | 
 *DefaultApi* | [**CreateBusinessMetadata**](docs/DefaultApi.md#createbusinessmetadata) | **Post** /catalog/v1/entity/businessmetadata | Bulk API to create multiple business metadata.
@@ -72,7 +75,6 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetSubjects**](docs/DefaultApi.md#getsubjects) | **Get** /schemas/ids/{id}/subjects | Get all the subjects associated with the input ID.
 *DefaultApi* | [**GetTagDefByName**](docs/DefaultApi.md#gettagdefbyname) | **Get** /catalog/v1/types/tagdefs/{tagName} | Get the tag definition with the given name.
 *DefaultApi* | [**GetTags**](docs/DefaultApi.md#gettags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Gets the list of classifications for a given entity represented by a qualifed name.
-*DefaultApi* | [**GetTopLevelConfig**](docs/DefaultApi.md#gettoplevelconfig) | **Get** /config | Get global compatibility level.
 *DefaultApi* | [**GetTopLevelMode**](docs/DefaultApi.md#gettoplevelmode) | **Get** /mode | Get global mode.
 *DefaultApi* | [**GetVersions**](docs/DefaultApi.md#getversions) | **Get** /schemas/ids/{id}/versions | Get all the subject-version pairs associated with the input ID.
 *DefaultApi* | [**List**](docs/DefaultApi.md#list) | **Get** /subjects | Get a list of registered subjects.
@@ -84,7 +86,6 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**Post**](docs/DefaultApi.md#post) | **Post** / | 
 *DefaultApi* | [**PutExporter**](docs/DefaultApi.md#putexporter) | **Put** /exporters/{name} | Alters an exporter.
 *DefaultApi* | [**PutExporterConfig**](docs/DefaultApi.md#putexporterconfig) | **Put** /exporters/{name}/config | Alters the config of an exporter.
-*DefaultApi* | [**Register**](docs/DefaultApi.md#register) | **Post** /subjects/{subject}/versions | Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema&#39;s version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
 *DefaultApi* | [**ResetExporter**](docs/DefaultApi.md#resetexporter) | **Put** /exporters/{name}/reset | Reset an exporter.
 *DefaultApi* | [**ResumeExporter**](docs/DefaultApi.md#resumeexporter) | **Put** /exporters/{name}/resume | Resume an exporter.
 *DefaultApi* | [**SearchUsingAttribute**](docs/DefaultApi.md#searchusingattribute) | **Get** /catalog/v1/search/attribute | Retrieve data for the specified attribute search query.
@@ -97,8 +98,8 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**UpdateSubjectLevelConfig**](docs/DefaultApi.md#updatesubjectlevelconfig) | **Put** /config/{subject} | Update compatibility level for the specified subject.
 *DefaultApi* | [**UpdateTagDefs**](docs/DefaultApi.md#updatetagdefs) | **Put** /catalog/v1/types/tagdefs | Bulk update API for tag definitions.
 *DefaultApi* | [**UpdateTags**](docs/DefaultApi.md#updatetags) | **Put** /catalog/v1/entity/tags | Bulk API to update multiple tags.
-*DefaultApi* | [**UpdateTopLevelConfig**](docs/DefaultApi.md#updatetoplevelconfig) | **Put** /config | Update global compatibility level.
 *DefaultApi* | [**UpdateTopLevelMode**](docs/DefaultApi.md#updatetoplevelmode) | **Put** /mode | Update global mode.
+*SubjectsV1Api* | [**Register**](docs/SubjectsV1Api.md#register) | **Post** /subjects/{subject}/versions | Register schema under a subject
 
 
 ## Documentation For Models
@@ -122,10 +123,13 @@ Class | Method | HTTP request | Description
  - [ErrorMessage](docs/ErrorMessage.md)
  - [ExporterInfo](docs/ExporterInfo.md)
  - [ExporterStatus](docs/ExporterStatus.md)
+ - [Metadata](docs/Metadata.md)
  - [Mode](docs/Mode.md)
  - [ModeUpdateRequest](docs/ModeUpdateRequest.md)
  - [RegisterSchemaRequest](docs/RegisterSchemaRequest.md)
  - [RegisterSchemaResponse](docs/RegisterSchemaResponse.md)
+ - [Rule](docs/Rule.md)
+ - [RuleSet](docs/RuleSet.md)
  - [Schema](docs/Schema.md)
  - [SchemaReference](docs/SchemaReference.md)
  - [SchemaString](docs/SchemaString.md)
