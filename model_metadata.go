@@ -8,8 +8,9 @@
  */
 
 package schemaregistry
-// RegisterSchemaResponse Schema register response
-type RegisterSchemaResponse struct {
-	// Globally unique identifier of the schema
-	Id int32 `json:"id,omitempty"`
+// Metadata User-defined metadata
+type Metadata struct {
+	Tags map[string][]string `json:"tags,omitempty"`
+	Properties map[string]string `json:"properties,omitempty"`
+	Sensitive []string `json:"sensitive,omitempty"`
 }
