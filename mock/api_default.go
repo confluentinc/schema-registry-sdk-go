@@ -68,6 +68,9 @@ type DefaultApi struct {
 	lockDeleteTagDef sync.Mutex
 	DeleteTagDefFunc func(ctx context.Context, tagName string) (*net_http.Response, error)
 
+	lockDeleteTopLevelConfig sync.Mutex
+	DeleteTopLevelConfigFunc func(ctx context.Context) (string, *net_http.Response, error)
+
 	lockGet sync.Mutex
 	GetFunc func(ctx context.Context) (map[string]map[string]interface{}, *net_http.Response, error)
 
@@ -171,7 +174,7 @@ type DefaultApi struct {
 	PutExporterConfigFunc func(ctx context.Context, name string, body map[string]string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockRegister sync.Mutex
-	RegisterFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error)
+	RegisterFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.RegisterOpts) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error)
 
 	lockResetExporter sync.Mutex
 	ResetExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
@@ -210,7 +213,7 @@ type DefaultApi struct {
 	UpdateTagsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
 
 	lockUpdateTopLevelConfig sync.Mutex
-	UpdateTopLevelConfigFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
+	UpdateTopLevelConfigFunc func(ctx context.Context, configUpdateRequest github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTopLevelMode sync.Mutex
 	UpdateTopLevelModeFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
@@ -293,6 +296,9 @@ type DefaultApi struct {
 		DeleteTagDef []struct {
 			Ctx     context.Context
 			TagName string
+		}
+		DeleteTopLevelConfig []struct {
+			Ctx context.Context
 		}
 		Get []struct {
 			Ctx context.Context
@@ -442,9 +448,10 @@ type DefaultApi struct {
 			Body map[string]string
 		}
 		Register []struct {
-			Ctx     context.Context
-			Subject string
-			Body    github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+			Ctx               context.Context
+			Subject           string
+			Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.RegisterOpts
 		}
 		ResetExporter []struct {
 			Ctx  context.Context
@@ -502,8 +509,8 @@ type DefaultApi struct {
 			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts
 		}
 		UpdateTopLevelConfig []struct {
-			Ctx  context.Context
-			Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
+			Ctx                 context.Context
+			ConfigUpdateRequest github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 		}
 		UpdateTopLevelMode []struct {
 			Ctx  context.Context
@@ -1266,6 +1273,44 @@ func (m *DefaultApi) DeleteTagDefCalls() []struct {
 	defer m.lockDeleteTagDef.Unlock()
 
 	return m.calls.DeleteTagDef
+}
+
+// DeleteTopLevelConfig mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteTopLevelConfig(ctx context.Context) (string, *net_http.Response, error) {
+	m.lockDeleteTopLevelConfig.Lock()
+	defer m.lockDeleteTopLevelConfig.Unlock()
+
+	if m.DeleteTopLevelConfigFunc == nil {
+		panic("mocker: DefaultApi.DeleteTopLevelConfigFunc is nil but DefaultApi.DeleteTopLevelConfig was called.")
+	}
+
+	call := struct {
+		Ctx context.Context
+	}{
+		Ctx: ctx,
+	}
+
+	m.calls.DeleteTopLevelConfig = append(m.calls.DeleteTopLevelConfig, call)
+
+	return m.DeleteTopLevelConfigFunc(ctx)
+}
+
+// DeleteTopLevelConfigCalled returns true if DeleteTopLevelConfig was called at least once.
+func (m *DefaultApi) DeleteTopLevelConfigCalled() bool {
+	m.lockDeleteTopLevelConfig.Lock()
+	defer m.lockDeleteTopLevelConfig.Unlock()
+
+	return len(m.calls.DeleteTopLevelConfig) > 0
+}
+
+// DeleteTopLevelConfigCalls returns the calls made to DeleteTopLevelConfig.
+func (m *DefaultApi) DeleteTopLevelConfigCalls() []struct {
+	Ctx context.Context
+} {
+	m.lockDeleteTopLevelConfig.Lock()
+	defer m.lockDeleteTopLevelConfig.Unlock()
+
+	return m.calls.DeleteTopLevelConfig
 }
 
 // Get mocks base method by wrapping the associated func.
@@ -2696,7 +2741,7 @@ func (m *DefaultApi) PutExporterConfigCalls() []struct {
 }
 
 // Register mocks base method by wrapping the associated func.
-func (m *DefaultApi) Register(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error) {
+func (m *DefaultApi) Register(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.RegisterOpts) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error) {
 	m.lockRegister.Lock()
 	defer m.lockRegister.Unlock()
 
@@ -2705,18 +2750,20 @@ func (m *DefaultApi) Register(ctx context.Context, subject string, body github_c
 	}
 
 	call := struct {
-		Ctx     context.Context
-		Subject string
-		Body    github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+		Ctx               context.Context
+		Subject           string
+		Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.RegisterOpts
 	}{
-		Ctx:     ctx,
-		Subject: subject,
-		Body:    body,
+		Ctx:               ctx,
+		Subject:           subject,
+		Body:              body,
+		LocalVarOptionals: localVarOptionals,
 	}
 
 	m.calls.Register = append(m.calls.Register, call)
 
-	return m.RegisterFunc(ctx, subject, body)
+	return m.RegisterFunc(ctx, subject, body, localVarOptionals)
 }
 
 // RegisterCalled returns true if Register was called at least once.
@@ -2729,9 +2776,10 @@ func (m *DefaultApi) RegisterCalled() bool {
 
 // RegisterCalls returns the calls made to Register.
 func (m *DefaultApi) RegisterCalls() []struct {
-	Ctx     context.Context
-	Subject string
-	Body    github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+	Ctx               context.Context
+	Subject           string
+	Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.RegisterOpts
 } {
 	m.lockRegister.Lock()
 	defer m.lockRegister.Unlock()
@@ -3253,7 +3301,7 @@ func (m *DefaultApi) UpdateTagsCalls() []struct {
 }
 
 // UpdateTopLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, configUpdateRequest github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
 
@@ -3262,16 +3310,16 @@ func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body github_com_c
 	}
 
 	call := struct {
-		Ctx  context.Context
-		Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
+		Ctx                 context.Context
+		ConfigUpdateRequest github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 	}{
-		Ctx:  ctx,
-		Body: body,
+		Ctx:                 ctx,
+		ConfigUpdateRequest: configUpdateRequest,
 	}
 
 	m.calls.UpdateTopLevelConfig = append(m.calls.UpdateTopLevelConfig, call)
 
-	return m.UpdateTopLevelConfigFunc(ctx, body)
+	return m.UpdateTopLevelConfigFunc(ctx, configUpdateRequest)
 }
 
 // UpdateTopLevelConfigCalled returns true if UpdateTopLevelConfig was called at least once.
@@ -3284,8 +3332,8 @@ func (m *DefaultApi) UpdateTopLevelConfigCalled() bool {
 
 // UpdateTopLevelConfigCalls returns the calls made to UpdateTopLevelConfig.
 func (m *DefaultApi) UpdateTopLevelConfigCalls() []struct {
-	Ctx  context.Context
-	Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
+	Ctx                 context.Context
+	ConfigUpdateRequest github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 } {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
@@ -3390,6 +3438,9 @@ func (m *DefaultApi) Reset() {
 	m.lockDeleteTagDef.Lock()
 	m.calls.DeleteTagDef = nil
 	m.lockDeleteTagDef.Unlock()
+	m.lockDeleteTopLevelConfig.Lock()
+	m.calls.DeleteTopLevelConfig = nil
+	m.lockDeleteTopLevelConfig.Unlock()
 	m.lockGet.Lock()
 	m.calls.Get = nil
 	m.lockGet.Unlock()

@@ -22,6 +22,7 @@ Method | HTTP request | Description
 [**DeleteSubjectMode**](DefaultApi.md#DeleteSubjectMode) | **Delete** /mode/{subject} | Deletes the specified subject-level mode and revert to the global default.
 [**DeleteTag**](DefaultApi.md#DeleteTag) | **Delete** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags/{tagName} | Delete a tag on an entity.
 [**DeleteTagDef**](DefaultApi.md#DeleteTagDef) | **Delete** /catalog/v1/types/tagdefs/{tagName} | Delete API for tag definition identified by its name.
+[**DeleteTopLevelConfig**](DefaultApi.md#DeleteTopLevelConfig) | **Delete** /config | Delete global compatibility level
 [**Get**](DefaultApi.md#Get) | **Get** / | Schema Registry Root Resource
 [**GetAllBusinessMetadataDefs**](DefaultApi.md#GetAllBusinessMetadataDefs) | **Get** /catalog/v1/types/businessmetadatadefs | Bulk retrieval API for retrieving business metadata definitions.
 [**GetAllTagDefs**](DefaultApi.md#GetAllTagDefs) | **Get** /catalog/v1/types/tagdefs | Bulk retrieval API for retrieving tag definitions.
@@ -44,7 +45,7 @@ Method | HTTP request | Description
 [**GetSubjects**](DefaultApi.md#GetSubjects) | **Get** /schemas/ids/{id}/subjects | Get all the subjects associated with the input ID.
 [**GetTagDefByName**](DefaultApi.md#GetTagDefByName) | **Get** /catalog/v1/types/tagdefs/{tagName} | Get the tag definition with the given name.
 [**GetTags**](DefaultApi.md#GetTags) | **Get** /catalog/v1/entity/type/{typeName}/name/{qualifiedName}/tags | Gets the list of classifications for a given entity represented by a qualifed name.
-[**GetTopLevelConfig**](DefaultApi.md#GetTopLevelConfig) | **Get** /config | Get global compatibility level.
+[**GetTopLevelConfig**](DefaultApi.md#GetTopLevelConfig) | **Get** /config | Get global compatibility level
 [**GetTopLevelMode**](DefaultApi.md#GetTopLevelMode) | **Get** /mode | Get global mode.
 [**GetVersions**](DefaultApi.md#GetVersions) | **Get** /schemas/ids/{id}/versions | Get all the subject-version pairs associated with the input ID.
 [**List**](DefaultApi.md#List) | **Get** /subjects | Get a list of registered subjects.
@@ -56,7 +57,7 @@ Method | HTTP request | Description
 [**Post**](DefaultApi.md#Post) | **Post** / | 
 [**PutExporter**](DefaultApi.md#PutExporter) | **Put** /exporters/{name} | Alters an exporter.
 [**PutExporterConfig**](DefaultApi.md#PutExporterConfig) | **Put** /exporters/{name}/config | Alters the config of an exporter.
-[**Register**](DefaultApi.md#Register) | **Post** /subjects/{subject}/versions | Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema&#39;s version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+[**Register**](DefaultApi.md#Register) | **Post** /subjects/{subject}/versions | Register schema under a subject
 [**ResetExporter**](DefaultApi.md#ResetExporter) | **Put** /exporters/{name}/reset | Reset an exporter.
 [**ResumeExporter**](DefaultApi.md#ResumeExporter) | **Put** /exporters/{name}/resume | Resume an exporter.
 [**SearchUsingAttribute**](DefaultApi.md#SearchUsingAttribute) | **Get** /catalog/v1/search/attribute | Retrieve data for the specified attribute search query.
@@ -69,7 +70,7 @@ Method | HTTP request | Description
 [**UpdateSubjectLevelConfig**](DefaultApi.md#UpdateSubjectLevelConfig) | **Put** /config/{subject} | Update compatibility level for the specified subject.
 [**UpdateTagDefs**](DefaultApi.md#UpdateTagDefs) | **Put** /catalog/v1/types/tagdefs | Bulk update API for tag definitions.
 [**UpdateTags**](DefaultApi.md#UpdateTags) | **Put** /catalog/v1/entity/tags | Bulk API to update multiple tags.
-[**UpdateTopLevelConfig**](DefaultApi.md#UpdateTopLevelConfig) | **Put** /config | Update global compatibility level.
+[**UpdateTopLevelConfig**](DefaultApi.md#UpdateTopLevelConfig) | **Put** /config | Update global compatibility level
 [**UpdateTopLevelMode**](DefaultApi.md#UpdateTopLevelMode) | **Put** /mode | Update global mode.
 
 
@@ -730,6 +731,36 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteTopLevelConfig
+
+> string DeleteTopLevelConfig(ctx, )
+
+Delete global compatibility level
+
+Deletes the global compatibility level config and reverts to the default.
+
+### Required Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**string**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1566,7 +1597,9 @@ No authorization required
 
 > Config GetTopLevelConfig(ctx, )
 
-Get global compatibility level.
+Get global compatibility level
+
+Retrieves the global compatibility level.
 
 ### Required Parameters
 
@@ -1685,6 +1718,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **subjectPrefix** | **optional.String**|  | 
  **deleted** | **optional.Bool**|  | 
+ **deletedOnly** | **optional.Bool**| Whether to return deleted subjects only | 
 
 ### Return type
 
@@ -1756,6 +1790,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **deleted** | **optional.Bool**|  | 
+ **deletedOnly** | **optional.Bool**| Whether to return deleted schemas only | 
 
 ### Return type
 
@@ -1989,7 +2024,9 @@ No authorization required
 
 ## Register
 
-> RegisterSchemaResponse Register(ctx, subject, body)
+> RegisterSchemaResponse Register(ctx, subject, body, optional)
+
+Register schema under a subject
 
 Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
 
@@ -1999,8 +2036,20 @@ Register a new schema under the specified subject. If successfully registered, t
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**subject** | **string**| Name of the Subject | 
+**subject** | **string**| Name of the subject | 
 **body** | [**RegisterSchemaRequest**](RegisterSchemaRequest.md)| Schema | 
+ **optional** | ***RegisterOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a RegisterOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **normalize** | **optional.Bool**| Whether to register the normalized schema | 
 
 ### Return type
 
@@ -2539,9 +2588,11 @@ No authorization required
 
 ## UpdateTopLevelConfig
 
-> ConfigUpdateRequest UpdateTopLevelConfig(ctx, body)
+> ConfigUpdateRequest UpdateTopLevelConfig(ctx, configUpdateRequest)
 
-Update global compatibility level.
+Update global compatibility level
+
+Updates the global compatibility level. On success, echoes the original request back to the client.
 
 ### Required Parameters
 
@@ -2549,7 +2600,7 @@ Update global compatibility level.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**body** | [**ConfigUpdateRequest**](ConfigUpdateRequest.md)| Config Update Request | 
+**configUpdateRequest** | [**ConfigUpdateRequest**](ConfigUpdateRequest.md)| Config Update Request | 
 
 ### Return type
 
