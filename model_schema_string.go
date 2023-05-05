@@ -16,6 +16,8 @@ type SchemaString struct {
 	Schema string `json:"schema,omitempty"`
 	// Schema references
 	References []SchemaReference `json:"references,omitempty"`
+	Metadata Metadata `json:"metadata,omitempty"`
+	RuleSet RuleSet `json:"ruleSet,omitempty"`
 	// Maximum ID
 	MaxId int32 `json:"maxId,omitempty"`
 }

@@ -1718,6 +1718,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **subjectPrefix** | **optional.String**|  | 
  **deleted** | **optional.Bool**|  | 
+ **deletedOnly** | **optional.Bool**| Whether to return deleted subjects only | 
 
 ### Return type
 
@@ -1789,6 +1790,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **deleted** | **optional.Bool**|  | 
+ **deletedOnly** | **optional.Bool**| Whether to return deleted schemas only | 
 
 ### Return type
 
