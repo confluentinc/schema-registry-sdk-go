@@ -11,13 +11,12 @@ package schemaregistry
 
 import (
 	_context "context"
+	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
 	"reflect"
 	"strings"
-
-	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -212,6 +211,16 @@ type DefaultApi interface {
 	 * @param tagName The name of the tag definition
 	 */
 	DeleteTagDef(ctx _context.Context, tagName string) (*_nethttp.Response, error)
+
+	/*
+	 * DeleteTopLevelConfig Delete global compatibility level
+	 *
+	 * Deletes the global compatibility level config and reverts to the default.
+	 *
+	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return string
+	 */
+	DeleteTopLevelConfig(ctx _context.Context) (string, *_nethttp.Response, error)
 
 	/*
 	 * Get Schema Registry Root Resource
@@ -456,7 +465,9 @@ type DefaultApi interface {
 	GetTags(ctx _context.Context, typeName string, qualifiedName string) ([]TagResponse, *_nethttp.Response, error)
 
 	/*
-	 * GetTopLevelConfig Get global compatibility level.
+	 * GetTopLevelConfig Get global compatibility level
+	 *
+	 * Retrieves the global compatibility level.
 	 *
 	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return Config
@@ -490,6 +501,7 @@ type DefaultApi interface {
 	 * @param optional nil or *ListOpts - Optional Parameters:
 	 * @param "SubjectPrefix" (optional.String) -
 	 * @param "Deleted" (optional.Bool) -
+	 * @param "DeletedOnly" (optional.Bool) -  Whether to return deleted subjects only
 	 * @return []string
 	 */
 	List(ctx _context.Context, localVarOptionals *ListOpts) ([]string, *_nethttp.Response, error)
@@ -509,6 +521,7 @@ type DefaultApi interface {
 	 * @param subject Name of the Subject
 	 * @param optional nil or *ListVersionsOpts - Optional Parameters:
 	 * @param "Deleted" (optional.Bool) -
+	 * @param "DeletedOnly" (optional.Bool) -  Whether to return deleted schemas only
 	 * @return []int32
 	 */
 	ListVersions(ctx _context.Context, subject string, localVarOptionals *ListVersionsOpts) ([]int32, *_nethttp.Response, error)
@@ -571,14 +584,18 @@ type DefaultApi interface {
 	PutExporterConfig(ctx _context.Context, name string, body map[string]string) (UpdateExporterResponse, *_nethttp.Response, error)
 
 	/*
-	 * Register Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+	 * Register Register schema under a subject
+	 *
+	 * Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema&#39;s version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
 	 *
 	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @param subject Name of the Subject
+	 * @param subject Name of the subject
 	 * @param body Schema
+	 * @param optional nil or *RegisterOpts - Optional Parameters:
+	 * @param "Normalize" (optional.Bool) -  Whether to register the normalized schema
 	 * @return RegisterSchemaResponse
 	 */
-	Register(ctx _context.Context, subject string, body RegisterSchemaRequest) (RegisterSchemaResponse, *_nethttp.Response, error)
+	Register(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *RegisterOpts) (RegisterSchemaResponse, *_nethttp.Response, error)
 
 	/*
 	 * ResetExporter Reset an exporter.
@@ -753,13 +770,15 @@ type DefaultApi interface {
 	UpdateTags(ctx _context.Context, localVarOptionals *UpdateTagsOpts) ([]TagResponse, *_nethttp.Response, error)
 
 	/*
-	 * UpdateTopLevelConfig Update global compatibility level.
+	 * UpdateTopLevelConfig Update global compatibility level
+	 *
+	 * Updates the global compatibility level. On success, echoes the original request back to the client.
 	 *
 	 * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @param body Config Update Request
+	 * @param configUpdateRequest Config Update Request
 	 * @return ConfigUpdateRequest
 	 */
-	UpdateTopLevelConfig(ctx _context.Context, body ConfigUpdateRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
+	UpdateTopLevelConfig(ctx _context.Context, configUpdateRequest ConfigUpdateRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
 
 	/*
 	 * UpdateTopLevelMode Update global mode.
@@ -2194,6 +2213,92 @@ func (a *DefaultApiService) DeleteTagDef(ctx _context.Context, tagName string) (
 	}
 
 	return localVarHTTPResponse, nil
+}
+
+/*
+ * DeleteTopLevelConfig Delete global compatibility level
+ *
+ * Deletes the global compatibility level config and reverts to the default.
+ *
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return string
+ */
+func (a *DefaultApiService) DeleteTopLevelConfig(ctx _context.Context) (string, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  string
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/config"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 /*
@@ -4071,7 +4176,9 @@ func (a *DefaultApiService) GetTags(ctx _context.Context, typeName string, quali
 }
 
 /*
- * GetTopLevelConfig Get global compatibility level.
+ * GetTopLevelConfig Get global compatibility level
+ *
+ * Retrieves the global compatibility level.
  *
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return Config
@@ -4129,6 +4236,15 @@ func (a *DefaultApiService) GetTopLevelConfig(ctx _context.Context) (Config, *_n
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4317,6 +4433,7 @@ func (a *DefaultApiService) GetVersions(ctx _context.Context, id int32, localVar
 type ListOpts struct {
 	SubjectPrefix optional.String
 	Deleted       optional.Bool
+	DeletedOnly   optional.Bool
 }
 
 /*
@@ -4326,6 +4443,7 @@ type ListOpts struct {
  * @param optional nil or *ListOpts - Optional Parameters:
  * @param "SubjectPrefix" (optional.String) -
  * @param "Deleted" (optional.Bool) -
+ * @param "DeletedOnly" (optional.Bool) -  Whether to return deleted subjects only
  * @return []string
  */
 func (a *DefaultApiService) List(ctx _context.Context, localVarOptionals *ListOpts) ([]string, *_nethttp.Response, error) {
@@ -4349,6 +4467,9 @@ func (a *DefaultApiService) List(ctx _context.Context, localVarOptionals *ListOp
 	}
 	if localVarOptionals != nil && localVarOptionals.Deleted.IsSet() {
 		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.DeletedOnly.IsSet() {
+		localVarQueryParams.Add("deletedOnly", parameterToString(localVarOptionals.DeletedOnly.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4480,7 +4601,8 @@ func (a *DefaultApiService) ListContexts(ctx _context.Context) ([]string, *_neth
 
 // ListVersionsOpts Optional parameters for the method 'ListVersions'
 type ListVersionsOpts struct {
-	Deleted optional.Bool
+	Deleted     optional.Bool
+	DeletedOnly optional.Bool
 }
 
 /*
@@ -4490,6 +4612,7 @@ type ListVersionsOpts struct {
  * @param subject Name of the Subject
  * @param optional nil or *ListVersionsOpts - Optional Parameters:
  * @param "Deleted" (optional.Bool) -
+ * @param "DeletedOnly" (optional.Bool) -  Whether to return deleted schemas only
  * @return []int32
  */
 func (a *DefaultApiService) ListVersions(ctx _context.Context, subject string, localVarOptionals *ListVersionsOpts) ([]int32, *_nethttp.Response, error) {
@@ -4512,6 +4635,9 @@ func (a *DefaultApiService) ListVersions(ctx _context.Context, subject string, l
 
 	if localVarOptionals != nil && localVarOptionals.Deleted.IsSet() {
 		localVarQueryParams.Add("deleted", parameterToString(localVarOptionals.Deleted.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.DeletedOnly.IsSet() {
+		localVarQueryParams.Add("deletedOnly", parameterToString(localVarOptionals.DeletedOnly.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5050,15 +5176,24 @@ func (a *DefaultApiService) PutExporterConfig(ctx _context.Context, name string,
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// RegisterOpts Optional parameters for the method 'Register'
+type RegisterOpts struct {
+	Normalize optional.Bool
+}
+
 /*
- * Register Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+ * Register Register schema under a subject
+ *
+ * Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema&#39;s version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects. A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
  *
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param subject Name of the Subject
+ * @param subject Name of the subject
  * @param body Schema
+ * @param optional nil or *RegisterOpts - Optional Parameters:
+ * @param "Normalize" (optional.Bool) -  Whether to register the normalized schema
  * @return RegisterSchemaResponse
  */
-func (a *DefaultApiService) Register(ctx _context.Context, subject string, body RegisterSchemaRequest) (RegisterSchemaResponse, *_nethttp.Response, error) {
+func (a *DefaultApiService) Register(ctx _context.Context, subject string, body RegisterSchemaRequest, localVarOptionals *RegisterOpts) (RegisterSchemaResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -5076,6 +5211,9 @@ func (a *DefaultApiService) Register(ctx _context.Context, subject string, body 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Normalize.IsSet() {
+		localVarQueryParams.Add("normalize", parameterToString(localVarOptionals.Normalize.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}
 
@@ -5115,6 +5253,35 @@ func (a *DefaultApiService) Register(ctx _context.Context, subject string, body 
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6414,13 +6581,15 @@ func (a *DefaultApiService) UpdateTags(ctx _context.Context, localVarOptionals *
 }
 
 /*
- * UpdateTopLevelConfig Update global compatibility level.
+ * UpdateTopLevelConfig Update global compatibility level
+ *
+ * Updates the global compatibility level. On success, echoes the original request back to the client.
  *
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param body Config Update Request
+ * @param configUpdateRequest Config Update Request
  * @return ConfigUpdateRequest
  */
-func (a *DefaultApiService) UpdateTopLevelConfig(ctx _context.Context, body ConfigUpdateRequest) (ConfigUpdateRequest, *_nethttp.Response, error) {
+func (a *DefaultApiService) UpdateTopLevelConfig(ctx _context.Context, configUpdateRequest ConfigUpdateRequest) (ConfigUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
@@ -6454,7 +6623,7 @@ func (a *DefaultApiService) UpdateTopLevelConfig(ctx _context.Context, body Conf
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = &body
+	localVarPostBody = &configUpdateRequest
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -6475,6 +6644,25 @@ func (a *DefaultApiService) UpdateTopLevelConfig(ctx _context.Context, body Conf
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorMessage
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
