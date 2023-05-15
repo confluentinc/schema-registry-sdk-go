@@ -18,8 +18,8 @@ type RegisterSchemaRequest struct {
 	SchemaType string `json:"schemaType,omitempty"`
 	// References to other schemas
 	References []SchemaReference `json:"references,omitempty"`
-	Metadata Metadata `json:"metadata,omitempty"`
-	RuleSet RuleSet `json:"ruleSet,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
+	RuleSet *RuleSet `json:"ruleSet,omitempty"`
 	// Schema definition string
 	Schema string `json:"schema,omitempty"`
 }

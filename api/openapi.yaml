@@ -3447,6 +3447,7 @@ components:
       type: object
     Metadata:
       description: User-defined metadata
+      nullable: true
       properties:
         tags:
           additionalProperties:
@@ -3521,6 +3522,7 @@ components:
       type: object
     RuleSet:
       description: Schema rule set
+      nullable: true
       properties:
         migrationRules:
           items:
