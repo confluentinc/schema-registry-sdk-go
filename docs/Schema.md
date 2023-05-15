@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **SchemaType** | **string** |  | [optional] 
 **References** | [**[]SchemaReference**](SchemaReference.md) |  | [optional] 
 **Schema** | **string** |  | [optional] 
+**Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
+**Ruleset** | Pointer to [**RuleSet**](RuleSet.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
