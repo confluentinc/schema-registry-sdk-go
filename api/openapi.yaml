@@ -3371,6 +3371,10 @@ components:
           type: array
         schema:
           type: string
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        ruleset:
+          $ref: '#/components/schemas/RuleSet'
       type: object
     SchemaReference:
       example:

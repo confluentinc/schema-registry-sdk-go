@@ -16,4 +16,6 @@ type Schema struct {
 	SchemaType string `json:"schemaType,omitempty"`
 	References []SchemaReference `json:"references,omitempty"`
 	Schema string `json:"schema,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
+	Ruleset *RuleSet `json:"ruleset,omitempty"`
 }
