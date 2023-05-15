@@ -18,6 +18,7 @@ java -jar modules/openapi-generator-cli/target/openapi-generator-cli.jar generat
  -o <path-to-schema-registry-sdk-go-directory> \
  --package-name schemaregistry --git-user-id confluentinc \
  --git-repo-id schema-registry-sdk-go \
- --additional-properties=generateInterfaces=true
+ --additional-properties=generateInterfaces=true \
+ --additional-properties=nullables=true
  ```
 - Lastly, run `make mock` from schema-registry-sdk-go directory to generate the api_default.go file.
