@@ -13,8 +13,8 @@ type Config struct {
 	// Compatibility Level
 	CompatibilityLevel string `json:"compatibilityLevel,omitempty"`
 	CompatibilityGroup string `json:"compatibilityGroup,omitempty"`
-	DefaultMetadata Metadata `json:"defaultMetadata,omitempty"`
-	OverrideMetadata Metadata `json:"overrideMetadata,omitempty"`
-	DefaultRuleSet RuleSet `json:"defaultRuleSet,omitempty"`
-	OverrideRuleSet RuleSet `json:"overrideRuleSet,omitempty"`
+	DefaultMetadata *Metadata `json:"defaultMetadata,omitempty"`
+	OverrideMetadata *Metadata `json:"overrideMetadata,omitempty"`
+	DefaultRuleSet *RuleSet `json:"defaultRuleSet,omitempty"`
+	OverrideRuleSet *RuleSet `json:"overrideRuleSet,omitempty"`
 }
