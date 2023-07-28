@@ -11,7 +11,7 @@ package schemaregistry
 // AtlasEntityHeader struct for AtlasEntityHeader
 type AtlasEntityHeader struct {
 	TypeName string `json:"typeName,omitempty"`
-	Attributes map[string]map[string]interface{} `json:"attributes,omitempty"`
+	Attributes map[string]interface{} `json:"attributes,omitempty"`
 	Guid string `json:"guid,omitempty"`
 	Status string `json:"status,omitempty"`
 	DisplayText string `json:"displayText,omitempty"`
