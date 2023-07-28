@@ -4306,7 +4306,6 @@ components:
         typeName:
           type: string
         attributes:
-          additionalProperties: true
           type: object
         guid:
           type: string
