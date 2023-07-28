@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TypeName** | **string** |  | [optional] 
-**Attributes** | **map[string]map[string]interface{}** |  | [optional] 
+**Attributes** | **map[string]interface{}** |  | [optional] 
 **Guid** | **string** |  | [optional] 
 **Status** | **string** |  | [optional] 
 **DisplayText** | **string** |  | [optional] 
