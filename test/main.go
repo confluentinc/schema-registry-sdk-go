@@ -22,13 +22,12 @@ func main() {
 			Password: "**",
 		})
 
-	//updateTopic(ctx, srClient)
-	listTopic(ctx, srClient)
+	searchSubject(ctx, srClient)
 }
 
 func getConfig() *srsdk.Configuration {
 	return &srsdk.Configuration{
-		BasePath:      "https://psrc-6k7wdj.us-west-2.aws.devel.cpdev.cloud",
+		BasePath:      "https://psrc-w6y8w.us-west-2.aws.devel.cpdev.cloud",
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "OpenAPI-Generator/1.0.0/go",
 		Debug:         false,
@@ -72,6 +71,20 @@ func listSubject(ctx context.Context, srClient *srsdk.APIClient) {
 	}
 	log.Println(subjects)
 	log.Println(response)
+}
+
+func searchSubject(ctx context.Context, srClient *srsdk.APIClient) {
+	opts := &srsdk.SearchUsingAttributeOpts{
+		Types:           optional.NewString("sr_subject_version"),
+		AttrName:        optional.NewInterface("name"),
+		AttrValuePrefix: optional.NewInterface("test"),
+	}
+	result, _, err := srClient.DefaultApi.SearchUsingAttribute(ctx, opts)
+	if err != nil {
+		log.Println("Got error from http search ", err)
+		panic(err)
+	}
+	log.Println(result.Entities[0].Attributes["name"])
 }
 
 func createAndListBMDef(ctx context.Context, srClient *srsdk.APIClient) {
