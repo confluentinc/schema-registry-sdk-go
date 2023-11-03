@@ -5,6 +5,657 @@ info:
 servers:
 - url: /
 paths:
+  /dek-registry/v1/keks/{name}/deks:
+    get:
+      operationId: getDekSubjects
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  example: User
+                  type: string
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  example: User
+                  type: string
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  example: User
+                  type: string
+                type: array
+          description: List of dek subjects
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Get a list of dek subjects.
+    post:
+      operationId: createDek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+        description: The create request
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Dek'
+          description: The create response
+      summary: Create a dek.
+  /dek-registry/v1/keks:
+    get:
+      operationId: getKekNames
+      parameters:
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  example: mykek
+                  type: string
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  example: mykek
+                  type: string
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  example: mykek
+                  type: string
+                type: array
+          description: List of kek names
+      summary: Get a list of kek names.
+    post:
+      operationId: createKek
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+        description: The create request
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Kek'
+          description: The create response
+      summary: Create a kek.
+  /dek-registry/v1/keks/{name}:
+    delete:
+      operationId: deleteKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to perform a permanent delete
+        explode: true
+        in: query
+        name: permanent
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Delete a kek.
+    get:
+      operationId: getKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Kek'
+          description: The kek info
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Get a kek by name.
+    put:
+      operationId: putKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+        description: The update request
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Kek'
+          description: The update response
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Alters a kek.
+  /dek-registry/v1/keks/{name}/deks/{subject}:
+    delete:
+      operationId: deleteDekVersions
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to perform a permanent delete
+        explode: true
+        in: query
+        name: permanent
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Delete all versions of a dek.
+    get:
+      operationId: getDek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Dek'
+          description: The dek info
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Get a dek by subject.
+  /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}:
+    delete:
+      operationId: deleteDekVersion
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Version of the dek
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to perform a permanent delete
+        explode: true
+        in: query
+        name: permanent
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+        "422":
+          description: Error code 42202 -- Invalid version
+      summary: Delete a dek version.
+    get:
+      operationId: getDekByVersion
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Version of the dek
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Dek'
+          description: The dek info
+        "404":
+          description: Error code 40470 -- Key not found
+        "422":
+          description: Error code 42202 -- Invalid version
+      summary: Get a dek by subject and version.
+  /dek-registry/v1/keks/{name}/deks/{subject}/versions:
+    get:
+      operationId: getDekVersions
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  example: 1
+                  format: int32
+                  type: integer
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  example: 1
+                  format: int32
+                  type: integer
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  example: 1
+                  format: int32
+                  type: integer
+                type: array
+          description: List of version numbers for dek
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: List versions of dek.
+  /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}/undelete:
+    post:
+      operationId: undeleteDekVersion
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Version of the dek
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+        "422":
+          description: Error code 42202 -- Invalid version
+      summary: Undelete a dek version.
+  /dek-registry/v1/keks/{name}/deks/{subject}/undelete:
+    post:
+      operationId: undeleteDekVersions
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Undelete all versions of a dek.
+  /dek-registry/v1/keks/{name}/undelete:
+    post:
+      operationId: undeleteKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Undelete a kek.
   /catalog/v1/entity/businessmetadata:
     post:
       description: Bulk API to create multiple business metadata.
@@ -3206,6 +3857,134 @@ paths:
           description: Internal Server Error
 components:
   schemas:
+    Dek:
+      example:
+        kekName: kekName
+        keyMaterial: keyMaterial
+        deleted: true
+        subject: subject
+        encryptedKeyMaterial: encryptedKeyMaterial
+        version: 0
+        algorithm: AES128_GCM
+        ts: 6
+      properties:
+        kekName:
+          type: string
+        subject:
+          type: string
+        version:
+          format: int32
+          type: integer
+        algorithm:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        encryptedKeyMaterial:
+          type: string
+        keyMaterial:
+          type: string
+        ts:
+          format: int64
+          type: integer
+        deleted:
+          type: boolean
+      type: object
+    CreateDekRequest:
+      example:
+        subject: subject
+        encryptedKeyMaterial: encryptedKeyMaterial
+        version: 0
+        algorithm: AES128_GCM
+      properties:
+        subject:
+          type: string
+        version:
+          format: int32
+          type: integer
+        algorithm:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        encryptedKeyMaterial:
+          type: string
+      type: object
+    Kek:
+      example:
+        kmsProps:
+          key: kmsProps
+        shared: true
+        deleted: true
+        name: name
+        doc: doc
+        kmsKeyId: kmsKeyId
+        kmsType: kmsType
+        ts: 0
+      properties:
+        name:
+          type: string
+        kmsType:
+          type: string
+        kmsKeyId:
+          type: string
+        kmsProps:
+          additionalProperties:
+            type: string
+          type: object
+        doc:
+          type: string
+        shared:
+          type: boolean
+        ts:
+          format: int64
+          type: integer
+        deleted:
+          type: boolean
+      type: object
+    CreateKekRequest:
+      example:
+        kmsProps:
+          key: kmsProps
+        shared: true
+        name: name
+        doc: doc
+        kmsKeyId: kmsKeyId
+        kmsType: kmsType
+      properties:
+        name:
+          type: string
+        kmsType:
+          type: string
+        kmsKeyId:
+          type: string
+        kmsProps:
+          additionalProperties:
+            type: string
+          type: object
+        doc:
+          type: string
+        shared:
+          type: boolean
+      type: object
+    UpdateKekRequest:
+      example:
+        kmsProps:
+          key: kmsProps
+        shared: true
+        doc: doc
+      properties:
+        kmsProps:
+          additionalProperties:
+            type: string
+          type: object
+        doc:
+          type: string
+        shared:
+          type: boolean
+      type: object
     CompatibilityCheckResponse:
       example:
         is_compatible: true
