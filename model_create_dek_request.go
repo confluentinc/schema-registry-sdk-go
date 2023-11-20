@@ -32,31 +32,33 @@ import (
 	"reflect"
 )
 
-// SubjectVersion struct for SubjectVersion
-type SubjectVersion struct {
+// CreateDekRequest struct for CreateDekRequest
+type CreateDekRequest struct {
 	Subject *string `json:"subject,omitempty"`
 	Version *int32 `json:"version,omitempty"`
+	Algorithm *string `json:"algorithm,omitempty"`
+	EncryptedKeyMaterial *string `json:"encryptedKeyMaterial,omitempty"`
 }
 
-// NewSubjectVersion instantiates a new SubjectVersion object
+// NewCreateDekRequest instantiates a new CreateDekRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSubjectVersion() *SubjectVersion {
-	this := SubjectVersion{}
+func NewCreateDekRequest() *CreateDekRequest {
+	this := CreateDekRequest{}
 	return &this
 }
 
-// NewSubjectVersionWithDefaults instantiates a new SubjectVersion object
+// NewCreateDekRequestWithDefaults instantiates a new CreateDekRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSubjectVersionWithDefaults() *SubjectVersion {
-	this := SubjectVersion{}
+func NewCreateDekRequestWithDefaults() *CreateDekRequest {
+	this := CreateDekRequest{}
 	return &this
 }
 
 // GetSubject returns the Subject field value if set, zero value otherwise.
-func (o *SubjectVersion) GetSubject() string {
+func (o *CreateDekRequest) GetSubject() string {
 	if o == nil || o.Subject == nil {
 		var ret string
 		return ret
@@ -66,7 +68,7 @@ func (o *SubjectVersion) GetSubject() string {
 
 // GetSubjectOk returns a tuple with the Subject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SubjectVersion) GetSubjectOk() (*string, bool) {
+func (o *CreateDekRequest) GetSubjectOk() (*string, bool) {
 	if o == nil || o.Subject == nil {
 		return nil, false
 	}
@@ -74,7 +76,7 @@ func (o *SubjectVersion) GetSubjectOk() (*string, bool) {
 }
 
 // HasSubject returns a boolean if a field has been set.
-func (o *SubjectVersion) HasSubject() bool {
+func (o *CreateDekRequest) HasSubject() bool {
 	if o != nil && o.Subject != nil {
 		return true
 	}
@@ -83,12 +85,12 @@ func (o *SubjectVersion) HasSubject() bool {
 }
 
 // SetSubject gets a reference to the given string and assigns it to the Subject field.
-func (o *SubjectVersion) SetSubject(v string) {
+func (o *CreateDekRequest) SetSubject(v string) {
 	o.Subject = &v
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise.
-func (o *SubjectVersion) GetVersion() int32 {
+func (o *CreateDekRequest) GetVersion() int32 {
 	if o == nil || o.Version == nil {
 		var ret int32
 		return ret
@@ -98,7 +100,7 @@ func (o *SubjectVersion) GetVersion() int32 {
 
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SubjectVersion) GetVersionOk() (*int32, bool) {
+func (o *CreateDekRequest) GetVersionOk() (*int32, bool) {
 	if o == nil || o.Version == nil {
 		return nil, false
 	}
@@ -106,7 +108,7 @@ func (o *SubjectVersion) GetVersionOk() (*int32, bool) {
 }
 
 // HasVersion returns a boolean if a field has been set.
-func (o *SubjectVersion) HasVersion() bool {
+func (o *CreateDekRequest) HasVersion() bool {
 	if o != nil && o.Version != nil {
 		return true
 	}
@@ -115,17 +117,83 @@ func (o *SubjectVersion) HasVersion() bool {
 }
 
 // SetVersion gets a reference to the given int32 and assigns it to the Version field.
-func (o *SubjectVersion) SetVersion(v int32) {
+func (o *CreateDekRequest) SetVersion(v int32) {
 	o.Version = &v
 }
 
-// Redact resets all sensitive fields to their zero value.
-func (o *SubjectVersion) Redact() {
-    o.recurseRedact(o.Subject)
-    o.recurseRedact(o.Version)
+// GetAlgorithm returns the Algorithm field value if set, zero value otherwise.
+func (o *CreateDekRequest) GetAlgorithm() string {
+	if o == nil || o.Algorithm == nil {
+		var ret string
+		return ret
+	}
+	return *o.Algorithm
 }
 
-func (o *SubjectVersion) recurseRedact(v interface{}) {
+// GetAlgorithmOk returns a tuple with the Algorithm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDekRequest) GetAlgorithmOk() (*string, bool) {
+	if o == nil || o.Algorithm == nil {
+		return nil, false
+	}
+	return o.Algorithm, true
+}
+
+// HasAlgorithm returns a boolean if a field has been set.
+func (o *CreateDekRequest) HasAlgorithm() bool {
+	if o != nil && o.Algorithm != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAlgorithm gets a reference to the given string and assigns it to the Algorithm field.
+func (o *CreateDekRequest) SetAlgorithm(v string) {
+	o.Algorithm = &v
+}
+
+// GetEncryptedKeyMaterial returns the EncryptedKeyMaterial field value if set, zero value otherwise.
+func (o *CreateDekRequest) GetEncryptedKeyMaterial() string {
+	if o == nil || o.EncryptedKeyMaterial == nil {
+		var ret string
+		return ret
+	}
+	return *o.EncryptedKeyMaterial
+}
+
+// GetEncryptedKeyMaterialOk returns a tuple with the EncryptedKeyMaterial field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDekRequest) GetEncryptedKeyMaterialOk() (*string, bool) {
+	if o == nil || o.EncryptedKeyMaterial == nil {
+		return nil, false
+	}
+	return o.EncryptedKeyMaterial, true
+}
+
+// HasEncryptedKeyMaterial returns a boolean if a field has been set.
+func (o *CreateDekRequest) HasEncryptedKeyMaterial() bool {
+	if o != nil && o.EncryptedKeyMaterial != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptedKeyMaterial gets a reference to the given string and assigns it to the EncryptedKeyMaterial field.
+func (o *CreateDekRequest) SetEncryptedKeyMaterial(v string) {
+	o.EncryptedKeyMaterial = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CreateDekRequest) Redact() {
+    o.recurseRedact(o.Subject)
+    o.recurseRedact(o.Version)
+    o.recurseRedact(o.Algorithm)
+    o.recurseRedact(o.EncryptedKeyMaterial)
+}
+
+func (o *CreateDekRequest) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -150,12 +218,12 @@ func (o *SubjectVersion) recurseRedact(v interface{}) {
     }
 }
 
-func (o SubjectVersion) zeroField(v interface{}) {
+func (o CreateDekRequest) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o SubjectVersion) MarshalJSON() ([]byte, error) {
+func (o CreateDekRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Subject != nil {
 		toSerialize["subject"] = o.Subject
@@ -163,41 +231,47 @@ func (o SubjectVersion) MarshalJSON() ([]byte, error) {
 	if o.Version != nil {
 		toSerialize["version"] = o.Version
 	}
+	if o.Algorithm != nil {
+		toSerialize["algorithm"] = o.Algorithm
+	}
+	if o.EncryptedKeyMaterial != nil {
+		toSerialize["encryptedKeyMaterial"] = o.EncryptedKeyMaterial
+	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableSubjectVersion struct {
-	value *SubjectVersion
+type NullableCreateDekRequest struct {
+	value *CreateDekRequest
 	isSet bool
 }
 
-func (v NullableSubjectVersion) Get() *SubjectVersion {
+func (v NullableCreateDekRequest) Get() *CreateDekRequest {
 	return v.value
 }
 
-func (v *NullableSubjectVersion) Set(val *SubjectVersion) {
+func (v *NullableCreateDekRequest) Set(val *CreateDekRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSubjectVersion) IsSet() bool {
+func (v NullableCreateDekRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSubjectVersion) Unset() {
+func (v *NullableCreateDekRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSubjectVersion(val *SubjectVersion) *NullableSubjectVersion {
-	return &NullableSubjectVersion{value: val, isSet: true}
+func NewNullableCreateDekRequest(val *CreateDekRequest) *NullableCreateDekRequest {
+	return &NullableCreateDekRequest{value: val, isSet: true}
 }
 
-func (v NullableSubjectVersion) MarshalJSON() ([]byte, error) {
+func (v NullableCreateDekRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSubjectVersion) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateDekRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
