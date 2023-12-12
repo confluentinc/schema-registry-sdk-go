@@ -1,12 +1,14 @@
 name: schema-registry-sdk-go
-lang: unknown
-lang_version: unknown
+lang: go
+lang_version: "1.21.4"
 git:
   enable: true
+  hook:
+    enable: true
 github:
+  enable: true
+gitignore:
   enable: true
 semaphore:
   enable: true
   pipeline_enable: false
-  triggers: []
-  branches: []
