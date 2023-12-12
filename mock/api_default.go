@@ -14,231 +14,565 @@ import (
 
 // DefaultApi is a mock of DefaultApi interface
 type DefaultApi struct {
+	lockAsyncapiParsePut sync.Mutex
+	AsyncapiParsePutFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiParsePutRequest
+
+	lockAsyncapiParsePutExecute sync.Mutex
+	AsyncapiParsePutExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiParsePutRequest) (*net_http.Response, error)
+
 	lockAsyncapiPut sync.Mutex
-	AsyncapiPutFunc func(ctx context.Context) (*net_http.Response, error)
+	AsyncapiPutFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiPutRequest
+
+	lockAsyncapiPutExecute sync.Mutex
+	AsyncapiPutExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiPutRequest) (*net_http.Response, error)
 
 	lockCreateBusinessMetadata sync.Mutex
-	CreateBusinessMetadataFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
+	CreateBusinessMetadataFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataRequest
+
+	lockCreateBusinessMetadataExecute sync.Mutex
+	CreateBusinessMetadataExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
 
 	lockCreateBusinessMetadataDefs sync.Mutex
-	CreateBusinessMetadataDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error)
+	CreateBusinessMetadataDefsFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataDefsRequest
+
+	lockCreateBusinessMetadataDefsExecute sync.Mutex
+	CreateBusinessMetadataDefsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error)
+
+	lockCreateDek sync.Mutex
+	CreateDekFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiCreateDekRequest
+
+	lockCreateDekExecute sync.Mutex
+	CreateDekExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateDekRequest) (github_com_confluentinc_schema_registry_sdk_go.Dek, *net_http.Response, error)
 
 	lockCreateExporter sync.Mutex
-	CreateExporterFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.CreateExporterResponse, *net_http.Response, error)
+	CreateExporterFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateExporterRequest
+
+	lockCreateExporterExecute sync.Mutex
+	CreateExporterExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.CreateExporterResponse, *net_http.Response, error)
+
+	lockCreateKek sync.Mutex
+	CreateKekFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateKekRequest
+
+	lockCreateKekExecute sync.Mutex
+	CreateKekExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateKekRequest) (github_com_confluentinc_schema_registry_sdk_go.Kek, *net_http.Response, error)
 
 	lockCreateOrUpdate sync.Mutex
-	CreateOrUpdateFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts) (*net_http.Response, error)
+	CreateOrUpdateFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateOrUpdateRequest
+
+	lockCreateOrUpdateExecute sync.Mutex
+	CreateOrUpdateExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateOrUpdateRequest) (*net_http.Response, error)
 
 	lockCreateTagDefs sync.Mutex
-	CreateTagDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error)
+	CreateTagDefsFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagDefsRequest
+
+	lockCreateTagDefsExecute sync.Mutex
+	CreateTagDefsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error)
 
 	lockCreateTags sync.Mutex
-	CreateTagsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
+	CreateTagsFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagsRequest
+
+	lockCreateTagsExecute sync.Mutex
+	CreateTagsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
 
 	lockDeleteBusinessMetadata sync.Mutex
-	DeleteBusinessMetadataFunc func(ctx context.Context, typeName, qualifiedName, bmName string) (*net_http.Response, error)
+	DeleteBusinessMetadataFunc func(ctx context.Context, typeName, qualifiedName, bmName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataRequest
+
+	lockDeleteBusinessMetadataExecute sync.Mutex
+	DeleteBusinessMetadataExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataRequest) (*net_http.Response, error)
 
 	lockDeleteBusinessMetadataDef sync.Mutex
-	DeleteBusinessMetadataDefFunc func(ctx context.Context, bmName string) (*net_http.Response, error)
+	DeleteBusinessMetadataDefFunc func(ctx context.Context, bmName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataDefRequest
+
+	lockDeleteBusinessMetadataDefExecute sync.Mutex
+	DeleteBusinessMetadataDefExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataDefRequest) (*net_http.Response, error)
 
 	lockDeleteByUniqueAttributes sync.Mutex
-	DeleteByUniqueAttributesFunc func(ctx context.Context, typeName, qualifiedName string) (*net_http.Response, error)
+	DeleteByUniqueAttributesFunc func(ctx context.Context, typeName, qualifiedName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteByUniqueAttributesRequest
+
+	lockDeleteByUniqueAttributesExecute sync.Mutex
+	DeleteByUniqueAttributesExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteByUniqueAttributesRequest) (*net_http.Response, error)
+
+	lockDeleteDekVersion sync.Mutex
+	DeleteDekVersionFunc func(ctx context.Context, name, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionRequest
+
+	lockDeleteDekVersionExecute sync.Mutex
+	DeleteDekVersionExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionRequest) (*net_http.Response, error)
+
+	lockDeleteDekVersions sync.Mutex
+	DeleteDekVersionsFunc func(ctx context.Context, name, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionsRequest
+
+	lockDeleteDekVersionsExecute sync.Mutex
+	DeleteDekVersionsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionsRequest) (*net_http.Response, error)
 
 	lockDeleteExporter sync.Mutex
-	DeleteExporterFunc func(ctx context.Context, name string) (*net_http.Response, error)
+	DeleteExporterFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteExporterRequest
+
+	lockDeleteExporterExecute sync.Mutex
+	DeleteExporterExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteExporterRequest) (*net_http.Response, error)
+
+	lockDeleteKek sync.Mutex
+	DeleteKekFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteKekRequest
+
+	lockDeleteKekExecute sync.Mutex
+	DeleteKekExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteKekRequest) (*net_http.Response, error)
 
 	lockDeleteSchemaVersion sync.Mutex
-	DeleteSchemaVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts) (int32, *net_http.Response, error)
+	DeleteSchemaVersionFunc func(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSchemaVersionRequest
+
+	lockDeleteSchemaVersionExecute sync.Mutex
+	DeleteSchemaVersionExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSchemaVersionRequest) (int32, *net_http.Response, error)
 
 	lockDeleteSubject sync.Mutex
-	DeleteSubjectFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts) ([]int32, *net_http.Response, error)
+	DeleteSubjectFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectRequest
+
+	lockDeleteSubjectExecute sync.Mutex
+	DeleteSubjectExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectRequest) ([]int32, *net_http.Response, error)
 
 	lockDeleteSubjectConfig sync.Mutex
-	DeleteSubjectConfigFunc func(ctx context.Context, subject string) (string, *net_http.Response, error)
+	DeleteSubjectConfigFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectConfigRequest
+
+	lockDeleteSubjectConfigExecute sync.Mutex
+	DeleteSubjectConfigExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectConfigRequest) (string, *net_http.Response, error)
 
 	lockDeleteSubjectMode sync.Mutex
-	DeleteSubjectModeFunc func(ctx context.Context, subject string) (string, *net_http.Response, error)
+	DeleteSubjectModeFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectModeRequest
+
+	lockDeleteSubjectModeExecute sync.Mutex
+	DeleteSubjectModeExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectModeRequest) (string, *net_http.Response, error)
 
 	lockDeleteTag sync.Mutex
-	DeleteTagFunc func(ctx context.Context, typeName, qualifiedName, tagName string) (*net_http.Response, error)
+	DeleteTagFunc func(ctx context.Context, typeName, qualifiedName, tagName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagRequest
+
+	lockDeleteTagExecute sync.Mutex
+	DeleteTagExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagRequest) (*net_http.Response, error)
 
 	lockDeleteTagDef sync.Mutex
-	DeleteTagDefFunc func(ctx context.Context, tagName string) (*net_http.Response, error)
+	DeleteTagDefFunc func(ctx context.Context, tagName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagDefRequest
+
+	lockDeleteTagDefExecute sync.Mutex
+	DeleteTagDefExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagDefRequest) (*net_http.Response, error)
+
+	lockDeleteTopLevelConfig sync.Mutex
+	DeleteTopLevelConfigFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTopLevelConfigRequest
+
+	lockDeleteTopLevelConfigExecute sync.Mutex
+	DeleteTopLevelConfigExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTopLevelConfigRequest) (string, *net_http.Response, error)
 
 	lockGet sync.Mutex
-	GetFunc func(ctx context.Context) (map[string]map[string]interface{}, *net_http.Response, error)
+	GetFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetRequest
+
+	lockGetExecute sync.Mutex
+	GetExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetRequest) (map[string]map[string]interface{}, *net_http.Response, error)
 
 	lockGetAllBusinessMetadataDefs sync.Mutex
-	GetAllBusinessMetadataDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error)
+	GetAllBusinessMetadataDefsFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetAllBusinessMetadataDefsRequest
+
+	lockGetAllBusinessMetadataDefsExecute sync.Mutex
+	GetAllBusinessMetadataDefsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetAllBusinessMetadataDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error)
 
 	lockGetAllTagDefs sync.Mutex
-	GetAllTagDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error)
+	GetAllTagDefsFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetAllTagDefsRequest
+
+	lockGetAllTagDefsExecute sync.Mutex
+	GetAllTagDefsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetAllTagDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error)
 
 	lockGetBusinessMetadata sync.Mutex
-	GetBusinessMetadataFunc func(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
+	GetBusinessMetadataFunc func(ctx context.Context, typeName, qualifiedName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataRequest
+
+	lockGetBusinessMetadataExecute sync.Mutex
+	GetBusinessMetadataExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
 
 	lockGetBusinessMetadataDefByName sync.Mutex
-	GetBusinessMetadataDefByNameFunc func(ctx context.Context, bmName string) (github_com_confluentinc_schema_registry_sdk_go.AtlasBusinessMetadataDef, *net_http.Response, error)
+	GetBusinessMetadataDefByNameFunc func(ctx context.Context, bmName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataDefByNameRequest
+
+	lockGetBusinessMetadataDefByNameExecute sync.Mutex
+	GetBusinessMetadataDefByNameExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataDefByNameRequest) (github_com_confluentinc_schema_registry_sdk_go.AtlasBusinessMetadataDef, *net_http.Response, error)
 
 	lockGetByUniqueAttributes sync.Mutex
-	GetByUniqueAttributesFunc func(ctx context.Context, typeName, qualifiedName string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts) (github_com_confluentinc_schema_registry_sdk_go.AtlasEntityWithExtInfo, *net_http.Response, error)
+	GetByUniqueAttributesFunc func(ctx context.Context, typeName, qualifiedName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetByUniqueAttributesRequest
+
+	lockGetByUniqueAttributesExecute sync.Mutex
+	GetByUniqueAttributesExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetByUniqueAttributesRequest) (github_com_confluentinc_schema_registry_sdk_go.AtlasEntityWithExtInfo, *net_http.Response, error)
 
 	lockGetClusterId sync.Mutex
-	GetClusterIdFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.ServerClusterId, *net_http.Response, error)
+	GetClusterIdFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetClusterIdRequest
+
+	lockGetClusterIdExecute sync.Mutex
+	GetClusterIdExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetClusterIdRequest) (github_com_confluentinc_schema_registry_sdk_go.ServerClusterId, *net_http.Response, error)
+
+	lockGetDek sync.Mutex
+	GetDekFunc func(ctx context.Context, name, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiGetDekRequest
+
+	lockGetDekExecute sync.Mutex
+	GetDekExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetDekRequest) (github_com_confluentinc_schema_registry_sdk_go.Dek, *net_http.Response, error)
+
+	lockGetDekByVersion sync.Mutex
+	GetDekByVersionFunc func(ctx context.Context, name, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiGetDekByVersionRequest
+
+	lockGetDekByVersionExecute sync.Mutex
+	GetDekByVersionExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetDekByVersionRequest) (github_com_confluentinc_schema_registry_sdk_go.Dek, *net_http.Response, error)
+
+	lockGetDekSubjects sync.Mutex
+	GetDekSubjectsFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetDekSubjectsRequest
+
+	lockGetDekSubjectsExecute sync.Mutex
+	GetDekSubjectsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetDekSubjectsRequest) ([]string, *net_http.Response, error)
+
+	lockGetDekVersions sync.Mutex
+	GetDekVersionsFunc func(ctx context.Context, name, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiGetDekVersionsRequest
+
+	lockGetDekVersionsExecute sync.Mutex
+	GetDekVersionsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetDekVersionsRequest) ([]int32, *net_http.Response, error)
 
 	lockGetExporterConfig sync.Mutex
-	GetExporterConfigFunc func(ctx context.Context, name string) (map[string]string, *net_http.Response, error)
+	GetExporterConfigFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterConfigRequest
+
+	lockGetExporterConfigExecute sync.Mutex
+	GetExporterConfigExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterConfigRequest) (map[string]string, *net_http.Response, error)
 
 	lockGetExporterInfo sync.Mutex
-	GetExporterInfoFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.ExporterInfo, *net_http.Response, error)
+	GetExporterInfoFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterInfoRequest
+
+	lockGetExporterInfoExecute sync.Mutex
+	GetExporterInfoExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterInfoRequest) (github_com_confluentinc_schema_registry_sdk_go.ExporterInfo, *net_http.Response, error)
 
 	lockGetExporterStatus sync.Mutex
-	GetExporterStatusFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.ExporterStatus, *net_http.Response, error)
+	GetExporterStatusFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterStatusRequest
+
+	lockGetExporterStatusExecute sync.Mutex
+	GetExporterStatusExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterStatusRequest) (github_com_confluentinc_schema_registry_sdk_go.ExporterStatus, *net_http.Response, error)
 
 	lockGetExporters sync.Mutex
-	GetExportersFunc func(ctx context.Context) ([]string, *net_http.Response, error)
+	GetExportersFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetExportersRequest
+
+	lockGetExportersExecute sync.Mutex
+	GetExportersExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetExportersRequest) ([]string, *net_http.Response, error)
+
+	lockGetKek sync.Mutex
+	GetKekFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetKekRequest
+
+	lockGetKekExecute sync.Mutex
+	GetKekExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetKekRequest) (github_com_confluentinc_schema_registry_sdk_go.Kek, *net_http.Response, error)
+
+	lockGetKekNames sync.Mutex
+	GetKekNamesFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetKekNamesRequest
+
+	lockGetKekNamesExecute sync.Mutex
+	GetKekNamesExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetKekNamesRequest) ([]string, *net_http.Response, error)
 
 	lockGetMode sync.Mutex
-	GetModeFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error)
+	GetModeFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiGetModeRequest
+
+	lockGetModeExecute sync.Mutex
+	GetModeExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetModeRequest) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error)
 
 	lockGetReferencedBy sync.Mutex
-	GetReferencedByFunc func(ctx context.Context, subject, version string) ([]int32, *net_http.Response, error)
+	GetReferencedByFunc func(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiGetReferencedByRequest
+
+	lockGetReferencedByExecute sync.Mutex
+	GetReferencedByExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetReferencedByRequest) ([]int32, *net_http.Response, error)
 
 	lockGetSchema sync.Mutex
-	GetSchemaFunc func(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts) (github_com_confluentinc_schema_registry_sdk_go.SchemaString, *net_http.Response, error)
+	GetSchemaFunc func(ctx context.Context, id int32) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaRequest
+
+	lockGetSchemaExecute sync.Mutex
+	GetSchemaExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go.SchemaString, *net_http.Response, error)
 
 	lockGetSchemaByVersion sync.Mutex
-	GetSchemaByVersionFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts) (github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error)
+	GetSchemaByVersionFunc func(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaByVersionRequest
+
+	lockGetSchemaByVersionExecute sync.Mutex
+	GetSchemaByVersionExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaByVersionRequest) (github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error)
 
 	lockGetSchemaOnly sync.Mutex
-	GetSchemaOnlyFunc func(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts) (string, *net_http.Response, error)
+	GetSchemaOnlyFunc func(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaOnlyRequest
+
+	lockGetSchemaOnlyExecute sync.Mutex
+	GetSchemaOnlyExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaOnlyRequest) (string, *net_http.Response, error)
 
 	lockGetSchemaTypes sync.Mutex
-	GetSchemaTypesFunc func(ctx context.Context) ([]string, *net_http.Response, error)
+	GetSchemaTypesFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaTypesRequest
+
+	lockGetSchemaTypesExecute sync.Mutex
+	GetSchemaTypesExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaTypesRequest) ([]string, *net_http.Response, error)
 
 	lockGetSchemas sync.Mutex
-	GetSchemasFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts) ([]github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error)
+	GetSchemasFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemasRequest
+
+	lockGetSchemasExecute sync.Mutex
+	GetSchemasExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemasRequest) ([]github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error)
 
 	lockGetSubjectLevelConfig sync.Mutex
-	GetSubjectLevelConfigFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error)
+	GetSubjectLevelConfigFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectLevelConfigRequest
+
+	lockGetSubjectLevelConfigExecute sync.Mutex
+	GetSubjectLevelConfigExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectLevelConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error)
 
 	lockGetSubjects sync.Mutex
-	GetSubjectsFunc func(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts) ([]string, *net_http.Response, error)
+	GetSubjectsFunc func(ctx context.Context, id int32) github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectsRequest
+
+	lockGetSubjectsExecute sync.Mutex
+	GetSubjectsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectsRequest) ([]string, *net_http.Response, error)
 
 	lockGetTagDefByName sync.Mutex
-	GetTagDefByNameFunc func(ctx context.Context, tagName string) (github_com_confluentinc_schema_registry_sdk_go.TagDef, *net_http.Response, error)
+	GetTagDefByNameFunc func(ctx context.Context, tagName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetTagDefByNameRequest
+
+	lockGetTagDefByNameExecute sync.Mutex
+	GetTagDefByNameExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetTagDefByNameRequest) (github_com_confluentinc_schema_registry_sdk_go.TagDef, *net_http.Response, error)
 
 	lockGetTags sync.Mutex
-	GetTagsFunc func(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
+	GetTagsFunc func(ctx context.Context, typeName, qualifiedName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetTagsRequest
+
+	lockGetTagsExecute sync.Mutex
+	GetTagsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetTagsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
 
 	lockGetTopLevelConfig sync.Mutex
-	GetTopLevelConfigFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error)
+	GetTopLevelConfigFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelConfigRequest
+
+	lockGetTopLevelConfigExecute sync.Mutex
+	GetTopLevelConfigExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error)
 
 	lockGetTopLevelMode sync.Mutex
-	GetTopLevelModeFunc func(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error)
+	GetTopLevelModeFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelModeRequest
+
+	lockGetTopLevelModeExecute sync.Mutex
+	GetTopLevelModeExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelModeRequest) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error)
 
 	lockGetVersions sync.Mutex
-	GetVersionsFunc func(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.SubjectVersion, *net_http.Response, error)
+	GetVersionsFunc func(ctx context.Context, id int32) github_com_confluentinc_schema_registry_sdk_go.ApiGetVersionsRequest
+
+	lockGetVersionsExecute sync.Mutex
+	GetVersionsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiGetVersionsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.SubjectVersion, *net_http.Response, error)
 
 	lockList sync.Mutex
-	ListFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts) ([]string, *net_http.Response, error)
+	ListFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiListRequest
+
+	lockListExecute sync.Mutex
+	ListExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiListRequest) ([]string, *net_http.Response, error)
 
 	lockListContexts sync.Mutex
-	ListContextsFunc func(ctx context.Context) ([]string, *net_http.Response, error)
+	ListContextsFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiListContextsRequest
+
+	lockListContextsExecute sync.Mutex
+	ListContextsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiListContextsRequest) ([]string, *net_http.Response, error)
 
 	lockListVersions sync.Mutex
-	ListVersionsFunc func(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts) ([]int32, *net_http.Response, error)
+	ListVersionsFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiListVersionsRequest
+
+	lockListVersionsExecute sync.Mutex
+	ListVersionsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiListVersionsRequest) ([]int32, *net_http.Response, error)
 
 	lockLookUpSchemaUnderSubject sync.Mutex
-	LookUpSchemaUnderSubjectFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error)
+	LookUpSchemaUnderSubjectFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiLookUpSchemaUnderSubjectRequest
+
+	lockLookUpSchemaUnderSubjectExecute sync.Mutex
+	LookUpSchemaUnderSubjectExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiLookUpSchemaUnderSubjectRequest) (*net_http.Response, error)
 
 	lockPartialUpdateByUniqueAttributes sync.Mutex
-	PartialUpdateByUniqueAttributesFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts) (*net_http.Response, error)
+	PartialUpdateByUniqueAttributesFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiPartialUpdateByUniqueAttributesRequest
+
+	lockPartialUpdateByUniqueAttributesExecute sync.Mutex
+	PartialUpdateByUniqueAttributesExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiPartialUpdateByUniqueAttributesRequest) (*net_http.Response, error)
 
 	lockPauseExporter sync.Mutex
-	PauseExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
+	PauseExporterFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiPauseExporterRequest
+
+	lockPauseExporterExecute sync.Mutex
+	PauseExporterExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiPauseExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockPost sync.Mutex
-	PostFunc func(ctx context.Context) (map[string]string, *net_http.Response, error)
+	PostFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiPostRequest
+
+	lockPostExecute sync.Mutex
+	PostExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiPostRequest) (map[string]string, *net_http.Response, error)
 
 	lockPutExporter sync.Mutex
-	PutExporterFunc func(ctx context.Context, name string, body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
+	PutExporterFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterRequest
+
+	lockPutExporterExecute sync.Mutex
+	PutExporterExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockPutExporterConfig sync.Mutex
-	PutExporterConfigFunc func(ctx context.Context, name string, body map[string]string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
+	PutExporterConfigFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterConfigRequest
+
+	lockPutExporterConfigExecute sync.Mutex
+	PutExporterConfigExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
+
+	lockPutKek sync.Mutex
+	PutKekFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiPutKekRequest
+
+	lockPutKekExecute sync.Mutex
+	PutKekExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiPutKekRequest) (github_com_confluentinc_schema_registry_sdk_go.Kek, *net_http.Response, error)
 
 	lockRegister sync.Mutex
-	RegisterFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error)
+	RegisterFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiRegisterRequest
+
+	lockRegisterExecute sync.Mutex
+	RegisterExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiRegisterRequest) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error)
 
 	lockResetExporter sync.Mutex
-	ResetExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
+	ResetExporterFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiResetExporterRequest
+
+	lockResetExporterExecute sync.Mutex
+	ResetExporterExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiResetExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockResumeExporter sync.Mutex
-	ResumeExporterFunc func(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
+	ResumeExporterFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiResumeExporterRequest
+
+	lockResumeExporterExecute sync.Mutex
+	ResumeExporterExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiResumeExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error)
 
 	lockSearchUsingAttribute sync.Mutex
-	SearchUsingAttributeFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error)
+	SearchUsingAttributeFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingAttributeRequest
+
+	lockSearchUsingAttributeExecute sync.Mutex
+	SearchUsingAttributeExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingAttributeRequest) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error)
 
 	lockSearchUsingBasic sync.Mutex
-	SearchUsingBasicFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error)
+	SearchUsingBasicFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingBasicRequest
+
+	lockSearchUsingBasicExecute sync.Mutex
+	SearchUsingBasicExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingBasicRequest) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error)
 
 	lockTestCompatibilityBySubjectName sync.Mutex
-	TestCompatibilityBySubjectNameFunc func(ctx context.Context, subject, version string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error)
+	TestCompatibilityBySubjectNameFunc func(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityBySubjectNameRequest
+
+	lockTestCompatibilityBySubjectNameExecute sync.Mutex
+	TestCompatibilityBySubjectNameExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityBySubjectNameRequest) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error)
 
 	lockTestCompatibilityForSubject sync.Mutex
-	TestCompatibilityForSubjectFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error)
+	TestCompatibilityForSubjectFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityForSubjectRequest
+
+	lockTestCompatibilityForSubjectExecute sync.Mutex
+	TestCompatibilityForSubjectExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityForSubjectRequest) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error)
+
+	lockUndeleteDekVersion sync.Mutex
+	UndeleteDekVersionFunc func(ctx context.Context, name, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionRequest
+
+	lockUndeleteDekVersionExecute sync.Mutex
+	UndeleteDekVersionExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionRequest) (*net_http.Response, error)
+
+	lockUndeleteDekVersions sync.Mutex
+	UndeleteDekVersionsFunc func(ctx context.Context, name, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionsRequest
+
+	lockUndeleteDekVersionsExecute sync.Mutex
+	UndeleteDekVersionsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionsRequest) (*net_http.Response, error)
+
+	lockUndeleteKek sync.Mutex
+	UndeleteKekFunc func(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteKekRequest
+
+	lockUndeleteKekExecute sync.Mutex
+	UndeleteKekExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteKekRequest) (*net_http.Response, error)
 
 	lockUpdateBusinessMetadata sync.Mutex
-	UpdateBusinessMetadataFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
+	UpdateBusinessMetadataFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataRequest
+
+	lockUpdateBusinessMetadataExecute sync.Mutex
+	UpdateBusinessMetadataExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error)
 
 	lockUpdateBusinessMetadataDefs sync.Mutex
-	UpdateBusinessMetadataDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error)
+	UpdateBusinessMetadataDefsFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataDefsRequest
+
+	lockUpdateBusinessMetadataDefsExecute sync.Mutex
+	UpdateBusinessMetadataDefsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error)
 
 	lockUpdateMode sync.Mutex
-	UpdateModeFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
+	UpdateModeFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateModeRequest
+
+	lockUpdateModeExecute sync.Mutex
+	UpdateModeExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateModeRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
 
 	lockUpdateSubjectLevelConfig sync.Mutex
-	UpdateSubjectLevelConfigFunc func(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
+	UpdateSubjectLevelConfigFunc func(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateSubjectLevelConfigRequest
+
+	lockUpdateSubjectLevelConfigExecute sync.Mutex
+	UpdateSubjectLevelConfigExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateSubjectLevelConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTagDefs sync.Mutex
-	UpdateTagDefsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error)
+	UpdateTagDefsFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagDefsRequest
+
+	lockUpdateTagDefsExecute sync.Mutex
+	UpdateTagDefsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error)
 
 	lockUpdateTags sync.Mutex
-	UpdateTagsFunc func(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
+	UpdateTagsFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagsRequest
+
+	lockUpdateTagsExecute sync.Mutex
+	UpdateTagsExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error)
 
 	lockUpdateTopLevelConfig sync.Mutex
-	UpdateTopLevelConfigFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
+	UpdateTopLevelConfigFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelConfigRequest
+
+	lockUpdateTopLevelConfigExecute sync.Mutex
+	UpdateTopLevelConfigExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error)
 
 	lockUpdateTopLevelMode sync.Mutex
-	UpdateTopLevelModeFunc func(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
+	UpdateTopLevelModeFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelModeRequest
+
+	lockUpdateTopLevelModeExecute sync.Mutex
+	UpdateTopLevelModeExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelModeRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error)
 
 	calls struct {
+		AsyncapiParsePut []struct {
+			Ctx context.Context
+		}
+		AsyncapiParsePutExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiParsePutRequest
+		}
 		AsyncapiPut []struct {
 			Ctx context.Context
 		}
+		AsyncapiPutExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiPutRequest
+		}
 		CreateBusinessMetadata []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts
+			Ctx context.Context
+		}
+		CreateBusinessMetadataExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataRequest
 		}
 		CreateBusinessMetadataDefs []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts
+			Ctx context.Context
+		}
+		CreateBusinessMetadataDefsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataDefsRequest
+		}
+		CreateDek []struct {
+			Ctx  context.Context
+			Name string
+		}
+		CreateDekExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiCreateDekRequest
 		}
 		CreateExporter []struct {
-			Ctx  context.Context
-			Body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest
+			Ctx context.Context
+		}
+		CreateExporterExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiCreateExporterRequest
+		}
+		CreateKek []struct {
+			Ctx context.Context
+		}
+		CreateKekExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiCreateKekRequest
 		}
 		CreateOrUpdate []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts
+			Ctx context.Context
+		}
+		CreateOrUpdateExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiCreateOrUpdateRequest
 		}
 		CreateTagDefs []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts
+			Ctx context.Context
+		}
+		CreateTagDefsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagDefsRequest
 		}
 		CreateTags []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts
+			Ctx context.Context
+		}
+		CreateTagsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagsRequest
 		}
 		DeleteBusinessMetadata []struct {
 			Ctx           context.Context
@@ -246,37 +580,83 @@ type DefaultApi struct {
 			QualifiedName string
 			BmName        string
 		}
+		DeleteBusinessMetadataExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataRequest
+		}
 		DeleteBusinessMetadataDef []struct {
 			Ctx    context.Context
 			BmName string
+		}
+		DeleteBusinessMetadataDefExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataDefRequest
 		}
 		DeleteByUniqueAttributes []struct {
 			Ctx           context.Context
 			TypeName      string
 			QualifiedName string
 		}
+		DeleteByUniqueAttributesExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteByUniqueAttributesRequest
+		}
+		DeleteDekVersion []struct {
+			Ctx     context.Context
+			Name    string
+			Subject string
+			Version string
+		}
+		DeleteDekVersionExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionRequest
+		}
+		DeleteDekVersions []struct {
+			Ctx     context.Context
+			Name    string
+			Subject string
+		}
+		DeleteDekVersionsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionsRequest
+		}
 		DeleteExporter []struct {
 			Ctx  context.Context
 			Name string
 		}
+		DeleteExporterExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteExporterRequest
+		}
+		DeleteKek []struct {
+			Ctx  context.Context
+			Name string
+		}
+		DeleteKekExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteKekRequest
+		}
 		DeleteSchemaVersion []struct {
-			Ctx               context.Context
-			Subject           string
-			Version           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts
+			Ctx     context.Context
+			Subject string
+			Version string
+		}
+		DeleteSchemaVersionExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSchemaVersionRequest
 		}
 		DeleteSubject []struct {
-			Ctx               context.Context
-			Subject           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts
+			Ctx     context.Context
+			Subject string
+		}
+		DeleteSubjectExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectRequest
 		}
 		DeleteSubjectConfig []struct {
 			Ctx     context.Context
 			Subject string
 		}
+		DeleteSubjectConfigExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectConfigRequest
+		}
 		DeleteSubjectMode []struct {
 			Ctx     context.Context
 			Subject string
+		}
+		DeleteSubjectModeExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectModeRequest
 		}
 		DeleteTag []struct {
 			Ctx           context.Context
@@ -284,230 +664,508 @@ type DefaultApi struct {
 			QualifiedName string
 			TagName       string
 		}
+		DeleteTagExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagRequest
+		}
 		DeleteTagDef []struct {
 			Ctx     context.Context
 			TagName string
 		}
+		DeleteTagDefExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagDefRequest
+		}
+		DeleteTopLevelConfig []struct {
+			Ctx context.Context
+		}
+		DeleteTopLevelConfigExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTopLevelConfigRequest
+		}
 		Get []struct {
 			Ctx context.Context
 		}
+		GetExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetRequest
+		}
 		GetAllBusinessMetadataDefs []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts
+			Ctx context.Context
+		}
+		GetAllBusinessMetadataDefsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetAllBusinessMetadataDefsRequest
 		}
 		GetAllTagDefs []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts
+			Ctx context.Context
+		}
+		GetAllTagDefsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetAllTagDefsRequest
 		}
 		GetBusinessMetadata []struct {
 			Ctx           context.Context
 			TypeName      string
 			QualifiedName string
 		}
+		GetBusinessMetadataExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataRequest
+		}
 		GetBusinessMetadataDefByName []struct {
 			Ctx    context.Context
 			BmName string
 		}
+		GetBusinessMetadataDefByNameExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataDefByNameRequest
+		}
 		GetByUniqueAttributes []struct {
-			Ctx               context.Context
-			TypeName          string
-			QualifiedName     string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts
+			Ctx           context.Context
+			TypeName      string
+			QualifiedName string
+		}
+		GetByUniqueAttributesExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetByUniqueAttributesRequest
 		}
 		GetClusterId []struct {
 			Ctx context.Context
+		}
+		GetClusterIdExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetClusterIdRequest
+		}
+		GetDek []struct {
+			Ctx     context.Context
+			Name    string
+			Subject string
+		}
+		GetDekExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekRequest
+		}
+		GetDekByVersion []struct {
+			Ctx     context.Context
+			Name    string
+			Subject string
+			Version string
+		}
+		GetDekByVersionExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekByVersionRequest
+		}
+		GetDekSubjects []struct {
+			Ctx  context.Context
+			Name string
+		}
+		GetDekSubjectsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekSubjectsRequest
+		}
+		GetDekVersions []struct {
+			Ctx     context.Context
+			Name    string
+			Subject string
+		}
+		GetDekVersionsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekVersionsRequest
 		}
 		GetExporterConfig []struct {
 			Ctx  context.Context
 			Name string
 		}
+		GetExporterConfigExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterConfigRequest
+		}
 		GetExporterInfo []struct {
 			Ctx  context.Context
 			Name string
+		}
+		GetExporterInfoExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterInfoRequest
 		}
 		GetExporterStatus []struct {
 			Ctx  context.Context
 			Name string
 		}
+		GetExporterStatusExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterStatusRequest
+		}
 		GetExporters []struct {
 			Ctx context.Context
 		}
+		GetExportersExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetExportersRequest
+		}
+		GetKek []struct {
+			Ctx  context.Context
+			Name string
+		}
+		GetKekExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetKekRequest
+		}
+		GetKekNames []struct {
+			Ctx context.Context
+		}
+		GetKekNamesExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetKekNamesRequest
+		}
 		GetMode []struct {
-			Ctx               context.Context
-			Subject           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts
+			Ctx     context.Context
+			Subject string
+		}
+		GetModeExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetModeRequest
 		}
 		GetReferencedBy []struct {
 			Ctx     context.Context
 			Subject string
 			Version string
 		}
+		GetReferencedByExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetReferencedByRequest
+		}
 		GetSchema []struct {
-			Ctx               context.Context
-			Id                int32
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts
+			Ctx context.Context
+			Id  int32
+		}
+		GetSchemaExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaRequest
 		}
 		GetSchemaByVersion []struct {
-			Ctx               context.Context
-			Subject           string
-			Version           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts
+			Ctx     context.Context
+			Subject string
+			Version string
+		}
+		GetSchemaByVersionExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaByVersionRequest
 		}
 		GetSchemaOnly []struct {
-			Ctx               context.Context
-			Subject           string
-			Version           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts
+			Ctx     context.Context
+			Subject string
+			Version string
+		}
+		GetSchemaOnlyExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaOnlyRequest
 		}
 		GetSchemaTypes []struct {
 			Ctx context.Context
 		}
+		GetSchemaTypesExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaTypesRequest
+		}
 		GetSchemas []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts
+			Ctx context.Context
+		}
+		GetSchemasExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemasRequest
 		}
 		GetSubjectLevelConfig []struct {
-			Ctx               context.Context
-			Subject           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts
+			Ctx     context.Context
+			Subject string
+		}
+		GetSubjectLevelConfigExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectLevelConfigRequest
 		}
 		GetSubjects []struct {
-			Ctx               context.Context
-			Id                int32
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts
+			Ctx context.Context
+			Id  int32
+		}
+		GetSubjectsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectsRequest
 		}
 		GetTagDefByName []struct {
 			Ctx     context.Context
 			TagName string
+		}
+		GetTagDefByNameExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetTagDefByNameRequest
 		}
 		GetTags []struct {
 			Ctx           context.Context
 			TypeName      string
 			QualifiedName string
 		}
+		GetTagsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetTagsRequest
+		}
 		GetTopLevelConfig []struct {
 			Ctx context.Context
+		}
+		GetTopLevelConfigExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelConfigRequest
 		}
 		GetTopLevelMode []struct {
 			Ctx context.Context
 		}
+		GetTopLevelModeExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelModeRequest
+		}
 		GetVersions []struct {
-			Ctx               context.Context
-			Id                int32
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts
+			Ctx context.Context
+			Id  int32
+		}
+		GetVersionsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiGetVersionsRequest
 		}
 		List []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts
+			Ctx context.Context
+		}
+		ListExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiListRequest
 		}
 		ListContexts []struct {
 			Ctx context.Context
 		}
+		ListContextsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiListContextsRequest
+		}
 		ListVersions []struct {
-			Ctx               context.Context
-			Subject           string
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts
+			Ctx     context.Context
+			Subject string
+		}
+		ListVersionsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiListVersionsRequest
 		}
 		LookUpSchemaUnderSubject []struct {
-			Ctx               context.Context
-			Subject           string
-			Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts
+			Ctx     context.Context
+			Subject string
+		}
+		LookUpSchemaUnderSubjectExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiLookUpSchemaUnderSubjectRequest
 		}
 		PartialUpdateByUniqueAttributes []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts
+			Ctx context.Context
+		}
+		PartialUpdateByUniqueAttributesExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiPartialUpdateByUniqueAttributesRequest
 		}
 		PauseExporter []struct {
 			Ctx  context.Context
 			Name string
 		}
+		PauseExporterExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiPauseExporterRequest
+		}
 		Post []struct {
 			Ctx context.Context
+		}
+		PostExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiPostRequest
 		}
 		PutExporter []struct {
 			Ctx  context.Context
 			Name string
-			Body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest
+		}
+		PutExporterExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterRequest
 		}
 		PutExporterConfig []struct {
 			Ctx  context.Context
 			Name string
-			Body map[string]string
+		}
+		PutExporterConfigExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterConfigRequest
+		}
+		PutKek []struct {
+			Ctx  context.Context
+			Name string
+		}
+		PutKekExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiPutKekRequest
 		}
 		Register []struct {
 			Ctx     context.Context
 			Subject string
-			Body    github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
+		}
+		RegisterExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiRegisterRequest
 		}
 		ResetExporter []struct {
 			Ctx  context.Context
 			Name string
 		}
+		ResetExporterExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiResetExporterRequest
+		}
 		ResumeExporter []struct {
 			Ctx  context.Context
 			Name string
 		}
+		ResumeExporterExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiResumeExporterRequest
+		}
 		SearchUsingAttribute []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts
+			Ctx context.Context
+		}
+		SearchUsingAttributeExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingAttributeRequest
 		}
 		SearchUsingBasic []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts
+			Ctx context.Context
+		}
+		SearchUsingBasicExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingBasicRequest
 		}
 		TestCompatibilityBySubjectName []struct {
-			Ctx               context.Context
-			Subject           string
-			Version           string
-			Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts
+			Ctx     context.Context
+			Subject string
+			Version string
+		}
+		TestCompatibilityBySubjectNameExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityBySubjectNameRequest
 		}
 		TestCompatibilityForSubject []struct {
-			Ctx               context.Context
-			Subject           string
-			Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts
+			Ctx     context.Context
+			Subject string
+		}
+		TestCompatibilityForSubjectExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityForSubjectRequest
+		}
+		UndeleteDekVersion []struct {
+			Ctx     context.Context
+			Name    string
+			Subject string
+			Version string
+		}
+		UndeleteDekVersionExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionRequest
+		}
+		UndeleteDekVersions []struct {
+			Ctx     context.Context
+			Name    string
+			Subject string
+		}
+		UndeleteDekVersionsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionsRequest
+		}
+		UndeleteKek []struct {
+			Ctx  context.Context
+			Name string
+		}
+		UndeleteKekExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteKekRequest
 		}
 		UpdateBusinessMetadata []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts
+			Ctx context.Context
+		}
+		UpdateBusinessMetadataExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataRequest
 		}
 		UpdateBusinessMetadataDefs []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts
+			Ctx context.Context
+		}
+		UpdateBusinessMetadataDefsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataDefsRequest
 		}
 		UpdateMode []struct {
 			Ctx     context.Context
 			Subject string
-			Body    github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
+		}
+		UpdateModeExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateModeRequest
 		}
 		UpdateSubjectLevelConfig []struct {
 			Ctx     context.Context
 			Subject string
-			Body    github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
+		}
+		UpdateSubjectLevelConfigExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateSubjectLevelConfigRequest
 		}
 		UpdateTagDefs []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts
+			Ctx context.Context
+		}
+		UpdateTagDefsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagDefsRequest
 		}
 		UpdateTags []struct {
-			Ctx               context.Context
-			LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts
+			Ctx context.Context
+		}
+		UpdateTagsExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagsRequest
 		}
 		UpdateTopLevelConfig []struct {
-			Ctx  context.Context
-			Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
+			Ctx context.Context
+		}
+		UpdateTopLevelConfigExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelConfigRequest
 		}
 		UpdateTopLevelMode []struct {
-			Ctx  context.Context
-			Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
+			Ctx context.Context
+		}
+		UpdateTopLevelModeExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelModeRequest
 		}
 	}
 }
 
+// AsyncapiParsePut mocks base method by wrapping the associated func.
+func (m *DefaultApi) AsyncapiParsePut(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiParsePutRequest {
+	m.lockAsyncapiParsePut.Lock()
+	defer m.lockAsyncapiParsePut.Unlock()
+
+	if m.AsyncapiParsePutFunc == nil {
+		panic("mocker: DefaultApi.AsyncapiParsePutFunc is nil but DefaultApi.AsyncapiParsePut was called.")
+	}
+
+	call := struct {
+		Ctx context.Context
+	}{
+		Ctx: ctx,
+	}
+
+	m.calls.AsyncapiParsePut = append(m.calls.AsyncapiParsePut, call)
+
+	return m.AsyncapiParsePutFunc(ctx)
+}
+
+// AsyncapiParsePutCalled returns true if AsyncapiParsePut was called at least once.
+func (m *DefaultApi) AsyncapiParsePutCalled() bool {
+	m.lockAsyncapiParsePut.Lock()
+	defer m.lockAsyncapiParsePut.Unlock()
+
+	return len(m.calls.AsyncapiParsePut) > 0
+}
+
+// AsyncapiParsePutCalls returns the calls made to AsyncapiParsePut.
+func (m *DefaultApi) AsyncapiParsePutCalls() []struct {
+	Ctx context.Context
+} {
+	m.lockAsyncapiParsePut.Lock()
+	defer m.lockAsyncapiParsePut.Unlock()
+
+	return m.calls.AsyncapiParsePut
+}
+
+// AsyncapiParsePutExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) AsyncapiParsePutExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiParsePutRequest) (*net_http.Response, error) {
+	m.lockAsyncapiParsePutExecute.Lock()
+	defer m.lockAsyncapiParsePutExecute.Unlock()
+
+	if m.AsyncapiParsePutExecuteFunc == nil {
+		panic("mocker: DefaultApi.AsyncapiParsePutExecuteFunc is nil but DefaultApi.AsyncapiParsePutExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiParsePutRequest
+	}{
+		R: r,
+	}
+
+	m.calls.AsyncapiParsePutExecute = append(m.calls.AsyncapiParsePutExecute, call)
+
+	return m.AsyncapiParsePutExecuteFunc(r)
+}
+
+// AsyncapiParsePutExecuteCalled returns true if AsyncapiParsePutExecute was called at least once.
+func (m *DefaultApi) AsyncapiParsePutExecuteCalled() bool {
+	m.lockAsyncapiParsePutExecute.Lock()
+	defer m.lockAsyncapiParsePutExecute.Unlock()
+
+	return len(m.calls.AsyncapiParsePutExecute) > 0
+}
+
+// AsyncapiParsePutExecuteCalls returns the calls made to AsyncapiParsePutExecute.
+func (m *DefaultApi) AsyncapiParsePutExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiParsePutRequest
+} {
+	m.lockAsyncapiParsePutExecute.Lock()
+	defer m.lockAsyncapiParsePutExecute.Unlock()
+
+	return m.calls.AsyncapiParsePutExecute
+}
+
 // AsyncapiPut mocks base method by wrapping the associated func.
-func (m *DefaultApi) AsyncapiPut(ctx context.Context) (*net_http.Response, error) {
+func (m *DefaultApi) AsyncapiPut(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiPutRequest {
 	m.lockAsyncapiPut.Lock()
 	defer m.lockAsyncapiPut.Unlock()
 
@@ -544,8 +1202,46 @@ func (m *DefaultApi) AsyncapiPutCalls() []struct {
 	return m.calls.AsyncapiPut
 }
 
+// AsyncapiPutExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) AsyncapiPutExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiPutRequest) (*net_http.Response, error) {
+	m.lockAsyncapiPutExecute.Lock()
+	defer m.lockAsyncapiPutExecute.Unlock()
+
+	if m.AsyncapiPutExecuteFunc == nil {
+		panic("mocker: DefaultApi.AsyncapiPutExecuteFunc is nil but DefaultApi.AsyncapiPutExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiPutRequest
+	}{
+		R: r,
+	}
+
+	m.calls.AsyncapiPutExecute = append(m.calls.AsyncapiPutExecute, call)
+
+	return m.AsyncapiPutExecuteFunc(r)
+}
+
+// AsyncapiPutExecuteCalled returns true if AsyncapiPutExecute was called at least once.
+func (m *DefaultApi) AsyncapiPutExecuteCalled() bool {
+	m.lockAsyncapiPutExecute.Lock()
+	defer m.lockAsyncapiPutExecute.Unlock()
+
+	return len(m.calls.AsyncapiPutExecute) > 0
+}
+
+// AsyncapiPutExecuteCalls returns the calls made to AsyncapiPutExecute.
+func (m *DefaultApi) AsyncapiPutExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiAsyncapiPutRequest
+} {
+	m.lockAsyncapiPutExecute.Lock()
+	defer m.lockAsyncapiPutExecute.Unlock()
+
+	return m.calls.AsyncapiPutExecute
+}
+
 // CreateBusinessMetadata mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateBusinessMetadata(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateBusinessMetadata(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataRequest {
 	m.lockCreateBusinessMetadata.Lock()
 	defer m.lockCreateBusinessMetadata.Unlock()
 
@@ -554,16 +1250,14 @@ func (m *DefaultApi) CreateBusinessMetadata(ctx context.Context, localVarOptiona
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.CreateBusinessMetadata = append(m.calls.CreateBusinessMetadata, call)
 
-	return m.CreateBusinessMetadataFunc(ctx, localVarOptionals)
+	return m.CreateBusinessMetadataFunc(ctx)
 }
 
 // CreateBusinessMetadataCalled returns true if CreateBusinessMetadata was called at least once.
@@ -576,8 +1270,7 @@ func (m *DefaultApi) CreateBusinessMetadataCalled() bool {
 
 // CreateBusinessMetadataCalls returns the calls made to CreateBusinessMetadata.
 func (m *DefaultApi) CreateBusinessMetadataCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataOpts
+	Ctx context.Context
 } {
 	m.lockCreateBusinessMetadata.Lock()
 	defer m.lockCreateBusinessMetadata.Unlock()
@@ -585,8 +1278,46 @@ func (m *DefaultApi) CreateBusinessMetadataCalls() []struct {
 	return m.calls.CreateBusinessMetadata
 }
 
+// CreateBusinessMetadataExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateBusinessMetadataExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error) {
+	m.lockCreateBusinessMetadataExecute.Lock()
+	defer m.lockCreateBusinessMetadataExecute.Unlock()
+
+	if m.CreateBusinessMetadataExecuteFunc == nil {
+		panic("mocker: DefaultApi.CreateBusinessMetadataExecuteFunc is nil but DefaultApi.CreateBusinessMetadataExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataRequest
+	}{
+		R: r,
+	}
+
+	m.calls.CreateBusinessMetadataExecute = append(m.calls.CreateBusinessMetadataExecute, call)
+
+	return m.CreateBusinessMetadataExecuteFunc(r)
+}
+
+// CreateBusinessMetadataExecuteCalled returns true if CreateBusinessMetadataExecute was called at least once.
+func (m *DefaultApi) CreateBusinessMetadataExecuteCalled() bool {
+	m.lockCreateBusinessMetadataExecute.Lock()
+	defer m.lockCreateBusinessMetadataExecute.Unlock()
+
+	return len(m.calls.CreateBusinessMetadataExecute) > 0
+}
+
+// CreateBusinessMetadataExecuteCalls returns the calls made to CreateBusinessMetadataExecute.
+func (m *DefaultApi) CreateBusinessMetadataExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataRequest
+} {
+	m.lockCreateBusinessMetadataExecute.Lock()
+	defer m.lockCreateBusinessMetadataExecute.Unlock()
+
+	return m.calls.CreateBusinessMetadataExecute
+}
+
 // CreateBusinessMetadataDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateBusinessMetadataDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateBusinessMetadataDefs(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataDefsRequest {
 	m.lockCreateBusinessMetadataDefs.Lock()
 	defer m.lockCreateBusinessMetadataDefs.Unlock()
 
@@ -595,16 +1326,14 @@ func (m *DefaultApi) CreateBusinessMetadataDefs(ctx context.Context, localVarOpt
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.CreateBusinessMetadataDefs = append(m.calls.CreateBusinessMetadataDefs, call)
 
-	return m.CreateBusinessMetadataDefsFunc(ctx, localVarOptionals)
+	return m.CreateBusinessMetadataDefsFunc(ctx)
 }
 
 // CreateBusinessMetadataDefsCalled returns true if CreateBusinessMetadataDefs was called at least once.
@@ -617,8 +1346,7 @@ func (m *DefaultApi) CreateBusinessMetadataDefsCalled() bool {
 
 // CreateBusinessMetadataDefsCalls returns the calls made to CreateBusinessMetadataDefs.
 func (m *DefaultApi) CreateBusinessMetadataDefsCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateBusinessMetadataDefsOpts
+	Ctx context.Context
 } {
 	m.lockCreateBusinessMetadataDefs.Lock()
 	defer m.lockCreateBusinessMetadataDefs.Unlock()
@@ -626,8 +1354,125 @@ func (m *DefaultApi) CreateBusinessMetadataDefsCalls() []struct {
 	return m.calls.CreateBusinessMetadataDefs
 }
 
+// CreateBusinessMetadataDefsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateBusinessMetadataDefsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error) {
+	m.lockCreateBusinessMetadataDefsExecute.Lock()
+	defer m.lockCreateBusinessMetadataDefsExecute.Unlock()
+
+	if m.CreateBusinessMetadataDefsExecuteFunc == nil {
+		panic("mocker: DefaultApi.CreateBusinessMetadataDefsExecuteFunc is nil but DefaultApi.CreateBusinessMetadataDefsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataDefsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.CreateBusinessMetadataDefsExecute = append(m.calls.CreateBusinessMetadataDefsExecute, call)
+
+	return m.CreateBusinessMetadataDefsExecuteFunc(r)
+}
+
+// CreateBusinessMetadataDefsExecuteCalled returns true if CreateBusinessMetadataDefsExecute was called at least once.
+func (m *DefaultApi) CreateBusinessMetadataDefsExecuteCalled() bool {
+	m.lockCreateBusinessMetadataDefsExecute.Lock()
+	defer m.lockCreateBusinessMetadataDefsExecute.Unlock()
+
+	return len(m.calls.CreateBusinessMetadataDefsExecute) > 0
+}
+
+// CreateBusinessMetadataDefsExecuteCalls returns the calls made to CreateBusinessMetadataDefsExecute.
+func (m *DefaultApi) CreateBusinessMetadataDefsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiCreateBusinessMetadataDefsRequest
+} {
+	m.lockCreateBusinessMetadataDefsExecute.Lock()
+	defer m.lockCreateBusinessMetadataDefsExecute.Unlock()
+
+	return m.calls.CreateBusinessMetadataDefsExecute
+}
+
+// CreateDek mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateDek(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiCreateDekRequest {
+	m.lockCreateDek.Lock()
+	defer m.lockCreateDek.Unlock()
+
+	if m.CreateDekFunc == nil {
+		panic("mocker: DefaultApi.CreateDekFunc is nil but DefaultApi.CreateDek was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		Name string
+	}{
+		Ctx:  ctx,
+		Name: name,
+	}
+
+	m.calls.CreateDek = append(m.calls.CreateDek, call)
+
+	return m.CreateDekFunc(ctx, name)
+}
+
+// CreateDekCalled returns true if CreateDek was called at least once.
+func (m *DefaultApi) CreateDekCalled() bool {
+	m.lockCreateDek.Lock()
+	defer m.lockCreateDek.Unlock()
+
+	return len(m.calls.CreateDek) > 0
+}
+
+// CreateDekCalls returns the calls made to CreateDek.
+func (m *DefaultApi) CreateDekCalls() []struct {
+	Ctx  context.Context
+	Name string
+} {
+	m.lockCreateDek.Lock()
+	defer m.lockCreateDek.Unlock()
+
+	return m.calls.CreateDek
+}
+
+// CreateDekExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateDekExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateDekRequest) (github_com_confluentinc_schema_registry_sdk_go.Dek, *net_http.Response, error) {
+	m.lockCreateDekExecute.Lock()
+	defer m.lockCreateDekExecute.Unlock()
+
+	if m.CreateDekExecuteFunc == nil {
+		panic("mocker: DefaultApi.CreateDekExecuteFunc is nil but DefaultApi.CreateDekExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiCreateDekRequest
+	}{
+		R: r,
+	}
+
+	m.calls.CreateDekExecute = append(m.calls.CreateDekExecute, call)
+
+	return m.CreateDekExecuteFunc(r)
+}
+
+// CreateDekExecuteCalled returns true if CreateDekExecute was called at least once.
+func (m *DefaultApi) CreateDekExecuteCalled() bool {
+	m.lockCreateDekExecute.Lock()
+	defer m.lockCreateDekExecute.Unlock()
+
+	return len(m.calls.CreateDekExecute) > 0
+}
+
+// CreateDekExecuteCalls returns the calls made to CreateDekExecute.
+func (m *DefaultApi) CreateDekExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiCreateDekRequest
+} {
+	m.lockCreateDekExecute.Lock()
+	defer m.lockCreateDekExecute.Unlock()
+
+	return m.calls.CreateDekExecute
+}
+
 // CreateExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateExporter(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.CreateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateExporter(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateExporterRequest {
 	m.lockCreateExporter.Lock()
 	defer m.lockCreateExporter.Unlock()
 
@@ -636,16 +1481,14 @@ func (m *DefaultApi) CreateExporter(ctx context.Context, body github_com_conflue
 	}
 
 	call := struct {
-		Ctx  context.Context
-		Body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest
+		Ctx context.Context
 	}{
-		Ctx:  ctx,
-		Body: body,
+		Ctx: ctx,
 	}
 
 	m.calls.CreateExporter = append(m.calls.CreateExporter, call)
 
-	return m.CreateExporterFunc(ctx, body)
+	return m.CreateExporterFunc(ctx)
 }
 
 // CreateExporterCalled returns true if CreateExporter was called at least once.
@@ -658,8 +1501,7 @@ func (m *DefaultApi) CreateExporterCalled() bool {
 
 // CreateExporterCalls returns the calls made to CreateExporter.
 func (m *DefaultApi) CreateExporterCalls() []struct {
-	Ctx  context.Context
-	Body github_com_confluentinc_schema_registry_sdk_go.CreateExporterRequest
+	Ctx context.Context
 } {
 	m.lockCreateExporter.Lock()
 	defer m.lockCreateExporter.Unlock()
@@ -667,8 +1509,122 @@ func (m *DefaultApi) CreateExporterCalls() []struct {
 	return m.calls.CreateExporter
 }
 
+// CreateExporterExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateExporterExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.CreateExporterResponse, *net_http.Response, error) {
+	m.lockCreateExporterExecute.Lock()
+	defer m.lockCreateExporterExecute.Unlock()
+
+	if m.CreateExporterExecuteFunc == nil {
+		panic("mocker: DefaultApi.CreateExporterExecuteFunc is nil but DefaultApi.CreateExporterExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiCreateExporterRequest
+	}{
+		R: r,
+	}
+
+	m.calls.CreateExporterExecute = append(m.calls.CreateExporterExecute, call)
+
+	return m.CreateExporterExecuteFunc(r)
+}
+
+// CreateExporterExecuteCalled returns true if CreateExporterExecute was called at least once.
+func (m *DefaultApi) CreateExporterExecuteCalled() bool {
+	m.lockCreateExporterExecute.Lock()
+	defer m.lockCreateExporterExecute.Unlock()
+
+	return len(m.calls.CreateExporterExecute) > 0
+}
+
+// CreateExporterExecuteCalls returns the calls made to CreateExporterExecute.
+func (m *DefaultApi) CreateExporterExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiCreateExporterRequest
+} {
+	m.lockCreateExporterExecute.Lock()
+	defer m.lockCreateExporterExecute.Unlock()
+
+	return m.calls.CreateExporterExecute
+}
+
+// CreateKek mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateKek(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateKekRequest {
+	m.lockCreateKek.Lock()
+	defer m.lockCreateKek.Unlock()
+
+	if m.CreateKekFunc == nil {
+		panic("mocker: DefaultApi.CreateKekFunc is nil but DefaultApi.CreateKek was called.")
+	}
+
+	call := struct {
+		Ctx context.Context
+	}{
+		Ctx: ctx,
+	}
+
+	m.calls.CreateKek = append(m.calls.CreateKek, call)
+
+	return m.CreateKekFunc(ctx)
+}
+
+// CreateKekCalled returns true if CreateKek was called at least once.
+func (m *DefaultApi) CreateKekCalled() bool {
+	m.lockCreateKek.Lock()
+	defer m.lockCreateKek.Unlock()
+
+	return len(m.calls.CreateKek) > 0
+}
+
+// CreateKekCalls returns the calls made to CreateKek.
+func (m *DefaultApi) CreateKekCalls() []struct {
+	Ctx context.Context
+} {
+	m.lockCreateKek.Lock()
+	defer m.lockCreateKek.Unlock()
+
+	return m.calls.CreateKek
+}
+
+// CreateKekExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateKekExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateKekRequest) (github_com_confluentinc_schema_registry_sdk_go.Kek, *net_http.Response, error) {
+	m.lockCreateKekExecute.Lock()
+	defer m.lockCreateKekExecute.Unlock()
+
+	if m.CreateKekExecuteFunc == nil {
+		panic("mocker: DefaultApi.CreateKekExecuteFunc is nil but DefaultApi.CreateKekExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiCreateKekRequest
+	}{
+		R: r,
+	}
+
+	m.calls.CreateKekExecute = append(m.calls.CreateKekExecute, call)
+
+	return m.CreateKekExecuteFunc(r)
+}
+
+// CreateKekExecuteCalled returns true if CreateKekExecute was called at least once.
+func (m *DefaultApi) CreateKekExecuteCalled() bool {
+	m.lockCreateKekExecute.Lock()
+	defer m.lockCreateKekExecute.Unlock()
+
+	return len(m.calls.CreateKekExecute) > 0
+}
+
+// CreateKekExecuteCalls returns the calls made to CreateKekExecute.
+func (m *DefaultApi) CreateKekExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiCreateKekRequest
+} {
+	m.lockCreateKekExecute.Lock()
+	defer m.lockCreateKekExecute.Unlock()
+
+	return m.calls.CreateKekExecute
+}
+
 // CreateOrUpdate mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateOrUpdate(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts) (*net_http.Response, error) {
+func (m *DefaultApi) CreateOrUpdate(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateOrUpdateRequest {
 	m.lockCreateOrUpdate.Lock()
 	defer m.lockCreateOrUpdate.Unlock()
 
@@ -677,16 +1633,14 @@ func (m *DefaultApi) CreateOrUpdate(ctx context.Context, localVarOptionals *gith
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.CreateOrUpdate = append(m.calls.CreateOrUpdate, call)
 
-	return m.CreateOrUpdateFunc(ctx, localVarOptionals)
+	return m.CreateOrUpdateFunc(ctx)
 }
 
 // CreateOrUpdateCalled returns true if CreateOrUpdate was called at least once.
@@ -699,8 +1653,7 @@ func (m *DefaultApi) CreateOrUpdateCalled() bool {
 
 // CreateOrUpdateCalls returns the calls made to CreateOrUpdate.
 func (m *DefaultApi) CreateOrUpdateCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateOrUpdateOpts
+	Ctx context.Context
 } {
 	m.lockCreateOrUpdate.Lock()
 	defer m.lockCreateOrUpdate.Unlock()
@@ -708,8 +1661,46 @@ func (m *DefaultApi) CreateOrUpdateCalls() []struct {
 	return m.calls.CreateOrUpdate
 }
 
+// CreateOrUpdateExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateOrUpdateExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateOrUpdateRequest) (*net_http.Response, error) {
+	m.lockCreateOrUpdateExecute.Lock()
+	defer m.lockCreateOrUpdateExecute.Unlock()
+
+	if m.CreateOrUpdateExecuteFunc == nil {
+		panic("mocker: DefaultApi.CreateOrUpdateExecuteFunc is nil but DefaultApi.CreateOrUpdateExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiCreateOrUpdateRequest
+	}{
+		R: r,
+	}
+
+	m.calls.CreateOrUpdateExecute = append(m.calls.CreateOrUpdateExecute, call)
+
+	return m.CreateOrUpdateExecuteFunc(r)
+}
+
+// CreateOrUpdateExecuteCalled returns true if CreateOrUpdateExecute was called at least once.
+func (m *DefaultApi) CreateOrUpdateExecuteCalled() bool {
+	m.lockCreateOrUpdateExecute.Lock()
+	defer m.lockCreateOrUpdateExecute.Unlock()
+
+	return len(m.calls.CreateOrUpdateExecute) > 0
+}
+
+// CreateOrUpdateExecuteCalls returns the calls made to CreateOrUpdateExecute.
+func (m *DefaultApi) CreateOrUpdateExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiCreateOrUpdateRequest
+} {
+	m.lockCreateOrUpdateExecute.Lock()
+	defer m.lockCreateOrUpdateExecute.Unlock()
+
+	return m.calls.CreateOrUpdateExecute
+}
+
 // CreateTagDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateTagDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateTagDefs(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagDefsRequest {
 	m.lockCreateTagDefs.Lock()
 	defer m.lockCreateTagDefs.Unlock()
 
@@ -718,16 +1709,14 @@ func (m *DefaultApi) CreateTagDefs(ctx context.Context, localVarOptionals *githu
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.CreateTagDefs = append(m.calls.CreateTagDefs, call)
 
-	return m.CreateTagDefsFunc(ctx, localVarOptionals)
+	return m.CreateTagDefsFunc(ctx)
 }
 
 // CreateTagDefsCalled returns true if CreateTagDefs was called at least once.
@@ -740,8 +1729,7 @@ func (m *DefaultApi) CreateTagDefsCalled() bool {
 
 // CreateTagDefsCalls returns the calls made to CreateTagDefs.
 func (m *DefaultApi) CreateTagDefsCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagDefsOpts
+	Ctx context.Context
 } {
 	m.lockCreateTagDefs.Lock()
 	defer m.lockCreateTagDefs.Unlock()
@@ -749,8 +1737,46 @@ func (m *DefaultApi) CreateTagDefsCalls() []struct {
 	return m.calls.CreateTagDefs
 }
 
+// CreateTagDefsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateTagDefsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error) {
+	m.lockCreateTagDefsExecute.Lock()
+	defer m.lockCreateTagDefsExecute.Unlock()
+
+	if m.CreateTagDefsExecuteFunc == nil {
+		panic("mocker: DefaultApi.CreateTagDefsExecuteFunc is nil but DefaultApi.CreateTagDefsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagDefsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.CreateTagDefsExecute = append(m.calls.CreateTagDefsExecute, call)
+
+	return m.CreateTagDefsExecuteFunc(r)
+}
+
+// CreateTagDefsExecuteCalled returns true if CreateTagDefsExecute was called at least once.
+func (m *DefaultApi) CreateTagDefsExecuteCalled() bool {
+	m.lockCreateTagDefsExecute.Lock()
+	defer m.lockCreateTagDefsExecute.Unlock()
+
+	return len(m.calls.CreateTagDefsExecute) > 0
+}
+
+// CreateTagDefsExecuteCalls returns the calls made to CreateTagDefsExecute.
+func (m *DefaultApi) CreateTagDefsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagDefsRequest
+} {
+	m.lockCreateTagDefsExecute.Lock()
+	defer m.lockCreateTagDefsExecute.Unlock()
+
+	return m.calls.CreateTagDefsExecute
+}
+
 // CreateTags mocks base method by wrapping the associated func.
-func (m *DefaultApi) CreateTags(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error) {
+func (m *DefaultApi) CreateTags(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagsRequest {
 	m.lockCreateTags.Lock()
 	defer m.lockCreateTags.Unlock()
 
@@ -759,16 +1785,14 @@ func (m *DefaultApi) CreateTags(ctx context.Context, localVarOptionals *github_c
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.CreateTags = append(m.calls.CreateTags, call)
 
-	return m.CreateTagsFunc(ctx, localVarOptionals)
+	return m.CreateTagsFunc(ctx)
 }
 
 // CreateTagsCalled returns true if CreateTags was called at least once.
@@ -781,8 +1805,7 @@ func (m *DefaultApi) CreateTagsCalled() bool {
 
 // CreateTagsCalls returns the calls made to CreateTags.
 func (m *DefaultApi) CreateTagsCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.CreateTagsOpts
+	Ctx context.Context
 } {
 	m.lockCreateTags.Lock()
 	defer m.lockCreateTags.Unlock()
@@ -790,8 +1813,46 @@ func (m *DefaultApi) CreateTagsCalls() []struct {
 	return m.calls.CreateTags
 }
 
+// CreateTagsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) CreateTagsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error) {
+	m.lockCreateTagsExecute.Lock()
+	defer m.lockCreateTagsExecute.Unlock()
+
+	if m.CreateTagsExecuteFunc == nil {
+		panic("mocker: DefaultApi.CreateTagsExecuteFunc is nil but DefaultApi.CreateTagsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.CreateTagsExecute = append(m.calls.CreateTagsExecute, call)
+
+	return m.CreateTagsExecuteFunc(r)
+}
+
+// CreateTagsExecuteCalled returns true if CreateTagsExecute was called at least once.
+func (m *DefaultApi) CreateTagsExecuteCalled() bool {
+	m.lockCreateTagsExecute.Lock()
+	defer m.lockCreateTagsExecute.Unlock()
+
+	return len(m.calls.CreateTagsExecute) > 0
+}
+
+// CreateTagsExecuteCalls returns the calls made to CreateTagsExecute.
+func (m *DefaultApi) CreateTagsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiCreateTagsRequest
+} {
+	m.lockCreateTagsExecute.Lock()
+	defer m.lockCreateTagsExecute.Unlock()
+
+	return m.calls.CreateTagsExecute
+}
+
 // DeleteBusinessMetadata mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteBusinessMetadata(ctx context.Context, typeName, qualifiedName, bmName string) (*net_http.Response, error) {
+func (m *DefaultApi) DeleteBusinessMetadata(ctx context.Context, typeName, qualifiedName, bmName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataRequest {
 	m.lockDeleteBusinessMetadata.Lock()
 	defer m.lockDeleteBusinessMetadata.Unlock()
 
@@ -837,8 +1898,46 @@ func (m *DefaultApi) DeleteBusinessMetadataCalls() []struct {
 	return m.calls.DeleteBusinessMetadata
 }
 
+// DeleteBusinessMetadataExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteBusinessMetadataExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataRequest) (*net_http.Response, error) {
+	m.lockDeleteBusinessMetadataExecute.Lock()
+	defer m.lockDeleteBusinessMetadataExecute.Unlock()
+
+	if m.DeleteBusinessMetadataExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteBusinessMetadataExecuteFunc is nil but DefaultApi.DeleteBusinessMetadataExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteBusinessMetadataExecute = append(m.calls.DeleteBusinessMetadataExecute, call)
+
+	return m.DeleteBusinessMetadataExecuteFunc(r)
+}
+
+// DeleteBusinessMetadataExecuteCalled returns true if DeleteBusinessMetadataExecute was called at least once.
+func (m *DefaultApi) DeleteBusinessMetadataExecuteCalled() bool {
+	m.lockDeleteBusinessMetadataExecute.Lock()
+	defer m.lockDeleteBusinessMetadataExecute.Unlock()
+
+	return len(m.calls.DeleteBusinessMetadataExecute) > 0
+}
+
+// DeleteBusinessMetadataExecuteCalls returns the calls made to DeleteBusinessMetadataExecute.
+func (m *DefaultApi) DeleteBusinessMetadataExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataRequest
+} {
+	m.lockDeleteBusinessMetadataExecute.Lock()
+	defer m.lockDeleteBusinessMetadataExecute.Unlock()
+
+	return m.calls.DeleteBusinessMetadataExecute
+}
+
 // DeleteBusinessMetadataDef mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteBusinessMetadataDef(ctx context.Context, bmName string) (*net_http.Response, error) {
+func (m *DefaultApi) DeleteBusinessMetadataDef(ctx context.Context, bmName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataDefRequest {
 	m.lockDeleteBusinessMetadataDef.Lock()
 	defer m.lockDeleteBusinessMetadataDef.Unlock()
 
@@ -878,8 +1977,46 @@ func (m *DefaultApi) DeleteBusinessMetadataDefCalls() []struct {
 	return m.calls.DeleteBusinessMetadataDef
 }
 
+// DeleteBusinessMetadataDefExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteBusinessMetadataDefExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataDefRequest) (*net_http.Response, error) {
+	m.lockDeleteBusinessMetadataDefExecute.Lock()
+	defer m.lockDeleteBusinessMetadataDefExecute.Unlock()
+
+	if m.DeleteBusinessMetadataDefExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteBusinessMetadataDefExecuteFunc is nil but DefaultApi.DeleteBusinessMetadataDefExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataDefRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteBusinessMetadataDefExecute = append(m.calls.DeleteBusinessMetadataDefExecute, call)
+
+	return m.DeleteBusinessMetadataDefExecuteFunc(r)
+}
+
+// DeleteBusinessMetadataDefExecuteCalled returns true if DeleteBusinessMetadataDefExecute was called at least once.
+func (m *DefaultApi) DeleteBusinessMetadataDefExecuteCalled() bool {
+	m.lockDeleteBusinessMetadataDefExecute.Lock()
+	defer m.lockDeleteBusinessMetadataDefExecute.Unlock()
+
+	return len(m.calls.DeleteBusinessMetadataDefExecute) > 0
+}
+
+// DeleteBusinessMetadataDefExecuteCalls returns the calls made to DeleteBusinessMetadataDefExecute.
+func (m *DefaultApi) DeleteBusinessMetadataDefExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteBusinessMetadataDefRequest
+} {
+	m.lockDeleteBusinessMetadataDefExecute.Lock()
+	defer m.lockDeleteBusinessMetadataDefExecute.Unlock()
+
+	return m.calls.DeleteBusinessMetadataDefExecute
+}
+
 // DeleteByUniqueAttributes mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteByUniqueAttributes(ctx context.Context, typeName, qualifiedName string) (*net_http.Response, error) {
+func (m *DefaultApi) DeleteByUniqueAttributes(ctx context.Context, typeName, qualifiedName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteByUniqueAttributesRequest {
 	m.lockDeleteByUniqueAttributes.Lock()
 	defer m.lockDeleteByUniqueAttributes.Unlock()
 
@@ -922,8 +2059,213 @@ func (m *DefaultApi) DeleteByUniqueAttributesCalls() []struct {
 	return m.calls.DeleteByUniqueAttributes
 }
 
+// DeleteByUniqueAttributesExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteByUniqueAttributesExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteByUniqueAttributesRequest) (*net_http.Response, error) {
+	m.lockDeleteByUniqueAttributesExecute.Lock()
+	defer m.lockDeleteByUniqueAttributesExecute.Unlock()
+
+	if m.DeleteByUniqueAttributesExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteByUniqueAttributesExecuteFunc is nil but DefaultApi.DeleteByUniqueAttributesExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteByUniqueAttributesRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteByUniqueAttributesExecute = append(m.calls.DeleteByUniqueAttributesExecute, call)
+
+	return m.DeleteByUniqueAttributesExecuteFunc(r)
+}
+
+// DeleteByUniqueAttributesExecuteCalled returns true if DeleteByUniqueAttributesExecute was called at least once.
+func (m *DefaultApi) DeleteByUniqueAttributesExecuteCalled() bool {
+	m.lockDeleteByUniqueAttributesExecute.Lock()
+	defer m.lockDeleteByUniqueAttributesExecute.Unlock()
+
+	return len(m.calls.DeleteByUniqueAttributesExecute) > 0
+}
+
+// DeleteByUniqueAttributesExecuteCalls returns the calls made to DeleteByUniqueAttributesExecute.
+func (m *DefaultApi) DeleteByUniqueAttributesExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteByUniqueAttributesRequest
+} {
+	m.lockDeleteByUniqueAttributesExecute.Lock()
+	defer m.lockDeleteByUniqueAttributesExecute.Unlock()
+
+	return m.calls.DeleteByUniqueAttributesExecute
+}
+
+// DeleteDekVersion mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteDekVersion(ctx context.Context, name, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionRequest {
+	m.lockDeleteDekVersion.Lock()
+	defer m.lockDeleteDekVersion.Unlock()
+
+	if m.DeleteDekVersionFunc == nil {
+		panic("mocker: DefaultApi.DeleteDekVersionFunc is nil but DefaultApi.DeleteDekVersion was called.")
+	}
+
+	call := struct {
+		Ctx     context.Context
+		Name    string
+		Subject string
+		Version string
+	}{
+		Ctx:     ctx,
+		Name:    name,
+		Subject: subject,
+		Version: version,
+	}
+
+	m.calls.DeleteDekVersion = append(m.calls.DeleteDekVersion, call)
+
+	return m.DeleteDekVersionFunc(ctx, name, subject, version)
+}
+
+// DeleteDekVersionCalled returns true if DeleteDekVersion was called at least once.
+func (m *DefaultApi) DeleteDekVersionCalled() bool {
+	m.lockDeleteDekVersion.Lock()
+	defer m.lockDeleteDekVersion.Unlock()
+
+	return len(m.calls.DeleteDekVersion) > 0
+}
+
+// DeleteDekVersionCalls returns the calls made to DeleteDekVersion.
+func (m *DefaultApi) DeleteDekVersionCalls() []struct {
+	Ctx     context.Context
+	Name    string
+	Subject string
+	Version string
+} {
+	m.lockDeleteDekVersion.Lock()
+	defer m.lockDeleteDekVersion.Unlock()
+
+	return m.calls.DeleteDekVersion
+}
+
+// DeleteDekVersionExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteDekVersionExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionRequest) (*net_http.Response, error) {
+	m.lockDeleteDekVersionExecute.Lock()
+	defer m.lockDeleteDekVersionExecute.Unlock()
+
+	if m.DeleteDekVersionExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteDekVersionExecuteFunc is nil but DefaultApi.DeleteDekVersionExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteDekVersionExecute = append(m.calls.DeleteDekVersionExecute, call)
+
+	return m.DeleteDekVersionExecuteFunc(r)
+}
+
+// DeleteDekVersionExecuteCalled returns true if DeleteDekVersionExecute was called at least once.
+func (m *DefaultApi) DeleteDekVersionExecuteCalled() bool {
+	m.lockDeleteDekVersionExecute.Lock()
+	defer m.lockDeleteDekVersionExecute.Unlock()
+
+	return len(m.calls.DeleteDekVersionExecute) > 0
+}
+
+// DeleteDekVersionExecuteCalls returns the calls made to DeleteDekVersionExecute.
+func (m *DefaultApi) DeleteDekVersionExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionRequest
+} {
+	m.lockDeleteDekVersionExecute.Lock()
+	defer m.lockDeleteDekVersionExecute.Unlock()
+
+	return m.calls.DeleteDekVersionExecute
+}
+
+// DeleteDekVersions mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteDekVersions(ctx context.Context, name, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionsRequest {
+	m.lockDeleteDekVersions.Lock()
+	defer m.lockDeleteDekVersions.Unlock()
+
+	if m.DeleteDekVersionsFunc == nil {
+		panic("mocker: DefaultApi.DeleteDekVersionsFunc is nil but DefaultApi.DeleteDekVersions was called.")
+	}
+
+	call := struct {
+		Ctx     context.Context
+		Name    string
+		Subject string
+	}{
+		Ctx:     ctx,
+		Name:    name,
+		Subject: subject,
+	}
+
+	m.calls.DeleteDekVersions = append(m.calls.DeleteDekVersions, call)
+
+	return m.DeleteDekVersionsFunc(ctx, name, subject)
+}
+
+// DeleteDekVersionsCalled returns true if DeleteDekVersions was called at least once.
+func (m *DefaultApi) DeleteDekVersionsCalled() bool {
+	m.lockDeleteDekVersions.Lock()
+	defer m.lockDeleteDekVersions.Unlock()
+
+	return len(m.calls.DeleteDekVersions) > 0
+}
+
+// DeleteDekVersionsCalls returns the calls made to DeleteDekVersions.
+func (m *DefaultApi) DeleteDekVersionsCalls() []struct {
+	Ctx     context.Context
+	Name    string
+	Subject string
+} {
+	m.lockDeleteDekVersions.Lock()
+	defer m.lockDeleteDekVersions.Unlock()
+
+	return m.calls.DeleteDekVersions
+}
+
+// DeleteDekVersionsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteDekVersionsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionsRequest) (*net_http.Response, error) {
+	m.lockDeleteDekVersionsExecute.Lock()
+	defer m.lockDeleteDekVersionsExecute.Unlock()
+
+	if m.DeleteDekVersionsExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteDekVersionsExecuteFunc is nil but DefaultApi.DeleteDekVersionsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteDekVersionsExecute = append(m.calls.DeleteDekVersionsExecute, call)
+
+	return m.DeleteDekVersionsExecuteFunc(r)
+}
+
+// DeleteDekVersionsExecuteCalled returns true if DeleteDekVersionsExecute was called at least once.
+func (m *DefaultApi) DeleteDekVersionsExecuteCalled() bool {
+	m.lockDeleteDekVersionsExecute.Lock()
+	defer m.lockDeleteDekVersionsExecute.Unlock()
+
+	return len(m.calls.DeleteDekVersionsExecute) > 0
+}
+
+// DeleteDekVersionsExecuteCalls returns the calls made to DeleteDekVersionsExecute.
+func (m *DefaultApi) DeleteDekVersionsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteDekVersionsRequest
+} {
+	m.lockDeleteDekVersionsExecute.Lock()
+	defer m.lockDeleteDekVersionsExecute.Unlock()
+
+	return m.calls.DeleteDekVersionsExecute
+}
+
 // DeleteExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteExporter(ctx context.Context, name string) (*net_http.Response, error) {
+func (m *DefaultApi) DeleteExporter(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteExporterRequest {
 	m.lockDeleteExporter.Lock()
 	defer m.lockDeleteExporter.Unlock()
 
@@ -963,8 +2305,125 @@ func (m *DefaultApi) DeleteExporterCalls() []struct {
 	return m.calls.DeleteExporter
 }
 
+// DeleteExporterExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteExporterExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteExporterRequest) (*net_http.Response, error) {
+	m.lockDeleteExporterExecute.Lock()
+	defer m.lockDeleteExporterExecute.Unlock()
+
+	if m.DeleteExporterExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteExporterExecuteFunc is nil but DefaultApi.DeleteExporterExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteExporterRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteExporterExecute = append(m.calls.DeleteExporterExecute, call)
+
+	return m.DeleteExporterExecuteFunc(r)
+}
+
+// DeleteExporterExecuteCalled returns true if DeleteExporterExecute was called at least once.
+func (m *DefaultApi) DeleteExporterExecuteCalled() bool {
+	m.lockDeleteExporterExecute.Lock()
+	defer m.lockDeleteExporterExecute.Unlock()
+
+	return len(m.calls.DeleteExporterExecute) > 0
+}
+
+// DeleteExporterExecuteCalls returns the calls made to DeleteExporterExecute.
+func (m *DefaultApi) DeleteExporterExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteExporterRequest
+} {
+	m.lockDeleteExporterExecute.Lock()
+	defer m.lockDeleteExporterExecute.Unlock()
+
+	return m.calls.DeleteExporterExecute
+}
+
+// DeleteKek mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteKek(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteKekRequest {
+	m.lockDeleteKek.Lock()
+	defer m.lockDeleteKek.Unlock()
+
+	if m.DeleteKekFunc == nil {
+		panic("mocker: DefaultApi.DeleteKekFunc is nil but DefaultApi.DeleteKek was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		Name string
+	}{
+		Ctx:  ctx,
+		Name: name,
+	}
+
+	m.calls.DeleteKek = append(m.calls.DeleteKek, call)
+
+	return m.DeleteKekFunc(ctx, name)
+}
+
+// DeleteKekCalled returns true if DeleteKek was called at least once.
+func (m *DefaultApi) DeleteKekCalled() bool {
+	m.lockDeleteKek.Lock()
+	defer m.lockDeleteKek.Unlock()
+
+	return len(m.calls.DeleteKek) > 0
+}
+
+// DeleteKekCalls returns the calls made to DeleteKek.
+func (m *DefaultApi) DeleteKekCalls() []struct {
+	Ctx  context.Context
+	Name string
+} {
+	m.lockDeleteKek.Lock()
+	defer m.lockDeleteKek.Unlock()
+
+	return m.calls.DeleteKek
+}
+
+// DeleteKekExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteKekExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteKekRequest) (*net_http.Response, error) {
+	m.lockDeleteKekExecute.Lock()
+	defer m.lockDeleteKekExecute.Unlock()
+
+	if m.DeleteKekExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteKekExecuteFunc is nil but DefaultApi.DeleteKekExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteKekRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteKekExecute = append(m.calls.DeleteKekExecute, call)
+
+	return m.DeleteKekExecuteFunc(r)
+}
+
+// DeleteKekExecuteCalled returns true if DeleteKekExecute was called at least once.
+func (m *DefaultApi) DeleteKekExecuteCalled() bool {
+	m.lockDeleteKekExecute.Lock()
+	defer m.lockDeleteKekExecute.Unlock()
+
+	return len(m.calls.DeleteKekExecute) > 0
+}
+
+// DeleteKekExecuteCalls returns the calls made to DeleteKekExecute.
+func (m *DefaultApi) DeleteKekExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteKekRequest
+} {
+	m.lockDeleteKekExecute.Lock()
+	defer m.lockDeleteKekExecute.Unlock()
+
+	return m.calls.DeleteKekExecute
+}
+
 // DeleteSchemaVersion mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteSchemaVersion(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts) (int32, *net_http.Response, error) {
+func (m *DefaultApi) DeleteSchemaVersion(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSchemaVersionRequest {
 	m.lockDeleteSchemaVersion.Lock()
 	defer m.lockDeleteSchemaVersion.Unlock()
 
@@ -973,20 +2432,18 @@ func (m *DefaultApi) DeleteSchemaVersion(ctx context.Context, subject, version s
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		Version           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts
+		Ctx     context.Context
+		Subject string
+		Version string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		Version:           version,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
+		Version: version,
 	}
 
 	m.calls.DeleteSchemaVersion = append(m.calls.DeleteSchemaVersion, call)
 
-	return m.DeleteSchemaVersionFunc(ctx, subject, version, localVarOptionals)
+	return m.DeleteSchemaVersionFunc(ctx, subject, version)
 }
 
 // DeleteSchemaVersionCalled returns true if DeleteSchemaVersion was called at least once.
@@ -999,10 +2456,9 @@ func (m *DefaultApi) DeleteSchemaVersionCalled() bool {
 
 // DeleteSchemaVersionCalls returns the calls made to DeleteSchemaVersion.
 func (m *DefaultApi) DeleteSchemaVersionCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	Version           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSchemaVersionOpts
+	Ctx     context.Context
+	Subject string
+	Version string
 } {
 	m.lockDeleteSchemaVersion.Lock()
 	defer m.lockDeleteSchemaVersion.Unlock()
@@ -1010,8 +2466,46 @@ func (m *DefaultApi) DeleteSchemaVersionCalls() []struct {
 	return m.calls.DeleteSchemaVersion
 }
 
+// DeleteSchemaVersionExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteSchemaVersionExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSchemaVersionRequest) (int32, *net_http.Response, error) {
+	m.lockDeleteSchemaVersionExecute.Lock()
+	defer m.lockDeleteSchemaVersionExecute.Unlock()
+
+	if m.DeleteSchemaVersionExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteSchemaVersionExecuteFunc is nil but DefaultApi.DeleteSchemaVersionExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSchemaVersionRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteSchemaVersionExecute = append(m.calls.DeleteSchemaVersionExecute, call)
+
+	return m.DeleteSchemaVersionExecuteFunc(r)
+}
+
+// DeleteSchemaVersionExecuteCalled returns true if DeleteSchemaVersionExecute was called at least once.
+func (m *DefaultApi) DeleteSchemaVersionExecuteCalled() bool {
+	m.lockDeleteSchemaVersionExecute.Lock()
+	defer m.lockDeleteSchemaVersionExecute.Unlock()
+
+	return len(m.calls.DeleteSchemaVersionExecute) > 0
+}
+
+// DeleteSchemaVersionExecuteCalls returns the calls made to DeleteSchemaVersionExecute.
+func (m *DefaultApi) DeleteSchemaVersionExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSchemaVersionRequest
+} {
+	m.lockDeleteSchemaVersionExecute.Lock()
+	defer m.lockDeleteSchemaVersionExecute.Unlock()
+
+	return m.calls.DeleteSchemaVersionExecute
+}
+
 // DeleteSubject mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteSubject(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts) ([]int32, *net_http.Response, error) {
+func (m *DefaultApi) DeleteSubject(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectRequest {
 	m.lockDeleteSubject.Lock()
 	defer m.lockDeleteSubject.Unlock()
 
@@ -1020,18 +2514,16 @@ func (m *DefaultApi) DeleteSubject(ctx context.Context, subject string, localVar
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts
+		Ctx     context.Context
+		Subject string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
 	}
 
 	m.calls.DeleteSubject = append(m.calls.DeleteSubject, call)
 
-	return m.DeleteSubjectFunc(ctx, subject, localVarOptionals)
+	return m.DeleteSubjectFunc(ctx, subject)
 }
 
 // DeleteSubjectCalled returns true if DeleteSubject was called at least once.
@@ -1044,9 +2536,8 @@ func (m *DefaultApi) DeleteSubjectCalled() bool {
 
 // DeleteSubjectCalls returns the calls made to DeleteSubject.
 func (m *DefaultApi) DeleteSubjectCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.DeleteSubjectOpts
+	Ctx     context.Context
+	Subject string
 } {
 	m.lockDeleteSubject.Lock()
 	defer m.lockDeleteSubject.Unlock()
@@ -1054,8 +2545,46 @@ func (m *DefaultApi) DeleteSubjectCalls() []struct {
 	return m.calls.DeleteSubject
 }
 
+// DeleteSubjectExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteSubjectExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectRequest) ([]int32, *net_http.Response, error) {
+	m.lockDeleteSubjectExecute.Lock()
+	defer m.lockDeleteSubjectExecute.Unlock()
+
+	if m.DeleteSubjectExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteSubjectExecuteFunc is nil but DefaultApi.DeleteSubjectExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteSubjectExecute = append(m.calls.DeleteSubjectExecute, call)
+
+	return m.DeleteSubjectExecuteFunc(r)
+}
+
+// DeleteSubjectExecuteCalled returns true if DeleteSubjectExecute was called at least once.
+func (m *DefaultApi) DeleteSubjectExecuteCalled() bool {
+	m.lockDeleteSubjectExecute.Lock()
+	defer m.lockDeleteSubjectExecute.Unlock()
+
+	return len(m.calls.DeleteSubjectExecute) > 0
+}
+
+// DeleteSubjectExecuteCalls returns the calls made to DeleteSubjectExecute.
+func (m *DefaultApi) DeleteSubjectExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectRequest
+} {
+	m.lockDeleteSubjectExecute.Lock()
+	defer m.lockDeleteSubjectExecute.Unlock()
+
+	return m.calls.DeleteSubjectExecute
+}
+
 // DeleteSubjectConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteSubjectConfig(ctx context.Context, subject string) (string, *net_http.Response, error) {
+func (m *DefaultApi) DeleteSubjectConfig(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectConfigRequest {
 	m.lockDeleteSubjectConfig.Lock()
 	defer m.lockDeleteSubjectConfig.Unlock()
 
@@ -1095,8 +2624,46 @@ func (m *DefaultApi) DeleteSubjectConfigCalls() []struct {
 	return m.calls.DeleteSubjectConfig
 }
 
+// DeleteSubjectConfigExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteSubjectConfigExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectConfigRequest) (string, *net_http.Response, error) {
+	m.lockDeleteSubjectConfigExecute.Lock()
+	defer m.lockDeleteSubjectConfigExecute.Unlock()
+
+	if m.DeleteSubjectConfigExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteSubjectConfigExecuteFunc is nil but DefaultApi.DeleteSubjectConfigExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectConfigRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteSubjectConfigExecute = append(m.calls.DeleteSubjectConfigExecute, call)
+
+	return m.DeleteSubjectConfigExecuteFunc(r)
+}
+
+// DeleteSubjectConfigExecuteCalled returns true if DeleteSubjectConfigExecute was called at least once.
+func (m *DefaultApi) DeleteSubjectConfigExecuteCalled() bool {
+	m.lockDeleteSubjectConfigExecute.Lock()
+	defer m.lockDeleteSubjectConfigExecute.Unlock()
+
+	return len(m.calls.DeleteSubjectConfigExecute) > 0
+}
+
+// DeleteSubjectConfigExecuteCalls returns the calls made to DeleteSubjectConfigExecute.
+func (m *DefaultApi) DeleteSubjectConfigExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectConfigRequest
+} {
+	m.lockDeleteSubjectConfigExecute.Lock()
+	defer m.lockDeleteSubjectConfigExecute.Unlock()
+
+	return m.calls.DeleteSubjectConfigExecute
+}
+
 // DeleteSubjectMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteSubjectMode(ctx context.Context, subject string) (string, *net_http.Response, error) {
+func (m *DefaultApi) DeleteSubjectMode(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectModeRequest {
 	m.lockDeleteSubjectMode.Lock()
 	defer m.lockDeleteSubjectMode.Unlock()
 
@@ -1136,8 +2703,46 @@ func (m *DefaultApi) DeleteSubjectModeCalls() []struct {
 	return m.calls.DeleteSubjectMode
 }
 
+// DeleteSubjectModeExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteSubjectModeExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectModeRequest) (string, *net_http.Response, error) {
+	m.lockDeleteSubjectModeExecute.Lock()
+	defer m.lockDeleteSubjectModeExecute.Unlock()
+
+	if m.DeleteSubjectModeExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteSubjectModeExecuteFunc is nil but DefaultApi.DeleteSubjectModeExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectModeRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteSubjectModeExecute = append(m.calls.DeleteSubjectModeExecute, call)
+
+	return m.DeleteSubjectModeExecuteFunc(r)
+}
+
+// DeleteSubjectModeExecuteCalled returns true if DeleteSubjectModeExecute was called at least once.
+func (m *DefaultApi) DeleteSubjectModeExecuteCalled() bool {
+	m.lockDeleteSubjectModeExecute.Lock()
+	defer m.lockDeleteSubjectModeExecute.Unlock()
+
+	return len(m.calls.DeleteSubjectModeExecute) > 0
+}
+
+// DeleteSubjectModeExecuteCalls returns the calls made to DeleteSubjectModeExecute.
+func (m *DefaultApi) DeleteSubjectModeExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSubjectModeRequest
+} {
+	m.lockDeleteSubjectModeExecute.Lock()
+	defer m.lockDeleteSubjectModeExecute.Unlock()
+
+	return m.calls.DeleteSubjectModeExecute
+}
+
 // DeleteTag mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteTag(ctx context.Context, typeName, qualifiedName, tagName string) (*net_http.Response, error) {
+func (m *DefaultApi) DeleteTag(ctx context.Context, typeName, qualifiedName, tagName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagRequest {
 	m.lockDeleteTag.Lock()
 	defer m.lockDeleteTag.Unlock()
 
@@ -1183,8 +2788,46 @@ func (m *DefaultApi) DeleteTagCalls() []struct {
 	return m.calls.DeleteTag
 }
 
+// DeleteTagExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteTagExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagRequest) (*net_http.Response, error) {
+	m.lockDeleteTagExecute.Lock()
+	defer m.lockDeleteTagExecute.Unlock()
+
+	if m.DeleteTagExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteTagExecuteFunc is nil but DefaultApi.DeleteTagExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteTagExecute = append(m.calls.DeleteTagExecute, call)
+
+	return m.DeleteTagExecuteFunc(r)
+}
+
+// DeleteTagExecuteCalled returns true if DeleteTagExecute was called at least once.
+func (m *DefaultApi) DeleteTagExecuteCalled() bool {
+	m.lockDeleteTagExecute.Lock()
+	defer m.lockDeleteTagExecute.Unlock()
+
+	return len(m.calls.DeleteTagExecute) > 0
+}
+
+// DeleteTagExecuteCalls returns the calls made to DeleteTagExecute.
+func (m *DefaultApi) DeleteTagExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagRequest
+} {
+	m.lockDeleteTagExecute.Lock()
+	defer m.lockDeleteTagExecute.Unlock()
+
+	return m.calls.DeleteTagExecute
+}
+
 // DeleteTagDef mocks base method by wrapping the associated func.
-func (m *DefaultApi) DeleteTagDef(ctx context.Context, tagName string) (*net_http.Response, error) {
+func (m *DefaultApi) DeleteTagDef(ctx context.Context, tagName string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagDefRequest {
 	m.lockDeleteTagDef.Lock()
 	defer m.lockDeleteTagDef.Unlock()
 
@@ -1224,8 +2867,122 @@ func (m *DefaultApi) DeleteTagDefCalls() []struct {
 	return m.calls.DeleteTagDef
 }
 
+// DeleteTagDefExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteTagDefExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagDefRequest) (*net_http.Response, error) {
+	m.lockDeleteTagDefExecute.Lock()
+	defer m.lockDeleteTagDefExecute.Unlock()
+
+	if m.DeleteTagDefExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteTagDefExecuteFunc is nil but DefaultApi.DeleteTagDefExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagDefRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteTagDefExecute = append(m.calls.DeleteTagDefExecute, call)
+
+	return m.DeleteTagDefExecuteFunc(r)
+}
+
+// DeleteTagDefExecuteCalled returns true if DeleteTagDefExecute was called at least once.
+func (m *DefaultApi) DeleteTagDefExecuteCalled() bool {
+	m.lockDeleteTagDefExecute.Lock()
+	defer m.lockDeleteTagDefExecute.Unlock()
+
+	return len(m.calls.DeleteTagDefExecute) > 0
+}
+
+// DeleteTagDefExecuteCalls returns the calls made to DeleteTagDefExecute.
+func (m *DefaultApi) DeleteTagDefExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTagDefRequest
+} {
+	m.lockDeleteTagDefExecute.Lock()
+	defer m.lockDeleteTagDefExecute.Unlock()
+
+	return m.calls.DeleteTagDefExecute
+}
+
+// DeleteTopLevelConfig mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteTopLevelConfig(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTopLevelConfigRequest {
+	m.lockDeleteTopLevelConfig.Lock()
+	defer m.lockDeleteTopLevelConfig.Unlock()
+
+	if m.DeleteTopLevelConfigFunc == nil {
+		panic("mocker: DefaultApi.DeleteTopLevelConfigFunc is nil but DefaultApi.DeleteTopLevelConfig was called.")
+	}
+
+	call := struct {
+		Ctx context.Context
+	}{
+		Ctx: ctx,
+	}
+
+	m.calls.DeleteTopLevelConfig = append(m.calls.DeleteTopLevelConfig, call)
+
+	return m.DeleteTopLevelConfigFunc(ctx)
+}
+
+// DeleteTopLevelConfigCalled returns true if DeleteTopLevelConfig was called at least once.
+func (m *DefaultApi) DeleteTopLevelConfigCalled() bool {
+	m.lockDeleteTopLevelConfig.Lock()
+	defer m.lockDeleteTopLevelConfig.Unlock()
+
+	return len(m.calls.DeleteTopLevelConfig) > 0
+}
+
+// DeleteTopLevelConfigCalls returns the calls made to DeleteTopLevelConfig.
+func (m *DefaultApi) DeleteTopLevelConfigCalls() []struct {
+	Ctx context.Context
+} {
+	m.lockDeleteTopLevelConfig.Lock()
+	defer m.lockDeleteTopLevelConfig.Unlock()
+
+	return m.calls.DeleteTopLevelConfig
+}
+
+// DeleteTopLevelConfigExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteTopLevelConfigExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTopLevelConfigRequest) (string, *net_http.Response, error) {
+	m.lockDeleteTopLevelConfigExecute.Lock()
+	defer m.lockDeleteTopLevelConfigExecute.Unlock()
+
+	if m.DeleteTopLevelConfigExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteTopLevelConfigExecuteFunc is nil but DefaultApi.DeleteTopLevelConfigExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTopLevelConfigRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteTopLevelConfigExecute = append(m.calls.DeleteTopLevelConfigExecute, call)
+
+	return m.DeleteTopLevelConfigExecuteFunc(r)
+}
+
+// DeleteTopLevelConfigExecuteCalled returns true if DeleteTopLevelConfigExecute was called at least once.
+func (m *DefaultApi) DeleteTopLevelConfigExecuteCalled() bool {
+	m.lockDeleteTopLevelConfigExecute.Lock()
+	defer m.lockDeleteTopLevelConfigExecute.Unlock()
+
+	return len(m.calls.DeleteTopLevelConfigExecute) > 0
+}
+
+// DeleteTopLevelConfigExecuteCalls returns the calls made to DeleteTopLevelConfigExecute.
+func (m *DefaultApi) DeleteTopLevelConfigExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteTopLevelConfigRequest
+} {
+	m.lockDeleteTopLevelConfigExecute.Lock()
+	defer m.lockDeleteTopLevelConfigExecute.Unlock()
+
+	return m.calls.DeleteTopLevelConfigExecute
+}
+
 // Get mocks base method by wrapping the associated func.
-func (m *DefaultApi) Get(ctx context.Context) (map[string]map[string]interface{}, *net_http.Response, error) {
+func (m *DefaultApi) Get(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetRequest {
 	m.lockGet.Lock()
 	defer m.lockGet.Unlock()
 
@@ -1262,8 +3019,46 @@ func (m *DefaultApi) GetCalls() []struct {
 	return m.calls.Get
 }
 
+// GetExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetRequest) (map[string]map[string]interface{}, *net_http.Response, error) {
+	m.lockGetExecute.Lock()
+	defer m.lockGetExecute.Unlock()
+
+	if m.GetExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetExecuteFunc is nil but DefaultApi.GetExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetExecute = append(m.calls.GetExecute, call)
+
+	return m.GetExecuteFunc(r)
+}
+
+// GetExecuteCalled returns true if GetExecute was called at least once.
+func (m *DefaultApi) GetExecuteCalled() bool {
+	m.lockGetExecute.Lock()
+	defer m.lockGetExecute.Unlock()
+
+	return len(m.calls.GetExecute) > 0
+}
+
+// GetExecuteCalls returns the calls made to GetExecute.
+func (m *DefaultApi) GetExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetRequest
+} {
+	m.lockGetExecute.Lock()
+	defer m.lockGetExecute.Unlock()
+
+	return m.calls.GetExecute
+}
+
 // GetAllBusinessMetadataDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetAllBusinessMetadataDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetAllBusinessMetadataDefs(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetAllBusinessMetadataDefsRequest {
 	m.lockGetAllBusinessMetadataDefs.Lock()
 	defer m.lockGetAllBusinessMetadataDefs.Unlock()
 
@@ -1272,16 +3067,14 @@ func (m *DefaultApi) GetAllBusinessMetadataDefs(ctx context.Context, localVarOpt
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.GetAllBusinessMetadataDefs = append(m.calls.GetAllBusinessMetadataDefs, call)
 
-	return m.GetAllBusinessMetadataDefsFunc(ctx, localVarOptionals)
+	return m.GetAllBusinessMetadataDefsFunc(ctx)
 }
 
 // GetAllBusinessMetadataDefsCalled returns true if GetAllBusinessMetadataDefs was called at least once.
@@ -1294,8 +3087,7 @@ func (m *DefaultApi) GetAllBusinessMetadataDefsCalled() bool {
 
 // GetAllBusinessMetadataDefsCalls returns the calls made to GetAllBusinessMetadataDefs.
 func (m *DefaultApi) GetAllBusinessMetadataDefsCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllBusinessMetadataDefsOpts
+	Ctx context.Context
 } {
 	m.lockGetAllBusinessMetadataDefs.Lock()
 	defer m.lockGetAllBusinessMetadataDefs.Unlock()
@@ -1303,8 +3095,46 @@ func (m *DefaultApi) GetAllBusinessMetadataDefsCalls() []struct {
 	return m.calls.GetAllBusinessMetadataDefs
 }
 
+// GetAllBusinessMetadataDefsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetAllBusinessMetadataDefsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetAllBusinessMetadataDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error) {
+	m.lockGetAllBusinessMetadataDefsExecute.Lock()
+	defer m.lockGetAllBusinessMetadataDefsExecute.Unlock()
+
+	if m.GetAllBusinessMetadataDefsExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetAllBusinessMetadataDefsExecuteFunc is nil but DefaultApi.GetAllBusinessMetadataDefsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetAllBusinessMetadataDefsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetAllBusinessMetadataDefsExecute = append(m.calls.GetAllBusinessMetadataDefsExecute, call)
+
+	return m.GetAllBusinessMetadataDefsExecuteFunc(r)
+}
+
+// GetAllBusinessMetadataDefsExecuteCalled returns true if GetAllBusinessMetadataDefsExecute was called at least once.
+func (m *DefaultApi) GetAllBusinessMetadataDefsExecuteCalled() bool {
+	m.lockGetAllBusinessMetadataDefsExecute.Lock()
+	defer m.lockGetAllBusinessMetadataDefsExecute.Unlock()
+
+	return len(m.calls.GetAllBusinessMetadataDefsExecute) > 0
+}
+
+// GetAllBusinessMetadataDefsExecuteCalls returns the calls made to GetAllBusinessMetadataDefsExecute.
+func (m *DefaultApi) GetAllBusinessMetadataDefsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetAllBusinessMetadataDefsRequest
+} {
+	m.lockGetAllBusinessMetadataDefsExecute.Lock()
+	defer m.lockGetAllBusinessMetadataDefsExecute.Unlock()
+
+	return m.calls.GetAllBusinessMetadataDefsExecute
+}
+
 // GetAllTagDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetAllTagDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetAllTagDefs(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetAllTagDefsRequest {
 	m.lockGetAllTagDefs.Lock()
 	defer m.lockGetAllTagDefs.Unlock()
 
@@ -1313,16 +3143,14 @@ func (m *DefaultApi) GetAllTagDefs(ctx context.Context, localVarOptionals *githu
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.GetAllTagDefs = append(m.calls.GetAllTagDefs, call)
 
-	return m.GetAllTagDefsFunc(ctx, localVarOptionals)
+	return m.GetAllTagDefsFunc(ctx)
 }
 
 // GetAllTagDefsCalled returns true if GetAllTagDefs was called at least once.
@@ -1335,8 +3163,7 @@ func (m *DefaultApi) GetAllTagDefsCalled() bool {
 
 // GetAllTagDefsCalls returns the calls made to GetAllTagDefs.
 func (m *DefaultApi) GetAllTagDefsCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetAllTagDefsOpts
+	Ctx context.Context
 } {
 	m.lockGetAllTagDefs.Lock()
 	defer m.lockGetAllTagDefs.Unlock()
@@ -1344,8 +3171,46 @@ func (m *DefaultApi) GetAllTagDefsCalls() []struct {
 	return m.calls.GetAllTagDefs
 }
 
+// GetAllTagDefsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetAllTagDefsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetAllTagDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error) {
+	m.lockGetAllTagDefsExecute.Lock()
+	defer m.lockGetAllTagDefsExecute.Unlock()
+
+	if m.GetAllTagDefsExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetAllTagDefsExecuteFunc is nil but DefaultApi.GetAllTagDefsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetAllTagDefsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetAllTagDefsExecute = append(m.calls.GetAllTagDefsExecute, call)
+
+	return m.GetAllTagDefsExecuteFunc(r)
+}
+
+// GetAllTagDefsExecuteCalled returns true if GetAllTagDefsExecute was called at least once.
+func (m *DefaultApi) GetAllTagDefsExecuteCalled() bool {
+	m.lockGetAllTagDefsExecute.Lock()
+	defer m.lockGetAllTagDefsExecute.Unlock()
+
+	return len(m.calls.GetAllTagDefsExecute) > 0
+}
+
+// GetAllTagDefsExecuteCalls returns the calls made to GetAllTagDefsExecute.
+func (m *DefaultApi) GetAllTagDefsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetAllTagDefsRequest
+} {
+	m.lockGetAllTagDefsExecute.Lock()
+	defer m.lockGetAllTagDefsExecute.Unlock()
+
+	return m.calls.GetAllTagDefsExecute
+}
+
 // GetBusinessMetadata mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetBusinessMetadata(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetBusinessMetadata(ctx context.Context, typeName, qualifiedName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataRequest {
 	m.lockGetBusinessMetadata.Lock()
 	defer m.lockGetBusinessMetadata.Unlock()
 
@@ -1388,8 +3253,46 @@ func (m *DefaultApi) GetBusinessMetadataCalls() []struct {
 	return m.calls.GetBusinessMetadata
 }
 
+// GetBusinessMetadataExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetBusinessMetadataExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error) {
+	m.lockGetBusinessMetadataExecute.Lock()
+	defer m.lockGetBusinessMetadataExecute.Unlock()
+
+	if m.GetBusinessMetadataExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetBusinessMetadataExecuteFunc is nil but DefaultApi.GetBusinessMetadataExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetBusinessMetadataExecute = append(m.calls.GetBusinessMetadataExecute, call)
+
+	return m.GetBusinessMetadataExecuteFunc(r)
+}
+
+// GetBusinessMetadataExecuteCalled returns true if GetBusinessMetadataExecute was called at least once.
+func (m *DefaultApi) GetBusinessMetadataExecuteCalled() bool {
+	m.lockGetBusinessMetadataExecute.Lock()
+	defer m.lockGetBusinessMetadataExecute.Unlock()
+
+	return len(m.calls.GetBusinessMetadataExecute) > 0
+}
+
+// GetBusinessMetadataExecuteCalls returns the calls made to GetBusinessMetadataExecute.
+func (m *DefaultApi) GetBusinessMetadataExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataRequest
+} {
+	m.lockGetBusinessMetadataExecute.Lock()
+	defer m.lockGetBusinessMetadataExecute.Unlock()
+
+	return m.calls.GetBusinessMetadataExecute
+}
+
 // GetBusinessMetadataDefByName mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetBusinessMetadataDefByName(ctx context.Context, bmName string) (github_com_confluentinc_schema_registry_sdk_go.AtlasBusinessMetadataDef, *net_http.Response, error) {
+func (m *DefaultApi) GetBusinessMetadataDefByName(ctx context.Context, bmName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataDefByNameRequest {
 	m.lockGetBusinessMetadataDefByName.Lock()
 	defer m.lockGetBusinessMetadataDefByName.Unlock()
 
@@ -1429,8 +3332,46 @@ func (m *DefaultApi) GetBusinessMetadataDefByNameCalls() []struct {
 	return m.calls.GetBusinessMetadataDefByName
 }
 
+// GetBusinessMetadataDefByNameExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetBusinessMetadataDefByNameExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataDefByNameRequest) (github_com_confluentinc_schema_registry_sdk_go.AtlasBusinessMetadataDef, *net_http.Response, error) {
+	m.lockGetBusinessMetadataDefByNameExecute.Lock()
+	defer m.lockGetBusinessMetadataDefByNameExecute.Unlock()
+
+	if m.GetBusinessMetadataDefByNameExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetBusinessMetadataDefByNameExecuteFunc is nil but DefaultApi.GetBusinessMetadataDefByNameExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataDefByNameRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetBusinessMetadataDefByNameExecute = append(m.calls.GetBusinessMetadataDefByNameExecute, call)
+
+	return m.GetBusinessMetadataDefByNameExecuteFunc(r)
+}
+
+// GetBusinessMetadataDefByNameExecuteCalled returns true if GetBusinessMetadataDefByNameExecute was called at least once.
+func (m *DefaultApi) GetBusinessMetadataDefByNameExecuteCalled() bool {
+	m.lockGetBusinessMetadataDefByNameExecute.Lock()
+	defer m.lockGetBusinessMetadataDefByNameExecute.Unlock()
+
+	return len(m.calls.GetBusinessMetadataDefByNameExecute) > 0
+}
+
+// GetBusinessMetadataDefByNameExecuteCalls returns the calls made to GetBusinessMetadataDefByNameExecute.
+func (m *DefaultApi) GetBusinessMetadataDefByNameExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetBusinessMetadataDefByNameRequest
+} {
+	m.lockGetBusinessMetadataDefByNameExecute.Lock()
+	defer m.lockGetBusinessMetadataDefByNameExecute.Unlock()
+
+	return m.calls.GetBusinessMetadataDefByNameExecute
+}
+
 // GetByUniqueAttributes mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetByUniqueAttributes(ctx context.Context, typeName, qualifiedName string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts) (github_com_confluentinc_schema_registry_sdk_go.AtlasEntityWithExtInfo, *net_http.Response, error) {
+func (m *DefaultApi) GetByUniqueAttributes(ctx context.Context, typeName, qualifiedName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetByUniqueAttributesRequest {
 	m.lockGetByUniqueAttributes.Lock()
 	defer m.lockGetByUniqueAttributes.Unlock()
 
@@ -1439,20 +3380,18 @@ func (m *DefaultApi) GetByUniqueAttributes(ctx context.Context, typeName, qualif
 	}
 
 	call := struct {
-		Ctx               context.Context
-		TypeName          string
-		QualifiedName     string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts
+		Ctx           context.Context
+		TypeName      string
+		QualifiedName string
 	}{
-		Ctx:               ctx,
-		TypeName:          typeName,
-		QualifiedName:     qualifiedName,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:           ctx,
+		TypeName:      typeName,
+		QualifiedName: qualifiedName,
 	}
 
 	m.calls.GetByUniqueAttributes = append(m.calls.GetByUniqueAttributes, call)
 
-	return m.GetByUniqueAttributesFunc(ctx, typeName, qualifiedName, localVarOptionals)
+	return m.GetByUniqueAttributesFunc(ctx, typeName, qualifiedName)
 }
 
 // GetByUniqueAttributesCalled returns true if GetByUniqueAttributes was called at least once.
@@ -1465,10 +3404,9 @@ func (m *DefaultApi) GetByUniqueAttributesCalled() bool {
 
 // GetByUniqueAttributesCalls returns the calls made to GetByUniqueAttributes.
 func (m *DefaultApi) GetByUniqueAttributesCalls() []struct {
-	Ctx               context.Context
-	TypeName          string
-	QualifiedName     string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetByUniqueAttributesOpts
+	Ctx           context.Context
+	TypeName      string
+	QualifiedName string
 } {
 	m.lockGetByUniqueAttributes.Lock()
 	defer m.lockGetByUniqueAttributes.Unlock()
@@ -1476,8 +3414,46 @@ func (m *DefaultApi) GetByUniqueAttributesCalls() []struct {
 	return m.calls.GetByUniqueAttributes
 }
 
+// GetByUniqueAttributesExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetByUniqueAttributesExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetByUniqueAttributesRequest) (github_com_confluentinc_schema_registry_sdk_go.AtlasEntityWithExtInfo, *net_http.Response, error) {
+	m.lockGetByUniqueAttributesExecute.Lock()
+	defer m.lockGetByUniqueAttributesExecute.Unlock()
+
+	if m.GetByUniqueAttributesExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetByUniqueAttributesExecuteFunc is nil but DefaultApi.GetByUniqueAttributesExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetByUniqueAttributesRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetByUniqueAttributesExecute = append(m.calls.GetByUniqueAttributesExecute, call)
+
+	return m.GetByUniqueAttributesExecuteFunc(r)
+}
+
+// GetByUniqueAttributesExecuteCalled returns true if GetByUniqueAttributesExecute was called at least once.
+func (m *DefaultApi) GetByUniqueAttributesExecuteCalled() bool {
+	m.lockGetByUniqueAttributesExecute.Lock()
+	defer m.lockGetByUniqueAttributesExecute.Unlock()
+
+	return len(m.calls.GetByUniqueAttributesExecute) > 0
+}
+
+// GetByUniqueAttributesExecuteCalls returns the calls made to GetByUniqueAttributesExecute.
+func (m *DefaultApi) GetByUniqueAttributesExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetByUniqueAttributesRequest
+} {
+	m.lockGetByUniqueAttributesExecute.Lock()
+	defer m.lockGetByUniqueAttributesExecute.Unlock()
+
+	return m.calls.GetByUniqueAttributesExecute
+}
+
 // GetClusterId mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetClusterId(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.ServerClusterId, *net_http.Response, error) {
+func (m *DefaultApi) GetClusterId(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetClusterIdRequest {
 	m.lockGetClusterId.Lock()
 	defer m.lockGetClusterId.Unlock()
 
@@ -1514,8 +3490,374 @@ func (m *DefaultApi) GetClusterIdCalls() []struct {
 	return m.calls.GetClusterId
 }
 
+// GetClusterIdExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetClusterIdExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetClusterIdRequest) (github_com_confluentinc_schema_registry_sdk_go.ServerClusterId, *net_http.Response, error) {
+	m.lockGetClusterIdExecute.Lock()
+	defer m.lockGetClusterIdExecute.Unlock()
+
+	if m.GetClusterIdExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetClusterIdExecuteFunc is nil but DefaultApi.GetClusterIdExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetClusterIdRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetClusterIdExecute = append(m.calls.GetClusterIdExecute, call)
+
+	return m.GetClusterIdExecuteFunc(r)
+}
+
+// GetClusterIdExecuteCalled returns true if GetClusterIdExecute was called at least once.
+func (m *DefaultApi) GetClusterIdExecuteCalled() bool {
+	m.lockGetClusterIdExecute.Lock()
+	defer m.lockGetClusterIdExecute.Unlock()
+
+	return len(m.calls.GetClusterIdExecute) > 0
+}
+
+// GetClusterIdExecuteCalls returns the calls made to GetClusterIdExecute.
+func (m *DefaultApi) GetClusterIdExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetClusterIdRequest
+} {
+	m.lockGetClusterIdExecute.Lock()
+	defer m.lockGetClusterIdExecute.Unlock()
+
+	return m.calls.GetClusterIdExecute
+}
+
+// GetDek mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetDek(ctx context.Context, name, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiGetDekRequest {
+	m.lockGetDek.Lock()
+	defer m.lockGetDek.Unlock()
+
+	if m.GetDekFunc == nil {
+		panic("mocker: DefaultApi.GetDekFunc is nil but DefaultApi.GetDek was called.")
+	}
+
+	call := struct {
+		Ctx     context.Context
+		Name    string
+		Subject string
+	}{
+		Ctx:     ctx,
+		Name:    name,
+		Subject: subject,
+	}
+
+	m.calls.GetDek = append(m.calls.GetDek, call)
+
+	return m.GetDekFunc(ctx, name, subject)
+}
+
+// GetDekCalled returns true if GetDek was called at least once.
+func (m *DefaultApi) GetDekCalled() bool {
+	m.lockGetDek.Lock()
+	defer m.lockGetDek.Unlock()
+
+	return len(m.calls.GetDek) > 0
+}
+
+// GetDekCalls returns the calls made to GetDek.
+func (m *DefaultApi) GetDekCalls() []struct {
+	Ctx     context.Context
+	Name    string
+	Subject string
+} {
+	m.lockGetDek.Lock()
+	defer m.lockGetDek.Unlock()
+
+	return m.calls.GetDek
+}
+
+// GetDekExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetDekExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetDekRequest) (github_com_confluentinc_schema_registry_sdk_go.Dek, *net_http.Response, error) {
+	m.lockGetDekExecute.Lock()
+	defer m.lockGetDekExecute.Unlock()
+
+	if m.GetDekExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetDekExecuteFunc is nil but DefaultApi.GetDekExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetDekExecute = append(m.calls.GetDekExecute, call)
+
+	return m.GetDekExecuteFunc(r)
+}
+
+// GetDekExecuteCalled returns true if GetDekExecute was called at least once.
+func (m *DefaultApi) GetDekExecuteCalled() bool {
+	m.lockGetDekExecute.Lock()
+	defer m.lockGetDekExecute.Unlock()
+
+	return len(m.calls.GetDekExecute) > 0
+}
+
+// GetDekExecuteCalls returns the calls made to GetDekExecute.
+func (m *DefaultApi) GetDekExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekRequest
+} {
+	m.lockGetDekExecute.Lock()
+	defer m.lockGetDekExecute.Unlock()
+
+	return m.calls.GetDekExecute
+}
+
+// GetDekByVersion mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetDekByVersion(ctx context.Context, name, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiGetDekByVersionRequest {
+	m.lockGetDekByVersion.Lock()
+	defer m.lockGetDekByVersion.Unlock()
+
+	if m.GetDekByVersionFunc == nil {
+		panic("mocker: DefaultApi.GetDekByVersionFunc is nil but DefaultApi.GetDekByVersion was called.")
+	}
+
+	call := struct {
+		Ctx     context.Context
+		Name    string
+		Subject string
+		Version string
+	}{
+		Ctx:     ctx,
+		Name:    name,
+		Subject: subject,
+		Version: version,
+	}
+
+	m.calls.GetDekByVersion = append(m.calls.GetDekByVersion, call)
+
+	return m.GetDekByVersionFunc(ctx, name, subject, version)
+}
+
+// GetDekByVersionCalled returns true if GetDekByVersion was called at least once.
+func (m *DefaultApi) GetDekByVersionCalled() bool {
+	m.lockGetDekByVersion.Lock()
+	defer m.lockGetDekByVersion.Unlock()
+
+	return len(m.calls.GetDekByVersion) > 0
+}
+
+// GetDekByVersionCalls returns the calls made to GetDekByVersion.
+func (m *DefaultApi) GetDekByVersionCalls() []struct {
+	Ctx     context.Context
+	Name    string
+	Subject string
+	Version string
+} {
+	m.lockGetDekByVersion.Lock()
+	defer m.lockGetDekByVersion.Unlock()
+
+	return m.calls.GetDekByVersion
+}
+
+// GetDekByVersionExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetDekByVersionExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetDekByVersionRequest) (github_com_confluentinc_schema_registry_sdk_go.Dek, *net_http.Response, error) {
+	m.lockGetDekByVersionExecute.Lock()
+	defer m.lockGetDekByVersionExecute.Unlock()
+
+	if m.GetDekByVersionExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetDekByVersionExecuteFunc is nil but DefaultApi.GetDekByVersionExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekByVersionRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetDekByVersionExecute = append(m.calls.GetDekByVersionExecute, call)
+
+	return m.GetDekByVersionExecuteFunc(r)
+}
+
+// GetDekByVersionExecuteCalled returns true if GetDekByVersionExecute was called at least once.
+func (m *DefaultApi) GetDekByVersionExecuteCalled() bool {
+	m.lockGetDekByVersionExecute.Lock()
+	defer m.lockGetDekByVersionExecute.Unlock()
+
+	return len(m.calls.GetDekByVersionExecute) > 0
+}
+
+// GetDekByVersionExecuteCalls returns the calls made to GetDekByVersionExecute.
+func (m *DefaultApi) GetDekByVersionExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekByVersionRequest
+} {
+	m.lockGetDekByVersionExecute.Lock()
+	defer m.lockGetDekByVersionExecute.Unlock()
+
+	return m.calls.GetDekByVersionExecute
+}
+
+// GetDekSubjects mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetDekSubjects(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetDekSubjectsRequest {
+	m.lockGetDekSubjects.Lock()
+	defer m.lockGetDekSubjects.Unlock()
+
+	if m.GetDekSubjectsFunc == nil {
+		panic("mocker: DefaultApi.GetDekSubjectsFunc is nil but DefaultApi.GetDekSubjects was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		Name string
+	}{
+		Ctx:  ctx,
+		Name: name,
+	}
+
+	m.calls.GetDekSubjects = append(m.calls.GetDekSubjects, call)
+
+	return m.GetDekSubjectsFunc(ctx, name)
+}
+
+// GetDekSubjectsCalled returns true if GetDekSubjects was called at least once.
+func (m *DefaultApi) GetDekSubjectsCalled() bool {
+	m.lockGetDekSubjects.Lock()
+	defer m.lockGetDekSubjects.Unlock()
+
+	return len(m.calls.GetDekSubjects) > 0
+}
+
+// GetDekSubjectsCalls returns the calls made to GetDekSubjects.
+func (m *DefaultApi) GetDekSubjectsCalls() []struct {
+	Ctx  context.Context
+	Name string
+} {
+	m.lockGetDekSubjects.Lock()
+	defer m.lockGetDekSubjects.Unlock()
+
+	return m.calls.GetDekSubjects
+}
+
+// GetDekSubjectsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetDekSubjectsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetDekSubjectsRequest) ([]string, *net_http.Response, error) {
+	m.lockGetDekSubjectsExecute.Lock()
+	defer m.lockGetDekSubjectsExecute.Unlock()
+
+	if m.GetDekSubjectsExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetDekSubjectsExecuteFunc is nil but DefaultApi.GetDekSubjectsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekSubjectsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetDekSubjectsExecute = append(m.calls.GetDekSubjectsExecute, call)
+
+	return m.GetDekSubjectsExecuteFunc(r)
+}
+
+// GetDekSubjectsExecuteCalled returns true if GetDekSubjectsExecute was called at least once.
+func (m *DefaultApi) GetDekSubjectsExecuteCalled() bool {
+	m.lockGetDekSubjectsExecute.Lock()
+	defer m.lockGetDekSubjectsExecute.Unlock()
+
+	return len(m.calls.GetDekSubjectsExecute) > 0
+}
+
+// GetDekSubjectsExecuteCalls returns the calls made to GetDekSubjectsExecute.
+func (m *DefaultApi) GetDekSubjectsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekSubjectsRequest
+} {
+	m.lockGetDekSubjectsExecute.Lock()
+	defer m.lockGetDekSubjectsExecute.Unlock()
+
+	return m.calls.GetDekSubjectsExecute
+}
+
+// GetDekVersions mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetDekVersions(ctx context.Context, name, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiGetDekVersionsRequest {
+	m.lockGetDekVersions.Lock()
+	defer m.lockGetDekVersions.Unlock()
+
+	if m.GetDekVersionsFunc == nil {
+		panic("mocker: DefaultApi.GetDekVersionsFunc is nil but DefaultApi.GetDekVersions was called.")
+	}
+
+	call := struct {
+		Ctx     context.Context
+		Name    string
+		Subject string
+	}{
+		Ctx:     ctx,
+		Name:    name,
+		Subject: subject,
+	}
+
+	m.calls.GetDekVersions = append(m.calls.GetDekVersions, call)
+
+	return m.GetDekVersionsFunc(ctx, name, subject)
+}
+
+// GetDekVersionsCalled returns true if GetDekVersions was called at least once.
+func (m *DefaultApi) GetDekVersionsCalled() bool {
+	m.lockGetDekVersions.Lock()
+	defer m.lockGetDekVersions.Unlock()
+
+	return len(m.calls.GetDekVersions) > 0
+}
+
+// GetDekVersionsCalls returns the calls made to GetDekVersions.
+func (m *DefaultApi) GetDekVersionsCalls() []struct {
+	Ctx     context.Context
+	Name    string
+	Subject string
+} {
+	m.lockGetDekVersions.Lock()
+	defer m.lockGetDekVersions.Unlock()
+
+	return m.calls.GetDekVersions
+}
+
+// GetDekVersionsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetDekVersionsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetDekVersionsRequest) ([]int32, *net_http.Response, error) {
+	m.lockGetDekVersionsExecute.Lock()
+	defer m.lockGetDekVersionsExecute.Unlock()
+
+	if m.GetDekVersionsExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetDekVersionsExecuteFunc is nil but DefaultApi.GetDekVersionsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekVersionsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetDekVersionsExecute = append(m.calls.GetDekVersionsExecute, call)
+
+	return m.GetDekVersionsExecuteFunc(r)
+}
+
+// GetDekVersionsExecuteCalled returns true if GetDekVersionsExecute was called at least once.
+func (m *DefaultApi) GetDekVersionsExecuteCalled() bool {
+	m.lockGetDekVersionsExecute.Lock()
+	defer m.lockGetDekVersionsExecute.Unlock()
+
+	return len(m.calls.GetDekVersionsExecute) > 0
+}
+
+// GetDekVersionsExecuteCalls returns the calls made to GetDekVersionsExecute.
+func (m *DefaultApi) GetDekVersionsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetDekVersionsRequest
+} {
+	m.lockGetDekVersionsExecute.Lock()
+	defer m.lockGetDekVersionsExecute.Unlock()
+
+	return m.calls.GetDekVersionsExecute
+}
+
 // GetExporterConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetExporterConfig(ctx context.Context, name string) (map[string]string, *net_http.Response, error) {
+func (m *DefaultApi) GetExporterConfig(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterConfigRequest {
 	m.lockGetExporterConfig.Lock()
 	defer m.lockGetExporterConfig.Unlock()
 
@@ -1555,8 +3897,46 @@ func (m *DefaultApi) GetExporterConfigCalls() []struct {
 	return m.calls.GetExporterConfig
 }
 
+// GetExporterConfigExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetExporterConfigExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterConfigRequest) (map[string]string, *net_http.Response, error) {
+	m.lockGetExporterConfigExecute.Lock()
+	defer m.lockGetExporterConfigExecute.Unlock()
+
+	if m.GetExporterConfigExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetExporterConfigExecuteFunc is nil but DefaultApi.GetExporterConfigExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterConfigRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetExporterConfigExecute = append(m.calls.GetExporterConfigExecute, call)
+
+	return m.GetExporterConfigExecuteFunc(r)
+}
+
+// GetExporterConfigExecuteCalled returns true if GetExporterConfigExecute was called at least once.
+func (m *DefaultApi) GetExporterConfigExecuteCalled() bool {
+	m.lockGetExporterConfigExecute.Lock()
+	defer m.lockGetExporterConfigExecute.Unlock()
+
+	return len(m.calls.GetExporterConfigExecute) > 0
+}
+
+// GetExporterConfigExecuteCalls returns the calls made to GetExporterConfigExecute.
+func (m *DefaultApi) GetExporterConfigExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterConfigRequest
+} {
+	m.lockGetExporterConfigExecute.Lock()
+	defer m.lockGetExporterConfigExecute.Unlock()
+
+	return m.calls.GetExporterConfigExecute
+}
+
 // GetExporterInfo mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetExporterInfo(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.ExporterInfo, *net_http.Response, error) {
+func (m *DefaultApi) GetExporterInfo(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterInfoRequest {
 	m.lockGetExporterInfo.Lock()
 	defer m.lockGetExporterInfo.Unlock()
 
@@ -1596,8 +3976,46 @@ func (m *DefaultApi) GetExporterInfoCalls() []struct {
 	return m.calls.GetExporterInfo
 }
 
+// GetExporterInfoExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetExporterInfoExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterInfoRequest) (github_com_confluentinc_schema_registry_sdk_go.ExporterInfo, *net_http.Response, error) {
+	m.lockGetExporterInfoExecute.Lock()
+	defer m.lockGetExporterInfoExecute.Unlock()
+
+	if m.GetExporterInfoExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetExporterInfoExecuteFunc is nil but DefaultApi.GetExporterInfoExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterInfoRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetExporterInfoExecute = append(m.calls.GetExporterInfoExecute, call)
+
+	return m.GetExporterInfoExecuteFunc(r)
+}
+
+// GetExporterInfoExecuteCalled returns true if GetExporterInfoExecute was called at least once.
+func (m *DefaultApi) GetExporterInfoExecuteCalled() bool {
+	m.lockGetExporterInfoExecute.Lock()
+	defer m.lockGetExporterInfoExecute.Unlock()
+
+	return len(m.calls.GetExporterInfoExecute) > 0
+}
+
+// GetExporterInfoExecuteCalls returns the calls made to GetExporterInfoExecute.
+func (m *DefaultApi) GetExporterInfoExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterInfoRequest
+} {
+	m.lockGetExporterInfoExecute.Lock()
+	defer m.lockGetExporterInfoExecute.Unlock()
+
+	return m.calls.GetExporterInfoExecute
+}
+
 // GetExporterStatus mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetExporterStatus(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.ExporterStatus, *net_http.Response, error) {
+func (m *DefaultApi) GetExporterStatus(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterStatusRequest {
 	m.lockGetExporterStatus.Lock()
 	defer m.lockGetExporterStatus.Unlock()
 
@@ -1637,8 +4055,46 @@ func (m *DefaultApi) GetExporterStatusCalls() []struct {
 	return m.calls.GetExporterStatus
 }
 
+// GetExporterStatusExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetExporterStatusExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterStatusRequest) (github_com_confluentinc_schema_registry_sdk_go.ExporterStatus, *net_http.Response, error) {
+	m.lockGetExporterStatusExecute.Lock()
+	defer m.lockGetExporterStatusExecute.Unlock()
+
+	if m.GetExporterStatusExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetExporterStatusExecuteFunc is nil but DefaultApi.GetExporterStatusExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterStatusRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetExporterStatusExecute = append(m.calls.GetExporterStatusExecute, call)
+
+	return m.GetExporterStatusExecuteFunc(r)
+}
+
+// GetExporterStatusExecuteCalled returns true if GetExporterStatusExecute was called at least once.
+func (m *DefaultApi) GetExporterStatusExecuteCalled() bool {
+	m.lockGetExporterStatusExecute.Lock()
+	defer m.lockGetExporterStatusExecute.Unlock()
+
+	return len(m.calls.GetExporterStatusExecute) > 0
+}
+
+// GetExporterStatusExecuteCalls returns the calls made to GetExporterStatusExecute.
+func (m *DefaultApi) GetExporterStatusExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetExporterStatusRequest
+} {
+	m.lockGetExporterStatusExecute.Lock()
+	defer m.lockGetExporterStatusExecute.Unlock()
+
+	return m.calls.GetExporterStatusExecute
+}
+
 // GetExporters mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetExporters(ctx context.Context) ([]string, *net_http.Response, error) {
+func (m *DefaultApi) GetExporters(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetExportersRequest {
 	m.lockGetExporters.Lock()
 	defer m.lockGetExporters.Unlock()
 
@@ -1675,8 +4131,201 @@ func (m *DefaultApi) GetExportersCalls() []struct {
 	return m.calls.GetExporters
 }
 
+// GetExportersExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetExportersExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetExportersRequest) ([]string, *net_http.Response, error) {
+	m.lockGetExportersExecute.Lock()
+	defer m.lockGetExportersExecute.Unlock()
+
+	if m.GetExportersExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetExportersExecuteFunc is nil but DefaultApi.GetExportersExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetExportersRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetExportersExecute = append(m.calls.GetExportersExecute, call)
+
+	return m.GetExportersExecuteFunc(r)
+}
+
+// GetExportersExecuteCalled returns true if GetExportersExecute was called at least once.
+func (m *DefaultApi) GetExportersExecuteCalled() bool {
+	m.lockGetExportersExecute.Lock()
+	defer m.lockGetExportersExecute.Unlock()
+
+	return len(m.calls.GetExportersExecute) > 0
+}
+
+// GetExportersExecuteCalls returns the calls made to GetExportersExecute.
+func (m *DefaultApi) GetExportersExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetExportersRequest
+} {
+	m.lockGetExportersExecute.Lock()
+	defer m.lockGetExportersExecute.Unlock()
+
+	return m.calls.GetExportersExecute
+}
+
+// GetKek mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetKek(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiGetKekRequest {
+	m.lockGetKek.Lock()
+	defer m.lockGetKek.Unlock()
+
+	if m.GetKekFunc == nil {
+		panic("mocker: DefaultApi.GetKekFunc is nil but DefaultApi.GetKek was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		Name string
+	}{
+		Ctx:  ctx,
+		Name: name,
+	}
+
+	m.calls.GetKek = append(m.calls.GetKek, call)
+
+	return m.GetKekFunc(ctx, name)
+}
+
+// GetKekCalled returns true if GetKek was called at least once.
+func (m *DefaultApi) GetKekCalled() bool {
+	m.lockGetKek.Lock()
+	defer m.lockGetKek.Unlock()
+
+	return len(m.calls.GetKek) > 0
+}
+
+// GetKekCalls returns the calls made to GetKek.
+func (m *DefaultApi) GetKekCalls() []struct {
+	Ctx  context.Context
+	Name string
+} {
+	m.lockGetKek.Lock()
+	defer m.lockGetKek.Unlock()
+
+	return m.calls.GetKek
+}
+
+// GetKekExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetKekExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetKekRequest) (github_com_confluentinc_schema_registry_sdk_go.Kek, *net_http.Response, error) {
+	m.lockGetKekExecute.Lock()
+	defer m.lockGetKekExecute.Unlock()
+
+	if m.GetKekExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetKekExecuteFunc is nil but DefaultApi.GetKekExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetKekRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetKekExecute = append(m.calls.GetKekExecute, call)
+
+	return m.GetKekExecuteFunc(r)
+}
+
+// GetKekExecuteCalled returns true if GetKekExecute was called at least once.
+func (m *DefaultApi) GetKekExecuteCalled() bool {
+	m.lockGetKekExecute.Lock()
+	defer m.lockGetKekExecute.Unlock()
+
+	return len(m.calls.GetKekExecute) > 0
+}
+
+// GetKekExecuteCalls returns the calls made to GetKekExecute.
+func (m *DefaultApi) GetKekExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetKekRequest
+} {
+	m.lockGetKekExecute.Lock()
+	defer m.lockGetKekExecute.Unlock()
+
+	return m.calls.GetKekExecute
+}
+
+// GetKekNames mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetKekNames(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetKekNamesRequest {
+	m.lockGetKekNames.Lock()
+	defer m.lockGetKekNames.Unlock()
+
+	if m.GetKekNamesFunc == nil {
+		panic("mocker: DefaultApi.GetKekNamesFunc is nil but DefaultApi.GetKekNames was called.")
+	}
+
+	call := struct {
+		Ctx context.Context
+	}{
+		Ctx: ctx,
+	}
+
+	m.calls.GetKekNames = append(m.calls.GetKekNames, call)
+
+	return m.GetKekNamesFunc(ctx)
+}
+
+// GetKekNamesCalled returns true if GetKekNames was called at least once.
+func (m *DefaultApi) GetKekNamesCalled() bool {
+	m.lockGetKekNames.Lock()
+	defer m.lockGetKekNames.Unlock()
+
+	return len(m.calls.GetKekNames) > 0
+}
+
+// GetKekNamesCalls returns the calls made to GetKekNames.
+func (m *DefaultApi) GetKekNamesCalls() []struct {
+	Ctx context.Context
+} {
+	m.lockGetKekNames.Lock()
+	defer m.lockGetKekNames.Unlock()
+
+	return m.calls.GetKekNames
+}
+
+// GetKekNamesExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetKekNamesExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetKekNamesRequest) ([]string, *net_http.Response, error) {
+	m.lockGetKekNamesExecute.Lock()
+	defer m.lockGetKekNamesExecute.Unlock()
+
+	if m.GetKekNamesExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetKekNamesExecuteFunc is nil but DefaultApi.GetKekNamesExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetKekNamesRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetKekNamesExecute = append(m.calls.GetKekNamesExecute, call)
+
+	return m.GetKekNamesExecuteFunc(r)
+}
+
+// GetKekNamesExecuteCalled returns true if GetKekNamesExecute was called at least once.
+func (m *DefaultApi) GetKekNamesExecuteCalled() bool {
+	m.lockGetKekNamesExecute.Lock()
+	defer m.lockGetKekNamesExecute.Unlock()
+
+	return len(m.calls.GetKekNamesExecute) > 0
+}
+
+// GetKekNamesExecuteCalls returns the calls made to GetKekNamesExecute.
+func (m *DefaultApi) GetKekNamesExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetKekNamesRequest
+} {
+	m.lockGetKekNamesExecute.Lock()
+	defer m.lockGetKekNamesExecute.Unlock()
+
+	return m.calls.GetKekNamesExecute
+}
+
 // GetMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetMode(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error) {
+func (m *DefaultApi) GetMode(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiGetModeRequest {
 	m.lockGetMode.Lock()
 	defer m.lockGetMode.Unlock()
 
@@ -1685,18 +4334,16 @@ func (m *DefaultApi) GetMode(ctx context.Context, subject string, localVarOption
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts
+		Ctx     context.Context
+		Subject string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
 	}
 
 	m.calls.GetMode = append(m.calls.GetMode, call)
 
-	return m.GetModeFunc(ctx, subject, localVarOptionals)
+	return m.GetModeFunc(ctx, subject)
 }
 
 // GetModeCalled returns true if GetMode was called at least once.
@@ -1709,9 +4356,8 @@ func (m *DefaultApi) GetModeCalled() bool {
 
 // GetModeCalls returns the calls made to GetMode.
 func (m *DefaultApi) GetModeCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetModeOpts
+	Ctx     context.Context
+	Subject string
 } {
 	m.lockGetMode.Lock()
 	defer m.lockGetMode.Unlock()
@@ -1719,8 +4365,46 @@ func (m *DefaultApi) GetModeCalls() []struct {
 	return m.calls.GetMode
 }
 
+// GetModeExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetModeExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetModeRequest) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error) {
+	m.lockGetModeExecute.Lock()
+	defer m.lockGetModeExecute.Unlock()
+
+	if m.GetModeExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetModeExecuteFunc is nil but DefaultApi.GetModeExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetModeRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetModeExecute = append(m.calls.GetModeExecute, call)
+
+	return m.GetModeExecuteFunc(r)
+}
+
+// GetModeExecuteCalled returns true if GetModeExecute was called at least once.
+func (m *DefaultApi) GetModeExecuteCalled() bool {
+	m.lockGetModeExecute.Lock()
+	defer m.lockGetModeExecute.Unlock()
+
+	return len(m.calls.GetModeExecute) > 0
+}
+
+// GetModeExecuteCalls returns the calls made to GetModeExecute.
+func (m *DefaultApi) GetModeExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetModeRequest
+} {
+	m.lockGetModeExecute.Lock()
+	defer m.lockGetModeExecute.Unlock()
+
+	return m.calls.GetModeExecute
+}
+
 // GetReferencedBy mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetReferencedBy(ctx context.Context, subject, version string) ([]int32, *net_http.Response, error) {
+func (m *DefaultApi) GetReferencedBy(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiGetReferencedByRequest {
 	m.lockGetReferencedBy.Lock()
 	defer m.lockGetReferencedBy.Unlock()
 
@@ -1763,8 +4447,46 @@ func (m *DefaultApi) GetReferencedByCalls() []struct {
 	return m.calls.GetReferencedBy
 }
 
+// GetReferencedByExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetReferencedByExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetReferencedByRequest) ([]int32, *net_http.Response, error) {
+	m.lockGetReferencedByExecute.Lock()
+	defer m.lockGetReferencedByExecute.Unlock()
+
+	if m.GetReferencedByExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetReferencedByExecuteFunc is nil but DefaultApi.GetReferencedByExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetReferencedByRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetReferencedByExecute = append(m.calls.GetReferencedByExecute, call)
+
+	return m.GetReferencedByExecuteFunc(r)
+}
+
+// GetReferencedByExecuteCalled returns true if GetReferencedByExecute was called at least once.
+func (m *DefaultApi) GetReferencedByExecuteCalled() bool {
+	m.lockGetReferencedByExecute.Lock()
+	defer m.lockGetReferencedByExecute.Unlock()
+
+	return len(m.calls.GetReferencedByExecute) > 0
+}
+
+// GetReferencedByExecuteCalls returns the calls made to GetReferencedByExecute.
+func (m *DefaultApi) GetReferencedByExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetReferencedByRequest
+} {
+	m.lockGetReferencedByExecute.Lock()
+	defer m.lockGetReferencedByExecute.Unlock()
+
+	return m.calls.GetReferencedByExecute
+}
+
 // GetSchema mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchema(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts) (github_com_confluentinc_schema_registry_sdk_go.SchemaString, *net_http.Response, error) {
+func (m *DefaultApi) GetSchema(ctx context.Context, id int32) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaRequest {
 	m.lockGetSchema.Lock()
 	defer m.lockGetSchema.Unlock()
 
@@ -1773,18 +4495,16 @@ func (m *DefaultApi) GetSchema(ctx context.Context, id int32, localVarOptionals 
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Id                int32
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts
+		Ctx context.Context
+		Id  int32
 	}{
-		Ctx:               ctx,
-		Id:                id,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
+		Id:  id,
 	}
 
 	m.calls.GetSchema = append(m.calls.GetSchema, call)
 
-	return m.GetSchemaFunc(ctx, id, localVarOptionals)
+	return m.GetSchemaFunc(ctx, id)
 }
 
 // GetSchemaCalled returns true if GetSchema was called at least once.
@@ -1797,9 +4517,8 @@ func (m *DefaultApi) GetSchemaCalled() bool {
 
 // GetSchemaCalls returns the calls made to GetSchema.
 func (m *DefaultApi) GetSchemaCalls() []struct {
-	Ctx               context.Context
-	Id                int32
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOpts
+	Ctx context.Context
+	Id  int32
 } {
 	m.lockGetSchema.Lock()
 	defer m.lockGetSchema.Unlock()
@@ -1807,8 +4526,46 @@ func (m *DefaultApi) GetSchemaCalls() []struct {
 	return m.calls.GetSchema
 }
 
+// GetSchemaExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetSchemaExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go.SchemaString, *net_http.Response, error) {
+	m.lockGetSchemaExecute.Lock()
+	defer m.lockGetSchemaExecute.Unlock()
+
+	if m.GetSchemaExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetSchemaExecuteFunc is nil but DefaultApi.GetSchemaExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetSchemaExecute = append(m.calls.GetSchemaExecute, call)
+
+	return m.GetSchemaExecuteFunc(r)
+}
+
+// GetSchemaExecuteCalled returns true if GetSchemaExecute was called at least once.
+func (m *DefaultApi) GetSchemaExecuteCalled() bool {
+	m.lockGetSchemaExecute.Lock()
+	defer m.lockGetSchemaExecute.Unlock()
+
+	return len(m.calls.GetSchemaExecute) > 0
+}
+
+// GetSchemaExecuteCalls returns the calls made to GetSchemaExecute.
+func (m *DefaultApi) GetSchemaExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaRequest
+} {
+	m.lockGetSchemaExecute.Lock()
+	defer m.lockGetSchemaExecute.Unlock()
+
+	return m.calls.GetSchemaExecute
+}
+
 // GetSchemaByVersion mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchemaByVersion(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts) (github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error) {
+func (m *DefaultApi) GetSchemaByVersion(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaByVersionRequest {
 	m.lockGetSchemaByVersion.Lock()
 	defer m.lockGetSchemaByVersion.Unlock()
 
@@ -1817,20 +4574,18 @@ func (m *DefaultApi) GetSchemaByVersion(ctx context.Context, subject, version st
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		Version           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts
+		Ctx     context.Context
+		Subject string
+		Version string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		Version:           version,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
+		Version: version,
 	}
 
 	m.calls.GetSchemaByVersion = append(m.calls.GetSchemaByVersion, call)
 
-	return m.GetSchemaByVersionFunc(ctx, subject, version, localVarOptionals)
+	return m.GetSchemaByVersionFunc(ctx, subject, version)
 }
 
 // GetSchemaByVersionCalled returns true if GetSchemaByVersion was called at least once.
@@ -1843,10 +4598,9 @@ func (m *DefaultApi) GetSchemaByVersionCalled() bool {
 
 // GetSchemaByVersionCalls returns the calls made to GetSchemaByVersion.
 func (m *DefaultApi) GetSchemaByVersionCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	Version           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaByVersionOpts
+	Ctx     context.Context
+	Subject string
+	Version string
 } {
 	m.lockGetSchemaByVersion.Lock()
 	defer m.lockGetSchemaByVersion.Unlock()
@@ -1854,8 +4608,46 @@ func (m *DefaultApi) GetSchemaByVersionCalls() []struct {
 	return m.calls.GetSchemaByVersion
 }
 
+// GetSchemaByVersionExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetSchemaByVersionExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaByVersionRequest) (github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error) {
+	m.lockGetSchemaByVersionExecute.Lock()
+	defer m.lockGetSchemaByVersionExecute.Unlock()
+
+	if m.GetSchemaByVersionExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetSchemaByVersionExecuteFunc is nil but DefaultApi.GetSchemaByVersionExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaByVersionRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetSchemaByVersionExecute = append(m.calls.GetSchemaByVersionExecute, call)
+
+	return m.GetSchemaByVersionExecuteFunc(r)
+}
+
+// GetSchemaByVersionExecuteCalled returns true if GetSchemaByVersionExecute was called at least once.
+func (m *DefaultApi) GetSchemaByVersionExecuteCalled() bool {
+	m.lockGetSchemaByVersionExecute.Lock()
+	defer m.lockGetSchemaByVersionExecute.Unlock()
+
+	return len(m.calls.GetSchemaByVersionExecute) > 0
+}
+
+// GetSchemaByVersionExecuteCalls returns the calls made to GetSchemaByVersionExecute.
+func (m *DefaultApi) GetSchemaByVersionExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaByVersionRequest
+} {
+	m.lockGetSchemaByVersionExecute.Lock()
+	defer m.lockGetSchemaByVersionExecute.Unlock()
+
+	return m.calls.GetSchemaByVersionExecute
+}
+
 // GetSchemaOnly mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchemaOnly(ctx context.Context, subject, version string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts) (string, *net_http.Response, error) {
+func (m *DefaultApi) GetSchemaOnly(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaOnlyRequest {
 	m.lockGetSchemaOnly.Lock()
 	defer m.lockGetSchemaOnly.Unlock()
 
@@ -1864,20 +4656,18 @@ func (m *DefaultApi) GetSchemaOnly(ctx context.Context, subject, version string,
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		Version           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts
+		Ctx     context.Context
+		Subject string
+		Version string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		Version:           version,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
+		Version: version,
 	}
 
 	m.calls.GetSchemaOnly = append(m.calls.GetSchemaOnly, call)
 
-	return m.GetSchemaOnlyFunc(ctx, subject, version, localVarOptionals)
+	return m.GetSchemaOnlyFunc(ctx, subject, version)
 }
 
 // GetSchemaOnlyCalled returns true if GetSchemaOnly was called at least once.
@@ -1890,10 +4680,9 @@ func (m *DefaultApi) GetSchemaOnlyCalled() bool {
 
 // GetSchemaOnlyCalls returns the calls made to GetSchemaOnly.
 func (m *DefaultApi) GetSchemaOnlyCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	Version           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemaOnlyOpts
+	Ctx     context.Context
+	Subject string
+	Version string
 } {
 	m.lockGetSchemaOnly.Lock()
 	defer m.lockGetSchemaOnly.Unlock()
@@ -1901,8 +4690,46 @@ func (m *DefaultApi) GetSchemaOnlyCalls() []struct {
 	return m.calls.GetSchemaOnly
 }
 
+// GetSchemaOnlyExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetSchemaOnlyExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaOnlyRequest) (string, *net_http.Response, error) {
+	m.lockGetSchemaOnlyExecute.Lock()
+	defer m.lockGetSchemaOnlyExecute.Unlock()
+
+	if m.GetSchemaOnlyExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetSchemaOnlyExecuteFunc is nil but DefaultApi.GetSchemaOnlyExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaOnlyRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetSchemaOnlyExecute = append(m.calls.GetSchemaOnlyExecute, call)
+
+	return m.GetSchemaOnlyExecuteFunc(r)
+}
+
+// GetSchemaOnlyExecuteCalled returns true if GetSchemaOnlyExecute was called at least once.
+func (m *DefaultApi) GetSchemaOnlyExecuteCalled() bool {
+	m.lockGetSchemaOnlyExecute.Lock()
+	defer m.lockGetSchemaOnlyExecute.Unlock()
+
+	return len(m.calls.GetSchemaOnlyExecute) > 0
+}
+
+// GetSchemaOnlyExecuteCalls returns the calls made to GetSchemaOnlyExecute.
+func (m *DefaultApi) GetSchemaOnlyExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaOnlyRequest
+} {
+	m.lockGetSchemaOnlyExecute.Lock()
+	defer m.lockGetSchemaOnlyExecute.Unlock()
+
+	return m.calls.GetSchemaOnlyExecute
+}
+
 // GetSchemaTypes mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchemaTypes(ctx context.Context) ([]string, *net_http.Response, error) {
+func (m *DefaultApi) GetSchemaTypes(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaTypesRequest {
 	m.lockGetSchemaTypes.Lock()
 	defer m.lockGetSchemaTypes.Unlock()
 
@@ -1939,8 +4766,46 @@ func (m *DefaultApi) GetSchemaTypesCalls() []struct {
 	return m.calls.GetSchemaTypes
 }
 
+// GetSchemaTypesExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetSchemaTypesExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaTypesRequest) ([]string, *net_http.Response, error) {
+	m.lockGetSchemaTypesExecute.Lock()
+	defer m.lockGetSchemaTypesExecute.Unlock()
+
+	if m.GetSchemaTypesExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetSchemaTypesExecuteFunc is nil but DefaultApi.GetSchemaTypesExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaTypesRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetSchemaTypesExecute = append(m.calls.GetSchemaTypesExecute, call)
+
+	return m.GetSchemaTypesExecuteFunc(r)
+}
+
+// GetSchemaTypesExecuteCalled returns true if GetSchemaTypesExecute was called at least once.
+func (m *DefaultApi) GetSchemaTypesExecuteCalled() bool {
+	m.lockGetSchemaTypesExecute.Lock()
+	defer m.lockGetSchemaTypesExecute.Unlock()
+
+	return len(m.calls.GetSchemaTypesExecute) > 0
+}
+
+// GetSchemaTypesExecuteCalls returns the calls made to GetSchemaTypesExecute.
+func (m *DefaultApi) GetSchemaTypesExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemaTypesRequest
+} {
+	m.lockGetSchemaTypesExecute.Lock()
+	defer m.lockGetSchemaTypesExecute.Unlock()
+
+	return m.calls.GetSchemaTypesExecute
+}
+
 // GetSchemas mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSchemas(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts) ([]github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error) {
+func (m *DefaultApi) GetSchemas(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemasRequest {
 	m.lockGetSchemas.Lock()
 	defer m.lockGetSchemas.Unlock()
 
@@ -1949,16 +4814,14 @@ func (m *DefaultApi) GetSchemas(ctx context.Context, localVarOptionals *github_c
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.GetSchemas = append(m.calls.GetSchemas, call)
 
-	return m.GetSchemasFunc(ctx, localVarOptionals)
+	return m.GetSchemasFunc(ctx)
 }
 
 // GetSchemasCalled returns true if GetSchemas was called at least once.
@@ -1971,8 +4834,7 @@ func (m *DefaultApi) GetSchemasCalled() bool {
 
 // GetSchemasCalls returns the calls made to GetSchemas.
 func (m *DefaultApi) GetSchemasCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSchemasOpts
+	Ctx context.Context
 } {
 	m.lockGetSchemas.Lock()
 	defer m.lockGetSchemas.Unlock()
@@ -1980,8 +4842,46 @@ func (m *DefaultApi) GetSchemasCalls() []struct {
 	return m.calls.GetSchemas
 }
 
+// GetSchemasExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetSchemasExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemasRequest) ([]github_com_confluentinc_schema_registry_sdk_go.Schema, *net_http.Response, error) {
+	m.lockGetSchemasExecute.Lock()
+	defer m.lockGetSchemasExecute.Unlock()
+
+	if m.GetSchemasExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetSchemasExecuteFunc is nil but DefaultApi.GetSchemasExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemasRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetSchemasExecute = append(m.calls.GetSchemasExecute, call)
+
+	return m.GetSchemasExecuteFunc(r)
+}
+
+// GetSchemasExecuteCalled returns true if GetSchemasExecute was called at least once.
+func (m *DefaultApi) GetSchemasExecuteCalled() bool {
+	m.lockGetSchemasExecute.Lock()
+	defer m.lockGetSchemasExecute.Unlock()
+
+	return len(m.calls.GetSchemasExecute) > 0
+}
+
+// GetSchemasExecuteCalls returns the calls made to GetSchemasExecute.
+func (m *DefaultApi) GetSchemasExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetSchemasRequest
+} {
+	m.lockGetSchemasExecute.Lock()
+	defer m.lockGetSchemasExecute.Unlock()
+
+	return m.calls.GetSchemasExecute
+}
+
 // GetSubjectLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSubjectLevelConfig(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error) {
+func (m *DefaultApi) GetSubjectLevelConfig(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectLevelConfigRequest {
 	m.lockGetSubjectLevelConfig.Lock()
 	defer m.lockGetSubjectLevelConfig.Unlock()
 
@@ -1990,18 +4890,16 @@ func (m *DefaultApi) GetSubjectLevelConfig(ctx context.Context, subject string, 
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts
+		Ctx     context.Context
+		Subject string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
 	}
 
 	m.calls.GetSubjectLevelConfig = append(m.calls.GetSubjectLevelConfig, call)
 
-	return m.GetSubjectLevelConfigFunc(ctx, subject, localVarOptionals)
+	return m.GetSubjectLevelConfigFunc(ctx, subject)
 }
 
 // GetSubjectLevelConfigCalled returns true if GetSubjectLevelConfig was called at least once.
@@ -2014,9 +4912,8 @@ func (m *DefaultApi) GetSubjectLevelConfigCalled() bool {
 
 // GetSubjectLevelConfigCalls returns the calls made to GetSubjectLevelConfig.
 func (m *DefaultApi) GetSubjectLevelConfigCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectLevelConfigOpts
+	Ctx     context.Context
+	Subject string
 } {
 	m.lockGetSubjectLevelConfig.Lock()
 	defer m.lockGetSubjectLevelConfig.Unlock()
@@ -2024,8 +4921,46 @@ func (m *DefaultApi) GetSubjectLevelConfigCalls() []struct {
 	return m.calls.GetSubjectLevelConfig
 }
 
+// GetSubjectLevelConfigExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetSubjectLevelConfigExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectLevelConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error) {
+	m.lockGetSubjectLevelConfigExecute.Lock()
+	defer m.lockGetSubjectLevelConfigExecute.Unlock()
+
+	if m.GetSubjectLevelConfigExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetSubjectLevelConfigExecuteFunc is nil but DefaultApi.GetSubjectLevelConfigExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectLevelConfigRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetSubjectLevelConfigExecute = append(m.calls.GetSubjectLevelConfigExecute, call)
+
+	return m.GetSubjectLevelConfigExecuteFunc(r)
+}
+
+// GetSubjectLevelConfigExecuteCalled returns true if GetSubjectLevelConfigExecute was called at least once.
+func (m *DefaultApi) GetSubjectLevelConfigExecuteCalled() bool {
+	m.lockGetSubjectLevelConfigExecute.Lock()
+	defer m.lockGetSubjectLevelConfigExecute.Unlock()
+
+	return len(m.calls.GetSubjectLevelConfigExecute) > 0
+}
+
+// GetSubjectLevelConfigExecuteCalls returns the calls made to GetSubjectLevelConfigExecute.
+func (m *DefaultApi) GetSubjectLevelConfigExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectLevelConfigRequest
+} {
+	m.lockGetSubjectLevelConfigExecute.Lock()
+	defer m.lockGetSubjectLevelConfigExecute.Unlock()
+
+	return m.calls.GetSubjectLevelConfigExecute
+}
+
 // GetSubjects mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetSubjects(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts) ([]string, *net_http.Response, error) {
+func (m *DefaultApi) GetSubjects(ctx context.Context, id int32) github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectsRequest {
 	m.lockGetSubjects.Lock()
 	defer m.lockGetSubjects.Unlock()
 
@@ -2034,18 +4969,16 @@ func (m *DefaultApi) GetSubjects(ctx context.Context, id int32, localVarOptional
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Id                int32
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts
+		Ctx context.Context
+		Id  int32
 	}{
-		Ctx:               ctx,
-		Id:                id,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
+		Id:  id,
 	}
 
 	m.calls.GetSubjects = append(m.calls.GetSubjects, call)
 
-	return m.GetSubjectsFunc(ctx, id, localVarOptionals)
+	return m.GetSubjectsFunc(ctx, id)
 }
 
 // GetSubjectsCalled returns true if GetSubjects was called at least once.
@@ -2058,9 +4991,8 @@ func (m *DefaultApi) GetSubjectsCalled() bool {
 
 // GetSubjectsCalls returns the calls made to GetSubjects.
 func (m *DefaultApi) GetSubjectsCalls() []struct {
-	Ctx               context.Context
-	Id                int32
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetSubjectsOpts
+	Ctx context.Context
+	Id  int32
 } {
 	m.lockGetSubjects.Lock()
 	defer m.lockGetSubjects.Unlock()
@@ -2068,8 +5000,46 @@ func (m *DefaultApi) GetSubjectsCalls() []struct {
 	return m.calls.GetSubjects
 }
 
+// GetSubjectsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetSubjectsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectsRequest) ([]string, *net_http.Response, error) {
+	m.lockGetSubjectsExecute.Lock()
+	defer m.lockGetSubjectsExecute.Unlock()
+
+	if m.GetSubjectsExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetSubjectsExecuteFunc is nil but DefaultApi.GetSubjectsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetSubjectsExecute = append(m.calls.GetSubjectsExecute, call)
+
+	return m.GetSubjectsExecuteFunc(r)
+}
+
+// GetSubjectsExecuteCalled returns true if GetSubjectsExecute was called at least once.
+func (m *DefaultApi) GetSubjectsExecuteCalled() bool {
+	m.lockGetSubjectsExecute.Lock()
+	defer m.lockGetSubjectsExecute.Unlock()
+
+	return len(m.calls.GetSubjectsExecute) > 0
+}
+
+// GetSubjectsExecuteCalls returns the calls made to GetSubjectsExecute.
+func (m *DefaultApi) GetSubjectsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetSubjectsRequest
+} {
+	m.lockGetSubjectsExecute.Lock()
+	defer m.lockGetSubjectsExecute.Unlock()
+
+	return m.calls.GetSubjectsExecute
+}
+
 // GetTagDefByName mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTagDefByName(ctx context.Context, tagName string) (github_com_confluentinc_schema_registry_sdk_go.TagDef, *net_http.Response, error) {
+func (m *DefaultApi) GetTagDefByName(ctx context.Context, tagName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetTagDefByNameRequest {
 	m.lockGetTagDefByName.Lock()
 	defer m.lockGetTagDefByName.Unlock()
 
@@ -2109,8 +5079,46 @@ func (m *DefaultApi) GetTagDefByNameCalls() []struct {
 	return m.calls.GetTagDefByName
 }
 
+// GetTagDefByNameExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetTagDefByNameExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetTagDefByNameRequest) (github_com_confluentinc_schema_registry_sdk_go.TagDef, *net_http.Response, error) {
+	m.lockGetTagDefByNameExecute.Lock()
+	defer m.lockGetTagDefByNameExecute.Unlock()
+
+	if m.GetTagDefByNameExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetTagDefByNameExecuteFunc is nil but DefaultApi.GetTagDefByNameExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetTagDefByNameRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetTagDefByNameExecute = append(m.calls.GetTagDefByNameExecute, call)
+
+	return m.GetTagDefByNameExecuteFunc(r)
+}
+
+// GetTagDefByNameExecuteCalled returns true if GetTagDefByNameExecute was called at least once.
+func (m *DefaultApi) GetTagDefByNameExecuteCalled() bool {
+	m.lockGetTagDefByNameExecute.Lock()
+	defer m.lockGetTagDefByNameExecute.Unlock()
+
+	return len(m.calls.GetTagDefByNameExecute) > 0
+}
+
+// GetTagDefByNameExecuteCalls returns the calls made to GetTagDefByNameExecute.
+func (m *DefaultApi) GetTagDefByNameExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetTagDefByNameRequest
+} {
+	m.lockGetTagDefByNameExecute.Lock()
+	defer m.lockGetTagDefByNameExecute.Unlock()
+
+	return m.calls.GetTagDefByNameExecute
+}
+
 // GetTags mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTags(ctx context.Context, typeName, qualifiedName string) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error) {
+func (m *DefaultApi) GetTags(ctx context.Context, typeName, qualifiedName string) github_com_confluentinc_schema_registry_sdk_go.ApiGetTagsRequest {
 	m.lockGetTags.Lock()
 	defer m.lockGetTags.Unlock()
 
@@ -2153,8 +5161,46 @@ func (m *DefaultApi) GetTagsCalls() []struct {
 	return m.calls.GetTags
 }
 
+// GetTagsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetTagsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetTagsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error) {
+	m.lockGetTagsExecute.Lock()
+	defer m.lockGetTagsExecute.Unlock()
+
+	if m.GetTagsExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetTagsExecuteFunc is nil but DefaultApi.GetTagsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetTagsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetTagsExecute = append(m.calls.GetTagsExecute, call)
+
+	return m.GetTagsExecuteFunc(r)
+}
+
+// GetTagsExecuteCalled returns true if GetTagsExecute was called at least once.
+func (m *DefaultApi) GetTagsExecuteCalled() bool {
+	m.lockGetTagsExecute.Lock()
+	defer m.lockGetTagsExecute.Unlock()
+
+	return len(m.calls.GetTagsExecute) > 0
+}
+
+// GetTagsExecuteCalls returns the calls made to GetTagsExecute.
+func (m *DefaultApi) GetTagsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetTagsRequest
+} {
+	m.lockGetTagsExecute.Lock()
+	defer m.lockGetTagsExecute.Unlock()
+
+	return m.calls.GetTagsExecute
+}
+
 // GetTopLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTopLevelConfig(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error) {
+func (m *DefaultApi) GetTopLevelConfig(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelConfigRequest {
 	m.lockGetTopLevelConfig.Lock()
 	defer m.lockGetTopLevelConfig.Unlock()
 
@@ -2191,8 +5237,46 @@ func (m *DefaultApi) GetTopLevelConfigCalls() []struct {
 	return m.calls.GetTopLevelConfig
 }
 
+// GetTopLevelConfigExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetTopLevelConfigExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.Config, *net_http.Response, error) {
+	m.lockGetTopLevelConfigExecute.Lock()
+	defer m.lockGetTopLevelConfigExecute.Unlock()
+
+	if m.GetTopLevelConfigExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetTopLevelConfigExecuteFunc is nil but DefaultApi.GetTopLevelConfigExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelConfigRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetTopLevelConfigExecute = append(m.calls.GetTopLevelConfigExecute, call)
+
+	return m.GetTopLevelConfigExecuteFunc(r)
+}
+
+// GetTopLevelConfigExecuteCalled returns true if GetTopLevelConfigExecute was called at least once.
+func (m *DefaultApi) GetTopLevelConfigExecuteCalled() bool {
+	m.lockGetTopLevelConfigExecute.Lock()
+	defer m.lockGetTopLevelConfigExecute.Unlock()
+
+	return len(m.calls.GetTopLevelConfigExecute) > 0
+}
+
+// GetTopLevelConfigExecuteCalls returns the calls made to GetTopLevelConfigExecute.
+func (m *DefaultApi) GetTopLevelConfigExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelConfigRequest
+} {
+	m.lockGetTopLevelConfigExecute.Lock()
+	defer m.lockGetTopLevelConfigExecute.Unlock()
+
+	return m.calls.GetTopLevelConfigExecute
+}
+
 // GetTopLevelMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetTopLevelMode(ctx context.Context) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error) {
+func (m *DefaultApi) GetTopLevelMode(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelModeRequest {
 	m.lockGetTopLevelMode.Lock()
 	defer m.lockGetTopLevelMode.Unlock()
 
@@ -2229,8 +5313,46 @@ func (m *DefaultApi) GetTopLevelModeCalls() []struct {
 	return m.calls.GetTopLevelMode
 }
 
+// GetTopLevelModeExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetTopLevelModeExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelModeRequest) (github_com_confluentinc_schema_registry_sdk_go.Mode, *net_http.Response, error) {
+	m.lockGetTopLevelModeExecute.Lock()
+	defer m.lockGetTopLevelModeExecute.Unlock()
+
+	if m.GetTopLevelModeExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetTopLevelModeExecuteFunc is nil but DefaultApi.GetTopLevelModeExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelModeRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetTopLevelModeExecute = append(m.calls.GetTopLevelModeExecute, call)
+
+	return m.GetTopLevelModeExecuteFunc(r)
+}
+
+// GetTopLevelModeExecuteCalled returns true if GetTopLevelModeExecute was called at least once.
+func (m *DefaultApi) GetTopLevelModeExecuteCalled() bool {
+	m.lockGetTopLevelModeExecute.Lock()
+	defer m.lockGetTopLevelModeExecute.Unlock()
+
+	return len(m.calls.GetTopLevelModeExecute) > 0
+}
+
+// GetTopLevelModeExecuteCalls returns the calls made to GetTopLevelModeExecute.
+func (m *DefaultApi) GetTopLevelModeExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetTopLevelModeRequest
+} {
+	m.lockGetTopLevelModeExecute.Lock()
+	defer m.lockGetTopLevelModeExecute.Unlock()
+
+	return m.calls.GetTopLevelModeExecute
+}
+
 // GetVersions mocks base method by wrapping the associated func.
-func (m *DefaultApi) GetVersions(ctx context.Context, id int32, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.SubjectVersion, *net_http.Response, error) {
+func (m *DefaultApi) GetVersions(ctx context.Context, id int32) github_com_confluentinc_schema_registry_sdk_go.ApiGetVersionsRequest {
 	m.lockGetVersions.Lock()
 	defer m.lockGetVersions.Unlock()
 
@@ -2239,18 +5361,16 @@ func (m *DefaultApi) GetVersions(ctx context.Context, id int32, localVarOptional
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Id                int32
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts
+		Ctx context.Context
+		Id  int32
 	}{
-		Ctx:               ctx,
-		Id:                id,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
+		Id:  id,
 	}
 
 	m.calls.GetVersions = append(m.calls.GetVersions, call)
 
-	return m.GetVersionsFunc(ctx, id, localVarOptionals)
+	return m.GetVersionsFunc(ctx, id)
 }
 
 // GetVersionsCalled returns true if GetVersions was called at least once.
@@ -2263,9 +5383,8 @@ func (m *DefaultApi) GetVersionsCalled() bool {
 
 // GetVersionsCalls returns the calls made to GetVersions.
 func (m *DefaultApi) GetVersionsCalls() []struct {
-	Ctx               context.Context
-	Id                int32
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.GetVersionsOpts
+	Ctx context.Context
+	Id  int32
 } {
 	m.lockGetVersions.Lock()
 	defer m.lockGetVersions.Unlock()
@@ -2273,8 +5392,46 @@ func (m *DefaultApi) GetVersionsCalls() []struct {
 	return m.calls.GetVersions
 }
 
+// GetVersionsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) GetVersionsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiGetVersionsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.SubjectVersion, *net_http.Response, error) {
+	m.lockGetVersionsExecute.Lock()
+	defer m.lockGetVersionsExecute.Unlock()
+
+	if m.GetVersionsExecuteFunc == nil {
+		panic("mocker: DefaultApi.GetVersionsExecuteFunc is nil but DefaultApi.GetVersionsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiGetVersionsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.GetVersionsExecute = append(m.calls.GetVersionsExecute, call)
+
+	return m.GetVersionsExecuteFunc(r)
+}
+
+// GetVersionsExecuteCalled returns true if GetVersionsExecute was called at least once.
+func (m *DefaultApi) GetVersionsExecuteCalled() bool {
+	m.lockGetVersionsExecute.Lock()
+	defer m.lockGetVersionsExecute.Unlock()
+
+	return len(m.calls.GetVersionsExecute) > 0
+}
+
+// GetVersionsExecuteCalls returns the calls made to GetVersionsExecute.
+func (m *DefaultApi) GetVersionsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiGetVersionsRequest
+} {
+	m.lockGetVersionsExecute.Lock()
+	defer m.lockGetVersionsExecute.Unlock()
+
+	return m.calls.GetVersionsExecute
+}
+
 // List mocks base method by wrapping the associated func.
-func (m *DefaultApi) List(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts) ([]string, *net_http.Response, error) {
+func (m *DefaultApi) List(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiListRequest {
 	m.lockList.Lock()
 	defer m.lockList.Unlock()
 
@@ -2283,16 +5440,14 @@ func (m *DefaultApi) List(ctx context.Context, localVarOptionals *github_com_con
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.List = append(m.calls.List, call)
 
-	return m.ListFunc(ctx, localVarOptionals)
+	return m.ListFunc(ctx)
 }
 
 // ListCalled returns true if List was called at least once.
@@ -2305,8 +5460,7 @@ func (m *DefaultApi) ListCalled() bool {
 
 // ListCalls returns the calls made to List.
 func (m *DefaultApi) ListCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListOpts
+	Ctx context.Context
 } {
 	m.lockList.Lock()
 	defer m.lockList.Unlock()
@@ -2314,8 +5468,46 @@ func (m *DefaultApi) ListCalls() []struct {
 	return m.calls.List
 }
 
+// ListExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) ListExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiListRequest) ([]string, *net_http.Response, error) {
+	m.lockListExecute.Lock()
+	defer m.lockListExecute.Unlock()
+
+	if m.ListExecuteFunc == nil {
+		panic("mocker: DefaultApi.ListExecuteFunc is nil but DefaultApi.ListExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiListRequest
+	}{
+		R: r,
+	}
+
+	m.calls.ListExecute = append(m.calls.ListExecute, call)
+
+	return m.ListExecuteFunc(r)
+}
+
+// ListExecuteCalled returns true if ListExecute was called at least once.
+func (m *DefaultApi) ListExecuteCalled() bool {
+	m.lockListExecute.Lock()
+	defer m.lockListExecute.Unlock()
+
+	return len(m.calls.ListExecute) > 0
+}
+
+// ListExecuteCalls returns the calls made to ListExecute.
+func (m *DefaultApi) ListExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiListRequest
+} {
+	m.lockListExecute.Lock()
+	defer m.lockListExecute.Unlock()
+
+	return m.calls.ListExecute
+}
+
 // ListContexts mocks base method by wrapping the associated func.
-func (m *DefaultApi) ListContexts(ctx context.Context) ([]string, *net_http.Response, error) {
+func (m *DefaultApi) ListContexts(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiListContextsRequest {
 	m.lockListContexts.Lock()
 	defer m.lockListContexts.Unlock()
 
@@ -2352,8 +5544,46 @@ func (m *DefaultApi) ListContextsCalls() []struct {
 	return m.calls.ListContexts
 }
 
+// ListContextsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) ListContextsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiListContextsRequest) ([]string, *net_http.Response, error) {
+	m.lockListContextsExecute.Lock()
+	defer m.lockListContextsExecute.Unlock()
+
+	if m.ListContextsExecuteFunc == nil {
+		panic("mocker: DefaultApi.ListContextsExecuteFunc is nil but DefaultApi.ListContextsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiListContextsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.ListContextsExecute = append(m.calls.ListContextsExecute, call)
+
+	return m.ListContextsExecuteFunc(r)
+}
+
+// ListContextsExecuteCalled returns true if ListContextsExecute was called at least once.
+func (m *DefaultApi) ListContextsExecuteCalled() bool {
+	m.lockListContextsExecute.Lock()
+	defer m.lockListContextsExecute.Unlock()
+
+	return len(m.calls.ListContextsExecute) > 0
+}
+
+// ListContextsExecuteCalls returns the calls made to ListContextsExecute.
+func (m *DefaultApi) ListContextsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiListContextsRequest
+} {
+	m.lockListContextsExecute.Lock()
+	defer m.lockListContextsExecute.Unlock()
+
+	return m.calls.ListContextsExecute
+}
+
 // ListVersions mocks base method by wrapping the associated func.
-func (m *DefaultApi) ListVersions(ctx context.Context, subject string, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts) ([]int32, *net_http.Response, error) {
+func (m *DefaultApi) ListVersions(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiListVersionsRequest {
 	m.lockListVersions.Lock()
 	defer m.lockListVersions.Unlock()
 
@@ -2362,18 +5592,16 @@ func (m *DefaultApi) ListVersions(ctx context.Context, subject string, localVarO
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts
+		Ctx     context.Context
+		Subject string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
 	}
 
 	m.calls.ListVersions = append(m.calls.ListVersions, call)
 
-	return m.ListVersionsFunc(ctx, subject, localVarOptionals)
+	return m.ListVersionsFunc(ctx, subject)
 }
 
 // ListVersionsCalled returns true if ListVersions was called at least once.
@@ -2386,9 +5614,8 @@ func (m *DefaultApi) ListVersionsCalled() bool {
 
 // ListVersionsCalls returns the calls made to ListVersions.
 func (m *DefaultApi) ListVersionsCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.ListVersionsOpts
+	Ctx     context.Context
+	Subject string
 } {
 	m.lockListVersions.Lock()
 	defer m.lockListVersions.Unlock()
@@ -2396,8 +5623,46 @@ func (m *DefaultApi) ListVersionsCalls() []struct {
 	return m.calls.ListVersions
 }
 
+// ListVersionsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) ListVersionsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiListVersionsRequest) ([]int32, *net_http.Response, error) {
+	m.lockListVersionsExecute.Lock()
+	defer m.lockListVersionsExecute.Unlock()
+
+	if m.ListVersionsExecuteFunc == nil {
+		panic("mocker: DefaultApi.ListVersionsExecuteFunc is nil but DefaultApi.ListVersionsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiListVersionsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.ListVersionsExecute = append(m.calls.ListVersionsExecute, call)
+
+	return m.ListVersionsExecuteFunc(r)
+}
+
+// ListVersionsExecuteCalled returns true if ListVersionsExecute was called at least once.
+func (m *DefaultApi) ListVersionsExecuteCalled() bool {
+	m.lockListVersionsExecute.Lock()
+	defer m.lockListVersionsExecute.Unlock()
+
+	return len(m.calls.ListVersionsExecute) > 0
+}
+
+// ListVersionsExecuteCalls returns the calls made to ListVersionsExecute.
+func (m *DefaultApi) ListVersionsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiListVersionsRequest
+} {
+	m.lockListVersionsExecute.Lock()
+	defer m.lockListVersionsExecute.Unlock()
+
+	return m.calls.ListVersionsExecute
+}
+
 // LookUpSchemaUnderSubject mocks base method by wrapping the associated func.
-func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts) (*net_http.Response, error) {
+func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiLookUpSchemaUnderSubjectRequest {
 	m.lockLookUpSchemaUnderSubject.Lock()
 	defer m.lockLookUpSchemaUnderSubject.Unlock()
 
@@ -2406,20 +5671,16 @@ func (m *DefaultApi) LookUpSchemaUnderSubject(ctx context.Context, subject strin
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts
+		Ctx     context.Context
+		Subject string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		Body:              body,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
 	}
 
 	m.calls.LookUpSchemaUnderSubject = append(m.calls.LookUpSchemaUnderSubject, call)
 
-	return m.LookUpSchemaUnderSubjectFunc(ctx, subject, body, localVarOptionals)
+	return m.LookUpSchemaUnderSubjectFunc(ctx, subject)
 }
 
 // LookUpSchemaUnderSubjectCalled returns true if LookUpSchemaUnderSubject was called at least once.
@@ -2432,10 +5693,8 @@ func (m *DefaultApi) LookUpSchemaUnderSubjectCalled() bool {
 
 // LookUpSchemaUnderSubjectCalls returns the calls made to LookUpSchemaUnderSubject.
 func (m *DefaultApi) LookUpSchemaUnderSubjectCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.LookUpSchemaUnderSubjectOpts
+	Ctx     context.Context
+	Subject string
 } {
 	m.lockLookUpSchemaUnderSubject.Lock()
 	defer m.lockLookUpSchemaUnderSubject.Unlock()
@@ -2443,8 +5702,46 @@ func (m *DefaultApi) LookUpSchemaUnderSubjectCalls() []struct {
 	return m.calls.LookUpSchemaUnderSubject
 }
 
+// LookUpSchemaUnderSubjectExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) LookUpSchemaUnderSubjectExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiLookUpSchemaUnderSubjectRequest) (*net_http.Response, error) {
+	m.lockLookUpSchemaUnderSubjectExecute.Lock()
+	defer m.lockLookUpSchemaUnderSubjectExecute.Unlock()
+
+	if m.LookUpSchemaUnderSubjectExecuteFunc == nil {
+		panic("mocker: DefaultApi.LookUpSchemaUnderSubjectExecuteFunc is nil but DefaultApi.LookUpSchemaUnderSubjectExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiLookUpSchemaUnderSubjectRequest
+	}{
+		R: r,
+	}
+
+	m.calls.LookUpSchemaUnderSubjectExecute = append(m.calls.LookUpSchemaUnderSubjectExecute, call)
+
+	return m.LookUpSchemaUnderSubjectExecuteFunc(r)
+}
+
+// LookUpSchemaUnderSubjectExecuteCalled returns true if LookUpSchemaUnderSubjectExecute was called at least once.
+func (m *DefaultApi) LookUpSchemaUnderSubjectExecuteCalled() bool {
+	m.lockLookUpSchemaUnderSubjectExecute.Lock()
+	defer m.lockLookUpSchemaUnderSubjectExecute.Unlock()
+
+	return len(m.calls.LookUpSchemaUnderSubjectExecute) > 0
+}
+
+// LookUpSchemaUnderSubjectExecuteCalls returns the calls made to LookUpSchemaUnderSubjectExecute.
+func (m *DefaultApi) LookUpSchemaUnderSubjectExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiLookUpSchemaUnderSubjectRequest
+} {
+	m.lockLookUpSchemaUnderSubjectExecute.Lock()
+	defer m.lockLookUpSchemaUnderSubjectExecute.Unlock()
+
+	return m.calls.LookUpSchemaUnderSubjectExecute
+}
+
 // PartialUpdateByUniqueAttributes mocks base method by wrapping the associated func.
-func (m *DefaultApi) PartialUpdateByUniqueAttributes(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts) (*net_http.Response, error) {
+func (m *DefaultApi) PartialUpdateByUniqueAttributes(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiPartialUpdateByUniqueAttributesRequest {
 	m.lockPartialUpdateByUniqueAttributes.Lock()
 	defer m.lockPartialUpdateByUniqueAttributes.Unlock()
 
@@ -2453,16 +5750,14 @@ func (m *DefaultApi) PartialUpdateByUniqueAttributes(ctx context.Context, localV
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.PartialUpdateByUniqueAttributes = append(m.calls.PartialUpdateByUniqueAttributes, call)
 
-	return m.PartialUpdateByUniqueAttributesFunc(ctx, localVarOptionals)
+	return m.PartialUpdateByUniqueAttributesFunc(ctx)
 }
 
 // PartialUpdateByUniqueAttributesCalled returns true if PartialUpdateByUniqueAttributes was called at least once.
@@ -2475,8 +5770,7 @@ func (m *DefaultApi) PartialUpdateByUniqueAttributesCalled() bool {
 
 // PartialUpdateByUniqueAttributesCalls returns the calls made to PartialUpdateByUniqueAttributes.
 func (m *DefaultApi) PartialUpdateByUniqueAttributesCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.PartialUpdateByUniqueAttributesOpts
+	Ctx context.Context
 } {
 	m.lockPartialUpdateByUniqueAttributes.Lock()
 	defer m.lockPartialUpdateByUniqueAttributes.Unlock()
@@ -2484,8 +5778,46 @@ func (m *DefaultApi) PartialUpdateByUniqueAttributesCalls() []struct {
 	return m.calls.PartialUpdateByUniqueAttributes
 }
 
+// PartialUpdateByUniqueAttributesExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) PartialUpdateByUniqueAttributesExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiPartialUpdateByUniqueAttributesRequest) (*net_http.Response, error) {
+	m.lockPartialUpdateByUniqueAttributesExecute.Lock()
+	defer m.lockPartialUpdateByUniqueAttributesExecute.Unlock()
+
+	if m.PartialUpdateByUniqueAttributesExecuteFunc == nil {
+		panic("mocker: DefaultApi.PartialUpdateByUniqueAttributesExecuteFunc is nil but DefaultApi.PartialUpdateByUniqueAttributesExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiPartialUpdateByUniqueAttributesRequest
+	}{
+		R: r,
+	}
+
+	m.calls.PartialUpdateByUniqueAttributesExecute = append(m.calls.PartialUpdateByUniqueAttributesExecute, call)
+
+	return m.PartialUpdateByUniqueAttributesExecuteFunc(r)
+}
+
+// PartialUpdateByUniqueAttributesExecuteCalled returns true if PartialUpdateByUniqueAttributesExecute was called at least once.
+func (m *DefaultApi) PartialUpdateByUniqueAttributesExecuteCalled() bool {
+	m.lockPartialUpdateByUniqueAttributesExecute.Lock()
+	defer m.lockPartialUpdateByUniqueAttributesExecute.Unlock()
+
+	return len(m.calls.PartialUpdateByUniqueAttributesExecute) > 0
+}
+
+// PartialUpdateByUniqueAttributesExecuteCalls returns the calls made to PartialUpdateByUniqueAttributesExecute.
+func (m *DefaultApi) PartialUpdateByUniqueAttributesExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiPartialUpdateByUniqueAttributesRequest
+} {
+	m.lockPartialUpdateByUniqueAttributesExecute.Lock()
+	defer m.lockPartialUpdateByUniqueAttributesExecute.Unlock()
+
+	return m.calls.PartialUpdateByUniqueAttributesExecute
+}
+
 // PauseExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) PauseExporter(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) PauseExporter(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiPauseExporterRequest {
 	m.lockPauseExporter.Lock()
 	defer m.lockPauseExporter.Unlock()
 
@@ -2525,8 +5857,46 @@ func (m *DefaultApi) PauseExporterCalls() []struct {
 	return m.calls.PauseExporter
 }
 
+// PauseExporterExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) PauseExporterExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiPauseExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+	m.lockPauseExporterExecute.Lock()
+	defer m.lockPauseExporterExecute.Unlock()
+
+	if m.PauseExporterExecuteFunc == nil {
+		panic("mocker: DefaultApi.PauseExporterExecuteFunc is nil but DefaultApi.PauseExporterExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiPauseExporterRequest
+	}{
+		R: r,
+	}
+
+	m.calls.PauseExporterExecute = append(m.calls.PauseExporterExecute, call)
+
+	return m.PauseExporterExecuteFunc(r)
+}
+
+// PauseExporterExecuteCalled returns true if PauseExporterExecute was called at least once.
+func (m *DefaultApi) PauseExporterExecuteCalled() bool {
+	m.lockPauseExporterExecute.Lock()
+	defer m.lockPauseExporterExecute.Unlock()
+
+	return len(m.calls.PauseExporterExecute) > 0
+}
+
+// PauseExporterExecuteCalls returns the calls made to PauseExporterExecute.
+func (m *DefaultApi) PauseExporterExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiPauseExporterRequest
+} {
+	m.lockPauseExporterExecute.Lock()
+	defer m.lockPauseExporterExecute.Unlock()
+
+	return m.calls.PauseExporterExecute
+}
+
 // Post mocks base method by wrapping the associated func.
-func (m *DefaultApi) Post(ctx context.Context) (map[string]string, *net_http.Response, error) {
+func (m *DefaultApi) Post(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiPostRequest {
 	m.lockPost.Lock()
 	defer m.lockPost.Unlock()
 
@@ -2563,8 +5933,46 @@ func (m *DefaultApi) PostCalls() []struct {
 	return m.calls.Post
 }
 
+// PostExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) PostExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiPostRequest) (map[string]string, *net_http.Response, error) {
+	m.lockPostExecute.Lock()
+	defer m.lockPostExecute.Unlock()
+
+	if m.PostExecuteFunc == nil {
+		panic("mocker: DefaultApi.PostExecuteFunc is nil but DefaultApi.PostExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiPostRequest
+	}{
+		R: r,
+	}
+
+	m.calls.PostExecute = append(m.calls.PostExecute, call)
+
+	return m.PostExecuteFunc(r)
+}
+
+// PostExecuteCalled returns true if PostExecute was called at least once.
+func (m *DefaultApi) PostExecuteCalled() bool {
+	m.lockPostExecute.Lock()
+	defer m.lockPostExecute.Unlock()
+
+	return len(m.calls.PostExecute) > 0
+}
+
+// PostExecuteCalls returns the calls made to PostExecute.
+func (m *DefaultApi) PostExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiPostRequest
+} {
+	m.lockPostExecute.Lock()
+	defer m.lockPostExecute.Unlock()
+
+	return m.calls.PostExecute
+}
+
 // PutExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) PutExporter(ctx context.Context, name string, body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) PutExporter(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterRequest {
 	m.lockPutExporter.Lock()
 	defer m.lockPutExporter.Unlock()
 
@@ -2575,16 +5983,14 @@ func (m *DefaultApi) PutExporter(ctx context.Context, name string, body github_c
 	call := struct {
 		Ctx  context.Context
 		Name string
-		Body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest
 	}{
 		Ctx:  ctx,
 		Name: name,
-		Body: body,
 	}
 
 	m.calls.PutExporter = append(m.calls.PutExporter, call)
 
-	return m.PutExporterFunc(ctx, name, body)
+	return m.PutExporterFunc(ctx, name)
 }
 
 // PutExporterCalled returns true if PutExporter was called at least once.
@@ -2599,7 +6005,6 @@ func (m *DefaultApi) PutExporterCalled() bool {
 func (m *DefaultApi) PutExporterCalls() []struct {
 	Ctx  context.Context
 	Name string
-	Body github_com_confluentinc_schema_registry_sdk_go.UpdateExporterRequest
 } {
 	m.lockPutExporter.Lock()
 	defer m.lockPutExporter.Unlock()
@@ -2607,8 +6012,46 @@ func (m *DefaultApi) PutExporterCalls() []struct {
 	return m.calls.PutExporter
 }
 
+// PutExporterExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) PutExporterExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+	m.lockPutExporterExecute.Lock()
+	defer m.lockPutExporterExecute.Unlock()
+
+	if m.PutExporterExecuteFunc == nil {
+		panic("mocker: DefaultApi.PutExporterExecuteFunc is nil but DefaultApi.PutExporterExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterRequest
+	}{
+		R: r,
+	}
+
+	m.calls.PutExporterExecute = append(m.calls.PutExporterExecute, call)
+
+	return m.PutExporterExecuteFunc(r)
+}
+
+// PutExporterExecuteCalled returns true if PutExporterExecute was called at least once.
+func (m *DefaultApi) PutExporterExecuteCalled() bool {
+	m.lockPutExporterExecute.Lock()
+	defer m.lockPutExporterExecute.Unlock()
+
+	return len(m.calls.PutExporterExecute) > 0
+}
+
+// PutExporterExecuteCalls returns the calls made to PutExporterExecute.
+func (m *DefaultApi) PutExporterExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterRequest
+} {
+	m.lockPutExporterExecute.Lock()
+	defer m.lockPutExporterExecute.Unlock()
+
+	return m.calls.PutExporterExecute
+}
+
 // PutExporterConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) PutExporterConfig(ctx context.Context, name string, body map[string]string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) PutExporterConfig(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterConfigRequest {
 	m.lockPutExporterConfig.Lock()
 	defer m.lockPutExporterConfig.Unlock()
 
@@ -2619,16 +6062,14 @@ func (m *DefaultApi) PutExporterConfig(ctx context.Context, name string, body ma
 	call := struct {
 		Ctx  context.Context
 		Name string
-		Body map[string]string
 	}{
 		Ctx:  ctx,
 		Name: name,
-		Body: body,
 	}
 
 	m.calls.PutExporterConfig = append(m.calls.PutExporterConfig, call)
 
-	return m.PutExporterConfigFunc(ctx, name, body)
+	return m.PutExporterConfigFunc(ctx, name)
 }
 
 // PutExporterConfigCalled returns true if PutExporterConfig was called at least once.
@@ -2643,7 +6084,6 @@ func (m *DefaultApi) PutExporterConfigCalled() bool {
 func (m *DefaultApi) PutExporterConfigCalls() []struct {
 	Ctx  context.Context
 	Name string
-	Body map[string]string
 } {
 	m.lockPutExporterConfig.Lock()
 	defer m.lockPutExporterConfig.Unlock()
@@ -2651,8 +6091,125 @@ func (m *DefaultApi) PutExporterConfigCalls() []struct {
 	return m.calls.PutExporterConfig
 }
 
+// PutExporterConfigExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) PutExporterConfigExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+	m.lockPutExporterConfigExecute.Lock()
+	defer m.lockPutExporterConfigExecute.Unlock()
+
+	if m.PutExporterConfigExecuteFunc == nil {
+		panic("mocker: DefaultApi.PutExporterConfigExecuteFunc is nil but DefaultApi.PutExporterConfigExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterConfigRequest
+	}{
+		R: r,
+	}
+
+	m.calls.PutExporterConfigExecute = append(m.calls.PutExporterConfigExecute, call)
+
+	return m.PutExporterConfigExecuteFunc(r)
+}
+
+// PutExporterConfigExecuteCalled returns true if PutExporterConfigExecute was called at least once.
+func (m *DefaultApi) PutExporterConfigExecuteCalled() bool {
+	m.lockPutExporterConfigExecute.Lock()
+	defer m.lockPutExporterConfigExecute.Unlock()
+
+	return len(m.calls.PutExporterConfigExecute) > 0
+}
+
+// PutExporterConfigExecuteCalls returns the calls made to PutExporterConfigExecute.
+func (m *DefaultApi) PutExporterConfigExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiPutExporterConfigRequest
+} {
+	m.lockPutExporterConfigExecute.Lock()
+	defer m.lockPutExporterConfigExecute.Unlock()
+
+	return m.calls.PutExporterConfigExecute
+}
+
+// PutKek mocks base method by wrapping the associated func.
+func (m *DefaultApi) PutKek(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiPutKekRequest {
+	m.lockPutKek.Lock()
+	defer m.lockPutKek.Unlock()
+
+	if m.PutKekFunc == nil {
+		panic("mocker: DefaultApi.PutKekFunc is nil but DefaultApi.PutKek was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		Name string
+	}{
+		Ctx:  ctx,
+		Name: name,
+	}
+
+	m.calls.PutKek = append(m.calls.PutKek, call)
+
+	return m.PutKekFunc(ctx, name)
+}
+
+// PutKekCalled returns true if PutKek was called at least once.
+func (m *DefaultApi) PutKekCalled() bool {
+	m.lockPutKek.Lock()
+	defer m.lockPutKek.Unlock()
+
+	return len(m.calls.PutKek) > 0
+}
+
+// PutKekCalls returns the calls made to PutKek.
+func (m *DefaultApi) PutKekCalls() []struct {
+	Ctx  context.Context
+	Name string
+} {
+	m.lockPutKek.Lock()
+	defer m.lockPutKek.Unlock()
+
+	return m.calls.PutKek
+}
+
+// PutKekExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) PutKekExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiPutKekRequest) (github_com_confluentinc_schema_registry_sdk_go.Kek, *net_http.Response, error) {
+	m.lockPutKekExecute.Lock()
+	defer m.lockPutKekExecute.Unlock()
+
+	if m.PutKekExecuteFunc == nil {
+		panic("mocker: DefaultApi.PutKekExecuteFunc is nil but DefaultApi.PutKekExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiPutKekRequest
+	}{
+		R: r,
+	}
+
+	m.calls.PutKekExecute = append(m.calls.PutKekExecute, call)
+
+	return m.PutKekExecuteFunc(r)
+}
+
+// PutKekExecuteCalled returns true if PutKekExecute was called at least once.
+func (m *DefaultApi) PutKekExecuteCalled() bool {
+	m.lockPutKekExecute.Lock()
+	defer m.lockPutKekExecute.Unlock()
+
+	return len(m.calls.PutKekExecute) > 0
+}
+
+// PutKekExecuteCalls returns the calls made to PutKekExecute.
+func (m *DefaultApi) PutKekExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiPutKekRequest
+} {
+	m.lockPutKekExecute.Lock()
+	defer m.lockPutKekExecute.Unlock()
+
+	return m.calls.PutKekExecute
+}
+
 // Register mocks base method by wrapping the associated func.
-func (m *DefaultApi) Register(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error) {
+func (m *DefaultApi) Register(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiRegisterRequest {
 	m.lockRegister.Lock()
 	defer m.lockRegister.Unlock()
 
@@ -2663,16 +6220,14 @@ func (m *DefaultApi) Register(ctx context.Context, subject string, body github_c
 	call := struct {
 		Ctx     context.Context
 		Subject string
-		Body    github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
-		Body:    body,
 	}
 
 	m.calls.Register = append(m.calls.Register, call)
 
-	return m.RegisterFunc(ctx, subject, body)
+	return m.RegisterFunc(ctx, subject)
 }
 
 // RegisterCalled returns true if Register was called at least once.
@@ -2687,7 +6242,6 @@ func (m *DefaultApi) RegisterCalled() bool {
 func (m *DefaultApi) RegisterCalls() []struct {
 	Ctx     context.Context
 	Subject string
-	Body    github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
 } {
 	m.lockRegister.Lock()
 	defer m.lockRegister.Unlock()
@@ -2695,8 +6249,46 @@ func (m *DefaultApi) RegisterCalls() []struct {
 	return m.calls.Register
 }
 
+// RegisterExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) RegisterExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiRegisterRequest) (github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaResponse, *net_http.Response, error) {
+	m.lockRegisterExecute.Lock()
+	defer m.lockRegisterExecute.Unlock()
+
+	if m.RegisterExecuteFunc == nil {
+		panic("mocker: DefaultApi.RegisterExecuteFunc is nil but DefaultApi.RegisterExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiRegisterRequest
+	}{
+		R: r,
+	}
+
+	m.calls.RegisterExecute = append(m.calls.RegisterExecute, call)
+
+	return m.RegisterExecuteFunc(r)
+}
+
+// RegisterExecuteCalled returns true if RegisterExecute was called at least once.
+func (m *DefaultApi) RegisterExecuteCalled() bool {
+	m.lockRegisterExecute.Lock()
+	defer m.lockRegisterExecute.Unlock()
+
+	return len(m.calls.RegisterExecute) > 0
+}
+
+// RegisterExecuteCalls returns the calls made to RegisterExecute.
+func (m *DefaultApi) RegisterExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiRegisterRequest
+} {
+	m.lockRegisterExecute.Lock()
+	defer m.lockRegisterExecute.Unlock()
+
+	return m.calls.RegisterExecute
+}
+
 // ResetExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) ResetExporter(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) ResetExporter(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiResetExporterRequest {
 	m.lockResetExporter.Lock()
 	defer m.lockResetExporter.Unlock()
 
@@ -2736,8 +6328,46 @@ func (m *DefaultApi) ResetExporterCalls() []struct {
 	return m.calls.ResetExporter
 }
 
+// ResetExporterExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) ResetExporterExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiResetExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+	m.lockResetExporterExecute.Lock()
+	defer m.lockResetExporterExecute.Unlock()
+
+	if m.ResetExporterExecuteFunc == nil {
+		panic("mocker: DefaultApi.ResetExporterExecuteFunc is nil but DefaultApi.ResetExporterExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiResetExporterRequest
+	}{
+		R: r,
+	}
+
+	m.calls.ResetExporterExecute = append(m.calls.ResetExporterExecute, call)
+
+	return m.ResetExporterExecuteFunc(r)
+}
+
+// ResetExporterExecuteCalled returns true if ResetExporterExecute was called at least once.
+func (m *DefaultApi) ResetExporterExecuteCalled() bool {
+	m.lockResetExporterExecute.Lock()
+	defer m.lockResetExporterExecute.Unlock()
+
+	return len(m.calls.ResetExporterExecute) > 0
+}
+
+// ResetExporterExecuteCalls returns the calls made to ResetExporterExecute.
+func (m *DefaultApi) ResetExporterExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiResetExporterRequest
+} {
+	m.lockResetExporterExecute.Lock()
+	defer m.lockResetExporterExecute.Unlock()
+
+	return m.calls.ResetExporterExecute
+}
+
 // ResumeExporter mocks base method by wrapping the associated func.
-func (m *DefaultApi) ResumeExporter(ctx context.Context, name string) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+func (m *DefaultApi) ResumeExporter(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiResumeExporterRequest {
 	m.lockResumeExporter.Lock()
 	defer m.lockResumeExporter.Unlock()
 
@@ -2777,8 +6407,46 @@ func (m *DefaultApi) ResumeExporterCalls() []struct {
 	return m.calls.ResumeExporter
 }
 
+// ResumeExporterExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) ResumeExporterExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiResumeExporterRequest) (github_com_confluentinc_schema_registry_sdk_go.UpdateExporterResponse, *net_http.Response, error) {
+	m.lockResumeExporterExecute.Lock()
+	defer m.lockResumeExporterExecute.Unlock()
+
+	if m.ResumeExporterExecuteFunc == nil {
+		panic("mocker: DefaultApi.ResumeExporterExecuteFunc is nil but DefaultApi.ResumeExporterExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiResumeExporterRequest
+	}{
+		R: r,
+	}
+
+	m.calls.ResumeExporterExecute = append(m.calls.ResumeExporterExecute, call)
+
+	return m.ResumeExporterExecuteFunc(r)
+}
+
+// ResumeExporterExecuteCalled returns true if ResumeExporterExecute was called at least once.
+func (m *DefaultApi) ResumeExporterExecuteCalled() bool {
+	m.lockResumeExporterExecute.Lock()
+	defer m.lockResumeExporterExecute.Unlock()
+
+	return len(m.calls.ResumeExporterExecute) > 0
+}
+
+// ResumeExporterExecuteCalls returns the calls made to ResumeExporterExecute.
+func (m *DefaultApi) ResumeExporterExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiResumeExporterRequest
+} {
+	m.lockResumeExporterExecute.Lock()
+	defer m.lockResumeExporterExecute.Unlock()
+
+	return m.calls.ResumeExporterExecute
+}
+
 // SearchUsingAttribute mocks base method by wrapping the associated func.
-func (m *DefaultApi) SearchUsingAttribute(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error) {
+func (m *DefaultApi) SearchUsingAttribute(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingAttributeRequest {
 	m.lockSearchUsingAttribute.Lock()
 	defer m.lockSearchUsingAttribute.Unlock()
 
@@ -2787,16 +6455,14 @@ func (m *DefaultApi) SearchUsingAttribute(ctx context.Context, localVarOptionals
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.SearchUsingAttribute = append(m.calls.SearchUsingAttribute, call)
 
-	return m.SearchUsingAttributeFunc(ctx, localVarOptionals)
+	return m.SearchUsingAttributeFunc(ctx)
 }
 
 // SearchUsingAttributeCalled returns true if SearchUsingAttribute was called at least once.
@@ -2809,8 +6475,7 @@ func (m *DefaultApi) SearchUsingAttributeCalled() bool {
 
 // SearchUsingAttributeCalls returns the calls made to SearchUsingAttribute.
 func (m *DefaultApi) SearchUsingAttributeCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingAttributeOpts
+	Ctx context.Context
 } {
 	m.lockSearchUsingAttribute.Lock()
 	defer m.lockSearchUsingAttribute.Unlock()
@@ -2818,8 +6483,46 @@ func (m *DefaultApi) SearchUsingAttributeCalls() []struct {
 	return m.calls.SearchUsingAttribute
 }
 
+// SearchUsingAttributeExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) SearchUsingAttributeExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingAttributeRequest) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error) {
+	m.lockSearchUsingAttributeExecute.Lock()
+	defer m.lockSearchUsingAttributeExecute.Unlock()
+
+	if m.SearchUsingAttributeExecuteFunc == nil {
+		panic("mocker: DefaultApi.SearchUsingAttributeExecuteFunc is nil but DefaultApi.SearchUsingAttributeExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingAttributeRequest
+	}{
+		R: r,
+	}
+
+	m.calls.SearchUsingAttributeExecute = append(m.calls.SearchUsingAttributeExecute, call)
+
+	return m.SearchUsingAttributeExecuteFunc(r)
+}
+
+// SearchUsingAttributeExecuteCalled returns true if SearchUsingAttributeExecute was called at least once.
+func (m *DefaultApi) SearchUsingAttributeExecuteCalled() bool {
+	m.lockSearchUsingAttributeExecute.Lock()
+	defer m.lockSearchUsingAttributeExecute.Unlock()
+
+	return len(m.calls.SearchUsingAttributeExecute) > 0
+}
+
+// SearchUsingAttributeExecuteCalls returns the calls made to SearchUsingAttributeExecute.
+func (m *DefaultApi) SearchUsingAttributeExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingAttributeRequest
+} {
+	m.lockSearchUsingAttributeExecute.Lock()
+	defer m.lockSearchUsingAttributeExecute.Unlock()
+
+	return m.calls.SearchUsingAttributeExecute
+}
+
 // SearchUsingBasic mocks base method by wrapping the associated func.
-func (m *DefaultApi) SearchUsingBasic(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error) {
+func (m *DefaultApi) SearchUsingBasic(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingBasicRequest {
 	m.lockSearchUsingBasic.Lock()
 	defer m.lockSearchUsingBasic.Unlock()
 
@@ -2828,16 +6531,14 @@ func (m *DefaultApi) SearchUsingBasic(ctx context.Context, localVarOptionals *gi
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.SearchUsingBasic = append(m.calls.SearchUsingBasic, call)
 
-	return m.SearchUsingBasicFunc(ctx, localVarOptionals)
+	return m.SearchUsingBasicFunc(ctx)
 }
 
 // SearchUsingBasicCalled returns true if SearchUsingBasic was called at least once.
@@ -2850,8 +6551,7 @@ func (m *DefaultApi) SearchUsingBasicCalled() bool {
 
 // SearchUsingBasicCalls returns the calls made to SearchUsingBasic.
 func (m *DefaultApi) SearchUsingBasicCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.SearchUsingBasicOpts
+	Ctx context.Context
 } {
 	m.lockSearchUsingBasic.Lock()
 	defer m.lockSearchUsingBasic.Unlock()
@@ -2859,8 +6559,46 @@ func (m *DefaultApi) SearchUsingBasicCalls() []struct {
 	return m.calls.SearchUsingBasic
 }
 
+// SearchUsingBasicExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) SearchUsingBasicExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingBasicRequest) (github_com_confluentinc_schema_registry_sdk_go.SearchResult, *net_http.Response, error) {
+	m.lockSearchUsingBasicExecute.Lock()
+	defer m.lockSearchUsingBasicExecute.Unlock()
+
+	if m.SearchUsingBasicExecuteFunc == nil {
+		panic("mocker: DefaultApi.SearchUsingBasicExecuteFunc is nil but DefaultApi.SearchUsingBasicExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingBasicRequest
+	}{
+		R: r,
+	}
+
+	m.calls.SearchUsingBasicExecute = append(m.calls.SearchUsingBasicExecute, call)
+
+	return m.SearchUsingBasicExecuteFunc(r)
+}
+
+// SearchUsingBasicExecuteCalled returns true if SearchUsingBasicExecute was called at least once.
+func (m *DefaultApi) SearchUsingBasicExecuteCalled() bool {
+	m.lockSearchUsingBasicExecute.Lock()
+	defer m.lockSearchUsingBasicExecute.Unlock()
+
+	return len(m.calls.SearchUsingBasicExecute) > 0
+}
+
+// SearchUsingBasicExecuteCalls returns the calls made to SearchUsingBasicExecute.
+func (m *DefaultApi) SearchUsingBasicExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiSearchUsingBasicRequest
+} {
+	m.lockSearchUsingBasicExecute.Lock()
+	defer m.lockSearchUsingBasicExecute.Unlock()
+
+	return m.calls.SearchUsingBasicExecute
+}
+
 // TestCompatibilityBySubjectName mocks base method by wrapping the associated func.
-func (m *DefaultApi) TestCompatibilityBySubjectName(ctx context.Context, subject, version string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error) {
+func (m *DefaultApi) TestCompatibilityBySubjectName(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityBySubjectNameRequest {
 	m.lockTestCompatibilityBySubjectName.Lock()
 	defer m.lockTestCompatibilityBySubjectName.Unlock()
 
@@ -2869,22 +6607,18 @@ func (m *DefaultApi) TestCompatibilityBySubjectName(ctx context.Context, subject
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		Version           string
-		Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts
+		Ctx     context.Context
+		Subject string
+		Version string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		Version:           version,
-		Body:              body,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
+		Version: version,
 	}
 
 	m.calls.TestCompatibilityBySubjectName = append(m.calls.TestCompatibilityBySubjectName, call)
 
-	return m.TestCompatibilityBySubjectNameFunc(ctx, subject, version, body, localVarOptionals)
+	return m.TestCompatibilityBySubjectNameFunc(ctx, subject, version)
 }
 
 // TestCompatibilityBySubjectNameCalled returns true if TestCompatibilityBySubjectName was called at least once.
@@ -2897,11 +6631,9 @@ func (m *DefaultApi) TestCompatibilityBySubjectNameCalled() bool {
 
 // TestCompatibilityBySubjectNameCalls returns the calls made to TestCompatibilityBySubjectName.
 func (m *DefaultApi) TestCompatibilityBySubjectNameCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	Version           string
-	Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityBySubjectNameOpts
+	Ctx     context.Context
+	Subject string
+	Version string
 } {
 	m.lockTestCompatibilityBySubjectName.Lock()
 	defer m.lockTestCompatibilityBySubjectName.Unlock()
@@ -2909,8 +6641,46 @@ func (m *DefaultApi) TestCompatibilityBySubjectNameCalls() []struct {
 	return m.calls.TestCompatibilityBySubjectName
 }
 
+// TestCompatibilityBySubjectNameExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) TestCompatibilityBySubjectNameExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityBySubjectNameRequest) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error) {
+	m.lockTestCompatibilityBySubjectNameExecute.Lock()
+	defer m.lockTestCompatibilityBySubjectNameExecute.Unlock()
+
+	if m.TestCompatibilityBySubjectNameExecuteFunc == nil {
+		panic("mocker: DefaultApi.TestCompatibilityBySubjectNameExecuteFunc is nil but DefaultApi.TestCompatibilityBySubjectNameExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityBySubjectNameRequest
+	}{
+		R: r,
+	}
+
+	m.calls.TestCompatibilityBySubjectNameExecute = append(m.calls.TestCompatibilityBySubjectNameExecute, call)
+
+	return m.TestCompatibilityBySubjectNameExecuteFunc(r)
+}
+
+// TestCompatibilityBySubjectNameExecuteCalled returns true if TestCompatibilityBySubjectNameExecute was called at least once.
+func (m *DefaultApi) TestCompatibilityBySubjectNameExecuteCalled() bool {
+	m.lockTestCompatibilityBySubjectNameExecute.Lock()
+	defer m.lockTestCompatibilityBySubjectNameExecute.Unlock()
+
+	return len(m.calls.TestCompatibilityBySubjectNameExecute) > 0
+}
+
+// TestCompatibilityBySubjectNameExecuteCalls returns the calls made to TestCompatibilityBySubjectNameExecute.
+func (m *DefaultApi) TestCompatibilityBySubjectNameExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityBySubjectNameRequest
+} {
+	m.lockTestCompatibilityBySubjectNameExecute.Lock()
+	defer m.lockTestCompatibilityBySubjectNameExecute.Unlock()
+
+	return m.calls.TestCompatibilityBySubjectNameExecute
+}
+
 // TestCompatibilityForSubject mocks base method by wrapping the associated func.
-func (m *DefaultApi) TestCompatibilityForSubject(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error) {
+func (m *DefaultApi) TestCompatibilityForSubject(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityForSubjectRequest {
 	m.lockTestCompatibilityForSubject.Lock()
 	defer m.lockTestCompatibilityForSubject.Unlock()
 
@@ -2919,20 +6689,16 @@ func (m *DefaultApi) TestCompatibilityForSubject(ctx context.Context, subject st
 	}
 
 	call := struct {
-		Ctx               context.Context
-		Subject           string
-		Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts
+		Ctx     context.Context
+		Subject string
 	}{
-		Ctx:               ctx,
-		Subject:           subject,
-		Body:              body,
-		LocalVarOptionals: localVarOptionals,
+		Ctx:     ctx,
+		Subject: subject,
 	}
 
 	m.calls.TestCompatibilityForSubject = append(m.calls.TestCompatibilityForSubject, call)
 
-	return m.TestCompatibilityForSubjectFunc(ctx, subject, body, localVarOptionals)
+	return m.TestCompatibilityForSubjectFunc(ctx, subject)
 }
 
 // TestCompatibilityForSubjectCalled returns true if TestCompatibilityForSubject was called at least once.
@@ -2945,10 +6711,8 @@ func (m *DefaultApi) TestCompatibilityForSubjectCalled() bool {
 
 // TestCompatibilityForSubjectCalls returns the calls made to TestCompatibilityForSubject.
 func (m *DefaultApi) TestCompatibilityForSubjectCalls() []struct {
-	Ctx               context.Context
-	Subject           string
-	Body              github_com_confluentinc_schema_registry_sdk_go.RegisterSchemaRequest
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.TestCompatibilityForSubjectOpts
+	Ctx     context.Context
+	Subject string
 } {
 	m.lockTestCompatibilityForSubject.Lock()
 	defer m.lockTestCompatibilityForSubject.Unlock()
@@ -2956,8 +6720,292 @@ func (m *DefaultApi) TestCompatibilityForSubjectCalls() []struct {
 	return m.calls.TestCompatibilityForSubject
 }
 
+// TestCompatibilityForSubjectExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) TestCompatibilityForSubjectExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityForSubjectRequest) (github_com_confluentinc_schema_registry_sdk_go.CompatibilityCheckResponse, *net_http.Response, error) {
+	m.lockTestCompatibilityForSubjectExecute.Lock()
+	defer m.lockTestCompatibilityForSubjectExecute.Unlock()
+
+	if m.TestCompatibilityForSubjectExecuteFunc == nil {
+		panic("mocker: DefaultApi.TestCompatibilityForSubjectExecuteFunc is nil but DefaultApi.TestCompatibilityForSubjectExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityForSubjectRequest
+	}{
+		R: r,
+	}
+
+	m.calls.TestCompatibilityForSubjectExecute = append(m.calls.TestCompatibilityForSubjectExecute, call)
+
+	return m.TestCompatibilityForSubjectExecuteFunc(r)
+}
+
+// TestCompatibilityForSubjectExecuteCalled returns true if TestCompatibilityForSubjectExecute was called at least once.
+func (m *DefaultApi) TestCompatibilityForSubjectExecuteCalled() bool {
+	m.lockTestCompatibilityForSubjectExecute.Lock()
+	defer m.lockTestCompatibilityForSubjectExecute.Unlock()
+
+	return len(m.calls.TestCompatibilityForSubjectExecute) > 0
+}
+
+// TestCompatibilityForSubjectExecuteCalls returns the calls made to TestCompatibilityForSubjectExecute.
+func (m *DefaultApi) TestCompatibilityForSubjectExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiTestCompatibilityForSubjectRequest
+} {
+	m.lockTestCompatibilityForSubjectExecute.Lock()
+	defer m.lockTestCompatibilityForSubjectExecute.Unlock()
+
+	return m.calls.TestCompatibilityForSubjectExecute
+}
+
+// UndeleteDekVersion mocks base method by wrapping the associated func.
+func (m *DefaultApi) UndeleteDekVersion(ctx context.Context, name, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionRequest {
+	m.lockUndeleteDekVersion.Lock()
+	defer m.lockUndeleteDekVersion.Unlock()
+
+	if m.UndeleteDekVersionFunc == nil {
+		panic("mocker: DefaultApi.UndeleteDekVersionFunc is nil but DefaultApi.UndeleteDekVersion was called.")
+	}
+
+	call := struct {
+		Ctx     context.Context
+		Name    string
+		Subject string
+		Version string
+	}{
+		Ctx:     ctx,
+		Name:    name,
+		Subject: subject,
+		Version: version,
+	}
+
+	m.calls.UndeleteDekVersion = append(m.calls.UndeleteDekVersion, call)
+
+	return m.UndeleteDekVersionFunc(ctx, name, subject, version)
+}
+
+// UndeleteDekVersionCalled returns true if UndeleteDekVersion was called at least once.
+func (m *DefaultApi) UndeleteDekVersionCalled() bool {
+	m.lockUndeleteDekVersion.Lock()
+	defer m.lockUndeleteDekVersion.Unlock()
+
+	return len(m.calls.UndeleteDekVersion) > 0
+}
+
+// UndeleteDekVersionCalls returns the calls made to UndeleteDekVersion.
+func (m *DefaultApi) UndeleteDekVersionCalls() []struct {
+	Ctx     context.Context
+	Name    string
+	Subject string
+	Version string
+} {
+	m.lockUndeleteDekVersion.Lock()
+	defer m.lockUndeleteDekVersion.Unlock()
+
+	return m.calls.UndeleteDekVersion
+}
+
+// UndeleteDekVersionExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UndeleteDekVersionExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionRequest) (*net_http.Response, error) {
+	m.lockUndeleteDekVersionExecute.Lock()
+	defer m.lockUndeleteDekVersionExecute.Unlock()
+
+	if m.UndeleteDekVersionExecuteFunc == nil {
+		panic("mocker: DefaultApi.UndeleteDekVersionExecuteFunc is nil but DefaultApi.UndeleteDekVersionExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UndeleteDekVersionExecute = append(m.calls.UndeleteDekVersionExecute, call)
+
+	return m.UndeleteDekVersionExecuteFunc(r)
+}
+
+// UndeleteDekVersionExecuteCalled returns true if UndeleteDekVersionExecute was called at least once.
+func (m *DefaultApi) UndeleteDekVersionExecuteCalled() bool {
+	m.lockUndeleteDekVersionExecute.Lock()
+	defer m.lockUndeleteDekVersionExecute.Unlock()
+
+	return len(m.calls.UndeleteDekVersionExecute) > 0
+}
+
+// UndeleteDekVersionExecuteCalls returns the calls made to UndeleteDekVersionExecute.
+func (m *DefaultApi) UndeleteDekVersionExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionRequest
+} {
+	m.lockUndeleteDekVersionExecute.Lock()
+	defer m.lockUndeleteDekVersionExecute.Unlock()
+
+	return m.calls.UndeleteDekVersionExecute
+}
+
+// UndeleteDekVersions mocks base method by wrapping the associated func.
+func (m *DefaultApi) UndeleteDekVersions(ctx context.Context, name, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionsRequest {
+	m.lockUndeleteDekVersions.Lock()
+	defer m.lockUndeleteDekVersions.Unlock()
+
+	if m.UndeleteDekVersionsFunc == nil {
+		panic("mocker: DefaultApi.UndeleteDekVersionsFunc is nil but DefaultApi.UndeleteDekVersions was called.")
+	}
+
+	call := struct {
+		Ctx     context.Context
+		Name    string
+		Subject string
+	}{
+		Ctx:     ctx,
+		Name:    name,
+		Subject: subject,
+	}
+
+	m.calls.UndeleteDekVersions = append(m.calls.UndeleteDekVersions, call)
+
+	return m.UndeleteDekVersionsFunc(ctx, name, subject)
+}
+
+// UndeleteDekVersionsCalled returns true if UndeleteDekVersions was called at least once.
+func (m *DefaultApi) UndeleteDekVersionsCalled() bool {
+	m.lockUndeleteDekVersions.Lock()
+	defer m.lockUndeleteDekVersions.Unlock()
+
+	return len(m.calls.UndeleteDekVersions) > 0
+}
+
+// UndeleteDekVersionsCalls returns the calls made to UndeleteDekVersions.
+func (m *DefaultApi) UndeleteDekVersionsCalls() []struct {
+	Ctx     context.Context
+	Name    string
+	Subject string
+} {
+	m.lockUndeleteDekVersions.Lock()
+	defer m.lockUndeleteDekVersions.Unlock()
+
+	return m.calls.UndeleteDekVersions
+}
+
+// UndeleteDekVersionsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UndeleteDekVersionsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionsRequest) (*net_http.Response, error) {
+	m.lockUndeleteDekVersionsExecute.Lock()
+	defer m.lockUndeleteDekVersionsExecute.Unlock()
+
+	if m.UndeleteDekVersionsExecuteFunc == nil {
+		panic("mocker: DefaultApi.UndeleteDekVersionsExecuteFunc is nil but DefaultApi.UndeleteDekVersionsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UndeleteDekVersionsExecute = append(m.calls.UndeleteDekVersionsExecute, call)
+
+	return m.UndeleteDekVersionsExecuteFunc(r)
+}
+
+// UndeleteDekVersionsExecuteCalled returns true if UndeleteDekVersionsExecute was called at least once.
+func (m *DefaultApi) UndeleteDekVersionsExecuteCalled() bool {
+	m.lockUndeleteDekVersionsExecute.Lock()
+	defer m.lockUndeleteDekVersionsExecute.Unlock()
+
+	return len(m.calls.UndeleteDekVersionsExecute) > 0
+}
+
+// UndeleteDekVersionsExecuteCalls returns the calls made to UndeleteDekVersionsExecute.
+func (m *DefaultApi) UndeleteDekVersionsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteDekVersionsRequest
+} {
+	m.lockUndeleteDekVersionsExecute.Lock()
+	defer m.lockUndeleteDekVersionsExecute.Unlock()
+
+	return m.calls.UndeleteDekVersionsExecute
+}
+
+// UndeleteKek mocks base method by wrapping the associated func.
+func (m *DefaultApi) UndeleteKek(ctx context.Context, name string) github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteKekRequest {
+	m.lockUndeleteKek.Lock()
+	defer m.lockUndeleteKek.Unlock()
+
+	if m.UndeleteKekFunc == nil {
+		panic("mocker: DefaultApi.UndeleteKekFunc is nil but DefaultApi.UndeleteKek was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		Name string
+	}{
+		Ctx:  ctx,
+		Name: name,
+	}
+
+	m.calls.UndeleteKek = append(m.calls.UndeleteKek, call)
+
+	return m.UndeleteKekFunc(ctx, name)
+}
+
+// UndeleteKekCalled returns true if UndeleteKek was called at least once.
+func (m *DefaultApi) UndeleteKekCalled() bool {
+	m.lockUndeleteKek.Lock()
+	defer m.lockUndeleteKek.Unlock()
+
+	return len(m.calls.UndeleteKek) > 0
+}
+
+// UndeleteKekCalls returns the calls made to UndeleteKek.
+func (m *DefaultApi) UndeleteKekCalls() []struct {
+	Ctx  context.Context
+	Name string
+} {
+	m.lockUndeleteKek.Lock()
+	defer m.lockUndeleteKek.Unlock()
+
+	return m.calls.UndeleteKek
+}
+
+// UndeleteKekExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UndeleteKekExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteKekRequest) (*net_http.Response, error) {
+	m.lockUndeleteKekExecute.Lock()
+	defer m.lockUndeleteKekExecute.Unlock()
+
+	if m.UndeleteKekExecuteFunc == nil {
+		panic("mocker: DefaultApi.UndeleteKekExecuteFunc is nil but DefaultApi.UndeleteKekExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteKekRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UndeleteKekExecute = append(m.calls.UndeleteKekExecute, call)
+
+	return m.UndeleteKekExecuteFunc(r)
+}
+
+// UndeleteKekExecuteCalled returns true if UndeleteKekExecute was called at least once.
+func (m *DefaultApi) UndeleteKekExecuteCalled() bool {
+	m.lockUndeleteKekExecute.Lock()
+	defer m.lockUndeleteKekExecute.Unlock()
+
+	return len(m.calls.UndeleteKekExecute) > 0
+}
+
+// UndeleteKekExecuteCalls returns the calls made to UndeleteKekExecute.
+func (m *DefaultApi) UndeleteKekExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUndeleteKekRequest
+} {
+	m.lockUndeleteKekExecute.Lock()
+	defer m.lockUndeleteKekExecute.Unlock()
+
+	return m.calls.UndeleteKekExecute
+}
+
 // UpdateBusinessMetadata mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateBusinessMetadata(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error) {
+func (m *DefaultApi) UpdateBusinessMetadata(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataRequest {
 	m.lockUpdateBusinessMetadata.Lock()
 	defer m.lockUpdateBusinessMetadata.Unlock()
 
@@ -2966,16 +7014,14 @@ func (m *DefaultApi) UpdateBusinessMetadata(ctx context.Context, localVarOptiona
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.UpdateBusinessMetadata = append(m.calls.UpdateBusinessMetadata, call)
 
-	return m.UpdateBusinessMetadataFunc(ctx, localVarOptionals)
+	return m.UpdateBusinessMetadataFunc(ctx)
 }
 
 // UpdateBusinessMetadataCalled returns true if UpdateBusinessMetadata was called at least once.
@@ -2988,8 +7034,7 @@ func (m *DefaultApi) UpdateBusinessMetadataCalled() bool {
 
 // UpdateBusinessMetadataCalls returns the calls made to UpdateBusinessMetadata.
 func (m *DefaultApi) UpdateBusinessMetadataCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataOpts
+	Ctx context.Context
 } {
 	m.lockUpdateBusinessMetadata.Lock()
 	defer m.lockUpdateBusinessMetadata.Unlock()
@@ -2997,8 +7042,46 @@ func (m *DefaultApi) UpdateBusinessMetadataCalls() []struct {
 	return m.calls.UpdateBusinessMetadata
 }
 
+// UpdateBusinessMetadataExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UpdateBusinessMetadataExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataResponse, *net_http.Response, error) {
+	m.lockUpdateBusinessMetadataExecute.Lock()
+	defer m.lockUpdateBusinessMetadataExecute.Unlock()
+
+	if m.UpdateBusinessMetadataExecuteFunc == nil {
+		panic("mocker: DefaultApi.UpdateBusinessMetadataExecuteFunc is nil but DefaultApi.UpdateBusinessMetadataExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateBusinessMetadataExecute = append(m.calls.UpdateBusinessMetadataExecute, call)
+
+	return m.UpdateBusinessMetadataExecuteFunc(r)
+}
+
+// UpdateBusinessMetadataExecuteCalled returns true if UpdateBusinessMetadataExecute was called at least once.
+func (m *DefaultApi) UpdateBusinessMetadataExecuteCalled() bool {
+	m.lockUpdateBusinessMetadataExecute.Lock()
+	defer m.lockUpdateBusinessMetadataExecute.Unlock()
+
+	return len(m.calls.UpdateBusinessMetadataExecute) > 0
+}
+
+// UpdateBusinessMetadataExecuteCalls returns the calls made to UpdateBusinessMetadataExecute.
+func (m *DefaultApi) UpdateBusinessMetadataExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataRequest
+} {
+	m.lockUpdateBusinessMetadataExecute.Lock()
+	defer m.lockUpdateBusinessMetadataExecute.Unlock()
+
+	return m.calls.UpdateBusinessMetadataExecute
+}
+
 // UpdateBusinessMetadataDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateBusinessMetadataDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) UpdateBusinessMetadataDefs(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataDefsRequest {
 	m.lockUpdateBusinessMetadataDefs.Lock()
 	defer m.lockUpdateBusinessMetadataDefs.Unlock()
 
@@ -3007,16 +7090,14 @@ func (m *DefaultApi) UpdateBusinessMetadataDefs(ctx context.Context, localVarOpt
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.UpdateBusinessMetadataDefs = append(m.calls.UpdateBusinessMetadataDefs, call)
 
-	return m.UpdateBusinessMetadataDefsFunc(ctx, localVarOptionals)
+	return m.UpdateBusinessMetadataDefsFunc(ctx)
 }
 
 // UpdateBusinessMetadataDefsCalled returns true if UpdateBusinessMetadataDefs was called at least once.
@@ -3029,8 +7110,7 @@ func (m *DefaultApi) UpdateBusinessMetadataDefsCalled() bool {
 
 // UpdateBusinessMetadataDefsCalls returns the calls made to UpdateBusinessMetadataDefs.
 func (m *DefaultApi) UpdateBusinessMetadataDefsCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateBusinessMetadataDefsOpts
+	Ctx context.Context
 } {
 	m.lockUpdateBusinessMetadataDefs.Lock()
 	defer m.lockUpdateBusinessMetadataDefs.Unlock()
@@ -3038,8 +7118,46 @@ func (m *DefaultApi) UpdateBusinessMetadataDefsCalls() []struct {
 	return m.calls.UpdateBusinessMetadataDefs
 }
 
+// UpdateBusinessMetadataDefsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UpdateBusinessMetadataDefsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.BusinessMetadataDefResponse, *net_http.Response, error) {
+	m.lockUpdateBusinessMetadataDefsExecute.Lock()
+	defer m.lockUpdateBusinessMetadataDefsExecute.Unlock()
+
+	if m.UpdateBusinessMetadataDefsExecuteFunc == nil {
+		panic("mocker: DefaultApi.UpdateBusinessMetadataDefsExecuteFunc is nil but DefaultApi.UpdateBusinessMetadataDefsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataDefsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateBusinessMetadataDefsExecute = append(m.calls.UpdateBusinessMetadataDefsExecute, call)
+
+	return m.UpdateBusinessMetadataDefsExecuteFunc(r)
+}
+
+// UpdateBusinessMetadataDefsExecuteCalled returns true if UpdateBusinessMetadataDefsExecute was called at least once.
+func (m *DefaultApi) UpdateBusinessMetadataDefsExecuteCalled() bool {
+	m.lockUpdateBusinessMetadataDefsExecute.Lock()
+	defer m.lockUpdateBusinessMetadataDefsExecute.Unlock()
+
+	return len(m.calls.UpdateBusinessMetadataDefsExecute) > 0
+}
+
+// UpdateBusinessMetadataDefsExecuteCalls returns the calls made to UpdateBusinessMetadataDefsExecute.
+func (m *DefaultApi) UpdateBusinessMetadataDefsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateBusinessMetadataDefsRequest
+} {
+	m.lockUpdateBusinessMetadataDefsExecute.Lock()
+	defer m.lockUpdateBusinessMetadataDefsExecute.Unlock()
+
+	return m.calls.UpdateBusinessMetadataDefsExecute
+}
+
 // UpdateMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateMode(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateMode(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateModeRequest {
 	m.lockUpdateMode.Lock()
 	defer m.lockUpdateMode.Unlock()
 
@@ -3050,16 +7168,14 @@ func (m *DefaultApi) UpdateMode(ctx context.Context, subject string, body github
 	call := struct {
 		Ctx     context.Context
 		Subject string
-		Body    github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
-		Body:    body,
 	}
 
 	m.calls.UpdateMode = append(m.calls.UpdateMode, call)
 
-	return m.UpdateModeFunc(ctx, subject, body)
+	return m.UpdateModeFunc(ctx, subject)
 }
 
 // UpdateModeCalled returns true if UpdateMode was called at least once.
@@ -3074,7 +7190,6 @@ func (m *DefaultApi) UpdateModeCalled() bool {
 func (m *DefaultApi) UpdateModeCalls() []struct {
 	Ctx     context.Context
 	Subject string
-	Body    github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
 } {
 	m.lockUpdateMode.Lock()
 	defer m.lockUpdateMode.Unlock()
@@ -3082,8 +7197,46 @@ func (m *DefaultApi) UpdateModeCalls() []struct {
 	return m.calls.UpdateMode
 }
 
+// UpdateModeExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UpdateModeExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateModeRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
+	m.lockUpdateModeExecute.Lock()
+	defer m.lockUpdateModeExecute.Unlock()
+
+	if m.UpdateModeExecuteFunc == nil {
+		panic("mocker: DefaultApi.UpdateModeExecuteFunc is nil but DefaultApi.UpdateModeExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateModeRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateModeExecute = append(m.calls.UpdateModeExecute, call)
+
+	return m.UpdateModeExecuteFunc(r)
+}
+
+// UpdateModeExecuteCalled returns true if UpdateModeExecute was called at least once.
+func (m *DefaultApi) UpdateModeExecuteCalled() bool {
+	m.lockUpdateModeExecute.Lock()
+	defer m.lockUpdateModeExecute.Unlock()
+
+	return len(m.calls.UpdateModeExecute) > 0
+}
+
+// UpdateModeExecuteCalls returns the calls made to UpdateModeExecute.
+func (m *DefaultApi) UpdateModeExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateModeRequest
+} {
+	m.lockUpdateModeExecute.Lock()
+	defer m.lockUpdateModeExecute.Unlock()
+
+	return m.calls.UpdateModeExecute
+}
+
 // UpdateSubjectLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject string, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject string) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateSubjectLevelConfigRequest {
 	m.lockUpdateSubjectLevelConfig.Lock()
 	defer m.lockUpdateSubjectLevelConfig.Unlock()
 
@@ -3094,16 +7247,14 @@ func (m *DefaultApi) UpdateSubjectLevelConfig(ctx context.Context, subject strin
 	call := struct {
 		Ctx     context.Context
 		Subject string
-		Body    github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 	}{
 		Ctx:     ctx,
 		Subject: subject,
-		Body:    body,
 	}
 
 	m.calls.UpdateSubjectLevelConfig = append(m.calls.UpdateSubjectLevelConfig, call)
 
-	return m.UpdateSubjectLevelConfigFunc(ctx, subject, body)
+	return m.UpdateSubjectLevelConfigFunc(ctx, subject)
 }
 
 // UpdateSubjectLevelConfigCalled returns true if UpdateSubjectLevelConfig was called at least once.
@@ -3118,7 +7269,6 @@ func (m *DefaultApi) UpdateSubjectLevelConfigCalled() bool {
 func (m *DefaultApi) UpdateSubjectLevelConfigCalls() []struct {
 	Ctx     context.Context
 	Subject string
-	Body    github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
 } {
 	m.lockUpdateSubjectLevelConfig.Lock()
 	defer m.lockUpdateSubjectLevelConfig.Unlock()
@@ -3126,8 +7276,46 @@ func (m *DefaultApi) UpdateSubjectLevelConfigCalls() []struct {
 	return m.calls.UpdateSubjectLevelConfig
 }
 
+// UpdateSubjectLevelConfigExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UpdateSubjectLevelConfigExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateSubjectLevelConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
+	m.lockUpdateSubjectLevelConfigExecute.Lock()
+	defer m.lockUpdateSubjectLevelConfigExecute.Unlock()
+
+	if m.UpdateSubjectLevelConfigExecuteFunc == nil {
+		panic("mocker: DefaultApi.UpdateSubjectLevelConfigExecuteFunc is nil but DefaultApi.UpdateSubjectLevelConfigExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateSubjectLevelConfigRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateSubjectLevelConfigExecute = append(m.calls.UpdateSubjectLevelConfigExecute, call)
+
+	return m.UpdateSubjectLevelConfigExecuteFunc(r)
+}
+
+// UpdateSubjectLevelConfigExecuteCalled returns true if UpdateSubjectLevelConfigExecute was called at least once.
+func (m *DefaultApi) UpdateSubjectLevelConfigExecuteCalled() bool {
+	m.lockUpdateSubjectLevelConfigExecute.Lock()
+	defer m.lockUpdateSubjectLevelConfigExecute.Unlock()
+
+	return len(m.calls.UpdateSubjectLevelConfigExecute) > 0
+}
+
+// UpdateSubjectLevelConfigExecuteCalls returns the calls made to UpdateSubjectLevelConfigExecute.
+func (m *DefaultApi) UpdateSubjectLevelConfigExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateSubjectLevelConfigRequest
+} {
+	m.lockUpdateSubjectLevelConfigExecute.Lock()
+	defer m.lockUpdateSubjectLevelConfigExecute.Unlock()
+
+	return m.calls.UpdateSubjectLevelConfigExecute
+}
+
 // UpdateTagDefs mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTagDefs(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTagDefs(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagDefsRequest {
 	m.lockUpdateTagDefs.Lock()
 	defer m.lockUpdateTagDefs.Unlock()
 
@@ -3136,16 +7324,14 @@ func (m *DefaultApi) UpdateTagDefs(ctx context.Context, localVarOptionals *githu
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.UpdateTagDefs = append(m.calls.UpdateTagDefs, call)
 
-	return m.UpdateTagDefsFunc(ctx, localVarOptionals)
+	return m.UpdateTagDefsFunc(ctx)
 }
 
 // UpdateTagDefsCalled returns true if UpdateTagDefs was called at least once.
@@ -3158,8 +7344,7 @@ func (m *DefaultApi) UpdateTagDefsCalled() bool {
 
 // UpdateTagDefsCalls returns the calls made to UpdateTagDefs.
 func (m *DefaultApi) UpdateTagDefsCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagDefsOpts
+	Ctx context.Context
 } {
 	m.lockUpdateTagDefs.Lock()
 	defer m.lockUpdateTagDefs.Unlock()
@@ -3167,8 +7352,46 @@ func (m *DefaultApi) UpdateTagDefsCalls() []struct {
 	return m.calls.UpdateTagDefs
 }
 
+// UpdateTagDefsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UpdateTagDefsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagDefsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagDefResponse, *net_http.Response, error) {
+	m.lockUpdateTagDefsExecute.Lock()
+	defer m.lockUpdateTagDefsExecute.Unlock()
+
+	if m.UpdateTagDefsExecuteFunc == nil {
+		panic("mocker: DefaultApi.UpdateTagDefsExecuteFunc is nil but DefaultApi.UpdateTagDefsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagDefsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateTagDefsExecute = append(m.calls.UpdateTagDefsExecute, call)
+
+	return m.UpdateTagDefsExecuteFunc(r)
+}
+
+// UpdateTagDefsExecuteCalled returns true if UpdateTagDefsExecute was called at least once.
+func (m *DefaultApi) UpdateTagDefsExecuteCalled() bool {
+	m.lockUpdateTagDefsExecute.Lock()
+	defer m.lockUpdateTagDefsExecute.Unlock()
+
+	return len(m.calls.UpdateTagDefsExecute) > 0
+}
+
+// UpdateTagDefsExecuteCalls returns the calls made to UpdateTagDefsExecute.
+func (m *DefaultApi) UpdateTagDefsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagDefsRequest
+} {
+	m.lockUpdateTagDefsExecute.Lock()
+	defer m.lockUpdateTagDefsExecute.Unlock()
+
+	return m.calls.UpdateTagDefsExecute
+}
+
 // UpdateTags mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTags(ctx context.Context, localVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTags(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagsRequest {
 	m.lockUpdateTags.Lock()
 	defer m.lockUpdateTags.Unlock()
 
@@ -3177,16 +7400,14 @@ func (m *DefaultApi) UpdateTags(ctx context.Context, localVarOptionals *github_c
 	}
 
 	call := struct {
-		Ctx               context.Context
-		LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts
+		Ctx context.Context
 	}{
-		Ctx:               ctx,
-		LocalVarOptionals: localVarOptionals,
+		Ctx: ctx,
 	}
 
 	m.calls.UpdateTags = append(m.calls.UpdateTags, call)
 
-	return m.UpdateTagsFunc(ctx, localVarOptionals)
+	return m.UpdateTagsFunc(ctx)
 }
 
 // UpdateTagsCalled returns true if UpdateTags was called at least once.
@@ -3199,8 +7420,7 @@ func (m *DefaultApi) UpdateTagsCalled() bool {
 
 // UpdateTagsCalls returns the calls made to UpdateTags.
 func (m *DefaultApi) UpdateTagsCalls() []struct {
-	Ctx               context.Context
-	LocalVarOptionals *github_com_confluentinc_schema_registry_sdk_go.UpdateTagsOpts
+	Ctx context.Context
 } {
 	m.lockUpdateTags.Lock()
 	defer m.lockUpdateTags.Unlock()
@@ -3208,8 +7428,46 @@ func (m *DefaultApi) UpdateTagsCalls() []struct {
 	return m.calls.UpdateTags
 }
 
+// UpdateTagsExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UpdateTagsExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagsRequest) ([]github_com_confluentinc_schema_registry_sdk_go.TagResponse, *net_http.Response, error) {
+	m.lockUpdateTagsExecute.Lock()
+	defer m.lockUpdateTagsExecute.Unlock()
+
+	if m.UpdateTagsExecuteFunc == nil {
+		panic("mocker: DefaultApi.UpdateTagsExecuteFunc is nil but DefaultApi.UpdateTagsExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagsRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateTagsExecute = append(m.calls.UpdateTagsExecute, call)
+
+	return m.UpdateTagsExecuteFunc(r)
+}
+
+// UpdateTagsExecuteCalled returns true if UpdateTagsExecute was called at least once.
+func (m *DefaultApi) UpdateTagsExecuteCalled() bool {
+	m.lockUpdateTagsExecute.Lock()
+	defer m.lockUpdateTagsExecute.Unlock()
+
+	return len(m.calls.UpdateTagsExecute) > 0
+}
+
+// UpdateTagsExecuteCalls returns the calls made to UpdateTagsExecute.
+func (m *DefaultApi) UpdateTagsExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTagsRequest
+} {
+	m.lockUpdateTagsExecute.Lock()
+	defer m.lockUpdateTagsExecute.Unlock()
+
+	return m.calls.UpdateTagsExecute
+}
+
 // UpdateTopLevelConfig mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelConfigRequest {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
 
@@ -3218,16 +7476,14 @@ func (m *DefaultApi) UpdateTopLevelConfig(ctx context.Context, body github_com_c
 	}
 
 	call := struct {
-		Ctx  context.Context
-		Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
+		Ctx context.Context
 	}{
-		Ctx:  ctx,
-		Body: body,
+		Ctx: ctx,
 	}
 
 	m.calls.UpdateTopLevelConfig = append(m.calls.UpdateTopLevelConfig, call)
 
-	return m.UpdateTopLevelConfigFunc(ctx, body)
+	return m.UpdateTopLevelConfigFunc(ctx)
 }
 
 // UpdateTopLevelConfigCalled returns true if UpdateTopLevelConfig was called at least once.
@@ -3240,8 +7496,7 @@ func (m *DefaultApi) UpdateTopLevelConfigCalled() bool {
 
 // UpdateTopLevelConfigCalls returns the calls made to UpdateTopLevelConfig.
 func (m *DefaultApi) UpdateTopLevelConfigCalls() []struct {
-	Ctx  context.Context
-	Body github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest
+	Ctx context.Context
 } {
 	m.lockUpdateTopLevelConfig.Lock()
 	defer m.lockUpdateTopLevelConfig.Unlock()
@@ -3249,8 +7504,46 @@ func (m *DefaultApi) UpdateTopLevelConfigCalls() []struct {
 	return m.calls.UpdateTopLevelConfig
 }
 
+// UpdateTopLevelConfigExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UpdateTopLevelConfigExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelConfigRequest) (github_com_confluentinc_schema_registry_sdk_go.ConfigUpdateRequest, *net_http.Response, error) {
+	m.lockUpdateTopLevelConfigExecute.Lock()
+	defer m.lockUpdateTopLevelConfigExecute.Unlock()
+
+	if m.UpdateTopLevelConfigExecuteFunc == nil {
+		panic("mocker: DefaultApi.UpdateTopLevelConfigExecuteFunc is nil but DefaultApi.UpdateTopLevelConfigExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelConfigRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateTopLevelConfigExecute = append(m.calls.UpdateTopLevelConfigExecute, call)
+
+	return m.UpdateTopLevelConfigExecuteFunc(r)
+}
+
+// UpdateTopLevelConfigExecuteCalled returns true if UpdateTopLevelConfigExecute was called at least once.
+func (m *DefaultApi) UpdateTopLevelConfigExecuteCalled() bool {
+	m.lockUpdateTopLevelConfigExecute.Lock()
+	defer m.lockUpdateTopLevelConfigExecute.Unlock()
+
+	return len(m.calls.UpdateTopLevelConfigExecute) > 0
+}
+
+// UpdateTopLevelConfigExecuteCalls returns the calls made to UpdateTopLevelConfigExecute.
+func (m *DefaultApi) UpdateTopLevelConfigExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelConfigRequest
+} {
+	m.lockUpdateTopLevelConfigExecute.Lock()
+	defer m.lockUpdateTopLevelConfigExecute.Unlock()
+
+	return m.calls.UpdateTopLevelConfigExecute
+}
+
 // UpdateTopLevelMode mocks base method by wrapping the associated func.
-func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context, body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
+func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelModeRequest {
 	m.lockUpdateTopLevelMode.Lock()
 	defer m.lockUpdateTopLevelMode.Unlock()
 
@@ -3259,16 +7552,14 @@ func (m *DefaultApi) UpdateTopLevelMode(ctx context.Context, body github_com_con
 	}
 
 	call := struct {
-		Ctx  context.Context
-		Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
+		Ctx context.Context
 	}{
-		Ctx:  ctx,
-		Body: body,
+		Ctx: ctx,
 	}
 
 	m.calls.UpdateTopLevelMode = append(m.calls.UpdateTopLevelMode, call)
 
-	return m.UpdateTopLevelModeFunc(ctx, body)
+	return m.UpdateTopLevelModeFunc(ctx)
 }
 
 // UpdateTopLevelModeCalled returns true if UpdateTopLevelMode was called at least once.
@@ -3281,8 +7572,7 @@ func (m *DefaultApi) UpdateTopLevelModeCalled() bool {
 
 // UpdateTopLevelModeCalls returns the calls made to UpdateTopLevelMode.
 func (m *DefaultApi) UpdateTopLevelModeCalls() []struct {
-	Ctx  context.Context
-	Body github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest
+	Ctx context.Context
 } {
 	m.lockUpdateTopLevelMode.Lock()
 	defer m.lockUpdateTopLevelMode.Unlock()
@@ -3290,204 +7580,542 @@ func (m *DefaultApi) UpdateTopLevelModeCalls() []struct {
 	return m.calls.UpdateTopLevelMode
 }
 
+// UpdateTopLevelModeExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) UpdateTopLevelModeExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelModeRequest) (github_com_confluentinc_schema_registry_sdk_go.ModeUpdateRequest, *net_http.Response, error) {
+	m.lockUpdateTopLevelModeExecute.Lock()
+	defer m.lockUpdateTopLevelModeExecute.Unlock()
+
+	if m.UpdateTopLevelModeExecuteFunc == nil {
+		panic("mocker: DefaultApi.UpdateTopLevelModeExecuteFunc is nil but DefaultApi.UpdateTopLevelModeExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelModeRequest
+	}{
+		R: r,
+	}
+
+	m.calls.UpdateTopLevelModeExecute = append(m.calls.UpdateTopLevelModeExecute, call)
+
+	return m.UpdateTopLevelModeExecuteFunc(r)
+}
+
+// UpdateTopLevelModeExecuteCalled returns true if UpdateTopLevelModeExecute was called at least once.
+func (m *DefaultApi) UpdateTopLevelModeExecuteCalled() bool {
+	m.lockUpdateTopLevelModeExecute.Lock()
+	defer m.lockUpdateTopLevelModeExecute.Unlock()
+
+	return len(m.calls.UpdateTopLevelModeExecute) > 0
+}
+
+// UpdateTopLevelModeExecuteCalls returns the calls made to UpdateTopLevelModeExecute.
+func (m *DefaultApi) UpdateTopLevelModeExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiUpdateTopLevelModeRequest
+} {
+	m.lockUpdateTopLevelModeExecute.Lock()
+	defer m.lockUpdateTopLevelModeExecute.Unlock()
+
+	return m.calls.UpdateTopLevelModeExecute
+}
+
 // Reset resets the calls made to the mocked methods.
 func (m *DefaultApi) Reset() {
+	m.lockAsyncapiParsePut.Lock()
+	m.calls.AsyncapiParsePut = nil
+	m.lockAsyncapiParsePut.Unlock()
+	m.lockAsyncapiParsePutExecute.Lock()
+	m.calls.AsyncapiParsePutExecute = nil
+	m.lockAsyncapiParsePutExecute.Unlock()
 	m.lockAsyncapiPut.Lock()
 	m.calls.AsyncapiPut = nil
 	m.lockAsyncapiPut.Unlock()
+	m.lockAsyncapiPutExecute.Lock()
+	m.calls.AsyncapiPutExecute = nil
+	m.lockAsyncapiPutExecute.Unlock()
 	m.lockCreateBusinessMetadata.Lock()
 	m.calls.CreateBusinessMetadata = nil
 	m.lockCreateBusinessMetadata.Unlock()
+	m.lockCreateBusinessMetadataExecute.Lock()
+	m.calls.CreateBusinessMetadataExecute = nil
+	m.lockCreateBusinessMetadataExecute.Unlock()
 	m.lockCreateBusinessMetadataDefs.Lock()
 	m.calls.CreateBusinessMetadataDefs = nil
 	m.lockCreateBusinessMetadataDefs.Unlock()
+	m.lockCreateBusinessMetadataDefsExecute.Lock()
+	m.calls.CreateBusinessMetadataDefsExecute = nil
+	m.lockCreateBusinessMetadataDefsExecute.Unlock()
+	m.lockCreateDek.Lock()
+	m.calls.CreateDek = nil
+	m.lockCreateDek.Unlock()
+	m.lockCreateDekExecute.Lock()
+	m.calls.CreateDekExecute = nil
+	m.lockCreateDekExecute.Unlock()
 	m.lockCreateExporter.Lock()
 	m.calls.CreateExporter = nil
 	m.lockCreateExporter.Unlock()
+	m.lockCreateExporterExecute.Lock()
+	m.calls.CreateExporterExecute = nil
+	m.lockCreateExporterExecute.Unlock()
+	m.lockCreateKek.Lock()
+	m.calls.CreateKek = nil
+	m.lockCreateKek.Unlock()
+	m.lockCreateKekExecute.Lock()
+	m.calls.CreateKekExecute = nil
+	m.lockCreateKekExecute.Unlock()
 	m.lockCreateOrUpdate.Lock()
 	m.calls.CreateOrUpdate = nil
 	m.lockCreateOrUpdate.Unlock()
+	m.lockCreateOrUpdateExecute.Lock()
+	m.calls.CreateOrUpdateExecute = nil
+	m.lockCreateOrUpdateExecute.Unlock()
 	m.lockCreateTagDefs.Lock()
 	m.calls.CreateTagDefs = nil
 	m.lockCreateTagDefs.Unlock()
+	m.lockCreateTagDefsExecute.Lock()
+	m.calls.CreateTagDefsExecute = nil
+	m.lockCreateTagDefsExecute.Unlock()
 	m.lockCreateTags.Lock()
 	m.calls.CreateTags = nil
 	m.lockCreateTags.Unlock()
+	m.lockCreateTagsExecute.Lock()
+	m.calls.CreateTagsExecute = nil
+	m.lockCreateTagsExecute.Unlock()
 	m.lockDeleteBusinessMetadata.Lock()
 	m.calls.DeleteBusinessMetadata = nil
 	m.lockDeleteBusinessMetadata.Unlock()
+	m.lockDeleteBusinessMetadataExecute.Lock()
+	m.calls.DeleteBusinessMetadataExecute = nil
+	m.lockDeleteBusinessMetadataExecute.Unlock()
 	m.lockDeleteBusinessMetadataDef.Lock()
 	m.calls.DeleteBusinessMetadataDef = nil
 	m.lockDeleteBusinessMetadataDef.Unlock()
+	m.lockDeleteBusinessMetadataDefExecute.Lock()
+	m.calls.DeleteBusinessMetadataDefExecute = nil
+	m.lockDeleteBusinessMetadataDefExecute.Unlock()
 	m.lockDeleteByUniqueAttributes.Lock()
 	m.calls.DeleteByUniqueAttributes = nil
 	m.lockDeleteByUniqueAttributes.Unlock()
+	m.lockDeleteByUniqueAttributesExecute.Lock()
+	m.calls.DeleteByUniqueAttributesExecute = nil
+	m.lockDeleteByUniqueAttributesExecute.Unlock()
+	m.lockDeleteDekVersion.Lock()
+	m.calls.DeleteDekVersion = nil
+	m.lockDeleteDekVersion.Unlock()
+	m.lockDeleteDekVersionExecute.Lock()
+	m.calls.DeleteDekVersionExecute = nil
+	m.lockDeleteDekVersionExecute.Unlock()
+	m.lockDeleteDekVersions.Lock()
+	m.calls.DeleteDekVersions = nil
+	m.lockDeleteDekVersions.Unlock()
+	m.lockDeleteDekVersionsExecute.Lock()
+	m.calls.DeleteDekVersionsExecute = nil
+	m.lockDeleteDekVersionsExecute.Unlock()
 	m.lockDeleteExporter.Lock()
 	m.calls.DeleteExporter = nil
 	m.lockDeleteExporter.Unlock()
+	m.lockDeleteExporterExecute.Lock()
+	m.calls.DeleteExporterExecute = nil
+	m.lockDeleteExporterExecute.Unlock()
+	m.lockDeleteKek.Lock()
+	m.calls.DeleteKek = nil
+	m.lockDeleteKek.Unlock()
+	m.lockDeleteKekExecute.Lock()
+	m.calls.DeleteKekExecute = nil
+	m.lockDeleteKekExecute.Unlock()
 	m.lockDeleteSchemaVersion.Lock()
 	m.calls.DeleteSchemaVersion = nil
 	m.lockDeleteSchemaVersion.Unlock()
+	m.lockDeleteSchemaVersionExecute.Lock()
+	m.calls.DeleteSchemaVersionExecute = nil
+	m.lockDeleteSchemaVersionExecute.Unlock()
 	m.lockDeleteSubject.Lock()
 	m.calls.DeleteSubject = nil
 	m.lockDeleteSubject.Unlock()
+	m.lockDeleteSubjectExecute.Lock()
+	m.calls.DeleteSubjectExecute = nil
+	m.lockDeleteSubjectExecute.Unlock()
 	m.lockDeleteSubjectConfig.Lock()
 	m.calls.DeleteSubjectConfig = nil
 	m.lockDeleteSubjectConfig.Unlock()
+	m.lockDeleteSubjectConfigExecute.Lock()
+	m.calls.DeleteSubjectConfigExecute = nil
+	m.lockDeleteSubjectConfigExecute.Unlock()
 	m.lockDeleteSubjectMode.Lock()
 	m.calls.DeleteSubjectMode = nil
 	m.lockDeleteSubjectMode.Unlock()
+	m.lockDeleteSubjectModeExecute.Lock()
+	m.calls.DeleteSubjectModeExecute = nil
+	m.lockDeleteSubjectModeExecute.Unlock()
 	m.lockDeleteTag.Lock()
 	m.calls.DeleteTag = nil
 	m.lockDeleteTag.Unlock()
+	m.lockDeleteTagExecute.Lock()
+	m.calls.DeleteTagExecute = nil
+	m.lockDeleteTagExecute.Unlock()
 	m.lockDeleteTagDef.Lock()
 	m.calls.DeleteTagDef = nil
 	m.lockDeleteTagDef.Unlock()
+	m.lockDeleteTagDefExecute.Lock()
+	m.calls.DeleteTagDefExecute = nil
+	m.lockDeleteTagDefExecute.Unlock()
+	m.lockDeleteTopLevelConfig.Lock()
+	m.calls.DeleteTopLevelConfig = nil
+	m.lockDeleteTopLevelConfig.Unlock()
+	m.lockDeleteTopLevelConfigExecute.Lock()
+	m.calls.DeleteTopLevelConfigExecute = nil
+	m.lockDeleteTopLevelConfigExecute.Unlock()
 	m.lockGet.Lock()
 	m.calls.Get = nil
 	m.lockGet.Unlock()
+	m.lockGetExecute.Lock()
+	m.calls.GetExecute = nil
+	m.lockGetExecute.Unlock()
 	m.lockGetAllBusinessMetadataDefs.Lock()
 	m.calls.GetAllBusinessMetadataDefs = nil
 	m.lockGetAllBusinessMetadataDefs.Unlock()
+	m.lockGetAllBusinessMetadataDefsExecute.Lock()
+	m.calls.GetAllBusinessMetadataDefsExecute = nil
+	m.lockGetAllBusinessMetadataDefsExecute.Unlock()
 	m.lockGetAllTagDefs.Lock()
 	m.calls.GetAllTagDefs = nil
 	m.lockGetAllTagDefs.Unlock()
+	m.lockGetAllTagDefsExecute.Lock()
+	m.calls.GetAllTagDefsExecute = nil
+	m.lockGetAllTagDefsExecute.Unlock()
 	m.lockGetBusinessMetadata.Lock()
 	m.calls.GetBusinessMetadata = nil
 	m.lockGetBusinessMetadata.Unlock()
+	m.lockGetBusinessMetadataExecute.Lock()
+	m.calls.GetBusinessMetadataExecute = nil
+	m.lockGetBusinessMetadataExecute.Unlock()
 	m.lockGetBusinessMetadataDefByName.Lock()
 	m.calls.GetBusinessMetadataDefByName = nil
 	m.lockGetBusinessMetadataDefByName.Unlock()
+	m.lockGetBusinessMetadataDefByNameExecute.Lock()
+	m.calls.GetBusinessMetadataDefByNameExecute = nil
+	m.lockGetBusinessMetadataDefByNameExecute.Unlock()
 	m.lockGetByUniqueAttributes.Lock()
 	m.calls.GetByUniqueAttributes = nil
 	m.lockGetByUniqueAttributes.Unlock()
+	m.lockGetByUniqueAttributesExecute.Lock()
+	m.calls.GetByUniqueAttributesExecute = nil
+	m.lockGetByUniqueAttributesExecute.Unlock()
 	m.lockGetClusterId.Lock()
 	m.calls.GetClusterId = nil
 	m.lockGetClusterId.Unlock()
+	m.lockGetClusterIdExecute.Lock()
+	m.calls.GetClusterIdExecute = nil
+	m.lockGetClusterIdExecute.Unlock()
+	m.lockGetDek.Lock()
+	m.calls.GetDek = nil
+	m.lockGetDek.Unlock()
+	m.lockGetDekExecute.Lock()
+	m.calls.GetDekExecute = nil
+	m.lockGetDekExecute.Unlock()
+	m.lockGetDekByVersion.Lock()
+	m.calls.GetDekByVersion = nil
+	m.lockGetDekByVersion.Unlock()
+	m.lockGetDekByVersionExecute.Lock()
+	m.calls.GetDekByVersionExecute = nil
+	m.lockGetDekByVersionExecute.Unlock()
+	m.lockGetDekSubjects.Lock()
+	m.calls.GetDekSubjects = nil
+	m.lockGetDekSubjects.Unlock()
+	m.lockGetDekSubjectsExecute.Lock()
+	m.calls.GetDekSubjectsExecute = nil
+	m.lockGetDekSubjectsExecute.Unlock()
+	m.lockGetDekVersions.Lock()
+	m.calls.GetDekVersions = nil
+	m.lockGetDekVersions.Unlock()
+	m.lockGetDekVersionsExecute.Lock()
+	m.calls.GetDekVersionsExecute = nil
+	m.lockGetDekVersionsExecute.Unlock()
 	m.lockGetExporterConfig.Lock()
 	m.calls.GetExporterConfig = nil
 	m.lockGetExporterConfig.Unlock()
+	m.lockGetExporterConfigExecute.Lock()
+	m.calls.GetExporterConfigExecute = nil
+	m.lockGetExporterConfigExecute.Unlock()
 	m.lockGetExporterInfo.Lock()
 	m.calls.GetExporterInfo = nil
 	m.lockGetExporterInfo.Unlock()
+	m.lockGetExporterInfoExecute.Lock()
+	m.calls.GetExporterInfoExecute = nil
+	m.lockGetExporterInfoExecute.Unlock()
 	m.lockGetExporterStatus.Lock()
 	m.calls.GetExporterStatus = nil
 	m.lockGetExporterStatus.Unlock()
+	m.lockGetExporterStatusExecute.Lock()
+	m.calls.GetExporterStatusExecute = nil
+	m.lockGetExporterStatusExecute.Unlock()
 	m.lockGetExporters.Lock()
 	m.calls.GetExporters = nil
 	m.lockGetExporters.Unlock()
+	m.lockGetExportersExecute.Lock()
+	m.calls.GetExportersExecute = nil
+	m.lockGetExportersExecute.Unlock()
+	m.lockGetKek.Lock()
+	m.calls.GetKek = nil
+	m.lockGetKek.Unlock()
+	m.lockGetKekExecute.Lock()
+	m.calls.GetKekExecute = nil
+	m.lockGetKekExecute.Unlock()
+	m.lockGetKekNames.Lock()
+	m.calls.GetKekNames = nil
+	m.lockGetKekNames.Unlock()
+	m.lockGetKekNamesExecute.Lock()
+	m.calls.GetKekNamesExecute = nil
+	m.lockGetKekNamesExecute.Unlock()
 	m.lockGetMode.Lock()
 	m.calls.GetMode = nil
 	m.lockGetMode.Unlock()
+	m.lockGetModeExecute.Lock()
+	m.calls.GetModeExecute = nil
+	m.lockGetModeExecute.Unlock()
 	m.lockGetReferencedBy.Lock()
 	m.calls.GetReferencedBy = nil
 	m.lockGetReferencedBy.Unlock()
+	m.lockGetReferencedByExecute.Lock()
+	m.calls.GetReferencedByExecute = nil
+	m.lockGetReferencedByExecute.Unlock()
 	m.lockGetSchema.Lock()
 	m.calls.GetSchema = nil
 	m.lockGetSchema.Unlock()
+	m.lockGetSchemaExecute.Lock()
+	m.calls.GetSchemaExecute = nil
+	m.lockGetSchemaExecute.Unlock()
 	m.lockGetSchemaByVersion.Lock()
 	m.calls.GetSchemaByVersion = nil
 	m.lockGetSchemaByVersion.Unlock()
+	m.lockGetSchemaByVersionExecute.Lock()
+	m.calls.GetSchemaByVersionExecute = nil
+	m.lockGetSchemaByVersionExecute.Unlock()
 	m.lockGetSchemaOnly.Lock()
 	m.calls.GetSchemaOnly = nil
 	m.lockGetSchemaOnly.Unlock()
+	m.lockGetSchemaOnlyExecute.Lock()
+	m.calls.GetSchemaOnlyExecute = nil
+	m.lockGetSchemaOnlyExecute.Unlock()
 	m.lockGetSchemaTypes.Lock()
 	m.calls.GetSchemaTypes = nil
 	m.lockGetSchemaTypes.Unlock()
+	m.lockGetSchemaTypesExecute.Lock()
+	m.calls.GetSchemaTypesExecute = nil
+	m.lockGetSchemaTypesExecute.Unlock()
 	m.lockGetSchemas.Lock()
 	m.calls.GetSchemas = nil
 	m.lockGetSchemas.Unlock()
+	m.lockGetSchemasExecute.Lock()
+	m.calls.GetSchemasExecute = nil
+	m.lockGetSchemasExecute.Unlock()
 	m.lockGetSubjectLevelConfig.Lock()
 	m.calls.GetSubjectLevelConfig = nil
 	m.lockGetSubjectLevelConfig.Unlock()
+	m.lockGetSubjectLevelConfigExecute.Lock()
+	m.calls.GetSubjectLevelConfigExecute = nil
+	m.lockGetSubjectLevelConfigExecute.Unlock()
 	m.lockGetSubjects.Lock()
 	m.calls.GetSubjects = nil
 	m.lockGetSubjects.Unlock()
+	m.lockGetSubjectsExecute.Lock()
+	m.calls.GetSubjectsExecute = nil
+	m.lockGetSubjectsExecute.Unlock()
 	m.lockGetTagDefByName.Lock()
 	m.calls.GetTagDefByName = nil
 	m.lockGetTagDefByName.Unlock()
+	m.lockGetTagDefByNameExecute.Lock()
+	m.calls.GetTagDefByNameExecute = nil
+	m.lockGetTagDefByNameExecute.Unlock()
 	m.lockGetTags.Lock()
 	m.calls.GetTags = nil
 	m.lockGetTags.Unlock()
+	m.lockGetTagsExecute.Lock()
+	m.calls.GetTagsExecute = nil
+	m.lockGetTagsExecute.Unlock()
 	m.lockGetTopLevelConfig.Lock()
 	m.calls.GetTopLevelConfig = nil
 	m.lockGetTopLevelConfig.Unlock()
+	m.lockGetTopLevelConfigExecute.Lock()
+	m.calls.GetTopLevelConfigExecute = nil
+	m.lockGetTopLevelConfigExecute.Unlock()
 	m.lockGetTopLevelMode.Lock()
 	m.calls.GetTopLevelMode = nil
 	m.lockGetTopLevelMode.Unlock()
+	m.lockGetTopLevelModeExecute.Lock()
+	m.calls.GetTopLevelModeExecute = nil
+	m.lockGetTopLevelModeExecute.Unlock()
 	m.lockGetVersions.Lock()
 	m.calls.GetVersions = nil
 	m.lockGetVersions.Unlock()
+	m.lockGetVersionsExecute.Lock()
+	m.calls.GetVersionsExecute = nil
+	m.lockGetVersionsExecute.Unlock()
 	m.lockList.Lock()
 	m.calls.List = nil
 	m.lockList.Unlock()
+	m.lockListExecute.Lock()
+	m.calls.ListExecute = nil
+	m.lockListExecute.Unlock()
 	m.lockListContexts.Lock()
 	m.calls.ListContexts = nil
 	m.lockListContexts.Unlock()
+	m.lockListContextsExecute.Lock()
+	m.calls.ListContextsExecute = nil
+	m.lockListContextsExecute.Unlock()
 	m.lockListVersions.Lock()
 	m.calls.ListVersions = nil
 	m.lockListVersions.Unlock()
+	m.lockListVersionsExecute.Lock()
+	m.calls.ListVersionsExecute = nil
+	m.lockListVersionsExecute.Unlock()
 	m.lockLookUpSchemaUnderSubject.Lock()
 	m.calls.LookUpSchemaUnderSubject = nil
 	m.lockLookUpSchemaUnderSubject.Unlock()
+	m.lockLookUpSchemaUnderSubjectExecute.Lock()
+	m.calls.LookUpSchemaUnderSubjectExecute = nil
+	m.lockLookUpSchemaUnderSubjectExecute.Unlock()
 	m.lockPartialUpdateByUniqueAttributes.Lock()
 	m.calls.PartialUpdateByUniqueAttributes = nil
 	m.lockPartialUpdateByUniqueAttributes.Unlock()
+	m.lockPartialUpdateByUniqueAttributesExecute.Lock()
+	m.calls.PartialUpdateByUniqueAttributesExecute = nil
+	m.lockPartialUpdateByUniqueAttributesExecute.Unlock()
 	m.lockPauseExporter.Lock()
 	m.calls.PauseExporter = nil
 	m.lockPauseExporter.Unlock()
+	m.lockPauseExporterExecute.Lock()
+	m.calls.PauseExporterExecute = nil
+	m.lockPauseExporterExecute.Unlock()
 	m.lockPost.Lock()
 	m.calls.Post = nil
 	m.lockPost.Unlock()
+	m.lockPostExecute.Lock()
+	m.calls.PostExecute = nil
+	m.lockPostExecute.Unlock()
 	m.lockPutExporter.Lock()
 	m.calls.PutExporter = nil
 	m.lockPutExporter.Unlock()
+	m.lockPutExporterExecute.Lock()
+	m.calls.PutExporterExecute = nil
+	m.lockPutExporterExecute.Unlock()
 	m.lockPutExporterConfig.Lock()
 	m.calls.PutExporterConfig = nil
 	m.lockPutExporterConfig.Unlock()
+	m.lockPutExporterConfigExecute.Lock()
+	m.calls.PutExporterConfigExecute = nil
+	m.lockPutExporterConfigExecute.Unlock()
+	m.lockPutKek.Lock()
+	m.calls.PutKek = nil
+	m.lockPutKek.Unlock()
+	m.lockPutKekExecute.Lock()
+	m.calls.PutKekExecute = nil
+	m.lockPutKekExecute.Unlock()
 	m.lockRegister.Lock()
 	m.calls.Register = nil
 	m.lockRegister.Unlock()
+	m.lockRegisterExecute.Lock()
+	m.calls.RegisterExecute = nil
+	m.lockRegisterExecute.Unlock()
 	m.lockResetExporter.Lock()
 	m.calls.ResetExporter = nil
 	m.lockResetExporter.Unlock()
+	m.lockResetExporterExecute.Lock()
+	m.calls.ResetExporterExecute = nil
+	m.lockResetExporterExecute.Unlock()
 	m.lockResumeExporter.Lock()
 	m.calls.ResumeExporter = nil
 	m.lockResumeExporter.Unlock()
+	m.lockResumeExporterExecute.Lock()
+	m.calls.ResumeExporterExecute = nil
+	m.lockResumeExporterExecute.Unlock()
 	m.lockSearchUsingAttribute.Lock()
 	m.calls.SearchUsingAttribute = nil
 	m.lockSearchUsingAttribute.Unlock()
+	m.lockSearchUsingAttributeExecute.Lock()
+	m.calls.SearchUsingAttributeExecute = nil
+	m.lockSearchUsingAttributeExecute.Unlock()
 	m.lockSearchUsingBasic.Lock()
 	m.calls.SearchUsingBasic = nil
 	m.lockSearchUsingBasic.Unlock()
+	m.lockSearchUsingBasicExecute.Lock()
+	m.calls.SearchUsingBasicExecute = nil
+	m.lockSearchUsingBasicExecute.Unlock()
 	m.lockTestCompatibilityBySubjectName.Lock()
 	m.calls.TestCompatibilityBySubjectName = nil
 	m.lockTestCompatibilityBySubjectName.Unlock()
+	m.lockTestCompatibilityBySubjectNameExecute.Lock()
+	m.calls.TestCompatibilityBySubjectNameExecute = nil
+	m.lockTestCompatibilityBySubjectNameExecute.Unlock()
 	m.lockTestCompatibilityForSubject.Lock()
 	m.calls.TestCompatibilityForSubject = nil
 	m.lockTestCompatibilityForSubject.Unlock()
+	m.lockTestCompatibilityForSubjectExecute.Lock()
+	m.calls.TestCompatibilityForSubjectExecute = nil
+	m.lockTestCompatibilityForSubjectExecute.Unlock()
+	m.lockUndeleteDekVersion.Lock()
+	m.calls.UndeleteDekVersion = nil
+	m.lockUndeleteDekVersion.Unlock()
+	m.lockUndeleteDekVersionExecute.Lock()
+	m.calls.UndeleteDekVersionExecute = nil
+	m.lockUndeleteDekVersionExecute.Unlock()
+	m.lockUndeleteDekVersions.Lock()
+	m.calls.UndeleteDekVersions = nil
+	m.lockUndeleteDekVersions.Unlock()
+	m.lockUndeleteDekVersionsExecute.Lock()
+	m.calls.UndeleteDekVersionsExecute = nil
+	m.lockUndeleteDekVersionsExecute.Unlock()
+	m.lockUndeleteKek.Lock()
+	m.calls.UndeleteKek = nil
+	m.lockUndeleteKek.Unlock()
+	m.lockUndeleteKekExecute.Lock()
+	m.calls.UndeleteKekExecute = nil
+	m.lockUndeleteKekExecute.Unlock()
 	m.lockUpdateBusinessMetadata.Lock()
 	m.calls.UpdateBusinessMetadata = nil
 	m.lockUpdateBusinessMetadata.Unlock()
+	m.lockUpdateBusinessMetadataExecute.Lock()
+	m.calls.UpdateBusinessMetadataExecute = nil
+	m.lockUpdateBusinessMetadataExecute.Unlock()
 	m.lockUpdateBusinessMetadataDefs.Lock()
 	m.calls.UpdateBusinessMetadataDefs = nil
 	m.lockUpdateBusinessMetadataDefs.Unlock()
+	m.lockUpdateBusinessMetadataDefsExecute.Lock()
+	m.calls.UpdateBusinessMetadataDefsExecute = nil
+	m.lockUpdateBusinessMetadataDefsExecute.Unlock()
 	m.lockUpdateMode.Lock()
 	m.calls.UpdateMode = nil
 	m.lockUpdateMode.Unlock()
+	m.lockUpdateModeExecute.Lock()
+	m.calls.UpdateModeExecute = nil
+	m.lockUpdateModeExecute.Unlock()
 	m.lockUpdateSubjectLevelConfig.Lock()
 	m.calls.UpdateSubjectLevelConfig = nil
 	m.lockUpdateSubjectLevelConfig.Unlock()
+	m.lockUpdateSubjectLevelConfigExecute.Lock()
+	m.calls.UpdateSubjectLevelConfigExecute = nil
+	m.lockUpdateSubjectLevelConfigExecute.Unlock()
 	m.lockUpdateTagDefs.Lock()
 	m.calls.UpdateTagDefs = nil
 	m.lockUpdateTagDefs.Unlock()
+	m.lockUpdateTagDefsExecute.Lock()
+	m.calls.UpdateTagDefsExecute = nil
+	m.lockUpdateTagDefsExecute.Unlock()
 	m.lockUpdateTags.Lock()
 	m.calls.UpdateTags = nil
 	m.lockUpdateTags.Unlock()
+	m.lockUpdateTagsExecute.Lock()
+	m.calls.UpdateTagsExecute = nil
+	m.lockUpdateTagsExecute.Unlock()
 	m.lockUpdateTopLevelConfig.Lock()
 	m.calls.UpdateTopLevelConfig = nil
 	m.lockUpdateTopLevelConfig.Unlock()
+	m.lockUpdateTopLevelConfigExecute.Lock()
+	m.calls.UpdateTopLevelConfigExecute = nil
+	m.lockUpdateTopLevelConfigExecute.Unlock()
 	m.lockUpdateTopLevelMode.Lock()
 	m.calls.UpdateTopLevelMode = nil
 	m.lockUpdateTopLevelMode.Unlock()
+	m.lockUpdateTopLevelModeExecute.Lock()
+	m.calls.UpdateTopLevelModeExecute = nil
+	m.lockUpdateTopLevelModeExecute.Unlock()
 }

@@ -2,7 +2,8 @@ version: v1.0
 name: schema-registry-sdk-go
 agent:
   machine:
-    type: s1-prod-ubuntu20-04-amd64-1
+    type: e1-standard-2
+    os_image: ubuntu2004
 blocks:
   - name: Build
     task:
@@ -14,7 +15,6 @@ blocks:
           - export "PATH=${GOPATH}/bin:${PATH}"
           - mkdir -vp "${SEMAPHORE_GIT_DIR}" "${GOPATH}/bin"
           - git config --global url."git@github.com:".insteadOf "https://github.com/"
-          - chmod 400 ~/.ssh/id_rsa
           - export SEMAPHORE_CACHE_DIR=/home/semaphore
       jobs:
         - commands:

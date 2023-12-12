@@ -5,6 +5,657 @@ info:
 servers:
 - url: /
 paths:
+  /dek-registry/v1/keks/{name}/deks:
+    get:
+      operationId: getDekSubjects
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  example: User
+                  type: string
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  example: User
+                  type: string
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  example: User
+                  type: string
+                type: array
+          description: List of dek subjects
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Get a list of dek subjects.
+    post:
+      operationId: createDek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/CreateDekRequest'
+        description: The create request
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Dek'
+          description: The create response
+      summary: Create a dek.
+  /dek-registry/v1/keks:
+    get:
+      operationId: getKekNames
+      parameters:
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  example: mykek
+                  type: string
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  example: mykek
+                  type: string
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  example: mykek
+                  type: string
+                type: array
+          description: List of kek names
+      summary: Get a list of kek names.
+    post:
+      operationId: createKek
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/CreateKekRequest'
+        description: The create request
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Kek'
+          description: The create response
+      summary: Create a kek.
+  /dek-registry/v1/keks/{name}:
+    delete:
+      operationId: deleteKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to perform a permanent delete
+        explode: true
+        in: query
+        name: permanent
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Delete a kek.
+    get:
+      operationId: getKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Kek'
+          description: The kek info
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Get a kek by name.
+    put:
+      operationId: putKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/vnd.schemaregistry.v1+json:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+          application/vnd.schemaregistry+json:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/UpdateKekRequest'
+        description: The update request
+        required: true
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Kek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Kek'
+          description: The update response
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Alters a kek.
+  /dek-registry/v1/keks/{name}/deks/{subject}:
+    delete:
+      operationId: deleteDekVersions
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to perform a permanent delete
+        explode: true
+        in: query
+        name: permanent
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Delete all versions of a dek.
+    get:
+      operationId: getDek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Dek'
+          description: The dek info
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Get a dek by subject.
+  /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}:
+    delete:
+      operationId: deleteDekVersion
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Version of the dek
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to perform a permanent delete
+        explode: true
+        in: query
+        name: permanent
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+        "422":
+          description: Error code 42202 -- Invalid version
+      summary: Delete a dek version.
+    get:
+      operationId: getDekByVersion
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Version of the dek
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/Dek'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/Dek'
+          description: The dek info
+        "404":
+          description: Error code 40470 -- Key not found
+        "422":
+          description: Error code 42202 -- Invalid version
+      summary: Get a dek by subject and version.
+  /dek-registry/v1/keks/{name}/deks/{subject}/versions:
+    get:
+      operationId: getDekVersions
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      - description: Whether to include deleted keys
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                items:
+                  example: 1
+                  format: int32
+                  type: integer
+                type: array
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                items:
+                  example: 1
+                  format: int32
+                  type: integer
+                type: array
+            application/json; qs=0.5:
+              schema:
+                items:
+                  example: 1
+                  format: int32
+                  type: integer
+                type: array
+          description: List of version numbers for dek
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: List versions of dek.
+  /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version}/undelete:
+    post:
+      operationId: undeleteDekVersion
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Version of the dek
+        explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+        "422":
+          description: Error code 42202 -- Invalid version
+      summary: Undelete a dek version.
+  /dek-registry/v1/keks/{name}/deks/{subject}/undelete:
+    post:
+      operationId: undeleteDekVersions
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Subject of the dek
+        explode: false
+        in: path
+        name: subject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Algorithm of the dek
+        explode: true
+        in: query
+        name: algorithm
+        required: false
+        schema:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        style: form
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Undelete all versions of a dek.
+  /dek-registry/v1/keks/{name}/undelete:
+    post:
+      operationId: undeleteKek
+      parameters:
+      - description: Name of the kek
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Error code 40470 -- Key not found
+      summary: Undelete a kek.
   /catalog/v1/entity/businessmetadata:
     post:
       description: Bulk API to create multiple business metadata.
@@ -324,7 +975,67 @@ paths:
         for compatibility.
       x-codegen-request-body-name: body
   /config:
+    delete:
+      description: Deletes the global compatibility level config and reverts to the
+        default.
+      operationId: deleteTopLevelConfig
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              example: FULL_TRANSITIVE
+              schema:
+                enum:
+                - NONE
+                - BACKWARD
+                - BACKWARD_TRANSITIVE
+                - FORWARD
+                - FORWARD_TRANSITIVE
+                - FULL
+                - FULL_TRANSITIVE
+                type: string
+            application/vnd.schemaregistry+json; qs=0.9:
+              example: FULL_TRANSITIVE
+              schema:
+                enum:
+                - NONE
+                - BACKWARD
+                - BACKWARD_TRANSITIVE
+                - FORWARD
+                - FORWARD_TRANSITIVE
+                - FULL
+                - FULL_TRANSITIVE
+                type: string
+            application/json; qs=0.5:
+              example: FULL_TRANSITIVE
+              schema:
+                enum:
+                - NONE
+                - BACKWARD
+                - BACKWARD_TRANSITIVE
+                - FORWARD
+                - FORWARD_TRANSITIVE
+                - FULL
+                - FULL_TRANSITIVE
+                type: string
+          description: Operation succeeded. Returns old global compatibility level.
+        "500":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Internal Server Error. Error code 50001 indicates a failure
+            in the backend data store.
+      summary: Delete global compatibility level
+      x-codegen-request-body-name: body
     get:
+      description: Retrieves the global compatibility level.
       operationId: getTopLevelConfig
       responses:
         "200":
@@ -338,12 +1049,24 @@ paths:
             application/json; qs=0.5:
               schema:
                 $ref: '#/components/schemas/Config'
-          description: successful operation
+          description: The global compatibility level.
         "500":
-          content: {}
-          description: Error code 50001 -- Error in the backend data store
-      summary: Get global compatibility level.
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Internal Server Error. Error code 50001 indicates a failure
+            in the backend data store.
+      summary: Get global compatibility level
     put:
+      description: Updates the global compatibility level. On success, echoes the
+        original request back to the client.
       operationId: updateTopLevelConfig
       requestBody:
         content:
@@ -373,17 +1096,35 @@ paths:
             application/json; qs=0.5:
               schema:
                 $ref: '#/components/schemas/ConfigUpdateRequest'
-          description: successful operation
+          description: The original request.
         "422":
-          content: {}
-          description: Error code 42203 -- Invalid compatibility level
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Unprocessable Entity. Error code 42203 indicates invalid compatibility
+            level.
         "500":
-          content: {}
-          description: |
-            Error code 50001 -- Error in the backend data store
-            Error code 50003 -- Error while forwarding the request to the primary
-      summary: Update global compatibility level.
-      x-codegen-request-body-name: body
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Internal Server Error. Error code 50001 indicates a failure
+            in the backend data store. Error code 50003 indicates a failure forwarding
+            the request to the primary.
+      summary: Update global compatibility level
   /config/{subject}:
     delete:
       operationId: deleteSubjectConfig
@@ -1045,6 +1786,14 @@ paths:
         schema:
           type: boolean
         style: form
+      - description: Whether to return deleted subjects only
+        explode: true
+        in: query
+        name: deletedOnly
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1196,6 +1945,14 @@ paths:
         schema:
           type: boolean
         style: form
+      - description: Whether to return deleted schemas only
+        explode: true
+        in: query
+        name: deletedOnly
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1226,9 +1983,13 @@ paths:
           description: Error code 50001 -- Error in the backend data store
       summary: Get a list of versions registered under the specified subject.
     post:
+      description: |-
+        Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
+        A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
+        When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
       operationId: register
       parameters:
-      - description: Name of the Subject
+      - description: Name of the subject
         explode: false
         in: path
         name: subject
@@ -1236,6 +1997,14 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Whether to register the normalized schema
+        explode: true
+        in: query
+        name: normalize
+        required: false
+        schema:
+          type: boolean
+        style: form
       requestBody:
         content:
           application/vnd.schemaregistry.v1+json:
@@ -1266,21 +2035,45 @@ paths:
                 $ref: '#/components/schemas/RegisterSchemaResponse'
           description: successful operation
         "409":
-          content: {}
-          description: Incompatible schema
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Conflict. Incompatible schema.
         "422":
-          content: {}
-          description: Error code 42201 -- Invalid schema or schema type
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: 'Unprocessable entity. Error code 42201 indicates an invalid
+            schema or schema type. '
         "500":
-          content: {}
-          description: |-
-            Error code 50001 -- Error in the backend data store
-            Error code 50002 -- Operation timed out
-            Error code 50003 -- Error while forwarding the request to the primary
-      summary: |-
-        Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
-        A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
-        When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+            application/json; qs=0.5:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+          description: Internal Server Error. Error code 50001 indicates a failure
+            in the backend data store.Error code 50002 indicates operation timed out.
+            Error code 50003 indicates a failure forwarding the request to the primary.
+      summary: Register schema under a subject
       x-codegen-request-body-name: body
   /subjects/{subject}/versions/{version}:
     delete:
@@ -3036,6 +3829,19 @@ paths:
         "500":
           description: Internal Server Error
       summary: Get the tag definition with the given name.
+  /asyncapi/parse:
+    put:
+      description: Get number of times the cli tool is used to import and parse the
+        spec file
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "429":
+          description: Rate Limit Error
+        "500":
+          description: Internal Server Error
   /asyncapi:
     put:
       description: Get number of times the cli tool is used to export/produce the
@@ -3051,6 +3857,134 @@ paths:
           description: Internal Server Error
 components:
   schemas:
+    Dek:
+      example:
+        kekName: kekName
+        keyMaterial: keyMaterial
+        deleted: true
+        subject: subject
+        encryptedKeyMaterial: encryptedKeyMaterial
+        version: 0
+        algorithm: AES128_GCM
+        ts: 6
+      properties:
+        kekName:
+          type: string
+        subject:
+          type: string
+        version:
+          format: int32
+          type: integer
+        algorithm:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        encryptedKeyMaterial:
+          type: string
+        keyMaterial:
+          type: string
+        ts:
+          format: int64
+          type: integer
+        deleted:
+          type: boolean
+      type: object
+    CreateDekRequest:
+      example:
+        subject: subject
+        encryptedKeyMaterial: encryptedKeyMaterial
+        version: 0
+        algorithm: AES128_GCM
+      properties:
+        subject:
+          type: string
+        version:
+          format: int32
+          type: integer
+        algorithm:
+          enum:
+          - AES128_GCM
+          - AES256_GCM
+          - AES256_SIV
+          type: string
+        encryptedKeyMaterial:
+          type: string
+      type: object
+    Kek:
+      example:
+        kmsProps:
+          key: kmsProps
+        shared: true
+        deleted: true
+        name: name
+        doc: doc
+        kmsKeyId: kmsKeyId
+        kmsType: kmsType
+        ts: 0
+      properties:
+        name:
+          type: string
+        kmsType:
+          type: string
+        kmsKeyId:
+          type: string
+        kmsProps:
+          additionalProperties:
+            type: string
+          type: object
+        doc:
+          type: string
+        shared:
+          type: boolean
+        ts:
+          format: int64
+          type: integer
+        deleted:
+          type: boolean
+      type: object
+    CreateKekRequest:
+      example:
+        kmsProps:
+          key: kmsProps
+        shared: true
+        name: name
+        doc: doc
+        kmsKeyId: kmsKeyId
+        kmsType: kmsType
+      properties:
+        name:
+          type: string
+        kmsType:
+          type: string
+        kmsKeyId:
+          type: string
+        kmsProps:
+          additionalProperties:
+            type: string
+          type: object
+        doc:
+          type: string
+        shared:
+          type: boolean
+      type: object
+    UpdateKekRequest:
+      example:
+        kmsProps:
+          key: kmsProps
+        shared: true
+        doc: doc
+      properties:
+        kmsProps:
+          additionalProperties:
+            type: string
+          type: object
+        doc:
+          type: string
+        shared:
+          type: boolean
+      type: object
     CompatibilityCheckResponse:
       example:
         is_compatible: true
@@ -3066,11 +4000,12 @@ components:
           type: array
       type: object
     Config:
+      description: Config
       example:
         compatibilityLevel: BACKWARD
       properties:
         compatibilityLevel:
-          description: Compatability Level
+          description: Compatibility Level
           enum:
           - BACKWARD
           - BACKWARD_TRANSITIVE
@@ -3079,14 +4014,26 @@ components:
           - FULL
           - FULL_TRANSITIVE
           - NONE
+          example: FULL_TRANSITIVE
           type: string
+        compatibilityGroup:
+          type: string
+        defaultMetadata:
+          $ref: '#/components/schemas/Metadata'
+        overrideMetadata:
+          $ref: '#/components/schemas/Metadata'
+        defaultRuleSet:
+          $ref: '#/components/schemas/RuleSet'
+        overrideRuleSet:
+          $ref: '#/components/schemas/RuleSet'
       type: object
     ConfigUpdateRequest:
+      description: Config update request
       example:
         compatibility: BACKWARD
       properties:
         compatibility:
-          description: Compatability Level
+          description: Compatibility Level
           enum:
           - BACKWARD
           - BACKWARD_TRANSITIVE
@@ -3095,7 +4042,18 @@ components:
           - FULL
           - FULL_TRANSITIVE
           - NONE
+          example: FULL_TRANSITIVE
           type: string
+        compatibilityGroup:
+          type: string
+        defaultMetadata:
+          $ref: '#/components/schemas/Metadata'
+        overrideMetadata:
+          $ref: '#/components/schemas/Metadata'
+        defaultRuleSet:
+          $ref: '#/components/schemas/RuleSet'
+        overrideRuleSet:
+          $ref: '#/components/schemas/RuleSet'
       type: object
     Mode:
       example:
@@ -3112,6 +4070,7 @@ components:
           type: string
       type: object
     RegisterSchemaRequest:
+      description: Schema register request
       example:
         schema: schema
         references:
@@ -3126,25 +4085,37 @@ components:
         version: 0
       properties:
         version:
+          description: Version number
           format: int32
           type: integer
         id:
+          description: Globally unique identifier of the schema
           format: int32
           type: integer
         schemaType:
+          description: Schema type
           type: string
         references:
+          description: References to other schemas
           items:
             $ref: '#/components/schemas/SchemaReference'
           type: array
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        ruleSet:
+          $ref: '#/components/schemas/RuleSet'
         schema:
+          description: Schema definition string
           type: string
       type: object
     RegisterSchemaResponse:
+      description: Schema register response
       example:
         id: 0
       properties:
         id:
+          description: Globally unique identifier of the schema
+          example: 100001
           format: int32
           type: integer
       type: object
@@ -3179,6 +4150,10 @@ components:
           type: array
         schema:
           type: string
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        ruleset:
+          $ref: '#/components/schemas/RuleSet'
       type: object
     SchemaReference:
       example:
@@ -3218,6 +4193,10 @@ components:
           items:
             $ref: '#/components/schemas/SchemaReference'
           type: array
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        ruleSet:
+          $ref: '#/components/schemas/RuleSet'
         maxId:
           description: Maximum ID
           format: int32
@@ -3248,6 +4227,94 @@ components:
         version:
           format: int32
           type: integer
+      type: object
+    Metadata:
+      description: User-defined metadata
+      nullable: true
+      properties:
+        tags:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+            uniqueItems: true
+          type: object
+        properties:
+          additionalProperties:
+            type: string
+          type: object
+        sensitive:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    Rule:
+      description: Rule
+      properties:
+        name:
+          description: Rule name
+          type: string
+        doc:
+          description: Rule doc
+          type: string
+        kind:
+          description: Rule kind
+          enum:
+          - TRANSFORM
+          - CONDITION
+          type: string
+        mode:
+          description: Rule mode
+          enum:
+          - UPGRADE
+          - DOWNGRADE
+          - UPDOWN
+          - WRITE
+          - READ
+          - WRITEREAD
+          type: string
+        type:
+          description: Rule type
+          type: string
+        tags:
+          description: The tags to which this rule applies
+          items:
+            description: The tags to which this rule applies
+            type: string
+          type: array
+          uniqueItems: true
+        params:
+          additionalProperties:
+            description: Optional params for the rule
+            type: string
+          description: Optional params for the rule
+          type: object
+        expr:
+          description: Rule expression
+          type: string
+        onSuccess:
+          description: Rule action on success
+          type: string
+        onFailure:
+          description: Rule action on failure
+          type: string
+        disabled:
+          description: Whether the rule is disabled
+          type: boolean
+      type: object
+    RuleSet:
+      description: Schema rule set
+      nullable: true
+      properties:
+        migrationRules:
+          items:
+            $ref: '#/components/schemas/Rule'
+          type: array
+        domainRules:
+          items:
+            $ref: '#/components/schemas/Rule'
+          type: array
       type: object
     CreateExporterRequest:
       example:
@@ -4018,7 +5085,6 @@ components:
         typeName:
           type: string
         attributes:
-          additionalProperties: true
           type: object
         guid:
           type: string
@@ -4697,11 +5763,11 @@ components:
         updatedBy:
           type: string
         createTime:
-          format: date-time
-          type: string
+          format: int64
+          type: integer
         updateTime:
-          format: date-time
-          type: string
+          format: int64
+          type: integer
         version:
           format: int64
           type: integer
@@ -4831,11 +5897,11 @@ components:
         updatedBy:
           type: string
         createTime:
-          format: date-time
-          type: string
+          format: int64
+          type: integer
         updateTime:
-          format: date-time
-          type: string
+          format: int64
+          type: integer
         version:
           format: int64
           type: integer
