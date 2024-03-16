@@ -459,3 +459,7 @@ flycheck_*.el
 
 !/.github/
 !/.github/**
+
+# Chart dependencies
+**/charts/*.tgz
+charts/package/
