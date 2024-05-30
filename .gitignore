@@ -258,6 +258,9 @@ flycheck_*.el
 go.work
 go.work.sum
 
+# env file
+.env
+
 #
 # Global/macOS Gitignore
 #
