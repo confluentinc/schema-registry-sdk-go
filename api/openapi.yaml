@@ -4104,6 +4104,16 @@ components:
           $ref: '#/components/schemas/Metadata'
         ruleSet:
           $ref: '#/components/schemas/RuleSet'
+        schemaTagsToAdd:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaTags'
+        schemaTagsToRemove:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchemaTags'
+        propagateSchemaTags:
+          type: boolean
         schema:
           description: Schema definition string
           type: string
@@ -4316,6 +4326,25 @@ components:
             $ref: '#/components/schemas/Rule'
           type: array
       type: object
+    SchemaEntity:
+      type: object
+      properties:
+        entityPath:
+          type: string
+        entityType:
+          type: string
+          enum:
+            - sr_record
+            - sr_field
+    SchemaTags:
+      type: object
+      properties:
+        schemaEntity:
+          $ref: '#/components/schemas/SchemaEntity'
+        tags:
+          type: array
+          items:
+            type: string
     CreateExporterRequest:
       example:
         subjectRenameFormat: subjectRenameFormat
