@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -126,7 +127,11 @@ func (o Mode) MarshalJSON() ([]byte, error) {
 	if o.Mode != nil {
 		toSerialize["mode"] = o.Mode
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableMode struct {
@@ -157,7 +162,11 @@ func NewNullableMode(val *Mode) *NullableMode {
 }
 
 func (v NullableMode) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableMode) UnmarshalJSON(src []byte) error {

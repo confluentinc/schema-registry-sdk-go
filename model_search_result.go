@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -237,7 +238,11 @@ func (o SearchResult) MarshalJSON() ([]byte, error) {
 	if o.ReferredEntities != nil {
 		toSerialize["referredEntities"] = o.ReferredEntities
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableSearchResult struct {
@@ -268,7 +273,11 @@ func NewNullableSearchResult(val *SearchResult) *NullableSearchResult {
 }
 
 func (v NullableSearchResult) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableSearchResult) UnmarshalJSON(src []byte) error {
