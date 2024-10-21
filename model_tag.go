@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -422,7 +423,11 @@ func (o Tag) MarshalJSON() ([]byte, error) {
 	if o.EntityName != nil {
 		toSerialize["entityName"] = o.EntityName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableTag struct {
@@ -453,7 +458,11 @@ func NewNullableTag(val *Tag) *NullableTag {
 }
 
 func (v NullableTag) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableTag) UnmarshalJSON(src []byte) error {

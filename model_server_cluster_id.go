@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -163,7 +164,11 @@ func (o ServerClusterId) MarshalJSON() ([]byte, error) {
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableServerClusterId struct {
@@ -194,7 +199,11 @@ func NewNullableServerClusterId(val *ServerClusterId) *NullableServerClusterId {
 }
 
 func (v NullableServerClusterId) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableServerClusterId) UnmarshalJSON(src []byte) error {
