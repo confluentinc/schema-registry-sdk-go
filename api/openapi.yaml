@@ -4371,6 +4371,8 @@ components:
           type: string
         context:
           type: string
+        kekRenameFormat:
+          type: string
         subjectRenameFormat:
           type: string
         config:
@@ -4410,6 +4412,8 @@ components:
           - CUSTOM
           type: string
         context:
+          type: string
+        kekRenameFormat:
           type: string
         subjectRenameFormat:
           type: string
@@ -4468,6 +4472,8 @@ components:
           - CUSTOM
           type: string
         context:
+          type: string
+        kekRenameFormat:
           type: string
         subjectRenameFormat:
           type: string
