@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -385,7 +386,11 @@ func (o Dek) MarshalJSON() ([]byte, error) {
 	if o.Deleted != nil {
 		toSerialize["deleted"] = o.Deleted
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableDek struct {
@@ -416,7 +421,11 @@ func NewNullableDek(val *Dek) *NullableDek {
 }
 
 func (v NullableDek) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableDek) UnmarshalJSON(src []byte) error {
