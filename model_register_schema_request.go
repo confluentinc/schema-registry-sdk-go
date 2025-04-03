@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -44,6 +45,9 @@ type RegisterSchemaRequest struct {
 	References *[]SchemaReference `json:"references,omitempty"`
 	Metadata NullableMetadata `json:"metadata,omitempty"`
 	RuleSet NullableRuleSet `json:"ruleSet,omitempty"`
+	SchemaTagsToAdd *[]SchemaTags `json:"schemaTagsToAdd,omitempty"`
+	SchemaTagsToRemove *[]SchemaTags `json:"schemaTagsToRemove,omitempty"`
+	PropagateSchemaTags *bool `json:"propagateSchemaTags,omitempty"`
 	// Schema definition string
 	Schema *string `json:"schema,omitempty"`
 }
@@ -277,6 +281,102 @@ func (o *RegisterSchemaRequest) UnsetRuleSet() {
 	o.RuleSet.Unset()
 }
 
+// GetSchemaTagsToAdd returns the SchemaTagsToAdd field value if set, zero value otherwise.
+func (o *RegisterSchemaRequest) GetSchemaTagsToAdd() []SchemaTags {
+	if o == nil || o.SchemaTagsToAdd == nil {
+		var ret []SchemaTags
+		return ret
+	}
+	return *o.SchemaTagsToAdd
+}
+
+// GetSchemaTagsToAddOk returns a tuple with the SchemaTagsToAdd field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegisterSchemaRequest) GetSchemaTagsToAddOk() (*[]SchemaTags, bool) {
+	if o == nil || o.SchemaTagsToAdd == nil {
+		return nil, false
+	}
+	return o.SchemaTagsToAdd, true
+}
+
+// HasSchemaTagsToAdd returns a boolean if a field has been set.
+func (o *RegisterSchemaRequest) HasSchemaTagsToAdd() bool {
+	if o != nil && o.SchemaTagsToAdd != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaTagsToAdd gets a reference to the given []SchemaTags and assigns it to the SchemaTagsToAdd field.
+func (o *RegisterSchemaRequest) SetSchemaTagsToAdd(v []SchemaTags) {
+	o.SchemaTagsToAdd = &v
+}
+
+// GetSchemaTagsToRemove returns the SchemaTagsToRemove field value if set, zero value otherwise.
+func (o *RegisterSchemaRequest) GetSchemaTagsToRemove() []SchemaTags {
+	if o == nil || o.SchemaTagsToRemove == nil {
+		var ret []SchemaTags
+		return ret
+	}
+	return *o.SchemaTagsToRemove
+}
+
+// GetSchemaTagsToRemoveOk returns a tuple with the SchemaTagsToRemove field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegisterSchemaRequest) GetSchemaTagsToRemoveOk() (*[]SchemaTags, bool) {
+	if o == nil || o.SchemaTagsToRemove == nil {
+		return nil, false
+	}
+	return o.SchemaTagsToRemove, true
+}
+
+// HasSchemaTagsToRemove returns a boolean if a field has been set.
+func (o *RegisterSchemaRequest) HasSchemaTagsToRemove() bool {
+	if o != nil && o.SchemaTagsToRemove != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemaTagsToRemove gets a reference to the given []SchemaTags and assigns it to the SchemaTagsToRemove field.
+func (o *RegisterSchemaRequest) SetSchemaTagsToRemove(v []SchemaTags) {
+	o.SchemaTagsToRemove = &v
+}
+
+// GetPropagateSchemaTags returns the PropagateSchemaTags field value if set, zero value otherwise.
+func (o *RegisterSchemaRequest) GetPropagateSchemaTags() bool {
+	if o == nil || o.PropagateSchemaTags == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PropagateSchemaTags
+}
+
+// GetPropagateSchemaTagsOk returns a tuple with the PropagateSchemaTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegisterSchemaRequest) GetPropagateSchemaTagsOk() (*bool, bool) {
+	if o == nil || o.PropagateSchemaTags == nil {
+		return nil, false
+	}
+	return o.PropagateSchemaTags, true
+}
+
+// HasPropagateSchemaTags returns a boolean if a field has been set.
+func (o *RegisterSchemaRequest) HasPropagateSchemaTags() bool {
+	if o != nil && o.PropagateSchemaTags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPropagateSchemaTags gets a reference to the given bool and assigns it to the PropagateSchemaTags field.
+func (o *RegisterSchemaRequest) SetPropagateSchemaTags(v bool) {
+	o.PropagateSchemaTags = &v
+}
+
 // GetSchema returns the Schema field value if set, zero value otherwise.
 func (o *RegisterSchemaRequest) GetSchema() string {
 	if o == nil || o.Schema == nil {
@@ -317,6 +417,9 @@ func (o *RegisterSchemaRequest) Redact() {
     o.recurseRedact(o.References)
     o.recurseRedact(o.Metadata)
     o.recurseRedact(o.RuleSet)
+    o.recurseRedact(o.SchemaTagsToAdd)
+    o.recurseRedact(o.SchemaTagsToRemove)
+    o.recurseRedact(o.PropagateSchemaTags)
     o.recurseRedact(o.Schema)
 }
 
@@ -370,10 +473,23 @@ func (o RegisterSchemaRequest) MarshalJSON() ([]byte, error) {
 	if o.RuleSet.IsSet() {
 		toSerialize["ruleSet"] = o.RuleSet.Get()
 	}
+	if o.SchemaTagsToAdd != nil {
+		toSerialize["schemaTagsToAdd"] = o.SchemaTagsToAdd
+	}
+	if o.SchemaTagsToRemove != nil {
+		toSerialize["schemaTagsToRemove"] = o.SchemaTagsToRemove
+	}
+	if o.PropagateSchemaTags != nil {
+		toSerialize["propagateSchemaTags"] = o.PropagateSchemaTags
+	}
 	if o.Schema != nil {
 		toSerialize["schema"] = o.Schema
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableRegisterSchemaRequest struct {
@@ -404,7 +520,11 @@ func NewNullableRegisterSchemaRequest(val *RegisterSchemaRequest) *NullableRegis
 }
 
 func (v NullableRegisterSchemaRequest) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableRegisterSchemaRequest) UnmarshalJSON(src []byte) error {
