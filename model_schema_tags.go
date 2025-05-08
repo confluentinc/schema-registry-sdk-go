@@ -33,66 +33,100 @@ import (
 	"reflect"
 )
 
-// ModeUpdateRequest struct for ModeUpdateRequest
-type ModeUpdateRequest struct {
-	Mode *string `json:"mode,omitempty"`
+// SchemaTags struct for SchemaTags
+type SchemaTags struct {
+	SchemaEntity *SchemaEntity `json:"schemaEntity,omitempty"`
+	Tags *[]string `json:"tags,omitempty"`
 }
 
-// NewModeUpdateRequest instantiates a new ModeUpdateRequest object
+// NewSchemaTags instantiates a new SchemaTags object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModeUpdateRequest() *ModeUpdateRequest {
-	this := ModeUpdateRequest{}
+func NewSchemaTags() *SchemaTags {
+	this := SchemaTags{}
 	return &this
 }
 
-// NewModeUpdateRequestWithDefaults instantiates a new ModeUpdateRequest object
+// NewSchemaTagsWithDefaults instantiates a new SchemaTags object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewModeUpdateRequestWithDefaults() *ModeUpdateRequest {
-	this := ModeUpdateRequest{}
+func NewSchemaTagsWithDefaults() *SchemaTags {
+	this := SchemaTags{}
 	return &this
 }
 
-// GetMode returns the Mode field value if set, zero value otherwise.
-func (o *ModeUpdateRequest) GetMode() string {
-	if o == nil || o.Mode == nil {
-		var ret string
+// GetSchemaEntity returns the SchemaEntity field value if set, zero value otherwise.
+func (o *SchemaTags) GetSchemaEntity() SchemaEntity {
+	if o == nil || o.SchemaEntity == nil {
+		var ret SchemaEntity
 		return ret
 	}
-	return *o.Mode
+	return *o.SchemaEntity
 }
 
-// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// GetSchemaEntityOk returns a tuple with the SchemaEntity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModeUpdateRequest) GetModeOk() (*string, bool) {
-	if o == nil || o.Mode == nil {
+func (o *SchemaTags) GetSchemaEntityOk() (*SchemaEntity, bool) {
+	if o == nil || o.SchemaEntity == nil {
 		return nil, false
 	}
-	return o.Mode, true
+	return o.SchemaEntity, true
 }
 
-// HasMode returns a boolean if a field has been set.
-func (o *ModeUpdateRequest) HasMode() bool {
-	if o != nil && o.Mode != nil {
+// HasSchemaEntity returns a boolean if a field has been set.
+func (o *SchemaTags) HasSchemaEntity() bool {
+	if o != nil && o.SchemaEntity != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetMode gets a reference to the given string and assigns it to the Mode field.
-func (o *ModeUpdateRequest) SetMode(v string) {
-	o.Mode = &v
+// SetSchemaEntity gets a reference to the given SchemaEntity and assigns it to the SchemaEntity field.
+func (o *SchemaTags) SetSchemaEntity(v SchemaEntity) {
+	o.SchemaEntity = &v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *SchemaTags) GetTags() []string {
+	if o == nil || o.Tags == nil {
+		var ret []string
+		return ret
+	}
+	return *o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchemaTags) GetTagsOk() (*[]string, bool) {
+	if o == nil || o.Tags == nil {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *SchemaTags) HasTags() bool {
+	if o != nil && o.Tags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *SchemaTags) SetTags(v []string) {
+	o.Tags = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ModeUpdateRequest) Redact() {
-    o.recurseRedact(o.Mode)
+func (o *SchemaTags) Redact() {
+    o.recurseRedact(o.SchemaEntity)
+    o.recurseRedact(o.Tags)
 }
 
-func (o *ModeUpdateRequest) recurseRedact(v interface{}) {
+func (o *SchemaTags) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -117,15 +151,18 @@ func (o *ModeUpdateRequest) recurseRedact(v interface{}) {
     }
 }
 
-func (o ModeUpdateRequest) zeroField(v interface{}) {
+func (o SchemaTags) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ModeUpdateRequest) MarshalJSON() ([]byte, error) {
+func (o SchemaTags) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Mode != nil {
-		toSerialize["mode"] = o.Mode
+	if o.SchemaEntity != nil {
+		toSerialize["schemaEntity"] = o.SchemaEntity
+	}
+	if o.Tags != nil {
+		toSerialize["tags"] = o.Tags
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -134,34 +171,34 @@ func (o ModeUpdateRequest) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableModeUpdateRequest struct {
-	value *ModeUpdateRequest
+type NullableSchemaTags struct {
+	value *SchemaTags
 	isSet bool
 }
 
-func (v NullableModeUpdateRequest) Get() *ModeUpdateRequest {
+func (v NullableSchemaTags) Get() *SchemaTags {
 	return v.value
 }
 
-func (v *NullableModeUpdateRequest) Set(val *ModeUpdateRequest) {
+func (v *NullableSchemaTags) Set(val *SchemaTags) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableModeUpdateRequest) IsSet() bool {
+func (v NullableSchemaTags) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableModeUpdateRequest) Unset() {
+func (v *NullableSchemaTags) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableModeUpdateRequest(val *ModeUpdateRequest) *NullableModeUpdateRequest {
-	return &NullableModeUpdateRequest{value: val, isSet: true}
+func NewNullableSchemaTags(val *SchemaTags) *NullableSchemaTags {
+	return &NullableSchemaTags{value: val, isSet: true}
 }
 
-func (v NullableModeUpdateRequest) MarshalJSON() ([]byte, error) {
+func (v NullableSchemaTags) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -169,7 +206,7 @@ func (v NullableModeUpdateRequest) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableModeUpdateRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableSchemaTags) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
