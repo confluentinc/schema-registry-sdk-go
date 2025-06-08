@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -274,7 +275,11 @@ func (o UpdateExporterRequest) MarshalJSON() ([]byte, error) {
 	if o.Config != nil {
 		toSerialize["config"] = o.Config
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableUpdateExporterRequest struct {
@@ -305,7 +310,11 @@ func NewNullableUpdateExporterRequest(val *UpdateExporterRequest) *NullableUpdat
 }
 
 func (v NullableUpdateExporterRequest) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableUpdateExporterRequest) UnmarshalJSON(src []byte) error {

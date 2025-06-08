@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -496,7 +497,11 @@ func (o AtlasEntityHeader) MarshalJSON() ([]byte, error) {
 	if o.Labels != nil {
 		toSerialize["labels"] = o.Labels
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAtlasEntityHeader struct {
@@ -527,7 +532,11 @@ func NewNullableAtlasEntityHeader(val *AtlasEntityHeader) *NullableAtlasEntityHe
 }
 
 func (v NullableAtlasEntityHeader) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAtlasEntityHeader) UnmarshalJSON(src []byte) error {

@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -237,7 +238,11 @@ func (o CreateDekRequest) MarshalJSON() ([]byte, error) {
 	if o.EncryptedKeyMaterial != nil {
 		toSerialize["encryptedKeyMaterial"] = o.EncryptedKeyMaterial
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableCreateDekRequest struct {
@@ -268,7 +273,11 @@ func NewNullableCreateDekRequest(val *CreateDekRequest) *NullableCreateDekReques
 }
 
 func (v NullableCreateDekRequest) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableCreateDekRequest) UnmarshalJSON(src []byte) error {
