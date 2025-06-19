@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
@@ -571,7 +572,11 @@ func (o AtlasBusinessMetadataDef) MarshalJSON() ([]byte, error) {
 	if o.AttributeDefs != nil {
 		toSerialize["attributeDefs"] = o.AttributeDefs
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAtlasBusinessMetadataDef struct {
@@ -602,7 +607,11 @@ func NewNullableAtlasBusinessMetadataDef(val *AtlasBusinessMetadataDef) *Nullabl
 }
 
 func (v NullableAtlasBusinessMetadataDef) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAtlasBusinessMetadataDef) UnmarshalJSON(src []byte) error {

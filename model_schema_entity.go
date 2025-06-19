@@ -33,66 +33,100 @@ import (
 	"reflect"
 )
 
-// ModeUpdateRequest struct for ModeUpdateRequest
-type ModeUpdateRequest struct {
-	Mode *string `json:"mode,omitempty"`
+// SchemaEntity struct for SchemaEntity
+type SchemaEntity struct {
+	EntityPath *string `json:"entityPath,omitempty"`
+	EntityType *string `json:"entityType,omitempty"`
 }
 
-// NewModeUpdateRequest instantiates a new ModeUpdateRequest object
+// NewSchemaEntity instantiates a new SchemaEntity object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModeUpdateRequest() *ModeUpdateRequest {
-	this := ModeUpdateRequest{}
+func NewSchemaEntity() *SchemaEntity {
+	this := SchemaEntity{}
 	return &this
 }
 
-// NewModeUpdateRequestWithDefaults instantiates a new ModeUpdateRequest object
+// NewSchemaEntityWithDefaults instantiates a new SchemaEntity object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewModeUpdateRequestWithDefaults() *ModeUpdateRequest {
-	this := ModeUpdateRequest{}
+func NewSchemaEntityWithDefaults() *SchemaEntity {
+	this := SchemaEntity{}
 	return &this
 }
 
-// GetMode returns the Mode field value if set, zero value otherwise.
-func (o *ModeUpdateRequest) GetMode() string {
-	if o == nil || o.Mode == nil {
+// GetEntityPath returns the EntityPath field value if set, zero value otherwise.
+func (o *SchemaEntity) GetEntityPath() string {
+	if o == nil || o.EntityPath == nil {
 		var ret string
 		return ret
 	}
-	return *o.Mode
+	return *o.EntityPath
 }
 
-// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// GetEntityPathOk returns a tuple with the EntityPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModeUpdateRequest) GetModeOk() (*string, bool) {
-	if o == nil || o.Mode == nil {
+func (o *SchemaEntity) GetEntityPathOk() (*string, bool) {
+	if o == nil || o.EntityPath == nil {
 		return nil, false
 	}
-	return o.Mode, true
+	return o.EntityPath, true
 }
 
-// HasMode returns a boolean if a field has been set.
-func (o *ModeUpdateRequest) HasMode() bool {
-	if o != nil && o.Mode != nil {
+// HasEntityPath returns a boolean if a field has been set.
+func (o *SchemaEntity) HasEntityPath() bool {
+	if o != nil && o.EntityPath != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetMode gets a reference to the given string and assigns it to the Mode field.
-func (o *ModeUpdateRequest) SetMode(v string) {
-	o.Mode = &v
+// SetEntityPath gets a reference to the given string and assigns it to the EntityPath field.
+func (o *SchemaEntity) SetEntityPath(v string) {
+	o.EntityPath = &v
+}
+
+// GetEntityType returns the EntityType field value if set, zero value otherwise.
+func (o *SchemaEntity) GetEntityType() string {
+	if o == nil || o.EntityType == nil {
+		var ret string
+		return ret
+	}
+	return *o.EntityType
+}
+
+// GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SchemaEntity) GetEntityTypeOk() (*string, bool) {
+	if o == nil || o.EntityType == nil {
+		return nil, false
+	}
+	return o.EntityType, true
+}
+
+// HasEntityType returns a boolean if a field has been set.
+func (o *SchemaEntity) HasEntityType() bool {
+	if o != nil && o.EntityType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEntityType gets a reference to the given string and assigns it to the EntityType field.
+func (o *SchemaEntity) SetEntityType(v string) {
+	o.EntityType = &v
 }
 
 // Redact resets all sensitive fields to their zero value.
-func (o *ModeUpdateRequest) Redact() {
-    o.recurseRedact(o.Mode)
+func (o *SchemaEntity) Redact() {
+    o.recurseRedact(o.EntityPath)
+    o.recurseRedact(o.EntityType)
 }
 
-func (o *ModeUpdateRequest) recurseRedact(v interface{}) {
+func (o *SchemaEntity) recurseRedact(v interface{}) {
     type redactor interface {
         Redact()
     }
@@ -117,15 +151,18 @@ func (o *ModeUpdateRequest) recurseRedact(v interface{}) {
     }
 }
 
-func (o ModeUpdateRequest) zeroField(v interface{}) {
+func (o SchemaEntity) zeroField(v interface{}) {
     p := reflect.ValueOf(v).Elem()
     p.Set(reflect.Zero(p.Type()))
 }
 
-func (o ModeUpdateRequest) MarshalJSON() ([]byte, error) {
+func (o SchemaEntity) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Mode != nil {
-		toSerialize["mode"] = o.Mode
+	if o.EntityPath != nil {
+		toSerialize["entityPath"] = o.EntityPath
+	}
+	if o.EntityType != nil {
+		toSerialize["entityType"] = o.EntityType
 	}
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
@@ -134,34 +171,34 @@ func (o ModeUpdateRequest) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-type NullableModeUpdateRequest struct {
-	value *ModeUpdateRequest
+type NullableSchemaEntity struct {
+	value *SchemaEntity
 	isSet bool
 }
 
-func (v NullableModeUpdateRequest) Get() *ModeUpdateRequest {
+func (v NullableSchemaEntity) Get() *SchemaEntity {
 	return v.value
 }
 
-func (v *NullableModeUpdateRequest) Set(val *ModeUpdateRequest) {
+func (v *NullableSchemaEntity) Set(val *SchemaEntity) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableModeUpdateRequest) IsSet() bool {
+func (v NullableSchemaEntity) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableModeUpdateRequest) Unset() {
+func (v *NullableSchemaEntity) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableModeUpdateRequest(val *ModeUpdateRequest) *NullableModeUpdateRequest {
-	return &NullableModeUpdateRequest{value: val, isSet: true}
+func NewNullableSchemaEntity(val *SchemaEntity) *NullableSchemaEntity {
+	return &NullableSchemaEntity{value: val, isSet: true}
 }
 
-func (v NullableModeUpdateRequest) MarshalJSON() ([]byte, error) {
+func (v NullableSchemaEntity) MarshalJSON() ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)
@@ -169,7 +206,7 @@ func (v NullableModeUpdateRequest) MarshalJSON() ([]byte, error) {
 	return buffer.Bytes(), err
 }
 
-func (v *NullableModeUpdateRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableSchemaEntity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
