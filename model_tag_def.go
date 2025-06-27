@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -681,7 +682,11 @@ func (o TagDef) MarshalJSON() ([]byte, error) {
 	if o.SubTypes != nil {
 		toSerialize["subTypes"] = o.SubTypes
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableTagDef struct {
@@ -712,7 +717,11 @@ func NewNullableTagDef(val *TagDef) *NullableTagDef {
 }
 
 func (v NullableTagDef) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableTagDef) UnmarshalJSON(src []byte) error {

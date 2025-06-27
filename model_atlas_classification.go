@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -348,7 +349,11 @@ func (o AtlasClassification) MarshalJSON() ([]byte, error) {
 	if o.RemovePropagationsOnEntityDelete != nil {
 		toSerialize["removePropagationsOnEntityDelete"] = o.RemovePropagationsOnEntityDelete
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableAtlasClassification struct {
@@ -379,7 +384,11 @@ func NewNullableAtlasClassification(val *AtlasClassification) *NullableAtlasClas
 }
 
 func (v NullableAtlasClassification) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableAtlasClassification) UnmarshalJSON(src []byte) error {
