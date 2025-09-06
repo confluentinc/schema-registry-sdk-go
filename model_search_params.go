@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -200,7 +201,11 @@ func (o SearchParams) MarshalJSON() ([]byte, error) {
 	if o.Offset != nil {
 		toSerialize["offset"] = o.Offset
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableSearchParams struct {
@@ -231,7 +236,11 @@ func NewNullableSearchParams(val *SearchParams) *NullableSearchParams {
 }
 
 func (v NullableSearchParams) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableSearchParams) UnmarshalJSON(src []byte) error {

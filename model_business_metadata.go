@@ -25,6 +25,7 @@ API version: v1
 package schemaregistry
 
 import (
+	"bytes"
 	"encoding/json"
 )
 
@@ -237,7 +238,11 @@ func (o BusinessMetadata) MarshalJSON() ([]byte, error) {
 	if o.EntityName != nil {
 		toSerialize["entityName"] = o.EntityName
 	}
-	return json.Marshal(toSerialize)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(toSerialize)
+	return buffer.Bytes(), err
 }
 
 type NullableBusinessMetadata struct {
@@ -268,7 +273,11 @@ func NewNullableBusinessMetadata(val *BusinessMetadata) *NullableBusinessMetadat
 }
 
 func (v NullableBusinessMetadata) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	buffer := &bytes.Buffer{}
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	err := encoder.Encode(v.value)
+	return buffer.Bytes(), err
 }
 
 func (v *NullableBusinessMetadata) UnmarshalJSON(src []byte) error {
