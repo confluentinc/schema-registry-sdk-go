@@ -4325,6 +4325,10 @@ components:
           items:
             $ref: '#/components/schemas/Rule'
           type: array
+        encodingRules:
+          items:
+            $ref: '#/components/schemas/Rule'
+          type: array
       type: object
     SchemaEntity:
       type: object

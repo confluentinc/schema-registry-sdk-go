@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MigrationRules** | Pointer to [**[]Rule**](Rule.md) |  | [optional] 
 **DomainRules** | Pointer to [**[]Rule**](Rule.md) |  | [optional] 
+**EncodingRules** | Pointer to [**[]Rule**](Rule.md) |  | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetDomainRules sets DomainRules field to given value.
 `func (o *RuleSet) HasDomainRules() bool`
 
 HasDomainRules returns a boolean if a field has been set.
+
+### GetEncodingRules
+
+`func (o *RuleSet) GetEncodingRules() []Rule`
+
+GetEncodingRules returns the EncodingRules field if non-nil, zero value otherwise.
+
+### GetEncodingRulesOk
+
+`func (o *RuleSet) GetEncodingRulesOk() (*[]Rule, bool)`
+
+GetEncodingRulesOk returns a tuple with the EncodingRules field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncodingRules
+
+`func (o *RuleSet) SetEncodingRules(v []Rule)`
+
+SetEncodingRules sets EncodingRules field to given value.
+
+### HasEncodingRules
+
+`func (o *RuleSet) HasEncodingRules() bool`
+
+HasEncodingRules returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
