@@ -30,8 +30,8 @@ import (
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
 
 // Linger please
@@ -42,12 +42,12 @@ var (
 type DefaultApi interface {
 
 	/*
-	AsyncapiParsePut Method for AsyncapiParsePut
+		AsyncapiParsePut Method for AsyncapiParsePut
 
-	Get number of times the cli tool is used to import and parse the spec file
+		Get number of times the cli tool is used to import and parse the spec file
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiAsyncapiParsePutRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiAsyncapiParsePutRequest
 	*/
 	AsyncapiParsePut(ctx _context.Context) ApiAsyncapiParsePutRequest
 
@@ -55,12 +55,12 @@ type DefaultApi interface {
 	AsyncapiParsePutExecute(r ApiAsyncapiParsePutRequest) (*_nethttp.Response, error)
 
 	/*
-	AsyncapiPut Method for AsyncapiPut
+		AsyncapiPut Method for AsyncapiPut
 
-	Get number of times the cli tool is used to export/produce the spec file
+		Get number of times the cli tool is used to export/produce the spec file
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiAsyncapiPutRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiAsyncapiPutRequest
 	*/
 	AsyncapiPut(ctx _context.Context) ApiAsyncapiPutRequest
 
@@ -68,12 +68,12 @@ type DefaultApi interface {
 	AsyncapiPutExecute(r ApiAsyncapiPutRequest) (*_nethttp.Response, error)
 
 	/*
-	CreateBusinessMetadata Bulk API to create multiple business metadata.
+		CreateBusinessMetadata Bulk API to create multiple business metadata.
 
-	Bulk API to create multiple business metadata.
+		Bulk API to create multiple business metadata.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateBusinessMetadataRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateBusinessMetadataRequest
 	*/
 	CreateBusinessMetadata(ctx _context.Context) ApiCreateBusinessMetadataRequest
 
@@ -82,12 +82,12 @@ type DefaultApi interface {
 	CreateBusinessMetadataExecute(r ApiCreateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error)
 
 	/*
-	CreateBusinessMetadataDefs Bulk create API for business metadata definitions.
+		CreateBusinessMetadataDefs Bulk create API for business metadata definitions.
 
-	Bulk create API for business metadata definitions.
+		Bulk create API for business metadata definitions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateBusinessMetadataDefsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateBusinessMetadataDefsRequest
 	*/
 	CreateBusinessMetadataDefs(ctx _context.Context) ApiCreateBusinessMetadataDefsRequest
 
@@ -96,11 +96,11 @@ type DefaultApi interface {
 	CreateBusinessMetadataDefsExecute(r ApiCreateBusinessMetadataDefsRequest) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
 
 	/*
-	CreateDek Create a dek.
+		CreateDek Create a dek.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @return ApiCreateDekRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @return ApiCreateDekRequest
 	*/
 	CreateDek(ctx _context.Context, name string) ApiCreateDekRequest
 
@@ -109,10 +109,10 @@ type DefaultApi interface {
 	CreateDekExecute(r ApiCreateDekRequest) (Dek, *_nethttp.Response, error)
 
 	/*
-	CreateExporter Create an exporter.
+		CreateExporter Create an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateExporterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateExporterRequest
 	*/
 	CreateExporter(ctx _context.Context) ApiCreateExporterRequest
 
@@ -121,10 +121,10 @@ type DefaultApi interface {
 	CreateExporterExecute(r ApiCreateExporterRequest) (CreateExporterResponse, *_nethttp.Response, error)
 
 	/*
-	CreateKek Create a kek.
+		CreateKek Create a kek.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateKekRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateKekRequest
 	*/
 	CreateKek(ctx _context.Context) ApiCreateKekRequest
 
@@ -133,10 +133,10 @@ type DefaultApi interface {
 	CreateKekExecute(r ApiCreateKekRequest) (Kek, *_nethttp.Response, error)
 
 	/*
-	CreateOrUpdate Method for CreateOrUpdate
+		CreateOrUpdate Method for CreateOrUpdate
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateOrUpdateRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateOrUpdateRequest
 	*/
 	CreateOrUpdate(ctx _context.Context) ApiCreateOrUpdateRequest
 
@@ -144,12 +144,12 @@ type DefaultApi interface {
 	CreateOrUpdateExecute(r ApiCreateOrUpdateRequest) (*_nethttp.Response, error)
 
 	/*
-	CreateTagDefs Bulk create API for tag definitions.
+		CreateTagDefs Bulk create API for tag definitions.
 
-	Bulk create API for tag definitions.
+		Bulk create API for tag definitions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateTagDefsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateTagDefsRequest
 	*/
 	CreateTagDefs(ctx _context.Context) ApiCreateTagDefsRequest
 
@@ -158,12 +158,12 @@ type DefaultApi interface {
 	CreateTagDefsExecute(r ApiCreateTagDefsRequest) ([]TagDefResponse, *_nethttp.Response, error)
 
 	/*
-	CreateTags Bulk API to create multiple tags.
+		CreateTags Bulk API to create multiple tags.
 
-	Bulk API to create multiple tags.
+		Bulk API to create multiple tags.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiCreateTagsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiCreateTagsRequest
 	*/
 	CreateTags(ctx _context.Context) ApiCreateTagsRequest
 
@@ -172,15 +172,15 @@ type DefaultApi interface {
 	CreateTagsExecute(r ApiCreateTagsRequest) ([]TagResponse, *_nethttp.Response, error)
 
 	/*
-	DeleteBusinessMetadata Delete a business metadata on an entity.
+		DeleteBusinessMetadata Delete a business metadata on an entity.
 
-	Delete a business metadata on an entity.
+		Delete a business metadata on an entity.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param typeName The type of the entity
-	 @param qualifiedName The qualified name of the entity
-	 @param bmName The name of the business metadata
-	 @return ApiDeleteBusinessMetadataRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param typeName The type of the entity
+		 @param qualifiedName The qualified name of the entity
+		 @param bmName The name of the business metadata
+		 @return ApiDeleteBusinessMetadataRequest
 	*/
 	DeleteBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string, bmName string) ApiDeleteBusinessMetadataRequest
 
@@ -188,13 +188,13 @@ type DefaultApi interface {
 	DeleteBusinessMetadataExecute(r ApiDeleteBusinessMetadataRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteBusinessMetadataDef Delete API for business metadata definition identified by its name.
+		DeleteBusinessMetadataDef Delete API for business metadata definition identified by its name.
 
-	Delete API for business metadata definition identified by its name.
+		Delete API for business metadata definition identified by its name.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param bmName The name of the business metadata definition
-	 @return ApiDeleteBusinessMetadataDefRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param bmName The name of the business metadata definition
+		 @return ApiDeleteBusinessMetadataDefRequest
 	*/
 	DeleteBusinessMetadataDef(ctx _context.Context, bmName string) ApiDeleteBusinessMetadataDefRequest
 
@@ -202,12 +202,12 @@ type DefaultApi interface {
 	DeleteBusinessMetadataDefExecute(r ApiDeleteBusinessMetadataDefRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteByUniqueAttributes Method for DeleteByUniqueAttributes
+		DeleteByUniqueAttributes Method for DeleteByUniqueAttributes
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param typeName
-	 @param qualifiedName
-	 @return ApiDeleteByUniqueAttributesRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param typeName
+		 @param qualifiedName
+		 @return ApiDeleteByUniqueAttributesRequest
 	*/
 	DeleteByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string) ApiDeleteByUniqueAttributesRequest
 
@@ -215,13 +215,13 @@ type DefaultApi interface {
 	DeleteByUniqueAttributesExecute(r ApiDeleteByUniqueAttributesRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteDekVersion Delete a dek version.
+		DeleteDekVersion Delete a dek version.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @param subject Subject of the dek
-	 @param version Version of the dek
-	 @return ApiDeleteDekVersionRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @param subject Subject of the dek
+		 @param version Version of the dek
+		 @return ApiDeleteDekVersionRequest
 	*/
 	DeleteDekVersion(ctx _context.Context, name string, subject string, version string) ApiDeleteDekVersionRequest
 
@@ -229,12 +229,12 @@ type DefaultApi interface {
 	DeleteDekVersionExecute(r ApiDeleteDekVersionRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteDekVersions Delete all versions of a dek.
+		DeleteDekVersions Delete all versions of a dek.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @param subject Subject of the dek
-	 @return ApiDeleteDekVersionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @param subject Subject of the dek
+		 @return ApiDeleteDekVersionsRequest
 	*/
 	DeleteDekVersions(ctx _context.Context, name string, subject string) ApiDeleteDekVersionsRequest
 
@@ -242,11 +242,11 @@ type DefaultApi interface {
 	DeleteDekVersionsExecute(r ApiDeleteDekVersionsRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteExporter Delete an exporter.
+		DeleteExporter Delete an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the exporter
-	 @return ApiDeleteExporterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the exporter
+		 @return ApiDeleteExporterRequest
 	*/
 	DeleteExporter(ctx _context.Context, name string) ApiDeleteExporterRequest
 
@@ -254,11 +254,11 @@ type DefaultApi interface {
 	DeleteExporterExecute(r ApiDeleteExporterRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteKek Delete a kek.
+		DeleteKek Delete a kek.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @return ApiDeleteKekRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @return ApiDeleteKekRequest
 	*/
 	DeleteKek(ctx _context.Context, name string) ApiDeleteKekRequest
 
@@ -266,12 +266,12 @@ type DefaultApi interface {
 	DeleteKekExecute(r ApiDeleteKekRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteSchemaVersion Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
+		DeleteSchemaVersion Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Name of the Subject
-	 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-	 @return ApiDeleteSchemaVersionRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Name of the Subject
+		 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+		 @return ApiDeleteSchemaVersionRequest
 	*/
 	DeleteSchemaVersion(ctx _context.Context, subject string, version string) ApiDeleteSchemaVersionRequest
 
@@ -280,11 +280,11 @@ type DefaultApi interface {
 	DeleteSchemaVersionExecute(r ApiDeleteSchemaVersionRequest) (int32, *_nethttp.Response, error)
 
 	/*
-	DeleteSubject Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
+		DeleteSubject Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject the name of the subject
-	 @return ApiDeleteSubjectRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject the name of the subject
+		 @return ApiDeleteSubjectRequest
 	*/
 	DeleteSubject(ctx _context.Context, subject string) ApiDeleteSubjectRequest
 
@@ -293,11 +293,11 @@ type DefaultApi interface {
 	DeleteSubjectExecute(r ApiDeleteSubjectRequest) ([]int32, *_nethttp.Response, error)
 
 	/*
-	DeleteSubjectConfig Deletes the specified subject-level compatibility level config and revert to the global default.
+		DeleteSubjectConfig Deletes the specified subject-level compatibility level config and revert to the global default.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject the name of the subject
-	 @return ApiDeleteSubjectConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject the name of the subject
+		 @return ApiDeleteSubjectConfigRequest
 	*/
 	DeleteSubjectConfig(ctx _context.Context, subject string) ApiDeleteSubjectConfigRequest
 
@@ -306,11 +306,11 @@ type DefaultApi interface {
 	DeleteSubjectConfigExecute(r ApiDeleteSubjectConfigRequest) (string, *_nethttp.Response, error)
 
 	/*
-	DeleteSubjectMode Deletes the specified subject-level mode and revert to the global default.
+		DeleteSubjectMode Deletes the specified subject-level mode and revert to the global default.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject the name of the subject
-	 @return ApiDeleteSubjectModeRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject the name of the subject
+		 @return ApiDeleteSubjectModeRequest
 	*/
 	DeleteSubjectMode(ctx _context.Context, subject string) ApiDeleteSubjectModeRequest
 
@@ -319,15 +319,27 @@ type DefaultApi interface {
 	DeleteSubjectModeExecute(r ApiDeleteSubjectModeRequest) (string, *_nethttp.Response, error)
 
 	/*
-	DeleteTag Delete a tag on an entity.
+		DeleteMode Deletes the global mode and revert to the default.
 
-	Delete a tag on an entity.
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiDeleteModeRequest
+	*/
+	DeleteMode(ctx _context.Context) ApiDeleteModeRequest
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param typeName The type of the entity
-	 @param qualifiedName The qualified name of the entity
-	 @param tagName The name of the tag
-	 @return ApiDeleteTagRequest
+	// DeleteModeExecute executes the request
+	//  @return string
+	DeleteModeExecute(r ApiDeleteModeRequest) (string, *_nethttp.Response, error)
+
+	/*
+		DeleteTag Delete a tag on an entity.
+
+		Delete a tag on an entity.
+
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param typeName The type of the entity
+		 @param qualifiedName The qualified name of the entity
+		 @param tagName The name of the tag
+		 @return ApiDeleteTagRequest
 	*/
 	DeleteTag(ctx _context.Context, typeName string, qualifiedName string, tagName string) ApiDeleteTagRequest
 
@@ -335,13 +347,13 @@ type DefaultApi interface {
 	DeleteTagExecute(r ApiDeleteTagRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteTagDef Delete API for tag definition identified by its name.
+		DeleteTagDef Delete API for tag definition identified by its name.
 
-	Delete API for tag definition identified by its name.
+		Delete API for tag definition identified by its name.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param tagName The name of the tag definition
-	 @return ApiDeleteTagDefRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param tagName The name of the tag definition
+		 @return ApiDeleteTagDefRequest
 	*/
 	DeleteTagDef(ctx _context.Context, tagName string) ApiDeleteTagDefRequest
 
@@ -349,12 +361,12 @@ type DefaultApi interface {
 	DeleteTagDefExecute(r ApiDeleteTagDefRequest) (*_nethttp.Response, error)
 
 	/*
-	DeleteTopLevelConfig Delete global compatibility level
+		DeleteTopLevelConfig Delete global compatibility level
 
-	Deletes the global compatibility level config and reverts to the default.
+		Deletes the global compatibility level config and reverts to the default.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiDeleteTopLevelConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiDeleteTopLevelConfigRequest
 	*/
 	DeleteTopLevelConfig(ctx _context.Context) ApiDeleteTopLevelConfigRequest
 
@@ -363,12 +375,12 @@ type DefaultApi interface {
 	DeleteTopLevelConfigExecute(r ApiDeleteTopLevelConfigRequest) (string, *_nethttp.Response, error)
 
 	/*
-	Get Schema Registry Root Resource
+		Get Schema Registry Root Resource
 
-	The Root resource is a no-op.
+		The Root resource is a no-op.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetRequest
 	*/
 	Get(ctx _context.Context) ApiGetRequest
 
@@ -377,12 +389,12 @@ type DefaultApi interface {
 	GetExecute(r ApiGetRequest) (map[string]map[string]interface{}, *_nethttp.Response, error)
 
 	/*
-	GetAllBusinessMetadataDefs Bulk retrieval API for retrieving business metadata definitions.
+		GetAllBusinessMetadataDefs Bulk retrieval API for retrieving business metadata definitions.
 
-	Bulk retrieval API for retrieving business metadata definitions.
+		Bulk retrieval API for retrieving business metadata definitions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetAllBusinessMetadataDefsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetAllBusinessMetadataDefsRequest
 	*/
 	GetAllBusinessMetadataDefs(ctx _context.Context) ApiGetAllBusinessMetadataDefsRequest
 
@@ -391,12 +403,12 @@ type DefaultApi interface {
 	GetAllBusinessMetadataDefsExecute(r ApiGetAllBusinessMetadataDefsRequest) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
 
 	/*
-	GetAllTagDefs Bulk retrieval API for retrieving tag definitions.
+		GetAllTagDefs Bulk retrieval API for retrieving tag definitions.
 
-	Bulk retrieval API for retrieving tag definitions.
+		Bulk retrieval API for retrieving tag definitions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetAllTagDefsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetAllTagDefsRequest
 	*/
 	GetAllTagDefs(ctx _context.Context) ApiGetAllTagDefsRequest
 
@@ -405,14 +417,14 @@ type DefaultApi interface {
 	GetAllTagDefsExecute(r ApiGetAllTagDefsRequest) ([]TagDefResponse, *_nethttp.Response, error)
 
 	/*
-	GetBusinessMetadata Gets the list of business metadata for a given entity represented by a qualified name.
+		GetBusinessMetadata Gets the list of business metadata for a given entity represented by a qualified name.
 
-	Gets the list of business metadata for a given entity represented by a qualified name.
+		Gets the list of business metadata for a given entity represented by a qualified name.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param typeName The type of the entity
-	 @param qualifiedName The qualified name of the entity
-	 @return ApiGetBusinessMetadataRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param typeName The type of the entity
+		 @param qualifiedName The qualified name of the entity
+		 @return ApiGetBusinessMetadataRequest
 	*/
 	GetBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string) ApiGetBusinessMetadataRequest
 
@@ -421,13 +433,13 @@ type DefaultApi interface {
 	GetBusinessMetadataExecute(r ApiGetBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error)
 
 	/*
-	GetBusinessMetadataDefByName Get the business metadata definition with the given name.
+		GetBusinessMetadataDefByName Get the business metadata definition with the given name.
 
-	Get the business metadata definition with the given name.
+		Get the business metadata definition with the given name.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param bmName The name of the business metadata definition
-	 @return ApiGetBusinessMetadataDefByNameRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param bmName The name of the business metadata definition
+		 @return ApiGetBusinessMetadataDefByNameRequest
 	*/
 	GetBusinessMetadataDefByName(ctx _context.Context, bmName string) ApiGetBusinessMetadataDefByNameRequest
 
@@ -436,14 +448,14 @@ type DefaultApi interface {
 	GetBusinessMetadataDefByNameExecute(r ApiGetBusinessMetadataDefByNameRequest) (AtlasBusinessMetadataDef, *_nethttp.Response, error)
 
 	/*
-	GetByUniqueAttributes Fetch complete definition of an entity given its type and unique attribute.
+		GetByUniqueAttributes Fetch complete definition of an entity given its type and unique attribute.
 
-	Fetch complete definition of an entity given its type and unique attribute.
+		Fetch complete definition of an entity given its type and unique attribute.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param typeName The type of the entity
-	 @param qualifiedName The qualified name of the entity
-	 @return ApiGetByUniqueAttributesRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param typeName The type of the entity
+		 @param qualifiedName The qualified name of the entity
+		 @return ApiGetByUniqueAttributesRequest
 	*/
 	GetByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string) ApiGetByUniqueAttributesRequest
 
@@ -452,10 +464,10 @@ type DefaultApi interface {
 	GetByUniqueAttributesExecute(r ApiGetByUniqueAttributesRequest) (AtlasEntityWithExtInfo, *_nethttp.Response, error)
 
 	/*
-	GetClusterId Get the server metadata
+		GetClusterId Get the server metadata
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetClusterIdRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetClusterIdRequest
 	*/
 	GetClusterId(ctx _context.Context) ApiGetClusterIdRequest
 
@@ -464,12 +476,12 @@ type DefaultApi interface {
 	GetClusterIdExecute(r ApiGetClusterIdRequest) (ServerClusterId, *_nethttp.Response, error)
 
 	/*
-	GetDek Get a dek by subject.
+		GetDek Get a dek by subject.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @param subject Subject of the dek
-	 @return ApiGetDekRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @param subject Subject of the dek
+		 @return ApiGetDekRequest
 	*/
 	GetDek(ctx _context.Context, name string, subject string) ApiGetDekRequest
 
@@ -478,13 +490,13 @@ type DefaultApi interface {
 	GetDekExecute(r ApiGetDekRequest) (Dek, *_nethttp.Response, error)
 
 	/*
-	GetDekByVersion Get a dek by subject and version.
+		GetDekByVersion Get a dek by subject and version.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @param subject Subject of the dek
-	 @param version Version of the dek
-	 @return ApiGetDekByVersionRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @param subject Subject of the dek
+		 @param version Version of the dek
+		 @return ApiGetDekByVersionRequest
 	*/
 	GetDekByVersion(ctx _context.Context, name string, subject string, version string) ApiGetDekByVersionRequest
 
@@ -493,11 +505,11 @@ type DefaultApi interface {
 	GetDekByVersionExecute(r ApiGetDekByVersionRequest) (Dek, *_nethttp.Response, error)
 
 	/*
-	GetDekSubjects Get a list of dek subjects.
+		GetDekSubjects Get a list of dek subjects.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @return ApiGetDekSubjectsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @return ApiGetDekSubjectsRequest
 	*/
 	GetDekSubjects(ctx _context.Context, name string) ApiGetDekSubjectsRequest
 
@@ -506,12 +518,12 @@ type DefaultApi interface {
 	GetDekSubjectsExecute(r ApiGetDekSubjectsRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-	GetDekVersions List versions of dek.
+		GetDekVersions List versions of dek.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @param subject Subject of the dek
-	 @return ApiGetDekVersionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @param subject Subject of the dek
+		 @return ApiGetDekVersionsRequest
 	*/
 	GetDekVersions(ctx _context.Context, name string, subject string) ApiGetDekVersionsRequest
 
@@ -520,11 +532,11 @@ type DefaultApi interface {
 	GetDekVersionsExecute(r ApiGetDekVersionsRequest) ([]int32, *_nethttp.Response, error)
 
 	/*
-	GetExporterConfig Get the config for an exporter.
+		GetExporterConfig Get the config for an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name
-	 @return ApiGetExporterConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name
+		 @return ApiGetExporterConfigRequest
 	*/
 	GetExporterConfig(ctx _context.Context, name string) ApiGetExporterConfigRequest
 
@@ -533,11 +545,11 @@ type DefaultApi interface {
 	GetExporterConfigExecute(r ApiGetExporterConfigRequest) (map[string]string, *_nethttp.Response, error)
 
 	/*
-	GetExporterInfo Get the info for an exporter.
+		GetExporterInfo Get the info for an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name
-	 @return ApiGetExporterInfoRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name
+		 @return ApiGetExporterInfoRequest
 	*/
 	GetExporterInfo(ctx _context.Context, name string) ApiGetExporterInfoRequest
 
@@ -546,11 +558,11 @@ type DefaultApi interface {
 	GetExporterInfoExecute(r ApiGetExporterInfoRequest) (ExporterInfo, *_nethttp.Response, error)
 
 	/*
-	GetExporterStatus Get the status for an exporter.
+		GetExporterStatus Get the status for an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name
-	 @return ApiGetExporterStatusRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name
+		 @return ApiGetExporterStatusRequest
 	*/
 	GetExporterStatus(ctx _context.Context, name string) ApiGetExporterStatusRequest
 
@@ -559,10 +571,10 @@ type DefaultApi interface {
 	GetExporterStatusExecute(r ApiGetExporterStatusRequest) (ExporterStatus, *_nethttp.Response, error)
 
 	/*
-	GetExporters Get a list of exporter names.
+		GetExporters Get a list of exporter names.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetExportersRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetExportersRequest
 	*/
 	GetExporters(ctx _context.Context) ApiGetExportersRequest
 
@@ -571,11 +583,11 @@ type DefaultApi interface {
 	GetExportersExecute(r ApiGetExportersRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-	GetKek Get a kek by name.
+		GetKek Get a kek by name.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @return ApiGetKekRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @return ApiGetKekRequest
 	*/
 	GetKek(ctx _context.Context, name string) ApiGetKekRequest
 
@@ -584,10 +596,10 @@ type DefaultApi interface {
 	GetKekExecute(r ApiGetKekRequest) (Kek, *_nethttp.Response, error)
 
 	/*
-	GetKekNames Get a list of kek names.
+		GetKekNames Get a list of kek names.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetKekNamesRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetKekNamesRequest
 	*/
 	GetKekNames(ctx _context.Context) ApiGetKekNamesRequest
 
@@ -596,11 +608,11 @@ type DefaultApi interface {
 	GetKekNamesExecute(r ApiGetKekNamesRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-	GetMode Get mode for a subject.
+		GetMode Get mode for a subject.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Name of the Subject
-	 @return ApiGetModeRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Name of the Subject
+		 @return ApiGetModeRequest
 	*/
 	GetMode(ctx _context.Context, subject string) ApiGetModeRequest
 
@@ -609,12 +621,12 @@ type DefaultApi interface {
 	GetModeExecute(r ApiGetModeRequest) (Mode, *_nethttp.Response, error)
 
 	/*
-	GetReferencedBy Get the schemas that reference the specified schema.
+		GetReferencedBy Get the schemas that reference the specified schema.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Name of the Subject
-	 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-	 @return ApiGetReferencedByRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Name of the Subject
+		 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+		 @return ApiGetReferencedByRequest
 	*/
 	GetReferencedBy(ctx _context.Context, subject string, version string) ApiGetReferencedByRequest
 
@@ -623,11 +635,11 @@ type DefaultApi interface {
 	GetReferencedByExecute(r ApiGetReferencedByRequest) ([]int32, *_nethttp.Response, error)
 
 	/*
-	GetSchema Get the schema string identified by the input ID.
+		GetSchema Get the schema string identified by the input ID.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id Globally unique identifier of the schema
-	 @return ApiGetSchemaRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id Globally unique identifier of the schema
+		 @return ApiGetSchemaRequest
 	*/
 	GetSchema(ctx _context.Context, id int32) ApiGetSchemaRequest
 
@@ -636,12 +648,12 @@ type DefaultApi interface {
 	GetSchemaExecute(r ApiGetSchemaRequest) (SchemaString, *_nethttp.Response, error)
 
 	/*
-	GetSchemaByVersion Get a specific version of the schema registered under this subject.
+		GetSchemaByVersion Get a specific version of the schema registered under this subject.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Name of the Subject
-	 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-	 @return ApiGetSchemaByVersionRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Name of the Subject
+		 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+		 @return ApiGetSchemaByVersionRequest
 	*/
 	GetSchemaByVersion(ctx _context.Context, subject string, version string) ApiGetSchemaByVersionRequest
 
@@ -650,12 +662,12 @@ type DefaultApi interface {
 	GetSchemaByVersionExecute(r ApiGetSchemaByVersionRequest) (Schema, *_nethttp.Response, error)
 
 	/*
-	GetSchemaOnly Get the schema for the specified version of this subject. The unescaped schema only is returned.
+		GetSchemaOnly Get the schema for the specified version of this subject. The unescaped schema only is returned.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Name of the Subject
-	 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
-	 @return ApiGetSchemaOnlyRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Name of the Subject
+		 @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+		 @return ApiGetSchemaOnlyRequest
 	*/
 	GetSchemaOnly(ctx _context.Context, subject string, version string) ApiGetSchemaOnlyRequest
 
@@ -664,10 +676,10 @@ type DefaultApi interface {
 	GetSchemaOnlyExecute(r ApiGetSchemaOnlyRequest) (string, *_nethttp.Response, error)
 
 	/*
-	GetSchemaTypes Get the schema types supported by this registry.
+		GetSchemaTypes Get the schema types supported by this registry.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetSchemaTypesRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetSchemaTypesRequest
 	*/
 	GetSchemaTypes(ctx _context.Context) ApiGetSchemaTypesRequest
 
@@ -676,10 +688,10 @@ type DefaultApi interface {
 	GetSchemaTypesExecute(r ApiGetSchemaTypesRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-	GetSchemas Get the schemas.
+		GetSchemas Get the schemas.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetSchemasRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetSchemasRequest
 	*/
 	GetSchemas(ctx _context.Context) ApiGetSchemasRequest
 
@@ -688,11 +700,11 @@ type DefaultApi interface {
 	GetSchemasExecute(r ApiGetSchemasRequest) ([]Schema, *_nethttp.Response, error)
 
 	/*
-	GetSubjectLevelConfig Get compatibility level for a subject.
+		GetSubjectLevelConfig Get compatibility level for a subject.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject
-	 @return ApiGetSubjectLevelConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject
+		 @return ApiGetSubjectLevelConfigRequest
 	*/
 	GetSubjectLevelConfig(ctx _context.Context, subject string) ApiGetSubjectLevelConfigRequest
 
@@ -701,11 +713,11 @@ type DefaultApi interface {
 	GetSubjectLevelConfigExecute(r ApiGetSubjectLevelConfigRequest) (Config, *_nethttp.Response, error)
 
 	/*
-	GetSubjects Get all the subjects associated with the input ID.
+		GetSubjects Get all the subjects associated with the input ID.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id Globally unique identifier of the schema
-	 @return ApiGetSubjectsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id Globally unique identifier of the schema
+		 @return ApiGetSubjectsRequest
 	*/
 	GetSubjects(ctx _context.Context, id int32) ApiGetSubjectsRequest
 
@@ -714,13 +726,13 @@ type DefaultApi interface {
 	GetSubjectsExecute(r ApiGetSubjectsRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-	GetTagDefByName Get the tag definition with the given name.
+		GetTagDefByName Get the tag definition with the given name.
 
-	Get the tag definition with the given name.
+		Get the tag definition with the given name.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param tagName The name of the tag definiton
-	 @return ApiGetTagDefByNameRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param tagName The name of the tag definiton
+		 @return ApiGetTagDefByNameRequest
 	*/
 	GetTagDefByName(ctx _context.Context, tagName string) ApiGetTagDefByNameRequest
 
@@ -729,14 +741,14 @@ type DefaultApi interface {
 	GetTagDefByNameExecute(r ApiGetTagDefByNameRequest) (TagDef, *_nethttp.Response, error)
 
 	/*
-	GetTags Gets the list of classifications for a given entity represented by a qualifed name.
+		GetTags Gets the list of classifications for a given entity represented by a qualifed name.
 
-	Gets the list of classifications for a given entity represented by a qualifed name.
+		Gets the list of classifications for a given entity represented by a qualifed name.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param typeName The type of the entity
-	 @param qualifiedName The qualified name of the entity
-	 @return ApiGetTagsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param typeName The type of the entity
+		 @param qualifiedName The qualified name of the entity
+		 @return ApiGetTagsRequest
 	*/
 	GetTags(ctx _context.Context, typeName string, qualifiedName string) ApiGetTagsRequest
 
@@ -745,12 +757,12 @@ type DefaultApi interface {
 	GetTagsExecute(r ApiGetTagsRequest) ([]TagResponse, *_nethttp.Response, error)
 
 	/*
-	GetTopLevelConfig Get global compatibility level
+		GetTopLevelConfig Get global compatibility level
 
-	Retrieves the global compatibility level.
+		Retrieves the global compatibility level.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetTopLevelConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetTopLevelConfigRequest
 	*/
 	GetTopLevelConfig(ctx _context.Context) ApiGetTopLevelConfigRequest
 
@@ -759,10 +771,10 @@ type DefaultApi interface {
 	GetTopLevelConfigExecute(r ApiGetTopLevelConfigRequest) (Config, *_nethttp.Response, error)
 
 	/*
-	GetTopLevelMode Get global mode.
+		GetTopLevelMode Get global mode.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiGetTopLevelModeRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiGetTopLevelModeRequest
 	*/
 	GetTopLevelMode(ctx _context.Context) ApiGetTopLevelModeRequest
 
@@ -771,11 +783,11 @@ type DefaultApi interface {
 	GetTopLevelModeExecute(r ApiGetTopLevelModeRequest) (Mode, *_nethttp.Response, error)
 
 	/*
-	GetVersions Get all the subject-version pairs associated with the input ID.
+		GetVersions Get all the subject-version pairs associated with the input ID.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param id Globally unique identifier of the schema
-	 @return ApiGetVersionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param id Globally unique identifier of the schema
+		 @return ApiGetVersionsRequest
 	*/
 	GetVersions(ctx _context.Context, id int32) ApiGetVersionsRequest
 
@@ -784,10 +796,10 @@ type DefaultApi interface {
 	GetVersionsExecute(r ApiGetVersionsRequest) ([]SubjectVersion, *_nethttp.Response, error)
 
 	/*
-	List Get a list of registered subjects.
+		List Get a list of registered subjects.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListRequest
 	*/
 	List(ctx _context.Context) ApiListRequest
 
@@ -796,10 +808,10 @@ type DefaultApi interface {
 	ListExecute(r ApiListRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-	ListContexts Get a list of contexts.
+		ListContexts Get a list of contexts.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiListContextsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiListContextsRequest
 	*/
 	ListContexts(ctx _context.Context) ApiListContextsRequest
 
@@ -808,11 +820,11 @@ type DefaultApi interface {
 	ListContextsExecute(r ApiListContextsRequest) ([]string, *_nethttp.Response, error)
 
 	/*
-	ListVersions Get a list of versions registered under the specified subject.
+		ListVersions Get a list of versions registered under the specified subject.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Name of the Subject
-	 @return ApiListVersionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Name of the Subject
+		 @return ApiListVersionsRequest
 	*/
 	ListVersions(ctx _context.Context, subject string) ApiListVersionsRequest
 
@@ -821,11 +833,11 @@ type DefaultApi interface {
 	ListVersionsExecute(r ApiListVersionsRequest) ([]int32, *_nethttp.Response, error)
 
 	/*
-	LookUpSchemaUnderSubject Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
+		LookUpSchemaUnderSubject Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Subject under which the schema will be registered
-	 @return ApiLookUpSchemaUnderSubjectRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Subject under which the schema will be registered
+		 @return ApiLookUpSchemaUnderSubjectRequest
 	*/
 	LookUpSchemaUnderSubject(ctx _context.Context, subject string) ApiLookUpSchemaUnderSubjectRequest
 
@@ -833,10 +845,10 @@ type DefaultApi interface {
 	LookUpSchemaUnderSubjectExecute(r ApiLookUpSchemaUnderSubjectRequest) (*_nethttp.Response, error)
 
 	/*
-	PartialUpdateByUniqueAttributes Method for PartialUpdateByUniqueAttributes
+		PartialUpdateByUniqueAttributes Method for PartialUpdateByUniqueAttributes
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiPartialUpdateByUniqueAttributesRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiPartialUpdateByUniqueAttributesRequest
 	*/
 	PartialUpdateByUniqueAttributes(ctx _context.Context) ApiPartialUpdateByUniqueAttributesRequest
 
@@ -844,11 +856,11 @@ type DefaultApi interface {
 	PartialUpdateByUniqueAttributesExecute(r ApiPartialUpdateByUniqueAttributesRequest) (*_nethttp.Response, error)
 
 	/*
-	PauseExporter Pause an exporter.
+		PauseExporter Pause an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the exporter
-	 @return ApiPauseExporterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the exporter
+		 @return ApiPauseExporterRequest
 	*/
 	PauseExporter(ctx _context.Context, name string) ApiPauseExporterRequest
 
@@ -857,10 +869,10 @@ type DefaultApi interface {
 	PauseExporterExecute(r ApiPauseExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error)
 
 	/*
-	Post Method for Post
+		Post Method for Post
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiPostRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiPostRequest
 	*/
 	Post(ctx _context.Context) ApiPostRequest
 
@@ -869,11 +881,11 @@ type DefaultApi interface {
 	PostExecute(r ApiPostRequest) (map[string]string, *_nethttp.Response, error)
 
 	/*
-	PutExporter Alters an exporter.
+		PutExporter Alters an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the exporter
-	 @return ApiPutExporterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the exporter
+		 @return ApiPutExporterRequest
 	*/
 	PutExporter(ctx _context.Context, name string) ApiPutExporterRequest
 
@@ -882,11 +894,11 @@ type DefaultApi interface {
 	PutExporterExecute(r ApiPutExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error)
 
 	/*
-	PutExporterConfig Alters the config of an exporter.
+		PutExporterConfig Alters the config of an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the exporter
-	 @return ApiPutExporterConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the exporter
+		 @return ApiPutExporterConfigRequest
 	*/
 	PutExporterConfig(ctx _context.Context, name string) ApiPutExporterConfigRequest
 
@@ -895,11 +907,11 @@ type DefaultApi interface {
 	PutExporterConfigExecute(r ApiPutExporterConfigRequest) (UpdateExporterResponse, *_nethttp.Response, error)
 
 	/*
-	PutKek Alters a kek.
+		PutKek Alters a kek.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @return ApiPutKekRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @return ApiPutKekRequest
 	*/
 	PutKek(ctx _context.Context, name string) ApiPutKekRequest
 
@@ -908,15 +920,15 @@ type DefaultApi interface {
 	PutKekExecute(r ApiPutKekRequest) (Kek, *_nethttp.Response, error)
 
 	/*
-	Register Register schema under a subject
+			Register Register schema under a subject
 
-	Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
-A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
-When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
+			Register a new schema under the specified subject. If successfully registered, this returns the unique identifier of this schema in the registry. The returned identifier should be used to retrieve this schema from the schemas resource and is different from the schema's version which is associated with the subject. If the same schema is registered under a different subject, the same identifier will be returned. However, the version of the schema may be different under different subjects.
+		A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
+		When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Name of the subject
-	 @return ApiRegisterRequest
+			 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			 @param subject Name of the subject
+			 @return ApiRegisterRequest
 	*/
 	Register(ctx _context.Context, subject string) ApiRegisterRequest
 
@@ -925,11 +937,11 @@ When there are multiple instances of Schema Registry running in the same cluster
 	RegisterExecute(r ApiRegisterRequest) (RegisterSchemaResponse, *_nethttp.Response, error)
 
 	/*
-	ResetExporter Reset an exporter.
+		ResetExporter Reset an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the exporter
-	 @return ApiResetExporterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the exporter
+		 @return ApiResetExporterRequest
 	*/
 	ResetExporter(ctx _context.Context, name string) ApiResetExporterRequest
 
@@ -938,11 +950,11 @@ When there are multiple instances of Schema Registry running in the same cluster
 	ResetExporterExecute(r ApiResetExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error)
 
 	/*
-	ResumeExporter Resume an exporter.
+		ResumeExporter Resume an exporter.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the exporter
-	 @return ApiResumeExporterRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the exporter
+		 @return ApiResumeExporterRequest
 	*/
 	ResumeExporter(ctx _context.Context, name string) ApiResumeExporterRequest
 
@@ -951,12 +963,12 @@ When there are multiple instances of Schema Registry running in the same cluster
 	ResumeExporterExecute(r ApiResumeExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error)
 
 	/*
-	SearchUsingAttribute Retrieve data for the specified attribute search query.
+		SearchUsingAttribute Retrieve data for the specified attribute search query.
 
-	Retrieve data for the specified attribute search query.
+		Retrieve data for the specified attribute search query.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiSearchUsingAttributeRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiSearchUsingAttributeRequest
 	*/
 	SearchUsingAttribute(ctx _context.Context) ApiSearchUsingAttributeRequest
 
@@ -965,12 +977,12 @@ When there are multiple instances of Schema Registry running in the same cluster
 	SearchUsingAttributeExecute(r ApiSearchUsingAttributeRequest) (SearchResult, *_nethttp.Response, error)
 
 	/*
-	SearchUsingBasic Retrieve data for the specified fulltext query.
+		SearchUsingBasic Retrieve data for the specified fulltext query.
 
-	Retrieve data for the specified fulltext query.
+		Retrieve data for the specified fulltext query.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiSearchUsingBasicRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiSearchUsingBasicRequest
 	*/
 	SearchUsingBasic(ctx _context.Context) ApiSearchUsingBasicRequest
 
@@ -979,14 +991,14 @@ When there are multiple instances of Schema Registry running in the same cluster
 	SearchUsingBasicExecute(r ApiSearchUsingBasicRequest) (SearchResult, *_nethttp.Response, error)
 
 	/*
-	TestCompatibilityBySubjectName Test input schema against a particular version of a subject's schema for compatibility.
+		TestCompatibilityBySubjectName Test input schema against a particular version of a subject's schema for compatibility.
 
-	the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
+		the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Subject of the schema version against which compatibility is to be tested
-	 @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
-	 @return ApiTestCompatibilityBySubjectNameRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Subject of the schema version against which compatibility is to be tested
+		 @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
+		 @return ApiTestCompatibilityBySubjectNameRequest
 	*/
 	TestCompatibilityBySubjectName(ctx _context.Context, subject string, version string) ApiTestCompatibilityBySubjectNameRequest
 
@@ -995,13 +1007,13 @@ When there are multiple instances of Schema Registry running in the same cluster
 	TestCompatibilityBySubjectNameExecute(r ApiTestCompatibilityBySubjectNameRequest) (CompatibilityCheckResponse, *_nethttp.Response, error)
 
 	/*
-	TestCompatibilityForSubject Test input schema against a subject's schemas for compatibility, based on the compatibility level of the subject configured. In other word, it will perform the same compatibility check as register for that subject
+		TestCompatibilityForSubject Test input schema against a subject's schemas for compatibility, based on the compatibility level of the subject configured. In other word, it will perform the same compatibility check as register for that subject
 
-	the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
+		the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Subject of the schema version against which compatibility is to be tested
-	 @return ApiTestCompatibilityForSubjectRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Subject of the schema version against which compatibility is to be tested
+		 @return ApiTestCompatibilityForSubjectRequest
 	*/
 	TestCompatibilityForSubject(ctx _context.Context, subject string) ApiTestCompatibilityForSubjectRequest
 
@@ -1010,13 +1022,13 @@ When there are multiple instances of Schema Registry running in the same cluster
 	TestCompatibilityForSubjectExecute(r ApiTestCompatibilityForSubjectRequest) (CompatibilityCheckResponse, *_nethttp.Response, error)
 
 	/*
-	UndeleteDekVersion Undelete a dek version.
+		UndeleteDekVersion Undelete a dek version.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @param subject Subject of the dek
-	 @param version Version of the dek
-	 @return ApiUndeleteDekVersionRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @param subject Subject of the dek
+		 @param version Version of the dek
+		 @return ApiUndeleteDekVersionRequest
 	*/
 	UndeleteDekVersion(ctx _context.Context, name string, subject string, version string) ApiUndeleteDekVersionRequest
 
@@ -1024,12 +1036,12 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UndeleteDekVersionExecute(r ApiUndeleteDekVersionRequest) (*_nethttp.Response, error)
 
 	/*
-	UndeleteDekVersions Undelete all versions of a dek.
+		UndeleteDekVersions Undelete all versions of a dek.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @param subject Subject of the dek
-	 @return ApiUndeleteDekVersionsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @param subject Subject of the dek
+		 @return ApiUndeleteDekVersionsRequest
 	*/
 	UndeleteDekVersions(ctx _context.Context, name string, subject string) ApiUndeleteDekVersionsRequest
 
@@ -1037,11 +1049,11 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UndeleteDekVersionsExecute(r ApiUndeleteDekVersionsRequest) (*_nethttp.Response, error)
 
 	/*
-	UndeleteKek Undelete a kek.
+		UndeleteKek Undelete a kek.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param name Name of the kek
-	 @return ApiUndeleteKekRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param name Name of the kek
+		 @return ApiUndeleteKekRequest
 	*/
 	UndeleteKek(ctx _context.Context, name string) ApiUndeleteKekRequest
 
@@ -1049,12 +1061,12 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UndeleteKekExecute(r ApiUndeleteKekRequest) (*_nethttp.Response, error)
 
 	/*
-	UpdateBusinessMetadata Bulk API to update multiple business metadata.
+		UpdateBusinessMetadata Bulk API to update multiple business metadata.
 
-	Bulk API to update multiple business metadata.
+		Bulk API to update multiple business metadata.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiUpdateBusinessMetadataRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiUpdateBusinessMetadataRequest
 	*/
 	UpdateBusinessMetadata(ctx _context.Context) ApiUpdateBusinessMetadataRequest
 
@@ -1063,12 +1075,12 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UpdateBusinessMetadataExecute(r ApiUpdateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error)
 
 	/*
-	UpdateBusinessMetadataDefs Bulk update API for business metadata definitions.
+		UpdateBusinessMetadataDefs Bulk update API for business metadata definitions.
 
-	Bulk update API for business metadata definitions.
+		Bulk update API for business metadata definitions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiUpdateBusinessMetadataDefsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiUpdateBusinessMetadataDefsRequest
 	*/
 	UpdateBusinessMetadataDefs(ctx _context.Context) ApiUpdateBusinessMetadataDefsRequest
 
@@ -1077,11 +1089,11 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UpdateBusinessMetadataDefsExecute(r ApiUpdateBusinessMetadataDefsRequest) ([]BusinessMetadataDefResponse, *_nethttp.Response, error)
 
 	/*
-	UpdateMode Update mode for the specified subject.
+		UpdateMode Update mode for the specified subject.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Name of the Subject
-	 @return ApiUpdateModeRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Name of the Subject
+		 @return ApiUpdateModeRequest
 	*/
 	UpdateMode(ctx _context.Context, subject string) ApiUpdateModeRequest
 
@@ -1090,11 +1102,11 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UpdateModeExecute(r ApiUpdateModeRequest) (ModeUpdateRequest, *_nethttp.Response, error)
 
 	/*
-	UpdateSubjectLevelConfig Update compatibility level for the specified subject.
+		UpdateSubjectLevelConfig Update compatibility level for the specified subject.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @param subject Name of the Subject
-	 @return ApiUpdateSubjectLevelConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @param subject Name of the Subject
+		 @return ApiUpdateSubjectLevelConfigRequest
 	*/
 	UpdateSubjectLevelConfig(ctx _context.Context, subject string) ApiUpdateSubjectLevelConfigRequest
 
@@ -1103,12 +1115,12 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UpdateSubjectLevelConfigExecute(r ApiUpdateSubjectLevelConfigRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
 
 	/*
-	UpdateTagDefs Bulk update API for tag definitions.
+		UpdateTagDefs Bulk update API for tag definitions.
 
-	Bulk update API for tag definitions.
+		Bulk update API for tag definitions.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiUpdateTagDefsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiUpdateTagDefsRequest
 	*/
 	UpdateTagDefs(ctx _context.Context) ApiUpdateTagDefsRequest
 
@@ -1117,12 +1129,12 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UpdateTagDefsExecute(r ApiUpdateTagDefsRequest) ([]TagDefResponse, *_nethttp.Response, error)
 
 	/*
-	UpdateTags Bulk API to update multiple tags.
+		UpdateTags Bulk API to update multiple tags.
 
-	Bulk API to update multiple tags.
+		Bulk API to update multiple tags.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiUpdateTagsRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiUpdateTagsRequest
 	*/
 	UpdateTags(ctx _context.Context) ApiUpdateTagsRequest
 
@@ -1131,12 +1143,12 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UpdateTagsExecute(r ApiUpdateTagsRequest) ([]TagResponse, *_nethttp.Response, error)
 
 	/*
-	UpdateTopLevelConfig Update global compatibility level
+		UpdateTopLevelConfig Update global compatibility level
 
-	Updates the global compatibility level. On success, echoes the original request back to the client.
+		Updates the global compatibility level. On success, echoes the original request back to the client.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiUpdateTopLevelConfigRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiUpdateTopLevelConfigRequest
 	*/
 	UpdateTopLevelConfig(ctx _context.Context) ApiUpdateTopLevelConfigRequest
 
@@ -1145,10 +1157,10 @@ When there are multiple instances of Schema Registry running in the same cluster
 	UpdateTopLevelConfigExecute(r ApiUpdateTopLevelConfigRequest) (ConfigUpdateRequest, *_nethttp.Response, error)
 
 	/*
-	UpdateTopLevelMode Update global mode.
+		UpdateTopLevelMode Update global mode.
 
-	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 @return ApiUpdateTopLevelModeRequest
+		 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		 @return ApiUpdateTopLevelModeRequest
 	*/
 	UpdateTopLevelMode(ctx _context.Context) ApiUpdateTopLevelModeRequest
 
@@ -1161,10 +1173,9 @@ When there are multiple instances of Schema Registry running in the same cluster
 type DefaultApiService service
 
 type ApiAsyncapiParsePutRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiAsyncapiParsePutRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.AsyncapiParsePutExecute(r)
@@ -1175,13 +1186,13 @@ AsyncapiParsePut Method for AsyncapiParsePut
 
 Get number of times the cli tool is used to import and parse the spec file
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAsyncapiParsePutRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAsyncapiParsePutRequest
 */
 func (a *DefaultApiService) AsyncapiParsePut(ctx _context.Context) ApiAsyncapiParsePutRequest {
 	return ApiAsyncapiParsePutRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -1252,10 +1263,9 @@ func (a *DefaultApiService) AsyncapiParsePutExecute(r ApiAsyncapiParsePutRequest
 }
 
 type ApiAsyncapiPutRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiAsyncapiPutRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.AsyncapiPutExecute(r)
@@ -1266,13 +1276,13 @@ AsyncapiPut Method for AsyncapiPut
 
 Get number of times the cli tool is used to export/produce the spec file
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAsyncapiPutRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAsyncapiPutRequest
 */
 func (a *DefaultApiService) AsyncapiPut(ctx _context.Context) ApiAsyncapiPutRequest {
 	return ApiAsyncapiPutRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -1343,8 +1353,8 @@ func (a *DefaultApiService) AsyncapiPutExecute(r ApiAsyncapiPutRequest) (*_netht
 }
 
 type ApiCreateBusinessMetadataRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx              _context.Context
+	ApiService       DefaultApi
 	businessMetadata *[]BusinessMetadata
 }
 
@@ -1363,18 +1373,19 @@ CreateBusinessMetadata Bulk API to create multiple business metadata.
 
 Bulk API to create multiple business metadata.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateBusinessMetadataRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateBusinessMetadataRequest
 */
 func (a *DefaultApiService) CreateBusinessMetadata(ctx _context.Context) ApiCreateBusinessMetadataRequest {
 	return ApiCreateBusinessMetadataRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataResponse
+//
+//	@return []BusinessMetadataResponse
 func (a *DefaultApiService) CreateBusinessMetadataExecute(r ApiCreateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -1453,8 +1464,8 @@ func (a *DefaultApiService) CreateBusinessMetadataExecute(r ApiCreateBusinessMet
 }
 
 type ApiCreateBusinessMetadataDefsRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx                      _context.Context
+	ApiService               DefaultApi
 	atlasBusinessMetadataDef *[]AtlasBusinessMetadataDef
 }
 
@@ -1473,18 +1484,19 @@ CreateBusinessMetadataDefs Bulk create API for business metadata definitions.
 
 Bulk create API for business metadata definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateBusinessMetadataDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateBusinessMetadataDefsRequest
 */
 func (a *DefaultApiService) CreateBusinessMetadataDefs(ctx _context.Context) ApiCreateBusinessMetadataDefsRequest {
 	return ApiCreateBusinessMetadataDefsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataDefResponse
+//
+//	@return []BusinessMetadataDefResponse
 func (a *DefaultApiService) CreateBusinessMetadataDefsExecute(r ApiCreateBusinessMetadataDefsRequest) ([]BusinessMetadataDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -1563,9 +1575,9 @@ func (a *DefaultApiService) CreateBusinessMetadataDefsExecute(r ApiCreateBusines
 }
 
 type ApiCreateDekRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	name string
+	ctx              _context.Context
+	ApiService       DefaultApi
+	name             string
 	createDekRequest *CreateDekRequest
 }
 
@@ -1582,20 +1594,21 @@ func (r ApiCreateDekRequest) Execute() (Dek, *_nethttp.Response, error) {
 /*
 CreateDek Create a dek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiCreateDekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiCreateDekRequest
 */
 func (a *DefaultApiService) CreateDek(ctx _context.Context, name string) ApiCreateDekRequest {
 	return ApiCreateDekRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return Dek
+//
+//	@return Dek
 func (a *DefaultApiService) CreateDekExecute(r ApiCreateDekRequest) (Dek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -1678,9 +1691,9 @@ func (a *DefaultApiService) CreateDekExecute(r ApiCreateDekRequest) (Dek, *_neth
 }
 
 type ApiCreateExporterRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	body *CreateExporterRequest
+	body       *CreateExporterRequest
 }
 
 // Info
@@ -1696,18 +1709,19 @@ func (r ApiCreateExporterRequest) Execute() (CreateExporterResponse, *_nethttp.R
 /*
 CreateExporter Create an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateExporterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateExporterRequest
 */
 func (a *DefaultApiService) CreateExporter(ctx _context.Context) ApiCreateExporterRequest {
 	return ApiCreateExporterRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateExporterResponse
+//
+//	@return CreateExporterResponse
 func (a *DefaultApiService) CreateExporterExecute(r ApiCreateExporterRequest) (CreateExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -1789,8 +1803,8 @@ func (a *DefaultApiService) CreateExporterExecute(r ApiCreateExporterRequest) (C
 }
 
 type ApiCreateKekRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx              _context.Context
+	ApiService       DefaultApi
 	createKekRequest *CreateKekRequest
 }
 
@@ -1807,18 +1821,19 @@ func (r ApiCreateKekRequest) Execute() (Kek, *_nethttp.Response, error) {
 /*
 CreateKek Create a kek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateKekRequest
 */
 func (a *DefaultApiService) CreateKek(ctx _context.Context) ApiCreateKekRequest {
 	return ApiCreateKekRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Kek
+//
+//	@return Kek
 func (a *DefaultApiService) CreateKekExecute(r ApiCreateKekRequest) (Kek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -1900,8 +1915,8 @@ func (a *DefaultApiService) CreateKekExecute(r ApiCreateKekRequest) (Kek, *_neth
 }
 
 type ApiCreateOrUpdateRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx                    _context.Context
+	ApiService             DefaultApi
 	atlasEntityWithExtInfo *AtlasEntityWithExtInfo
 }
 
@@ -1917,13 +1932,13 @@ func (r ApiCreateOrUpdateRequest) Execute() (*_nethttp.Response, error) {
 /*
 CreateOrUpdate Method for CreateOrUpdate
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateOrUpdateRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateOrUpdateRequest
 */
 func (a *DefaultApiService) CreateOrUpdate(ctx _context.Context) ApiCreateOrUpdateRequest {
 	return ApiCreateOrUpdateRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -1996,9 +2011,9 @@ func (a *DefaultApiService) CreateOrUpdateExecute(r ApiCreateOrUpdateRequest) (*
 }
 
 type ApiCreateTagDefsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	tagDef *[]TagDef
+	tagDef     *[]TagDef
 }
 
 // The tag definitions to create
@@ -2016,18 +2031,19 @@ CreateTagDefs Bulk create API for tag definitions.
 
 Bulk create API for tag definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTagDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTagDefsRequest
 */
 func (a *DefaultApiService) CreateTagDefs(ctx _context.Context) ApiCreateTagDefsRequest {
 	return ApiCreateTagDefsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []TagDefResponse
+//
+//	@return []TagDefResponse
 func (a *DefaultApiService) CreateTagDefsExecute(r ApiCreateTagDefsRequest) ([]TagDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -2106,9 +2122,9 @@ func (a *DefaultApiService) CreateTagDefsExecute(r ApiCreateTagDefsRequest) ([]T
 }
 
 type ApiCreateTagsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	tag *[]Tag
+	tag        *[]Tag
 }
 
 // The tags
@@ -2126,18 +2142,19 @@ CreateTags Bulk API to create multiple tags.
 
 Bulk API to create multiple tags.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTagsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTagsRequest
 */
 func (a *DefaultApiService) CreateTags(ctx _context.Context) ApiCreateTagsRequest {
 	return ApiCreateTagsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []TagResponse
+//
+//	@return []TagResponse
 func (a *DefaultApiService) CreateTagsExecute(r ApiCreateTagsRequest) ([]TagResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -2216,13 +2233,12 @@ func (a *DefaultApiService) CreateTagsExecute(r ApiCreateTagsRequest) ([]TagResp
 }
 
 type ApiDeleteBusinessMetadataRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	typeName string
+	ctx           _context.Context
+	ApiService    DefaultApi
+	typeName      string
 	qualifiedName string
-	bmName string
+	bmName        string
 }
-
 
 func (r ApiDeleteBusinessMetadataRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteBusinessMetadataExecute(r)
@@ -2233,19 +2249,19 @@ DeleteBusinessMetadata Delete a business metadata on an entity.
 
 Delete a business metadata on an entity.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @param bmName The name of the business metadata
- @return ApiDeleteBusinessMetadataRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@param bmName The name of the business metadata
+	@return ApiDeleteBusinessMetadataRequest
 */
 func (a *DefaultApiService) DeleteBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string, bmName string) ApiDeleteBusinessMetadataRequest {
 	return ApiDeleteBusinessMetadataRequest{
-		ApiService: a,
-		ctx: ctx,
-		typeName: typeName,
+		ApiService:    a,
+		ctx:           ctx,
+		typeName:      typeName,
 		qualifiedName: qualifiedName,
-		bmName: bmName,
+		bmName:        bmName,
 	}
 }
 
@@ -2319,11 +2335,10 @@ func (a *DefaultApiService) DeleteBusinessMetadataExecute(r ApiDeleteBusinessMet
 }
 
 type ApiDeleteBusinessMetadataDefRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	bmName string
+	bmName     string
 }
-
 
 func (r ApiDeleteBusinessMetadataDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteBusinessMetadataDefExecute(r)
@@ -2334,15 +2349,15 @@ DeleteBusinessMetadataDef Delete API for business metadata definition identified
 
 Delete API for business metadata definition identified by its name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param bmName The name of the business metadata definition
- @return ApiDeleteBusinessMetadataDefRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param bmName The name of the business metadata definition
+	@return ApiDeleteBusinessMetadataDefRequest
 */
 func (a *DefaultApiService) DeleteBusinessMetadataDef(ctx _context.Context, bmName string) ApiDeleteBusinessMetadataDefRequest {
 	return ApiDeleteBusinessMetadataDefRequest{
 		ApiService: a,
-		ctx: ctx,
-		bmName: bmName,
+		ctx:        ctx,
+		bmName:     bmName,
 	}
 }
 
@@ -2414,12 +2429,11 @@ func (a *DefaultApiService) DeleteBusinessMetadataDefExecute(r ApiDeleteBusiness
 }
 
 type ApiDeleteByUniqueAttributesRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	typeName string
+	ctx           _context.Context
+	ApiService    DefaultApi
+	typeName      string
 	qualifiedName string
 }
-
 
 func (r ApiDeleteByUniqueAttributesRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteByUniqueAttributesExecute(r)
@@ -2428,16 +2442,16 @@ func (r ApiDeleteByUniqueAttributesRequest) Execute() (*_nethttp.Response, error
 /*
 DeleteByUniqueAttributes Method for DeleteByUniqueAttributes
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName
- @param qualifiedName
- @return ApiDeleteByUniqueAttributesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName
+	@param qualifiedName
+	@return ApiDeleteByUniqueAttributesRequest
 */
 func (a *DefaultApiService) DeleteByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string) ApiDeleteByUniqueAttributesRequest {
 	return ApiDeleteByUniqueAttributesRequest{
-		ApiService: a,
-		ctx: ctx,
-		typeName: typeName,
+		ApiService:    a,
+		ctx:           ctx,
+		typeName:      typeName,
 		qualifiedName: qualifiedName,
 	}
 }
@@ -2511,13 +2525,13 @@ func (a *DefaultApiService) DeleteByUniqueAttributesExecute(r ApiDeleteByUniqueA
 }
 
 type ApiDeleteDekVersionRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	subject string
-	version string
-	algorithm *string
-	permanent *bool
+	name       string
+	subject    string
+	version    string
+	algorithm  *string
+	permanent  *bool
 }
 
 // Algorithm of the dek
@@ -2525,6 +2539,7 @@ func (r ApiDeleteDekVersionRequest) Algorithm(algorithm string) ApiDeleteDekVers
 	r.algorithm = &algorithm
 	return r
 }
+
 // Whether to perform a permanent delete
 func (r ApiDeleteDekVersionRequest) Permanent(permanent bool) ApiDeleteDekVersionRequest {
 	r.permanent = &permanent
@@ -2538,19 +2553,19 @@ func (r ApiDeleteDekVersionRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteDekVersion Delete a dek version.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @param version Version of the dek
- @return ApiDeleteDekVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@param version Version of the dek
+	@return ApiDeleteDekVersionRequest
 */
 func (a *DefaultApiService) DeleteDekVersion(ctx _context.Context, name string, subject string, version string) ApiDeleteDekVersionRequest {
 	return ApiDeleteDekVersionRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
-		subject: subject,
-		version: version,
+		ctx:        ctx,
+		name:       name,
+		subject:    subject,
+		version:    version,
 	}
 }
 
@@ -2630,12 +2645,12 @@ func (a *DefaultApiService) DeleteDekVersionExecute(r ApiDeleteDekVersionRequest
 }
 
 type ApiDeleteDekVersionsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	subject string
-	algorithm *string
-	permanent *bool
+	name       string
+	subject    string
+	algorithm  *string
+	permanent  *bool
 }
 
 // Algorithm of the dek
@@ -2643,6 +2658,7 @@ func (r ApiDeleteDekVersionsRequest) Algorithm(algorithm string) ApiDeleteDekVer
 	r.algorithm = &algorithm
 	return r
 }
+
 // Whether to perform a permanent delete
 func (r ApiDeleteDekVersionsRequest) Permanent(permanent bool) ApiDeleteDekVersionsRequest {
 	r.permanent = &permanent
@@ -2656,17 +2672,17 @@ func (r ApiDeleteDekVersionsRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteDekVersions Delete all versions of a dek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @return ApiDeleteDekVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@return ApiDeleteDekVersionsRequest
 */
 func (a *DefaultApiService) DeleteDekVersions(ctx _context.Context, name string, subject string) ApiDeleteDekVersionsRequest {
 	return ApiDeleteDekVersionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
-		subject: subject,
+		ctx:        ctx,
+		name:       name,
+		subject:    subject,
 	}
 }
 
@@ -2745,11 +2761,10 @@ func (a *DefaultApiService) DeleteDekVersionsExecute(r ApiDeleteDekVersionsReque
 }
 
 type ApiDeleteExporterRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
+	name       string
 }
-
 
 func (r ApiDeleteExporterRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteExporterExecute(r)
@@ -2758,15 +2773,15 @@ func (r ApiDeleteExporterRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteExporter Delete an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiDeleteExporterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiDeleteExporterRequest
 */
 func (a *DefaultApiService) DeleteExporter(ctx _context.Context, name string) ApiDeleteExporterRequest {
 	return ApiDeleteExporterRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
@@ -2838,10 +2853,10 @@ func (a *DefaultApiService) DeleteExporterExecute(r ApiDeleteExporterRequest) (*
 }
 
 type ApiDeleteKekRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	permanent *bool
+	name       string
+	permanent  *bool
 }
 
 // Whether to perform a permanent delete
@@ -2857,15 +2872,15 @@ func (r ApiDeleteKekRequest) Execute() (*_nethttp.Response, error) {
 /*
 DeleteKek Delete a kek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiDeleteKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiDeleteKekRequest
 */
 func (a *DefaultApiService) DeleteKek(ctx _context.Context, name string) ApiDeleteKekRequest {
 	return ApiDeleteKekRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
@@ -2940,11 +2955,11 @@ func (a *DefaultApiService) DeleteKekExecute(r ApiDeleteKekRequest) (*_nethttp.R
 }
 
 type ApiDeleteSchemaVersionRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
-	version string
-	permanent *bool
+	subject    string
+	version    string
+	permanent  *bool
 }
 
 func (r ApiDeleteSchemaVersionRequest) Permanent(permanent bool) ApiDeleteSchemaVersionRequest {
@@ -2959,22 +2974,23 @@ func (r ApiDeleteSchemaVersionRequest) Execute() (int32, *_nethttp.Response, err
 /*
 DeleteSchemaVersion Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the Subject
- @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
- @return ApiDeleteSchemaVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the Subject
+	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	@return ApiDeleteSchemaVersionRequest
 */
 func (a *DefaultApiService) DeleteSchemaVersion(ctx _context.Context, subject string, version string) ApiDeleteSchemaVersionRequest {
 	return ApiDeleteSchemaVersionRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
-		version: version,
+		ctx:        ctx,
+		subject:    subject,
+		version:    version,
 	}
 }
 
 // Execute executes the request
-//  @return int32
+//
+//	@return int32
 func (a *DefaultApiService) DeleteSchemaVersionExecute(r ApiDeleteSchemaVersionRequest) (int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -3056,10 +3072,10 @@ func (a *DefaultApiService) DeleteSchemaVersionExecute(r ApiDeleteSchemaVersionR
 }
 
 type ApiDeleteSubjectRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
-	permanent *bool
+	subject    string
+	permanent  *bool
 }
 
 func (r ApiDeleteSubjectRequest) Permanent(permanent bool) ApiDeleteSubjectRequest {
@@ -3074,20 +3090,21 @@ func (r ApiDeleteSubjectRequest) Execute() ([]int32, *_nethttp.Response, error) 
 /*
 DeleteSubject Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject the name of the subject
- @return ApiDeleteSubjectRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject the name of the subject
+	@return ApiDeleteSubjectRequest
 */
 func (a *DefaultApiService) DeleteSubject(ctx _context.Context, subject string) ApiDeleteSubjectRequest {
 	return ApiDeleteSubjectRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return []int32
+//
+//	@return []int32
 func (a *DefaultApiService) DeleteSubjectExecute(r ApiDeleteSubjectRequest) ([]int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -3168,11 +3185,10 @@ func (a *DefaultApiService) DeleteSubjectExecute(r ApiDeleteSubjectRequest) ([]i
 }
 
 type ApiDeleteSubjectConfigRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
+	subject    string
 }
-
 
 func (r ApiDeleteSubjectConfigRequest) Execute() (string, *_nethttp.Response, error) {
 	return r.ApiService.DeleteSubjectConfigExecute(r)
@@ -3181,20 +3197,21 @@ func (r ApiDeleteSubjectConfigRequest) Execute() (string, *_nethttp.Response, er
 /*
 DeleteSubjectConfig Deletes the specified subject-level compatibility level config and revert to the global default.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject the name of the subject
- @return ApiDeleteSubjectConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject the name of the subject
+	@return ApiDeleteSubjectConfigRequest
 */
 func (a *DefaultApiService) DeleteSubjectConfig(ctx _context.Context, subject string) ApiDeleteSubjectConfigRequest {
 	return ApiDeleteSubjectConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *DefaultApiService) DeleteSubjectConfigExecute(r ApiDeleteSubjectConfigRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -3272,11 +3289,16 @@ func (a *DefaultApiService) DeleteSubjectConfigExecute(r ApiDeleteSubjectConfigR
 }
 
 type ApiDeleteSubjectModeRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
+	subject    string
+	recursive  *bool
 }
 
+func (r ApiDeleteSubjectModeRequest) Recursive(recursive bool) ApiDeleteSubjectModeRequest {
+	r.recursive = &recursive
+	return r
+}
 
 func (r ApiDeleteSubjectModeRequest) Execute() (string, *_nethttp.Response, error) {
 	return r.ApiService.DeleteSubjectModeExecute(r)
@@ -3285,20 +3307,21 @@ func (r ApiDeleteSubjectModeRequest) Execute() (string, *_nethttp.Response, erro
 /*
 DeleteSubjectMode Deletes the specified subject-level mode and revert to the global default.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject the name of the subject
- @return ApiDeleteSubjectModeRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject the name of the subject
+	@return ApiDeleteSubjectModeRequest
 */
 func (a *DefaultApiService) DeleteSubjectMode(ctx _context.Context, subject string) ApiDeleteSubjectModeRequest {
 	return ApiDeleteSubjectModeRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *DefaultApiService) DeleteSubjectModeExecute(r ApiDeleteSubjectModeRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -3321,6 +3344,118 @@ func (a *DefaultApiService) DeleteSubjectModeExecute(r ApiDeleteSubjectModeReque
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.recursive != nil {
+		localVarQueryParams.Add("recursive", parameterToString(*r.recursive, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteModeRequest struct {
+	ctx        _context.Context
+	ApiService DefaultApi
+	recursive  *bool
+}
+
+func (r ApiDeleteModeRequest) Recursive(recursive bool) ApiDeleteModeRequest {
+	r.recursive = &recursive
+	return r
+}
+
+func (r ApiDeleteModeRequest) Execute() (string, *_nethttp.Response, error) {
+	return r.ApiService.DeleteModeExecute(r)
+}
+
+/*
+DeleteMode Deletes the global mode and revert to the default.
+
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDeleteModeRequest
+*/
+func (a *DefaultApiService) DeleteMode(ctx _context.Context) ApiDeleteModeRequest {
+	return ApiDeleteModeRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return string
+func (a *DefaultApiService) DeleteModeExecute(r ApiDeleteModeRequest) (string, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.DeleteMode")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/mode"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.recursive != nil {
+		localVarQueryParams.Add("recursive", parameterToString(*r.recursive, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -3376,13 +3511,12 @@ func (a *DefaultApiService) DeleteSubjectModeExecute(r ApiDeleteSubjectModeReque
 }
 
 type ApiDeleteTagRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	typeName string
+	ctx           _context.Context
+	ApiService    DefaultApi
+	typeName      string
 	qualifiedName string
-	tagName string
+	tagName       string
 }
-
 
 func (r ApiDeleteTagRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteTagExecute(r)
@@ -3393,19 +3527,19 @@ DeleteTag Delete a tag on an entity.
 
 Delete a tag on an entity.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @param tagName The name of the tag
- @return ApiDeleteTagRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@param tagName The name of the tag
+	@return ApiDeleteTagRequest
 */
 func (a *DefaultApiService) DeleteTag(ctx _context.Context, typeName string, qualifiedName string, tagName string) ApiDeleteTagRequest {
 	return ApiDeleteTagRequest{
-		ApiService: a,
-		ctx: ctx,
-		typeName: typeName,
+		ApiService:    a,
+		ctx:           ctx,
+		typeName:      typeName,
 		qualifiedName: qualifiedName,
-		tagName: tagName,
+		tagName:       tagName,
 	}
 }
 
@@ -3479,11 +3613,10 @@ func (a *DefaultApiService) DeleteTagExecute(r ApiDeleteTagRequest) (*_nethttp.R
 }
 
 type ApiDeleteTagDefRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	tagName string
+	tagName    string
 }
-
 
 func (r ApiDeleteTagDefRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteTagDefExecute(r)
@@ -3494,15 +3627,15 @@ DeleteTagDef Delete API for tag definition identified by its name.
 
 Delete API for tag definition identified by its name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param tagName The name of the tag definition
- @return ApiDeleteTagDefRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param tagName The name of the tag definition
+	@return ApiDeleteTagDefRequest
 */
 func (a *DefaultApiService) DeleteTagDef(ctx _context.Context, tagName string) ApiDeleteTagDefRequest {
 	return ApiDeleteTagDefRequest{
 		ApiService: a,
-		ctx: ctx,
-		tagName: tagName,
+		ctx:        ctx,
+		tagName:    tagName,
 	}
 }
 
@@ -3574,10 +3707,9 @@ func (a *DefaultApiService) DeleteTagDefExecute(r ApiDeleteTagDefRequest) (*_net
 }
 
 type ApiDeleteTopLevelConfigRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiDeleteTopLevelConfigRequest) Execute() (string, *_nethttp.Response, error) {
 	return r.ApiService.DeleteTopLevelConfigExecute(r)
@@ -3588,18 +3720,19 @@ DeleteTopLevelConfig Delete global compatibility level
 
 Deletes the global compatibility level config and reverts to the default.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDeleteTopLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDeleteTopLevelConfigRequest
 */
 func (a *DefaultApiService) DeleteTopLevelConfig(ctx _context.Context) ApiDeleteTopLevelConfigRequest {
 	return ApiDeleteTopLevelConfigRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *DefaultApiService) DeleteTopLevelConfigExecute(r ApiDeleteTopLevelConfigRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
@@ -3685,10 +3818,9 @@ func (a *DefaultApiService) DeleteTopLevelConfigExecute(r ApiDeleteTopLevelConfi
 }
 
 type ApiGetRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiGetRequest) Execute() (map[string]map[string]interface{}, *_nethttp.Response, error) {
 	return r.ApiService.GetExecute(r)
@@ -3699,18 +3831,19 @@ Get Schema Registry Root Resource
 
 The Root resource is a no-op.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRequest
 */
 func (a *DefaultApiService) Get(ctx _context.Context) ApiGetRequest {
 	return ApiGetRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *DefaultApiService) GetExecute(r ApiGetRequest) (map[string]map[string]interface{}, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -3787,9 +3920,9 @@ func (a *DefaultApiService) GetExecute(r ApiGetRequest) (map[string]map[string]i
 }
 
 type ApiGetAllBusinessMetadataDefsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	prefix *string
+	prefix     *string
 }
 
 // The prefix of a business metadata definition name
@@ -3807,18 +3940,19 @@ GetAllBusinessMetadataDefs Bulk retrieval API for retrieving business metadata d
 
 Bulk retrieval API for retrieving business metadata definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAllBusinessMetadataDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAllBusinessMetadataDefsRequest
 */
 func (a *DefaultApiService) GetAllBusinessMetadataDefs(ctx _context.Context) ApiGetAllBusinessMetadataDefsRequest {
 	return ApiGetAllBusinessMetadataDefsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataDefResponse
+//
+//	@return []BusinessMetadataDefResponse
 func (a *DefaultApiService) GetAllBusinessMetadataDefsExecute(r ApiGetAllBusinessMetadataDefsRequest) ([]BusinessMetadataDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -3898,9 +4032,9 @@ func (a *DefaultApiService) GetAllBusinessMetadataDefsExecute(r ApiGetAllBusines
 }
 
 type ApiGetAllTagDefsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	prefix *string
+	prefix     *string
 }
 
 // The prefix of a tag definition name
@@ -3918,18 +4052,19 @@ GetAllTagDefs Bulk retrieval API for retrieving tag definitions.
 
 Bulk retrieval API for retrieving tag definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAllTagDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAllTagDefsRequest
 */
 func (a *DefaultApiService) GetAllTagDefs(ctx _context.Context) ApiGetAllTagDefsRequest {
 	return ApiGetAllTagDefsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []TagDefResponse
+//
+//	@return []TagDefResponse
 func (a *DefaultApiService) GetAllTagDefsExecute(r ApiGetAllTagDefsRequest) ([]TagDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -4009,12 +4144,11 @@ func (a *DefaultApiService) GetAllTagDefsExecute(r ApiGetAllTagDefsRequest) ([]T
 }
 
 type ApiGetBusinessMetadataRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	typeName string
+	ctx           _context.Context
+	ApiService    DefaultApi
+	typeName      string
 	qualifiedName string
 }
-
 
 func (r ApiGetBusinessMetadataRequest) Execute() ([]BusinessMetadataResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetBusinessMetadataExecute(r)
@@ -4025,22 +4159,23 @@ GetBusinessMetadata Gets the list of business metadata for a given entity repres
 
 Gets the list of business metadata for a given entity represented by a qualified name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @return ApiGetBusinessMetadataRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@return ApiGetBusinessMetadataRequest
 */
 func (a *DefaultApiService) GetBusinessMetadata(ctx _context.Context, typeName string, qualifiedName string) ApiGetBusinessMetadataRequest {
 	return ApiGetBusinessMetadataRequest{
-		ApiService: a,
-		ctx: ctx,
-		typeName: typeName,
+		ApiService:    a,
+		ctx:           ctx,
+		typeName:      typeName,
 		qualifiedName: qualifiedName,
 	}
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataResponse
+//
+//	@return []BusinessMetadataResponse
 func (a *DefaultApiService) GetBusinessMetadataExecute(r ApiGetBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -4119,11 +4254,10 @@ func (a *DefaultApiService) GetBusinessMetadataExecute(r ApiGetBusinessMetadataR
 }
 
 type ApiGetBusinessMetadataDefByNameRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	bmName string
+	bmName     string
 }
-
 
 func (r ApiGetBusinessMetadataDefByNameRequest) Execute() (AtlasBusinessMetadataDef, *_nethttp.Response, error) {
 	return r.ApiService.GetBusinessMetadataDefByNameExecute(r)
@@ -4134,20 +4268,21 @@ GetBusinessMetadataDefByName Get the business metadata definition with the given
 
 Get the business metadata definition with the given name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param bmName The name of the business metadata definition
- @return ApiGetBusinessMetadataDefByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param bmName The name of the business metadata definition
+	@return ApiGetBusinessMetadataDefByNameRequest
 */
 func (a *DefaultApiService) GetBusinessMetadataDefByName(ctx _context.Context, bmName string) ApiGetBusinessMetadataDefByNameRequest {
 	return ApiGetBusinessMetadataDefByNameRequest{
 		ApiService: a,
-		ctx: ctx,
-		bmName: bmName,
+		ctx:        ctx,
+		bmName:     bmName,
 	}
 }
 
 // Execute executes the request
-//  @return AtlasBusinessMetadataDef
+//
+//	@return AtlasBusinessMetadataDef
 func (a *DefaultApiService) GetBusinessMetadataDefByNameExecute(r ApiGetBusinessMetadataDefByNameRequest) (AtlasBusinessMetadataDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -4225,12 +4360,12 @@ func (a *DefaultApiService) GetBusinessMetadataDefByNameExecute(r ApiGetBusiness
 }
 
 type ApiGetByUniqueAttributesRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	typeName string
-	qualifiedName string
-	minExtInfo *bool
-	ignoreRelationships *bool
+	ctx                   _context.Context
+	ApiService            DefaultApi
+	typeName              string
+	qualifiedName         string
+	minExtInfo            *bool
+	ignoreRelationships   *bool
 	includeInternalPrefix *string
 }
 
@@ -4239,11 +4374,13 @@ func (r ApiGetByUniqueAttributesRequest) MinExtInfo(minExtInfo bool) ApiGetByUni
 	r.minExtInfo = &minExtInfo
 	return r
 }
+
 // Whether to ignore relationships
 func (r ApiGetByUniqueAttributesRequest) IgnoreRelationships(ignoreRelationships bool) ApiGetByUniqueAttributesRequest {
 	r.ignoreRelationships = &ignoreRelationships
 	return r
 }
+
 // If not null, include internal attributes that start with this prefix
 func (r ApiGetByUniqueAttributesRequest) IncludeInternalPrefix(includeInternalPrefix string) ApiGetByUniqueAttributesRequest {
 	r.includeInternalPrefix = &includeInternalPrefix
@@ -4259,22 +4396,23 @@ GetByUniqueAttributes Fetch complete definition of an entity given its type and 
 
 Fetch complete definition of an entity given its type and unique attribute.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @return ApiGetByUniqueAttributesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@return ApiGetByUniqueAttributesRequest
 */
 func (a *DefaultApiService) GetByUniqueAttributes(ctx _context.Context, typeName string, qualifiedName string) ApiGetByUniqueAttributesRequest {
 	return ApiGetByUniqueAttributesRequest{
-		ApiService: a,
-		ctx: ctx,
-		typeName: typeName,
+		ApiService:    a,
+		ctx:           ctx,
+		typeName:      typeName,
 		qualifiedName: qualifiedName,
 	}
 }
 
 // Execute executes the request
-//  @return AtlasEntityWithExtInfo
+//
+//	@return AtlasEntityWithExtInfo
 func (a *DefaultApiService) GetByUniqueAttributesExecute(r ApiGetByUniqueAttributesRequest) (AtlasEntityWithExtInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -4362,10 +4500,9 @@ func (a *DefaultApiService) GetByUniqueAttributesExecute(r ApiGetByUniqueAttribu
 }
 
 type ApiGetClusterIdRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiGetClusterIdRequest) Execute() (ServerClusterId, *_nethttp.Response, error) {
 	return r.ApiService.GetClusterIdExecute(r)
@@ -4374,18 +4511,19 @@ func (r ApiGetClusterIdRequest) Execute() (ServerClusterId, *_nethttp.Response, 
 /*
 GetClusterId Get the server metadata
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetClusterIdRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetClusterIdRequest
 */
 func (a *DefaultApiService) GetClusterId(ctx _context.Context) ApiGetClusterIdRequest {
 	return ApiGetClusterIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ServerClusterId
+//
+//	@return ServerClusterId
 func (a *DefaultApiService) GetClusterIdExecute(r ApiGetClusterIdRequest) (ServerClusterId, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -4462,12 +4600,12 @@ func (a *DefaultApiService) GetClusterIdExecute(r ApiGetClusterIdRequest) (Serve
 }
 
 type ApiGetDekRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	subject string
-	algorithm *string
-	deleted *bool
+	name       string
+	subject    string
+	algorithm  *string
+	deleted    *bool
 }
 
 // Algorithm of the dek
@@ -4475,6 +4613,7 @@ func (r ApiGetDekRequest) Algorithm(algorithm string) ApiGetDekRequest {
 	r.algorithm = &algorithm
 	return r
 }
+
 // Whether to include deleted keys
 func (r ApiGetDekRequest) Deleted(deleted bool) ApiGetDekRequest {
 	r.deleted = &deleted
@@ -4488,22 +4627,23 @@ func (r ApiGetDekRequest) Execute() (Dek, *_nethttp.Response, error) {
 /*
 GetDek Get a dek by subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @return ApiGetDekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@return ApiGetDekRequest
 */
 func (a *DefaultApiService) GetDek(ctx _context.Context, name string, subject string) ApiGetDekRequest {
 	return ApiGetDekRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
-		subject: subject,
+		ctx:        ctx,
+		name:       name,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return Dek
+//
+//	@return Dek
 func (a *DefaultApiService) GetDekExecute(r ApiGetDekRequest) (Dek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -4588,13 +4728,13 @@ func (a *DefaultApiService) GetDekExecute(r ApiGetDekRequest) (Dek, *_nethttp.Re
 }
 
 type ApiGetDekByVersionRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	subject string
-	version string
-	algorithm *string
-	deleted *bool
+	name       string
+	subject    string
+	version    string
+	algorithm  *string
+	deleted    *bool
 }
 
 // Algorithm of the dek
@@ -4602,6 +4742,7 @@ func (r ApiGetDekByVersionRequest) Algorithm(algorithm string) ApiGetDekByVersio
 	r.algorithm = &algorithm
 	return r
 }
+
 // Whether to include deleted keys
 func (r ApiGetDekByVersionRequest) Deleted(deleted bool) ApiGetDekByVersionRequest {
 	r.deleted = &deleted
@@ -4615,24 +4756,25 @@ func (r ApiGetDekByVersionRequest) Execute() (Dek, *_nethttp.Response, error) {
 /*
 GetDekByVersion Get a dek by subject and version.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @param version Version of the dek
- @return ApiGetDekByVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@param version Version of the dek
+	@return ApiGetDekByVersionRequest
 */
 func (a *DefaultApiService) GetDekByVersion(ctx _context.Context, name string, subject string, version string) ApiGetDekByVersionRequest {
 	return ApiGetDekByVersionRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
-		subject: subject,
-		version: version,
+		ctx:        ctx,
+		name:       name,
+		subject:    subject,
+		version:    version,
 	}
 }
 
 // Execute executes the request
-//  @return Dek
+//
+//	@return Dek
 func (a *DefaultApiService) GetDekByVersionExecute(r ApiGetDekByVersionRequest) (Dek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -4718,10 +4860,10 @@ func (a *DefaultApiService) GetDekByVersionExecute(r ApiGetDekByVersionRequest) 
 }
 
 type ApiGetDekSubjectsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	deleted *bool
+	name       string
+	deleted    *bool
 }
 
 // Whether to include deleted keys
@@ -4737,20 +4879,21 @@ func (r ApiGetDekSubjectsRequest) Execute() ([]string, *_nethttp.Response, error
 /*
 GetDekSubjects Get a list of dek subjects.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiGetDekSubjectsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiGetDekSubjectsRequest
 */
 func (a *DefaultApiService) GetDekSubjects(ctx _context.Context, name string) ApiGetDekSubjectsRequest {
 	return ApiGetDekSubjectsRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *DefaultApiService) GetDekSubjectsExecute(r ApiGetDekSubjectsRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -4831,12 +4974,12 @@ func (a *DefaultApiService) GetDekSubjectsExecute(r ApiGetDekSubjectsRequest) ([
 }
 
 type ApiGetDekVersionsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	subject string
-	algorithm *string
-	deleted *bool
+	name       string
+	subject    string
+	algorithm  *string
+	deleted    *bool
 }
 
 // Algorithm of the dek
@@ -4844,6 +4987,7 @@ func (r ApiGetDekVersionsRequest) Algorithm(algorithm string) ApiGetDekVersionsR
 	r.algorithm = &algorithm
 	return r
 }
+
 // Whether to include deleted keys
 func (r ApiGetDekVersionsRequest) Deleted(deleted bool) ApiGetDekVersionsRequest {
 	r.deleted = &deleted
@@ -4857,22 +5001,23 @@ func (r ApiGetDekVersionsRequest) Execute() ([]int32, *_nethttp.Response, error)
 /*
 GetDekVersions List versions of dek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @return ApiGetDekVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@return ApiGetDekVersionsRequest
 */
 func (a *DefaultApiService) GetDekVersions(ctx _context.Context, name string, subject string) ApiGetDekVersionsRequest {
 	return ApiGetDekVersionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
-		subject: subject,
+		ctx:        ctx,
+		name:       name,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return []int32
+//
+//	@return []int32
 func (a *DefaultApiService) GetDekVersionsExecute(r ApiGetDekVersionsRequest) ([]int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -4957,11 +5102,10 @@ func (a *DefaultApiService) GetDekVersionsExecute(r ApiGetDekVersionsRequest) ([
 }
 
 type ApiGetExporterConfigRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
+	name       string
 }
-
 
 func (r ApiGetExporterConfigRequest) Execute() (map[string]string, *_nethttp.Response, error) {
 	return r.ApiService.GetExporterConfigExecute(r)
@@ -4970,20 +5114,21 @@ func (r ApiGetExporterConfigRequest) Execute() (map[string]string, *_nethttp.Res
 /*
 GetExporterConfig Get the config for an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name
- @return ApiGetExporterConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name
+	@return ApiGetExporterConfigRequest
 */
 func (a *DefaultApiService) GetExporterConfig(ctx _context.Context, name string) ApiGetExporterConfigRequest {
 	return ApiGetExporterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]string
+//
+//	@return map[string]string
 func (a *DefaultApiService) GetExporterConfigExecute(r ApiGetExporterConfigRequest) (map[string]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -5061,11 +5206,10 @@ func (a *DefaultApiService) GetExporterConfigExecute(r ApiGetExporterConfigReque
 }
 
 type ApiGetExporterInfoRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
+	name       string
 }
-
 
 func (r ApiGetExporterInfoRequest) Execute() (ExporterInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetExporterInfoExecute(r)
@@ -5074,20 +5218,21 @@ func (r ApiGetExporterInfoRequest) Execute() (ExporterInfo, *_nethttp.Response, 
 /*
 GetExporterInfo Get the info for an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name
- @return ApiGetExporterInfoRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name
+	@return ApiGetExporterInfoRequest
 */
 func (a *DefaultApiService) GetExporterInfo(ctx _context.Context, name string) ApiGetExporterInfoRequest {
 	return ApiGetExporterInfoRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return ExporterInfo
+//
+//	@return ExporterInfo
 func (a *DefaultApiService) GetExporterInfoExecute(r ApiGetExporterInfoRequest) (ExporterInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -5165,11 +5310,10 @@ func (a *DefaultApiService) GetExporterInfoExecute(r ApiGetExporterInfoRequest) 
 }
 
 type ApiGetExporterStatusRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
+	name       string
 }
-
 
 func (r ApiGetExporterStatusRequest) Execute() (ExporterStatus, *_nethttp.Response, error) {
 	return r.ApiService.GetExporterStatusExecute(r)
@@ -5178,20 +5322,21 @@ func (r ApiGetExporterStatusRequest) Execute() (ExporterStatus, *_nethttp.Respon
 /*
 GetExporterStatus Get the status for an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name
- @return ApiGetExporterStatusRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name
+	@return ApiGetExporterStatusRequest
 */
 func (a *DefaultApiService) GetExporterStatus(ctx _context.Context, name string) ApiGetExporterStatusRequest {
 	return ApiGetExporterStatusRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return ExporterStatus
+//
+//	@return ExporterStatus
 func (a *DefaultApiService) GetExporterStatusExecute(r ApiGetExporterStatusRequest) (ExporterStatus, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -5269,10 +5414,9 @@ func (a *DefaultApiService) GetExporterStatusExecute(r ApiGetExporterStatusReque
 }
 
 type ApiGetExportersRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiGetExportersRequest) Execute() ([]string, *_nethttp.Response, error) {
 	return r.ApiService.GetExportersExecute(r)
@@ -5281,18 +5425,19 @@ func (r ApiGetExportersRequest) Execute() ([]string, *_nethttp.Response, error) 
 /*
 GetExporters Get a list of exporter names.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetExportersRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetExportersRequest
 */
 func (a *DefaultApiService) GetExporters(ctx _context.Context) ApiGetExportersRequest {
 	return ApiGetExportersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *DefaultApiService) GetExportersExecute(r ApiGetExportersRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -5369,10 +5514,10 @@ func (a *DefaultApiService) GetExportersExecute(r ApiGetExportersRequest) ([]str
 }
 
 type ApiGetKekRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	deleted *bool
+	name       string
+	deleted    *bool
 }
 
 // Whether to include deleted keys
@@ -5388,20 +5533,21 @@ func (r ApiGetKekRequest) Execute() (Kek, *_nethttp.Response, error) {
 /*
 GetKek Get a kek by name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiGetKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiGetKekRequest
 */
 func (a *DefaultApiService) GetKek(ctx _context.Context, name string) ApiGetKekRequest {
 	return ApiGetKekRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return Kek
+//
+//	@return Kek
 func (a *DefaultApiService) GetKekExecute(r ApiGetKekRequest) (Kek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -5482,9 +5628,9 @@ func (a *DefaultApiService) GetKekExecute(r ApiGetKekRequest) (Kek, *_nethttp.Re
 }
 
 type ApiGetKekNamesRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	deleted *bool
+	deleted    *bool
 }
 
 // Whether to include deleted keys
@@ -5500,18 +5646,19 @@ func (r ApiGetKekNamesRequest) Execute() ([]string, *_nethttp.Response, error) {
 /*
 GetKekNames Get a list of kek names.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetKekNamesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetKekNamesRequest
 */
 func (a *DefaultApiService) GetKekNames(ctx _context.Context) ApiGetKekNamesRequest {
 	return ApiGetKekNamesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *DefaultApiService) GetKekNamesExecute(r ApiGetKekNamesRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -5591,9 +5738,9 @@ func (a *DefaultApiService) GetKekNamesExecute(r ApiGetKekNamesRequest) ([]strin
 }
 
 type ApiGetModeRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	subject string
+	ctx             _context.Context
+	ApiService      DefaultApi
+	subject         string
 	defaultToGlobal *bool
 }
 
@@ -5609,20 +5756,21 @@ func (r ApiGetModeRequest) Execute() (Mode, *_nethttp.Response, error) {
 /*
 GetMode Get mode for a subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the Subject
- @return ApiGetModeRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the Subject
+	@return ApiGetModeRequest
 */
 func (a *DefaultApiService) GetMode(ctx _context.Context, subject string) ApiGetModeRequest {
 	return ApiGetModeRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return Mode
+//
+//	@return Mode
 func (a *DefaultApiService) GetModeExecute(r ApiGetModeRequest) (Mode, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -5703,12 +5851,11 @@ func (a *DefaultApiService) GetModeExecute(r ApiGetModeRequest) (Mode, *_nethttp
 }
 
 type ApiGetReferencedByRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
-	version string
+	subject    string
+	version    string
 }
-
 
 func (r ApiGetReferencedByRequest) Execute() ([]int32, *_nethttp.Response, error) {
 	return r.ApiService.GetReferencedByExecute(r)
@@ -5717,22 +5864,23 @@ func (r ApiGetReferencedByRequest) Execute() ([]int32, *_nethttp.Response, error
 /*
 GetReferencedBy Get the schemas that reference the specified schema.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the Subject
- @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
- @return ApiGetReferencedByRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the Subject
+	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	@return ApiGetReferencedByRequest
 */
 func (a *DefaultApiService) GetReferencedBy(ctx _context.Context, subject string, version string) ApiGetReferencedByRequest {
 	return ApiGetReferencedByRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
-		version: version,
+		ctx:        ctx,
+		subject:    subject,
+		version:    version,
 	}
 }
 
 // Execute executes the request
-//  @return []int32
+//
+//	@return []int32
 func (a *DefaultApiService) GetReferencedByExecute(r ApiGetReferencedByRequest) ([]int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -5811,11 +5959,11 @@ func (a *DefaultApiService) GetReferencedByExecute(r ApiGetReferencedByRequest) 
 }
 
 type ApiGetSchemaRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	id int32
-	subject *string
-	format *string
+	id         int32
+	subject    *string
+	format     *string
 	fetchMaxId *bool
 }
 
@@ -5839,20 +5987,21 @@ func (r ApiGetSchemaRequest) Execute() (SchemaString, *_nethttp.Response, error)
 /*
 GetSchema Get the schema string identified by the input ID.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Globally unique identifier of the schema
- @return ApiGetSchemaRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Globally unique identifier of the schema
+	@return ApiGetSchemaRequest
 */
 func (a *DefaultApiService) GetSchema(ctx _context.Context, id int32) ApiGetSchemaRequest {
 	return ApiGetSchemaRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return SchemaString
+//
+//	@return SchemaString
 func (a *DefaultApiService) GetSchemaExecute(r ApiGetSchemaRequest) (SchemaString, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -5939,11 +6088,11 @@ func (a *DefaultApiService) GetSchemaExecute(r ApiGetSchemaRequest) (SchemaStrin
 }
 
 type ApiGetSchemaByVersionRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
-	version string
-	deleted *bool
+	subject    string
+	version    string
+	deleted    *bool
 }
 
 func (r ApiGetSchemaByVersionRequest) Deleted(deleted bool) ApiGetSchemaByVersionRequest {
@@ -5958,22 +6107,23 @@ func (r ApiGetSchemaByVersionRequest) Execute() (Schema, *_nethttp.Response, err
 /*
 GetSchemaByVersion Get a specific version of the schema registered under this subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the Subject
- @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
- @return ApiGetSchemaByVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the Subject
+	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	@return ApiGetSchemaByVersionRequest
 */
 func (a *DefaultApiService) GetSchemaByVersion(ctx _context.Context, subject string, version string) ApiGetSchemaByVersionRequest {
 	return ApiGetSchemaByVersionRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
-		version: version,
+		ctx:        ctx,
+		subject:    subject,
+		version:    version,
 	}
 }
 
 // Execute executes the request
-//  @return Schema
+//
+//	@return Schema
 func (a *DefaultApiService) GetSchemaByVersionExecute(r ApiGetSchemaByVersionRequest) (Schema, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -6055,11 +6205,11 @@ func (a *DefaultApiService) GetSchemaByVersionExecute(r ApiGetSchemaByVersionReq
 }
 
 type ApiGetSchemaOnlyRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
-	version string
-	deleted *bool
+	subject    string
+	version    string
+	deleted    *bool
 }
 
 func (r ApiGetSchemaOnlyRequest) Deleted(deleted bool) ApiGetSchemaOnlyRequest {
@@ -6074,22 +6224,23 @@ func (r ApiGetSchemaOnlyRequest) Execute() (string, *_nethttp.Response, error) {
 /*
 GetSchemaOnly Get the schema for the specified version of this subject. The unescaped schema only is returned.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the Subject
- @param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
- @return ApiGetSchemaOnlyRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the Subject
+	@param version Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+	@return ApiGetSchemaOnlyRequest
 */
 func (a *DefaultApiService) GetSchemaOnly(ctx _context.Context, subject string, version string) ApiGetSchemaOnlyRequest {
 	return ApiGetSchemaOnlyRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
-		version: version,
+		ctx:        ctx,
+		subject:    subject,
+		version:    version,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *DefaultApiService) GetSchemaOnlyExecute(r ApiGetSchemaOnlyRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -6171,10 +6322,9 @@ func (a *DefaultApiService) GetSchemaOnlyExecute(r ApiGetSchemaOnlyRequest) (str
 }
 
 type ApiGetSchemaTypesRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiGetSchemaTypesRequest) Execute() ([]string, *_nethttp.Response, error) {
 	return r.ApiService.GetSchemaTypesExecute(r)
@@ -6183,18 +6333,19 @@ func (r ApiGetSchemaTypesRequest) Execute() ([]string, *_nethttp.Response, error
 /*
 GetSchemaTypes Get the schema types supported by this registry.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSchemaTypesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSchemaTypesRequest
 */
 func (a *DefaultApiService) GetSchemaTypes(ctx _context.Context) ApiGetSchemaTypesRequest {
 	return ApiGetSchemaTypesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *DefaultApiService) GetSchemaTypesExecute(r ApiGetSchemaTypesRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -6271,13 +6422,13 @@ func (a *DefaultApiService) GetSchemaTypesExecute(r ApiGetSchemaTypesRequest) ([
 }
 
 type ApiGetSchemasRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx           _context.Context
+	ApiService    DefaultApi
 	subjectPrefix *string
-	deleted *bool
-	latestOnly *bool
-	offset *int32
-	limit *int32
+	deleted       *bool
+	latestOnly    *bool
+	offset        *int32
+	limit         *int32
 }
 
 func (r ApiGetSchemasRequest) SubjectPrefix(subjectPrefix string) ApiGetSchemasRequest {
@@ -6308,18 +6459,19 @@ func (r ApiGetSchemasRequest) Execute() ([]Schema, *_nethttp.Response, error) {
 /*
 GetSchemas Get the schemas.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSchemasRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSchemasRequest
 */
 func (a *DefaultApiService) GetSchemas(ctx _context.Context) ApiGetSchemasRequest {
 	return ApiGetSchemasRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []Schema
+//
+//	@return []Schema
 func (a *DefaultApiService) GetSchemasExecute(r ApiGetSchemasRequest) ([]Schema, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -6411,9 +6563,9 @@ func (a *DefaultApiService) GetSchemasExecute(r ApiGetSchemasRequest) ([]Schema,
 }
 
 type ApiGetSubjectLevelConfigRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	subject string
+	ctx             _context.Context
+	ApiService      DefaultApi
+	subject         string
 	defaultToGlobal *bool
 }
 
@@ -6429,20 +6581,21 @@ func (r ApiGetSubjectLevelConfigRequest) Execute() (Config, *_nethttp.Response, 
 /*
 GetSubjectLevelConfig Get compatibility level for a subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject
- @return ApiGetSubjectLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject
+	@return ApiGetSubjectLevelConfigRequest
 */
 func (a *DefaultApiService) GetSubjectLevelConfig(ctx _context.Context, subject string) ApiGetSubjectLevelConfigRequest {
 	return ApiGetSubjectLevelConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return Config
+//
+//	@return Config
 func (a *DefaultApiService) GetSubjectLevelConfigExecute(r ApiGetSubjectLevelConfigRequest) (Config, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -6523,11 +6676,11 @@ func (a *DefaultApiService) GetSubjectLevelConfigExecute(r ApiGetSubjectLevelCon
 }
 
 type ApiGetSubjectsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	id int32
-	subject *string
-	deleted *bool
+	id         int32
+	subject    *string
+	deleted    *bool
 }
 
 func (r ApiGetSubjectsRequest) Subject(subject string) ApiGetSubjectsRequest {
@@ -6546,20 +6699,21 @@ func (r ApiGetSubjectsRequest) Execute() ([]string, *_nethttp.Response, error) {
 /*
 GetSubjects Get all the subjects associated with the input ID.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Globally unique identifier of the schema
- @return ApiGetSubjectsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Globally unique identifier of the schema
+	@return ApiGetSubjectsRequest
 */
 func (a *DefaultApiService) GetSubjects(ctx _context.Context, id int32) ApiGetSubjectsRequest {
 	return ApiGetSubjectsRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *DefaultApiService) GetSubjectsExecute(r ApiGetSubjectsRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -6643,11 +6797,10 @@ func (a *DefaultApiService) GetSubjectsExecute(r ApiGetSubjectsRequest) ([]strin
 }
 
 type ApiGetTagDefByNameRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	tagName string
+	tagName    string
 }
-
 
 func (r ApiGetTagDefByNameRequest) Execute() (TagDef, *_nethttp.Response, error) {
 	return r.ApiService.GetTagDefByNameExecute(r)
@@ -6658,20 +6811,21 @@ GetTagDefByName Get the tag definition with the given name.
 
 Get the tag definition with the given name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param tagName The name of the tag definiton
- @return ApiGetTagDefByNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param tagName The name of the tag definiton
+	@return ApiGetTagDefByNameRequest
 */
 func (a *DefaultApiService) GetTagDefByName(ctx _context.Context, tagName string) ApiGetTagDefByNameRequest {
 	return ApiGetTagDefByNameRequest{
 		ApiService: a,
-		ctx: ctx,
-		tagName: tagName,
+		ctx:        ctx,
+		tagName:    tagName,
 	}
 }
 
 // Execute executes the request
-//  @return TagDef
+//
+//	@return TagDef
 func (a *DefaultApiService) GetTagDefByNameExecute(r ApiGetTagDefByNameRequest) (TagDef, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -6749,12 +6903,11 @@ func (a *DefaultApiService) GetTagDefByNameExecute(r ApiGetTagDefByNameRequest) 
 }
 
 type ApiGetTagsRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	typeName string
+	ctx           _context.Context
+	ApiService    DefaultApi
+	typeName      string
 	qualifiedName string
 }
-
 
 func (r ApiGetTagsRequest) Execute() ([]TagResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetTagsExecute(r)
@@ -6765,22 +6918,23 @@ GetTags Gets the list of classifications for a given entity represented by a qua
 
 Gets the list of classifications for a given entity represented by a qualifed name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param typeName The type of the entity
- @param qualifiedName The qualified name of the entity
- @return ApiGetTagsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param typeName The type of the entity
+	@param qualifiedName The qualified name of the entity
+	@return ApiGetTagsRequest
 */
 func (a *DefaultApiService) GetTags(ctx _context.Context, typeName string, qualifiedName string) ApiGetTagsRequest {
 	return ApiGetTagsRequest{
-		ApiService: a,
-		ctx: ctx,
-		typeName: typeName,
+		ApiService:    a,
+		ctx:           ctx,
+		typeName:      typeName,
 		qualifiedName: qualifiedName,
 	}
 }
 
 // Execute executes the request
-//  @return []TagResponse
+//
+//	@return []TagResponse
 func (a *DefaultApiService) GetTagsExecute(r ApiGetTagsRequest) ([]TagResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -6859,10 +7013,9 @@ func (a *DefaultApiService) GetTagsExecute(r ApiGetTagsRequest) ([]TagResponse, 
 }
 
 type ApiGetTopLevelConfigRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiGetTopLevelConfigRequest) Execute() (Config, *_nethttp.Response, error) {
 	return r.ApiService.GetTopLevelConfigExecute(r)
@@ -6873,18 +7026,19 @@ GetTopLevelConfig Get global compatibility level
 
 Retrieves the global compatibility level.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTopLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTopLevelConfigRequest
 */
 func (a *DefaultApiService) GetTopLevelConfig(ctx _context.Context) ApiGetTopLevelConfigRequest {
 	return ApiGetTopLevelConfigRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Config
+//
+//	@return Config
 func (a *DefaultApiService) GetTopLevelConfigExecute(r ApiGetTopLevelConfigRequest) (Config, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -6970,10 +7124,9 @@ func (a *DefaultApiService) GetTopLevelConfigExecute(r ApiGetTopLevelConfigReque
 }
 
 type ApiGetTopLevelModeRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiGetTopLevelModeRequest) Execute() (Mode, *_nethttp.Response, error) {
 	return r.ApiService.GetTopLevelModeExecute(r)
@@ -6982,18 +7135,19 @@ func (r ApiGetTopLevelModeRequest) Execute() (Mode, *_nethttp.Response, error) {
 /*
 GetTopLevelMode Get global mode.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetTopLevelModeRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTopLevelModeRequest
 */
 func (a *DefaultApiService) GetTopLevelMode(ctx _context.Context) ApiGetTopLevelModeRequest {
 	return ApiGetTopLevelModeRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Mode
+//
+//	@return Mode
 func (a *DefaultApiService) GetTopLevelModeExecute(r ApiGetTopLevelModeRequest) (Mode, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -7070,11 +7224,11 @@ func (a *DefaultApiService) GetTopLevelModeExecute(r ApiGetTopLevelModeRequest) 
 }
 
 type ApiGetVersionsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	id int32
-	subject *string
-	deleted *bool
+	id         int32
+	subject    *string
+	deleted    *bool
 }
 
 func (r ApiGetVersionsRequest) Subject(subject string) ApiGetVersionsRequest {
@@ -7093,20 +7247,21 @@ func (r ApiGetVersionsRequest) Execute() ([]SubjectVersion, *_nethttp.Response, 
 /*
 GetVersions Get all the subject-version pairs associated with the input ID.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Globally unique identifier of the schema
- @return ApiGetVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Globally unique identifier of the schema
+	@return ApiGetVersionsRequest
 */
 func (a *DefaultApiService) GetVersions(ctx _context.Context, id int32) ApiGetVersionsRequest {
 	return ApiGetVersionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return []SubjectVersion
+//
+//	@return []SubjectVersion
 func (a *DefaultApiService) GetVersionsExecute(r ApiGetVersionsRequest) ([]SubjectVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -7190,11 +7345,11 @@ func (a *DefaultApiService) GetVersionsExecute(r ApiGetVersionsRequest) ([]Subje
 }
 
 type ApiListRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx           _context.Context
+	ApiService    DefaultApi
 	subjectPrefix *string
-	deleted *bool
-	deletedOnly *bool
+	deleted       *bool
+	deletedOnly   *bool
 }
 
 func (r ApiListRequest) SubjectPrefix(subjectPrefix string) ApiListRequest {
@@ -7205,6 +7360,7 @@ func (r ApiListRequest) Deleted(deleted bool) ApiListRequest {
 	r.deleted = &deleted
 	return r
 }
+
 // Whether to return deleted subjects only
 func (r ApiListRequest) DeletedOnly(deletedOnly bool) ApiListRequest {
 	r.deletedOnly = &deletedOnly
@@ -7218,18 +7374,19 @@ func (r ApiListRequest) Execute() ([]string, *_nethttp.Response, error) {
 /*
 List Get a list of registered subjects.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListRequest
 */
 func (a *DefaultApiService) List(ctx _context.Context) ApiListRequest {
 	return ApiListRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *DefaultApiService) ListExecute(r ApiListRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -7315,10 +7472,16 @@ func (a *DefaultApiService) ListExecute(r ApiListRequest) ([]string, *_nethttp.R
 }
 
 type ApiListContextsRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx           _context.Context
+	ApiService    DefaultApi
+	contextPrefix *string
 }
 
+// Prefix filter for context names
+func (r ApiListContextsRequest) ContextPrefix(contextPrefix string) ApiListContextsRequest {
+	r.contextPrefix = &contextPrefix
+	return r
+}
 
 func (r ApiListContextsRequest) Execute() ([]string, *_nethttp.Response, error) {
 	return r.ApiService.ListContextsExecute(r)
@@ -7327,18 +7490,19 @@ func (r ApiListContextsRequest) Execute() ([]string, *_nethttp.Response, error) 
 /*
 ListContexts Get a list of contexts.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListContextsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListContextsRequest
 */
 func (a *DefaultApiService) ListContexts(ctx _context.Context) ApiListContextsRequest {
 	return ApiListContextsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *DefaultApiService) ListContextsExecute(r ApiListContextsRequest) ([]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -7359,6 +7523,10 @@ func (a *DefaultApiService) ListContextsExecute(r ApiListContextsRequest) ([]str
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+
+	if r.contextPrefix != nil {
+		localVarQueryParams.Add("contextPrefix", parameterToString(*r.contextPrefix, ""))
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7415,10 +7583,10 @@ func (a *DefaultApiService) ListContextsExecute(r ApiListContextsRequest) ([]str
 }
 
 type ApiListVersionsRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	subject string
-	deleted *bool
+	ctx         _context.Context
+	ApiService  DefaultApi
+	subject     string
+	deleted     *bool
 	deletedOnly *bool
 }
 
@@ -7426,6 +7594,7 @@ func (r ApiListVersionsRequest) Deleted(deleted bool) ApiListVersionsRequest {
 	r.deleted = &deleted
 	return r
 }
+
 // Whether to return deleted schemas only
 func (r ApiListVersionsRequest) DeletedOnly(deletedOnly bool) ApiListVersionsRequest {
 	r.deletedOnly = &deletedOnly
@@ -7439,20 +7608,21 @@ func (r ApiListVersionsRequest) Execute() ([]int32, *_nethttp.Response, error) {
 /*
 ListVersions Get a list of versions registered under the specified subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the Subject
- @return ApiListVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the Subject
+	@return ApiListVersionsRequest
 */
 func (a *DefaultApiService) ListVersions(ctx _context.Context, subject string) ApiListVersionsRequest {
 	return ApiListVersionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return []int32
+//
+//	@return []int32
 func (a *DefaultApiService) ListVersionsExecute(r ApiListVersionsRequest) ([]int32, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -7536,11 +7706,11 @@ func (a *DefaultApiService) ListVersionsExecute(r ApiListVersionsRequest) ([]int
 }
 
 type ApiLookUpSchemaUnderSubjectRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
-	body *RegisterSchemaRequest
-	deleted *bool
+	subject    string
+	body       *RegisterSchemaRequest
+	deleted    *bool
 }
 
 // Schema
@@ -7560,15 +7730,15 @@ func (r ApiLookUpSchemaUnderSubjectRequest) Execute() (*_nethttp.Response, error
 /*
 LookUpSchemaUnderSubject Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Subject under which the schema will be registered
- @return ApiLookUpSchemaUnderSubjectRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Subject under which the schema will be registered
+	@return ApiLookUpSchemaUnderSubjectRequest
 */
 func (a *DefaultApiService) LookUpSchemaUnderSubject(ctx _context.Context, subject string) ApiLookUpSchemaUnderSubjectRequest {
 	return ApiLookUpSchemaUnderSubjectRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
@@ -7657,8 +7827,8 @@ func (a *DefaultApiService) LookUpSchemaUnderSubjectExecute(r ApiLookUpSchemaUnd
 }
 
 type ApiPartialUpdateByUniqueAttributesRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx                    _context.Context
+	ApiService             DefaultApi
 	atlasEntityWithExtInfo *AtlasEntityWithExtInfo
 }
 
@@ -7674,13 +7844,13 @@ func (r ApiPartialUpdateByUniqueAttributesRequest) Execute() (*_nethttp.Response
 /*
 PartialUpdateByUniqueAttributes Method for PartialUpdateByUniqueAttributes
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPartialUpdateByUniqueAttributesRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPartialUpdateByUniqueAttributesRequest
 */
 func (a *DefaultApiService) PartialUpdateByUniqueAttributes(ctx _context.Context) ApiPartialUpdateByUniqueAttributesRequest {
 	return ApiPartialUpdateByUniqueAttributesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
@@ -7753,11 +7923,10 @@ func (a *DefaultApiService) PartialUpdateByUniqueAttributesExecute(r ApiPartialU
 }
 
 type ApiPauseExporterRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
+	name       string
 }
-
 
 func (r ApiPauseExporterRequest) Execute() (UpdateExporterResponse, *_nethttp.Response, error) {
 	return r.ApiService.PauseExporterExecute(r)
@@ -7766,20 +7935,21 @@ func (r ApiPauseExporterRequest) Execute() (UpdateExporterResponse, *_nethttp.Re
 /*
 PauseExporter Pause an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiPauseExporterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiPauseExporterRequest
 */
 func (a *DefaultApiService) PauseExporter(ctx _context.Context, name string) ApiPauseExporterRequest {
 	return ApiPauseExporterRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateExporterResponse
+//
+//	@return UpdateExporterResponse
 func (a *DefaultApiService) PauseExporterExecute(r ApiPauseExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -7857,10 +8027,9 @@ func (a *DefaultApiService) PauseExporterExecute(r ApiPauseExporterRequest) (Upd
 }
 
 type ApiPostRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
 }
-
 
 func (r ApiPostRequest) Execute() (map[string]string, *_nethttp.Response, error) {
 	return r.ApiService.PostExecute(r)
@@ -7869,18 +8038,19 @@ func (r ApiPostRequest) Execute() (map[string]string, *_nethttp.Response, error)
 /*
 Post Method for Post
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPostRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiPostRequest
 */
 func (a *DefaultApiService) Post(ctx _context.Context) ApiPostRequest {
 	return ApiPostRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]string
+//
+//	@return map[string]string
 func (a *DefaultApiService) PostExecute(r ApiPostRequest) (map[string]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -7957,10 +8127,10 @@ func (a *DefaultApiService) PostExecute(r ApiPostRequest) (map[string]string, *_
 }
 
 type ApiPutExporterRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	body *UpdateExporterRequest
+	name       string
+	body       *UpdateExporterRequest
 }
 
 // Info
@@ -7976,20 +8146,21 @@ func (r ApiPutExporterRequest) Execute() (UpdateExporterResponse, *_nethttp.Resp
 /*
 PutExporter Alters an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiPutExporterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiPutExporterRequest
 */
 func (a *DefaultApiService) PutExporter(ctx _context.Context, name string) ApiPutExporterRequest {
 	return ApiPutExporterRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateExporterResponse
+//
+//	@return UpdateExporterResponse
 func (a *DefaultApiService) PutExporterExecute(r ApiPutExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -8072,10 +8243,10 @@ func (a *DefaultApiService) PutExporterExecute(r ApiPutExporterRequest) (UpdateE
 }
 
 type ApiPutExporterConfigRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	body *map[string]string
+	name       string
+	body       *map[string]string
 }
 
 // Config
@@ -8091,20 +8262,21 @@ func (r ApiPutExporterConfigRequest) Execute() (UpdateExporterResponse, *_nethtt
 /*
 PutExporterConfig Alters the config of an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiPutExporterConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiPutExporterConfigRequest
 */
 func (a *DefaultApiService) PutExporterConfig(ctx _context.Context, name string) ApiPutExporterConfigRequest {
 	return ApiPutExporterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateExporterResponse
+//
+//	@return UpdateExporterResponse
 func (a *DefaultApiService) PutExporterConfigExecute(r ApiPutExporterConfigRequest) (UpdateExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -8187,9 +8359,9 @@ func (a *DefaultApiService) PutExporterConfigExecute(r ApiPutExporterConfigReque
 }
 
 type ApiPutKekRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	name string
+	ctx              _context.Context
+	ApiService       DefaultApi
+	name             string
 	updateKekRequest *UpdateKekRequest
 }
 
@@ -8206,20 +8378,21 @@ func (r ApiPutKekRequest) Execute() (Kek, *_nethttp.Response, error) {
 /*
 PutKek Alters a kek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiPutKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiPutKekRequest
 */
 func (a *DefaultApiService) PutKek(ctx _context.Context, name string) ApiPutKekRequest {
 	return ApiPutKekRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return Kek
+//
+//	@return Kek
 func (a *DefaultApiService) PutKekExecute(r ApiPutKekRequest) (Kek, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -8302,11 +8475,11 @@ func (a *DefaultApiService) PutKekExecute(r ApiPutKekRequest) (Kek, *_nethttp.Re
 }
 
 type ApiRegisterRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
-	body *RegisterSchemaRequest
-	normalize *bool
+	subject    string
+	body       *RegisterSchemaRequest
+	normalize  *bool
 }
 
 // Schema
@@ -8314,6 +8487,7 @@ func (r ApiRegisterRequest) Body(body RegisterSchemaRequest) ApiRegisterRequest 
 	r.body = &body
 	return r
 }
+
 // Whether to register the normalized schema
 func (r ApiRegisterRequest) Normalize(normalize bool) ApiRegisterRequest {
 	r.normalize = &normalize
@@ -8331,20 +8505,21 @@ Register a new schema under the specified subject. If successfully registered, t
 A schema should be compatible with the previously registered schema or schemas (if there are any) as per the configured compatibility level. The configured compatibility level can be obtained by issuing a GET http:get:: /config/(string: subject). If that returns null, then GET http:get:: /config
 When there are multiple instances of Schema Registry running in the same cluster, the schema registration request will be forwarded to one of the instances designated as the primary. If the primary is not available, the client will get an error code indicating that the forwarding has failed.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the subject
- @return ApiRegisterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the subject
+	@return ApiRegisterRequest
 */
 func (a *DefaultApiService) Register(ctx _context.Context, subject string) ApiRegisterRequest {
 	return ApiRegisterRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return RegisterSchemaResponse
+//
+//	@return RegisterSchemaResponse
 func (a *DefaultApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSchemaResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -8459,11 +8634,10 @@ func (a *DefaultApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSchem
 }
 
 type ApiResetExporterRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
+	name       string
 }
-
 
 func (r ApiResetExporterRequest) Execute() (UpdateExporterResponse, *_nethttp.Response, error) {
 	return r.ApiService.ResetExporterExecute(r)
@@ -8472,20 +8646,21 @@ func (r ApiResetExporterRequest) Execute() (UpdateExporterResponse, *_nethttp.Re
 /*
 ResetExporter Reset an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiResetExporterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiResetExporterRequest
 */
 func (a *DefaultApiService) ResetExporter(ctx _context.Context, name string) ApiResetExporterRequest {
 	return ApiResetExporterRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateExporterResponse
+//
+//	@return UpdateExporterResponse
 func (a *DefaultApiService) ResetExporterExecute(r ApiResetExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -8563,11 +8738,10 @@ func (a *DefaultApiService) ResetExporterExecute(r ApiResetExporterRequest) (Upd
 }
 
 type ApiResumeExporterRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
+	name       string
 }
-
 
 func (r ApiResumeExporterRequest) Execute() (UpdateExporterResponse, *_nethttp.Response, error) {
 	return r.ApiService.ResumeExporterExecute(r)
@@ -8576,20 +8750,21 @@ func (r ApiResumeExporterRequest) Execute() (UpdateExporterResponse, *_nethttp.R
 /*
 ResumeExporter Resume an exporter.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the exporter
- @return ApiResumeExporterRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the exporter
+	@return ApiResumeExporterRequest
 */
 func (a *DefaultApiService) ResumeExporter(ctx _context.Context, name string) ApiResumeExporterRequest {
 	return ApiResumeExporterRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateExporterResponse
+//
+//	@return UpdateExporterResponse
 func (a *DefaultApiService) ResumeExporterExecute(r ApiResumeExporterRequest) (UpdateExporterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -8667,24 +8842,24 @@ func (a *DefaultApiService) ResumeExporterExecute(r ApiResumeExporterRequest) (U
 }
 
 type ApiSearchUsingAttributeRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	type_ *[]string
-	types *string
-	attr *[]string
-	attrs *string
-	attrName *[]string
+	ctx             _context.Context
+	ApiService      DefaultApi
+	type_           *[]string
+	types           *string
+	attr            *[]string
+	attrs           *string
+	attrName        *[]string
 	attrValuePrefix *[]string
-	tag *[]string
-	timeRangeType *string
-	timeRangeAttr *string
-	timeRangeStart *int64
-	timeRangeEnd *int64
-	sortBy *string
-	sortOrder *string
-	deleted *bool
-	limit *int32
-	offset *int32
+	tag             *[]string
+	timeRangeType   *string
+	timeRangeAttr   *string
+	timeRangeStart  *int64
+	timeRangeEnd    *int64
+	sortBy          *string
+	sortOrder       *string
+	deleted         *bool
+	limit           *int32
+	offset          *int32
 }
 
 // Limit the result to only entities of specified types
@@ -8696,6 +8871,7 @@ func (r ApiSearchUsingAttributeRequest) Types(types string) ApiSearchUsingAttrib
 	r.types = &types
 	return r
 }
+
 // One of more additional attributes to return in the response
 func (r ApiSearchUsingAttributeRequest) Attr(attr []string) ApiSearchUsingAttributeRequest {
 	r.attr = &attr
@@ -8705,61 +8881,73 @@ func (r ApiSearchUsingAttributeRequest) Attrs(attrs string) ApiSearchUsingAttrib
 	r.attrs = &attrs
 	return r
 }
+
 // The attribute to search
 func (r ApiSearchUsingAttributeRequest) AttrName(attrName []string) ApiSearchUsingAttributeRequest {
 	r.attrName = &attrName
 	return r
 }
+
 // The prefix for the attribute value to search
 func (r ApiSearchUsingAttributeRequest) AttrValuePrefix(attrValuePrefix []string) ApiSearchUsingAttributeRequest {
 	r.attrValuePrefix = &attrValuePrefix
 	return r
 }
+
 // Limit the result to only entities tagged with the given tag
 func (r ApiSearchUsingAttributeRequest) Tag(tag []string) ApiSearchUsingAttributeRequest {
 	r.tag = &tag
 	return r
 }
+
 // The type of time range search, default is CUSTOM
 func (r ApiSearchUsingAttributeRequest) TimeRangeType(timeRangeType string) ApiSearchUsingAttributeRequest {
 	r.timeRangeType = &timeRangeType
 	return r
 }
+
 // The attribute for a time range search
 func (r ApiSearchUsingAttributeRequest) TimeRangeAttr(timeRangeAttr string) ApiSearchUsingAttributeRequest {
 	r.timeRangeAttr = &timeRangeAttr
 	return r
 }
+
 // The start for a custom time range search in ms since the epoch
 func (r ApiSearchUsingAttributeRequest) TimeRangeStart(timeRangeStart int64) ApiSearchUsingAttributeRequest {
 	r.timeRangeStart = &timeRangeStart
 	return r
 }
+
 // The end for a custom time range search in ms since the epoch
 func (r ApiSearchUsingAttributeRequest) TimeRangeEnd(timeRangeEnd int64) ApiSearchUsingAttributeRequest {
 	r.timeRangeEnd = &timeRangeEnd
 	return r
 }
+
 // An attribute to sort by
 func (r ApiSearchUsingAttributeRequest) SortBy(sortBy string) ApiSearchUsingAttributeRequest {
 	r.sortBy = &sortBy
 	return r
 }
+
 // Sort order, either ASCENDING (default) or DESCENDING
 func (r ApiSearchUsingAttributeRequest) SortOrder(sortOrder string) ApiSearchUsingAttributeRequest {
 	r.sortOrder = &sortOrder
 	return r
 }
+
 // Whether to include deleted entities
 func (r ApiSearchUsingAttributeRequest) Deleted(deleted bool) ApiSearchUsingAttributeRequest {
 	r.deleted = &deleted
 	return r
 }
+
 // Limit the result set to only include the specified number of entries
 func (r ApiSearchUsingAttributeRequest) Limit(limit int32) ApiSearchUsingAttributeRequest {
 	r.limit = &limit
 	return r
 }
+
 // Start offset of the result set (useful for pagination)
 func (r ApiSearchUsingAttributeRequest) Offset(offset int32) ApiSearchUsingAttributeRequest {
 	r.offset = &offset
@@ -8775,18 +8963,19 @@ SearchUsingAttribute Retrieve data for the specified attribute search query.
 
 Retrieve data for the specified attribute search query.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSearchUsingAttributeRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSearchUsingAttributeRequest
 */
 func (a *DefaultApiService) SearchUsingAttribute(ctx _context.Context) ApiSearchUsingAttributeRequest {
 	return ApiSearchUsingAttributeRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SearchResult
+//
+//	@return SearchResult
 func (a *DefaultApiService) SearchUsingAttributeExecute(r ApiSearchUsingAttributeRequest) (SearchResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -8951,23 +9140,23 @@ func (a *DefaultApiService) SearchUsingAttributeExecute(r ApiSearchUsingAttribut
 }
 
 type ApiSearchUsingBasicRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	query *string
-	type_ *[]string
-	types *string
-	attr *[]string
-	attrs *string
-	tag *[]string
-	timeRangeType *string
-	timeRangeAttr *string
+	ctx            _context.Context
+	ApiService     DefaultApi
+	query          *string
+	type_          *[]string
+	types          *string
+	attr           *[]string
+	attrs          *string
+	tag            *[]string
+	timeRangeType  *string
+	timeRangeAttr  *string
 	timeRangeStart *int64
-	timeRangeEnd *int64
-	sortBy *string
-	sortOrder *string
-	deleted *bool
-	limit *int32
-	offset *int32
+	timeRangeEnd   *int64
+	sortBy         *string
+	sortOrder      *string
+	deleted        *bool
+	limit          *int32
+	offset         *int32
 }
 
 // The full-text query
@@ -8975,6 +9164,7 @@ func (r ApiSearchUsingBasicRequest) Query(query string) ApiSearchUsingBasicReque
 	r.query = &query
 	return r
 }
+
 // Limit the result to only entities of specified types
 func (r ApiSearchUsingBasicRequest) Type_(type_ []string) ApiSearchUsingBasicRequest {
 	r.type_ = &type_
@@ -8984,6 +9174,7 @@ func (r ApiSearchUsingBasicRequest) Types(types string) ApiSearchUsingBasicReque
 	r.types = &types
 	return r
 }
+
 // One of more additional attributes to return in the response
 func (r ApiSearchUsingBasicRequest) Attr(attr []string) ApiSearchUsingBasicRequest {
 	r.attr = &attr
@@ -8993,51 +9184,61 @@ func (r ApiSearchUsingBasicRequest) Attrs(attrs string) ApiSearchUsingBasicReque
 	r.attrs = &attrs
 	return r
 }
+
 // Limit the result to only entities with the given tag
 func (r ApiSearchUsingBasicRequest) Tag(tag []string) ApiSearchUsingBasicRequest {
 	r.tag = &tag
 	return r
 }
+
 // The type of time range search, default is CUSTOM
 func (r ApiSearchUsingBasicRequest) TimeRangeType(timeRangeType string) ApiSearchUsingBasicRequest {
 	r.timeRangeType = &timeRangeType
 	return r
 }
+
 // The attribute for a time range search
 func (r ApiSearchUsingBasicRequest) TimeRangeAttr(timeRangeAttr string) ApiSearchUsingBasicRequest {
 	r.timeRangeAttr = &timeRangeAttr
 	return r
 }
+
 // The start for a custom time range search in ms since the epoch
 func (r ApiSearchUsingBasicRequest) TimeRangeStart(timeRangeStart int64) ApiSearchUsingBasicRequest {
 	r.timeRangeStart = &timeRangeStart
 	return r
 }
+
 // The end for a custom time range search in ms since the epoch
 func (r ApiSearchUsingBasicRequest) TimeRangeEnd(timeRangeEnd int64) ApiSearchUsingBasicRequest {
 	r.timeRangeEnd = &timeRangeEnd
 	return r
 }
+
 // An attribute to sort by
 func (r ApiSearchUsingBasicRequest) SortBy(sortBy string) ApiSearchUsingBasicRequest {
 	r.sortBy = &sortBy
 	return r
 }
+
 // Sort order, either ASCENDING (default) or DESCENDING
 func (r ApiSearchUsingBasicRequest) SortOrder(sortOrder string) ApiSearchUsingBasicRequest {
 	r.sortOrder = &sortOrder
 	return r
 }
+
 // Whether to include deleted entities
 func (r ApiSearchUsingBasicRequest) Deleted(deleted bool) ApiSearchUsingBasicRequest {
 	r.deleted = &deleted
 	return r
 }
+
 // Limit the result set to only include the specified number of entries
 func (r ApiSearchUsingBasicRequest) Limit(limit int32) ApiSearchUsingBasicRequest {
 	r.limit = &limit
 	return r
 }
+
 // Start offset of the result set (useful for pagination)
 func (r ApiSearchUsingBasicRequest) Offset(offset int32) ApiSearchUsingBasicRequest {
 	r.offset = &offset
@@ -9053,18 +9254,19 @@ SearchUsingBasic Retrieve data for the specified fulltext query.
 
 Retrieve data for the specified fulltext query.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSearchUsingBasicRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSearchUsingBasicRequest
 */
 func (a *DefaultApiService) SearchUsingBasic(ctx _context.Context) ApiSearchUsingBasicRequest {
 	return ApiSearchUsingBasicRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SearchResult
+//
+//	@return SearchResult
 func (a *DefaultApiService) SearchUsingBasicExecute(r ApiSearchUsingBasicRequest) (SearchResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
@@ -9210,14 +9412,14 @@ func (a *DefaultApiService) SearchUsingBasicExecute(r ApiSearchUsingBasicRequest
 }
 
 type ApiTestCompatibilityBySubjectNameRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	subject string
-	version string
-	body *RegisterSchemaRequest
+	ctx         _context.Context
+	ApiService  DefaultApi
+	subject     string
+	version     string
+	body        *RegisterSchemaRequest
 	contentType *string
-	accept *string
-	verbose *bool
+	accept      *string
+	verbose     *bool
 }
 
 // Schema
@@ -9247,22 +9449,23 @@ TestCompatibilityBySubjectName Test input schema against a particular version of
 
 the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Subject of the schema version against which compatibility is to be tested
- @param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
- @return ApiTestCompatibilityBySubjectNameRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Subject of the schema version against which compatibility is to be tested
+	@param version Version of the subject's schema against which compatibility is to be tested. Valid values for versionId are between [1,2^31-1] or the string \"latest\".\"latest\" checks compatibility of the input schema with the last registered schema under the specified subject
+	@return ApiTestCompatibilityBySubjectNameRequest
 */
 func (a *DefaultApiService) TestCompatibilityBySubjectName(ctx _context.Context, subject string, version string) ApiTestCompatibilityBySubjectNameRequest {
 	return ApiTestCompatibilityBySubjectNameRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
-		version: version,
+		ctx:        ctx,
+		subject:    subject,
+		version:    version,
 	}
 }
 
 // Execute executes the request
-//  @return CompatibilityCheckResponse
+//
+//	@return CompatibilityCheckResponse
 func (a *DefaultApiService) TestCompatibilityBySubjectNameExecute(r ApiTestCompatibilityBySubjectNameRequest) (CompatibilityCheckResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -9355,13 +9558,13 @@ func (a *DefaultApiService) TestCompatibilityBySubjectNameExecute(r ApiTestCompa
 }
 
 type ApiTestCompatibilityForSubjectRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
-	subject string
-	body *RegisterSchemaRequest
+	ctx         _context.Context
+	ApiService  DefaultApi
+	subject     string
+	body        *RegisterSchemaRequest
 	contentType *string
-	accept *string
-	verbose *bool
+	accept      *string
+	verbose     *bool
 }
 
 // Schema
@@ -9391,20 +9594,21 @@ TestCompatibilityForSubject Test input schema against a subject's schemas for co
 
 the compatibility level applied for the check is the configured compatibility level for the subject (http:get:: /config/(string: subject)). If this subject's compatibility level was never changed, then the global compatibility level applies (http:get:: /config).
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Subject of the schema version against which compatibility is to be tested
- @return ApiTestCompatibilityForSubjectRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Subject of the schema version against which compatibility is to be tested
+	@return ApiTestCompatibilityForSubjectRequest
 */
 func (a *DefaultApiService) TestCompatibilityForSubject(ctx _context.Context, subject string) ApiTestCompatibilityForSubjectRequest {
 	return ApiTestCompatibilityForSubjectRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return CompatibilityCheckResponse
+//
+//	@return CompatibilityCheckResponse
 func (a *DefaultApiService) TestCompatibilityForSubjectExecute(r ApiTestCompatibilityForSubjectRequest) (CompatibilityCheckResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
@@ -9496,12 +9700,12 @@ func (a *DefaultApiService) TestCompatibilityForSubjectExecute(r ApiTestCompatib
 }
 
 type ApiUndeleteDekVersionRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	subject string
-	version string
-	algorithm *string
+	name       string
+	subject    string
+	version    string
+	algorithm  *string
 }
 
 // Algorithm of the dek
@@ -9517,19 +9721,19 @@ func (r ApiUndeleteDekVersionRequest) Execute() (*_nethttp.Response, error) {
 /*
 UndeleteDekVersion Undelete a dek version.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @param version Version of the dek
- @return ApiUndeleteDekVersionRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@param version Version of the dek
+	@return ApiUndeleteDekVersionRequest
 */
 func (a *DefaultApiService) UndeleteDekVersion(ctx _context.Context, name string, subject string, version string) ApiUndeleteDekVersionRequest {
 	return ApiUndeleteDekVersionRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
-		subject: subject,
-		version: version,
+		ctx:        ctx,
+		name:       name,
+		subject:    subject,
+		version:    version,
 	}
 }
 
@@ -9606,11 +9810,11 @@ func (a *DefaultApiService) UndeleteDekVersionExecute(r ApiUndeleteDekVersionReq
 }
 
 type ApiUndeleteDekVersionsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
-	subject string
-	algorithm *string
+	name       string
+	subject    string
+	algorithm  *string
 }
 
 // Algorithm of the dek
@@ -9626,17 +9830,17 @@ func (r ApiUndeleteDekVersionsRequest) Execute() (*_nethttp.Response, error) {
 /*
 UndeleteDekVersions Undelete all versions of a dek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @param subject Subject of the dek
- @return ApiUndeleteDekVersionsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@param subject Subject of the dek
+	@return ApiUndeleteDekVersionsRequest
 */
 func (a *DefaultApiService) UndeleteDekVersions(ctx _context.Context, name string, subject string) ApiUndeleteDekVersionsRequest {
 	return ApiUndeleteDekVersionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
-		subject: subject,
+		ctx:        ctx,
+		name:       name,
+		subject:    subject,
 	}
 }
 
@@ -9712,11 +9916,10 @@ func (a *DefaultApiService) UndeleteDekVersionsExecute(r ApiUndeleteDekVersionsR
 }
 
 type ApiUndeleteKekRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	name string
+	name       string
 }
-
 
 func (r ApiUndeleteKekRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.UndeleteKekExecute(r)
@@ -9725,15 +9928,15 @@ func (r ApiUndeleteKekRequest) Execute() (*_nethttp.Response, error) {
 /*
 UndeleteKek Undelete a kek.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name Name of the kek
- @return ApiUndeleteKekRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param name Name of the kek
+	@return ApiUndeleteKekRequest
 */
 func (a *DefaultApiService) UndeleteKek(ctx _context.Context, name string) ApiUndeleteKekRequest {
 	return ApiUndeleteKekRequest{
 		ApiService: a,
-		ctx: ctx,
-		name: name,
+		ctx:        ctx,
+		name:       name,
 	}
 }
 
@@ -9805,8 +10008,8 @@ func (a *DefaultApiService) UndeleteKekExecute(r ApiUndeleteKekRequest) (*_netht
 }
 
 type ApiUpdateBusinessMetadataRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx              _context.Context
+	ApiService       DefaultApi
 	businessMetadata *[]BusinessMetadata
 }
 
@@ -9825,18 +10028,19 @@ UpdateBusinessMetadata Bulk API to update multiple business metadata.
 
 Bulk API to update multiple business metadata.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateBusinessMetadataRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateBusinessMetadataRequest
 */
 func (a *DefaultApiService) UpdateBusinessMetadata(ctx _context.Context) ApiUpdateBusinessMetadataRequest {
 	return ApiUpdateBusinessMetadataRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataResponse
+//
+//	@return []BusinessMetadataResponse
 func (a *DefaultApiService) UpdateBusinessMetadataExecute(r ApiUpdateBusinessMetadataRequest) ([]BusinessMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -9915,8 +10119,8 @@ func (a *DefaultApiService) UpdateBusinessMetadataExecute(r ApiUpdateBusinessMet
 }
 
 type ApiUpdateBusinessMetadataDefsRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx                      _context.Context
+	ApiService               DefaultApi
 	atlasBusinessMetadataDef *[]AtlasBusinessMetadataDef
 }
 
@@ -9935,18 +10139,19 @@ UpdateBusinessMetadataDefs Bulk update API for business metadata definitions.
 
 Bulk update API for business metadata definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateBusinessMetadataDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateBusinessMetadataDefsRequest
 */
 func (a *DefaultApiService) UpdateBusinessMetadataDefs(ctx _context.Context) ApiUpdateBusinessMetadataDefsRequest {
 	return ApiUpdateBusinessMetadataDefsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []BusinessMetadataDefResponse
+//
+//	@return []BusinessMetadataDefResponse
 func (a *DefaultApiService) UpdateBusinessMetadataDefsExecute(r ApiUpdateBusinessMetadataDefsRequest) ([]BusinessMetadataDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -10025,10 +10230,10 @@ func (a *DefaultApiService) UpdateBusinessMetadataDefsExecute(r ApiUpdateBusines
 }
 
 type ApiUpdateModeRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
-	body *ModeUpdateRequest
+	subject    string
+	body       *ModeUpdateRequest
 }
 
 // Update Request
@@ -10044,20 +10249,21 @@ func (r ApiUpdateModeRequest) Execute() (ModeUpdateRequest, *_nethttp.Response, 
 /*
 UpdateMode Update mode for the specified subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the Subject
- @return ApiUpdateModeRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the Subject
+	@return ApiUpdateModeRequest
 */
 func (a *DefaultApiService) UpdateMode(ctx _context.Context, subject string) ApiUpdateModeRequest {
 	return ApiUpdateModeRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return ModeUpdateRequest
+//
+//	@return ModeUpdateRequest
 func (a *DefaultApiService) UpdateModeExecute(r ApiUpdateModeRequest) (ModeUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -10140,10 +10346,10 @@ func (a *DefaultApiService) UpdateModeExecute(r ApiUpdateModeRequest) (ModeUpdat
 }
 
 type ApiUpdateSubjectLevelConfigRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	subject string
-	body *ConfigUpdateRequest
+	subject    string
+	body       *ConfigUpdateRequest
 }
 
 // Config Update Request
@@ -10159,20 +10365,21 @@ func (r ApiUpdateSubjectLevelConfigRequest) Execute() (ConfigUpdateRequest, *_ne
 /*
 UpdateSubjectLevelConfig Update compatibility level for the specified subject.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param subject Name of the Subject
- @return ApiUpdateSubjectLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param subject Name of the Subject
+	@return ApiUpdateSubjectLevelConfigRequest
 */
 func (a *DefaultApiService) UpdateSubjectLevelConfig(ctx _context.Context, subject string) ApiUpdateSubjectLevelConfigRequest {
 	return ApiUpdateSubjectLevelConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		subject: subject,
+		ctx:        ctx,
+		subject:    subject,
 	}
 }
 
 // Execute executes the request
-//  @return ConfigUpdateRequest
+//
+//	@return ConfigUpdateRequest
 func (a *DefaultApiService) UpdateSubjectLevelConfigExecute(r ApiUpdateSubjectLevelConfigRequest) (ConfigUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -10255,9 +10462,9 @@ func (a *DefaultApiService) UpdateSubjectLevelConfigExecute(r ApiUpdateSubjectLe
 }
 
 type ApiUpdateTagDefsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	tagDef *[]TagDef
+	tagDef     *[]TagDef
 }
 
 // The tag definitions to update
@@ -10275,18 +10482,19 @@ UpdateTagDefs Bulk update API for tag definitions.
 
 Bulk update API for tag definitions.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateTagDefsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateTagDefsRequest
 */
 func (a *DefaultApiService) UpdateTagDefs(ctx _context.Context) ApiUpdateTagDefsRequest {
 	return ApiUpdateTagDefsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []TagDefResponse
+//
+//	@return []TagDefResponse
 func (a *DefaultApiService) UpdateTagDefsExecute(r ApiUpdateTagDefsRequest) ([]TagDefResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -10365,9 +10573,9 @@ func (a *DefaultApiService) UpdateTagDefsExecute(r ApiUpdateTagDefsRequest) ([]T
 }
 
 type ApiUpdateTagsRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	tag *[]Tag
+	tag        *[]Tag
 }
 
 // The tags
@@ -10385,18 +10593,19 @@ UpdateTags Bulk API to update multiple tags.
 
 Bulk API to update multiple tags.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateTagsRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateTagsRequest
 */
 func (a *DefaultApiService) UpdateTags(ctx _context.Context) ApiUpdateTagsRequest {
 	return ApiUpdateTagsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []TagResponse
+//
+//	@return []TagResponse
 func (a *DefaultApiService) UpdateTagsExecute(r ApiUpdateTagsRequest) ([]TagResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -10475,8 +10684,8 @@ func (a *DefaultApiService) UpdateTagsExecute(r ApiUpdateTagsRequest) ([]TagResp
 }
 
 type ApiUpdateTopLevelConfigRequest struct {
-	ctx _context.Context
-	ApiService DefaultApi
+	ctx                 _context.Context
+	ApiService          DefaultApi
 	configUpdateRequest *ConfigUpdateRequest
 }
 
@@ -10495,18 +10704,19 @@ UpdateTopLevelConfig Update global compatibility level
 
 Updates the global compatibility level. On success, echoes the original request back to the client.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateTopLevelConfigRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateTopLevelConfigRequest
 */
 func (a *DefaultApiService) UpdateTopLevelConfig(ctx _context.Context) ApiUpdateTopLevelConfigRequest {
 	return ApiUpdateTopLevelConfigRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ConfigUpdateRequest
+//
+//	@return ConfigUpdateRequest
 func (a *DefaultApiService) UpdateTopLevelConfigExecute(r ApiUpdateTopLevelConfigRequest) (ConfigUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
@@ -10607,9 +10817,9 @@ func (a *DefaultApiService) UpdateTopLevelConfigExecute(r ApiUpdateTopLevelConfi
 }
 
 type ApiUpdateTopLevelModeRequest struct {
-	ctx _context.Context
+	ctx        _context.Context
 	ApiService DefaultApi
-	body *ModeUpdateRequest
+	body       *ModeUpdateRequest
 }
 
 // Update Request
@@ -10625,18 +10835,19 @@ func (r ApiUpdateTopLevelModeRequest) Execute() (ModeUpdateRequest, *_nethttp.Re
 /*
 UpdateTopLevelMode Update global mode.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUpdateTopLevelModeRequest
+	@param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUpdateTopLevelModeRequest
 */
 func (a *DefaultApiService) UpdateTopLevelMode(ctx _context.Context) ApiUpdateTopLevelModeRequest {
 	return ApiUpdateTopLevelModeRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ModeUpdateRequest
+//
+//	@return ModeUpdateRequest
 func (a *DefaultApiService) UpdateTopLevelModeExecute(r ApiUpdateTopLevelModeRequest) (ModeUpdateRequest, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
