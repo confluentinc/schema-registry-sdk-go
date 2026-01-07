@@ -1,17 +1,3 @@
-// Copyright 2021 Confluent Inc. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Confluent Schema Registry
 
@@ -26,10 +12,6 @@ package schemaregistry
 
 import (
 	"encoding/json"
-)
-
-import (
-	"reflect"
 )
 
 // AtlasEntity struct for AtlasEntity
@@ -744,61 +726,6 @@ func (o *AtlasEntity) HasProxy() bool {
 // SetProxy gets a reference to the given bool and assigns it to the Proxy field.
 func (o *AtlasEntity) SetProxy(v bool) {
 	o.Proxy = &v
-}
-
-// Redact resets all sensitive fields to their zero value.
-func (o *AtlasEntity) Redact() {
-    o.recurseRedact(o.TypeName)
-    o.recurseRedact(o.Attributes)
-    o.recurseRedact(o.Guid)
-    o.recurseRedact(o.HomeId)
-    o.recurseRedact(o.IsProxy)
-    o.recurseRedact(o.IsIncomplete)
-    o.recurseRedact(o.ProvenanceType)
-    o.recurseRedact(o.Status)
-    o.recurseRedact(o.CreatedBy)
-    o.recurseRedact(o.UpdatedBy)
-    o.recurseRedact(o.CreateTime)
-    o.recurseRedact(o.UpdateTime)
-    o.recurseRedact(o.Version)
-    o.recurseRedact(o.RelationshipAttributes)
-    o.recurseRedact(o.Classifications)
-    o.recurseRedact(o.Meanings)
-    o.recurseRedact(o.CustomAttributes)
-    o.recurseRedact(o.BusinessAttributes)
-    o.recurseRedact(o.Labels)
-    o.recurseRedact(o.PendingTasks)
-    o.recurseRedact(o.Proxy)
-}
-
-func (o *AtlasEntity) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
-}
-
-func (o AtlasEntity) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AtlasEntity) MarshalJSON() ([]byte, error) {

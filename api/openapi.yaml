@@ -1274,6 +1274,15 @@ paths:
   /contexts:
     get:
       operationId: listContexts
+      parameters:
+      - description: prefix to filter contexts
+        explode: true
+        in: query
+        name: contextPrefix
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -1298,6 +1307,52 @@ paths:
           description: Error code 50001 -- Error in the backend datastore
       summary: Get a list of contexts.
   /mode:
+    delete:
+      operationId: deleteMode
+      parameters:
+      - description: recursive delete mode across all subjects.
+        explode: true
+        in: query
+        name: recursive
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                enum:
+                - READWRITE
+                - READONLY
+                - READONLY_OVERRIDE
+                - IMPORT
+                type: string
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                enum:
+                - READWRITE
+                - READONLY
+                - READONLY_OVERRIDE
+                - IMPORT
+                type: string
+            application/json; qs=0.5:
+              schema:
+                enum:
+                - READWRITE
+                - READONLY
+                - READONLY_OVERRIDE
+                - IMPORT
+                type: string
+          description: successful operation
+        "404":
+          content: {}
+          description: Error code 40401 -- Subject not found
+        "500":
+          content: {}
+          description: Error code 50001 -- Error in the backend datastore
+      summary: Deletes the global mode and revert to the default.
     get:
       operationId: getTopLevelMode
       responses:
@@ -1373,6 +1428,15 @@ paths:
         schema:
           type: string
         style: simple
+      - description: recursive delete mode for all subjects under the context if subject
+          parameter is a context
+        explode: true
+        in: query
+        name: recursive
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -4105,13 +4169,13 @@ components:
         ruleSet:
           $ref: '#/components/schemas/RuleSet'
         schemaTagsToAdd:
-          type: array
           items:
             $ref: '#/components/schemas/SchemaTags'
+          type: array
         schemaTagsToRemove:
-          type: array
           items:
             $ref: '#/components/schemas/SchemaTags'
+          type: array
         propagateSchemaTags:
           type: boolean
         schema:
@@ -4331,24 +4395,24 @@ components:
           type: array
       type: object
     SchemaEntity:
-      type: object
       properties:
         entityPath:
           type: string
         entityType:
-          type: string
           enum:
-            - sr_record
-            - sr_field
-    SchemaTags:
+          - sr_record
+          - sr_field
+          type: string
       type: object
+    SchemaTags:
       properties:
         schemaEntity:
           $ref: '#/components/schemas/SchemaEntity'
         tags:
-          type: array
           items:
             type: string
+          type: array
+      type: object
     CreateExporterRequest:
       example:
         subjectRenameFormat: subjectRenameFormat

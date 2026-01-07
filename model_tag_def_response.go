@@ -1,17 +1,3 @@
-// Copyright 2021 Confluent Inc. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Confluent Schema Registry
 
@@ -26,10 +12,6 @@ package schemaregistry
 
 import (
 	"encoding/json"
-)
-
-import (
-	"reflect"
 )
 
 // TagDefResponse struct for TagDefResponse
@@ -612,57 +594,6 @@ func (o *TagDefResponse) HasError() bool {
 // SetError gets a reference to the given ErrorMessage and assigns it to the Error field.
 func (o *TagDefResponse) SetError(v ErrorMessage) {
 	o.Error = &v
-}
-
-// Redact resets all sensitive fields to their zero value.
-func (o *TagDefResponse) Redact() {
-    o.recurseRedact(o.Category)
-    o.recurseRedact(o.Guid)
-    o.recurseRedact(o.CreatedBy)
-    o.recurseRedact(o.UpdatedBy)
-    o.recurseRedact(o.CreateTime)
-    o.recurseRedact(o.UpdateTime)
-    o.recurseRedact(o.Version)
-    o.recurseRedact(o.Name)
-    o.recurseRedact(o.Description)
-    o.recurseRedact(o.TypeVersion)
-    o.recurseRedact(o.ServiceType)
-    o.recurseRedact(o.Options)
-    o.recurseRedact(o.AttributeDefs)
-    o.recurseRedact(o.SuperTypes)
-    o.recurseRedact(o.EntityTypes)
-    o.recurseRedact(o.SubTypes)
-    o.recurseRedact(o.Error)
-}
-
-func (o *TagDefResponse) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
-}
-
-func (o TagDefResponse) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o TagDefResponse) MarshalJSON() ([]byte, error) {
