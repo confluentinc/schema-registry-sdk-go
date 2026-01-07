@@ -1,17 +1,3 @@
-// Copyright 2021 Confluent Inc. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Confluent Schema Registry
 
@@ -264,6 +250,18 @@ type DefaultApi interface {
 
 	// DeleteKekExecute executes the request
 	DeleteKekExecute(r ApiDeleteKekRequest) (*_nethttp.Response, error)
+
+	/*
+	DeleteMode Deletes the global mode and revert to the default.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @return ApiDeleteModeRequest
+	*/
+	DeleteMode(ctx _context.Context) ApiDeleteModeRequest
+
+	// DeleteModeExecute executes the request
+	//  @return string
+	DeleteModeExecute(r ApiDeleteModeRequest) (string, *_nethttp.Response, error)
 
 	/*
 	DeleteSchemaVersion Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
@@ -2939,6 +2937,115 @@ func (a *DefaultApiService) DeleteKekExecute(r ApiDeleteKekRequest) (*_nethttp.R
 	return localVarHTTPResponse, nil
 }
 
+type ApiDeleteModeRequest struct {
+	ctx _context.Context
+	ApiService DefaultApi
+	recursive *bool
+}
+
+// recursive delete mode across all subjects.
+func (r ApiDeleteModeRequest) Recursive(recursive bool) ApiDeleteModeRequest {
+	r.recursive = &recursive
+	return r
+}
+
+func (r ApiDeleteModeRequest) Execute() (string, *_nethttp.Response, error) {
+	return r.ApiService.DeleteModeExecute(r)
+}
+
+/*
+DeleteMode Deletes the global mode and revert to the default.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiDeleteModeRequest
+*/
+func (a *DefaultApiService) DeleteMode(ctx _context.Context) ApiDeleteModeRequest {
+	return ApiDeleteModeRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return string
+func (a *DefaultApiService) DeleteModeExecute(r ApiDeleteModeRequest) (string, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.DeleteMode")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/mode"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.recursive != nil {
+		localVarQueryParams.Add("recursive", parameterToString(*r.recursive, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiDeleteSchemaVersionRequest struct {
 	ctx _context.Context
 	ApiService DefaultApi
@@ -3275,8 +3382,14 @@ type ApiDeleteSubjectModeRequest struct {
 	ctx _context.Context
 	ApiService DefaultApi
 	subject string
+	recursive *bool
 }
 
+// recursive delete mode for all subjects under the context if subject parameter is a context
+func (r ApiDeleteSubjectModeRequest) Recursive(recursive bool) ApiDeleteSubjectModeRequest {
+	r.recursive = &recursive
+	return r
+}
 
 func (r ApiDeleteSubjectModeRequest) Execute() (string, *_nethttp.Response, error) {
 	return r.ApiService.DeleteSubjectModeExecute(r)
@@ -3321,6 +3434,9 @@ func (a *DefaultApiService) DeleteSubjectModeExecute(r ApiDeleteSubjectModeReque
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.recursive != nil {
+		localVarQueryParams.Add("recursive", parameterToString(*r.recursive, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7317,8 +7433,14 @@ func (a *DefaultApiService) ListExecute(r ApiListRequest) ([]string, *_nethttp.R
 type ApiListContextsRequest struct {
 	ctx _context.Context
 	ApiService DefaultApi
+	contextPrefix *string
 }
 
+// prefix to filter contexts
+func (r ApiListContextsRequest) ContextPrefix(contextPrefix string) ApiListContextsRequest {
+	r.contextPrefix = &contextPrefix
+	return r
+}
 
 func (r ApiListContextsRequest) Execute() ([]string, *_nethttp.Response, error) {
 	return r.ApiService.ListContextsExecute(r)
@@ -7360,6 +7482,9 @@ func (a *DefaultApiService) ListContextsExecute(r ApiListContextsRequest) ([]str
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.contextPrefix != nil {
+		localVarQueryParams.Add("contextPrefix", parameterToString(*r.contextPrefix, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

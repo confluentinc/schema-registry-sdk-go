@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**DeleteDekVersions**](DefaultApi.md#DeleteDekVersions) | **Delete** /dek-registry/v1/keks/{name}/deks/{subject} | Delete all versions of a dek.
 [**DeleteExporter**](DefaultApi.md#DeleteExporter) | **Delete** /exporters/{name} | Delete an exporter.
 [**DeleteKek**](DefaultApi.md#DeleteKek) | **Delete** /dek-registry/v1/keks/{name} | Delete a kek.
+[**DeleteMode**](DefaultApi.md#DeleteMode) | **Delete** /mode | Deletes the global mode and revert to the default.
 [**DeleteSchemaVersion**](DefaultApi.md#DeleteSchemaVersion) | **Delete** /subjects/{subject}/versions/{version} | Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 [**DeleteSubject**](DefaultApi.md#DeleteSubject) | **Delete** /subjects/{subject} | Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 [**DeleteSubjectConfig**](DefaultApi.md#DeleteSubjectConfig) | **Delete** /config/{subject} | Deletes the specified subject-level compatibility level config and revert to the global default.
@@ -1226,6 +1227,70 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## DeleteMode
+
+> string DeleteMode(ctx).Recursive(recursive).Execute()
+
+Deletes the global mode and revert to the default.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    recursive := true // bool | recursive delete mode across all subjects. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DefaultApi.DeleteMode(context.Background()).Recursive(recursive).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.DeleteMode``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `DeleteMode`: string
+    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.DeleteMode`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteModeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **recursive** | **bool** | recursive delete mode across all subjects. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteSchemaVersion
 
 > int32 DeleteSchemaVersion(ctx, subject, version).Permanent(permanent).Execute()
@@ -1439,7 +1504,7 @@ No authorization required
 
 ## DeleteSubjectMode
 
-> string DeleteSubjectMode(ctx, subject).Execute()
+> string DeleteSubjectMode(ctx, subject).Recursive(recursive).Execute()
 
 Deletes the specified subject-level mode and revert to the global default.
 
@@ -1457,10 +1522,11 @@ import (
 
 func main() {
     subject := "subject_example" // string | the name of the subject
+    recursive := true // bool | recursive delete mode for all subjects under the context if subject parameter is a context (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.DeleteSubjectMode(context.Background(), subject).Execute()
+    resp, r, err := api_client.DefaultApi.DeleteSubjectMode(context.Background(), subject).Recursive(recursive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.DeleteSubjectMode``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1486,6 +1552,7 @@ Other parameters are passed through a pointer to a apiDeleteSubjectModeRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **recursive** | **bool** | recursive delete mode for all subjects under the context if subject parameter is a context | 
 
 ### Return type
 
@@ -3916,7 +3983,7 @@ No authorization required
 
 ## ListContexts
 
-> []string ListContexts(ctx).Execute()
+> []string ListContexts(ctx).ContextPrefix(contextPrefix).Execute()
 
 Get a list of contexts.
 
@@ -3933,10 +4000,11 @@ import (
 )
 
 func main() {
+    contextPrefix := "contextPrefix_example" // string | prefix to filter contexts (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.ListContexts(context.Background()).Execute()
+    resp, r, err := api_client.DefaultApi.ListContexts(context.Background()).ContextPrefix(contextPrefix).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.ListContexts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3948,12 +4016,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListContextsRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **contextPrefix** | **string** | prefix to filter contexts | 
 
 ### Return type
 

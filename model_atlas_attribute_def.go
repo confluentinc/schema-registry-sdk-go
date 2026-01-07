@@ -1,17 +1,3 @@
-// Copyright 2021 Confluent Inc. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Confluent Schema Registry
 
@@ -26,10 +12,6 @@ package schemaregistry
 
 import (
 	"encoding/json"
-)
-
-import (
-	"reflect"
 )
 
 // AtlasAttributeDef struct for AtlasAttributeDef
@@ -579,56 +561,6 @@ func (o *AtlasAttributeDef) HasDisplayName() bool {
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
 func (o *AtlasAttributeDef) SetDisplayName(v string) {
 	o.DisplayName = &v
-}
-
-// Redact resets all sensitive fields to their zero value.
-func (o *AtlasAttributeDef) Redact() {
-    o.recurseRedact(o.Name)
-    o.recurseRedact(o.TypeName)
-    o.recurseRedact(o.IsOptional)
-    o.recurseRedact(o.Cardinality)
-    o.recurseRedact(o.ValuesMinCount)
-    o.recurseRedact(o.ValuesMaxCount)
-    o.recurseRedact(o.IsUnique)
-    o.recurseRedact(o.IsIndexable)
-    o.recurseRedact(o.IncludeInNotification)
-    o.recurseRedact(o.DefaultValue)
-    o.recurseRedact(o.Description)
-    o.recurseRedact(o.SearchWeight)
-    o.recurseRedact(o.IndexType)
-    o.recurseRedact(o.Constraints)
-    o.recurseRedact(o.Options)
-    o.recurseRedact(o.DisplayName)
-}
-
-func (o *AtlasAttributeDef) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
-}
-
-func (o AtlasAttributeDef) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AtlasAttributeDef) MarshalJSON() ([]byte, error) {
