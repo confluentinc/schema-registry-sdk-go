@@ -37,8 +37,10 @@ docs/RegisterSchemaResponse.md
 docs/Rule.md
 docs/RuleSet.md
 docs/Schema.md
+docs/SchemaEntity.md
 docs/SchemaReference.md
 docs/SchemaString.md
+docs/SchemaTags.md
 docs/SearchParams.md
 docs/SearchResult.md
 docs/ServerClusterId.md
@@ -85,8 +87,10 @@ model_register_schema_response.go
 model_rule.go
 model_rule_set.go
 model_schema.go
+model_schema_entity.go
 model_schema_reference.go
 model_schema_string.go
+model_schema_tags.go
 model_search_params.go
 model_search_result.go
 model_server_cluster_id.go
