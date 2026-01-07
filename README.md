@@ -58,7 +58,7 @@ Note, enum values are always validated and all unused variables are silently ign
 ### URLs Configuration per Operation
 
 Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
-An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
+An operation is uniquely identifield by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```
@@ -95,6 +95,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**DeleteDekVersions**](docs/DefaultApi.md#deletedekversions) | **Delete** /dek-registry/v1/keks/{name}/deks/{subject} | Delete all versions of a dek.
 *DefaultApi* | [**DeleteExporter**](docs/DefaultApi.md#deleteexporter) | **Delete** /exporters/{name} | Delete an exporter.
 *DefaultApi* | [**DeleteKek**](docs/DefaultApi.md#deletekek) | **Delete** /dek-registry/v1/keks/{name} | Delete a kek.
+*DefaultApi* | [**DeleteMode**](docs/DefaultApi.md#deletemode) | **Delete** /mode | Deletes the global mode and revert to the default.
 *DefaultApi* | [**DeleteSchemaVersion**](docs/DefaultApi.md#deleteschemaversion) | **Delete** /subjects/{subject}/versions/{version} | Deletes a specific version of the schema registered under this subject. This only deletes the version and the schema ID remains intact making it still possible to decode data using the schema ID. This API is recommended to be used only in development environments or under extreme circumstances where-in, its required to delete a previously registered schema for compatibility purposes or re-register previously registered schema.
 *DefaultApi* | [**DeleteSubject**](docs/DefaultApi.md#deletesubject) | **Delete** /subjects/{subject} | Deletes the specified subject and its associated compatibility level if registered. It is recommended to use this API only when a topic needs to be recycled or in development environment.
 *DefaultApi* | [**DeleteSubjectConfig**](docs/DefaultApi.md#deletesubjectconfig) | **Delete** /config/{subject} | Deletes the specified subject-level compatibility level config and revert to the global default.
@@ -196,8 +197,10 @@ Class | Method | HTTP request | Description
  - [Rule](docs/Rule.md)
  - [RuleSet](docs/RuleSet.md)
  - [Schema](docs/Schema.md)
+ - [SchemaEntity](docs/SchemaEntity.md)
  - [SchemaReference](docs/SchemaReference.md)
  - [SchemaString](docs/SchemaString.md)
+ - [SchemaTags](docs/SchemaTags.md)
  - [SearchParams](docs/SearchParams.md)
  - [SearchResult](docs/SearchResult.md)
  - [ServerClusterId](docs/ServerClusterId.md)

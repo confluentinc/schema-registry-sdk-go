@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Subjects** | Pointer to **[]string** |  | [optional] 
 **ContextType** | Pointer to **string** |  | [optional] 
 **Context** | Pointer to **string** |  | [optional] 
+**KekRenameFormat** | Pointer to **string** |  | [optional] 
 **SubjectRenameFormat** | Pointer to **string** |  | [optional] 
 **Config** | Pointer to **map[string]string** |  | [optional] 
 
@@ -129,6 +130,31 @@ SetContext sets Context field to given value.
 `func (o *CreateExporterRequest) HasContext() bool`
 
 HasContext returns a boolean if a field has been set.
+
+### GetKekRenameFormat
+
+`func (o *CreateExporterRequest) GetKekRenameFormat() string`
+
+GetKekRenameFormat returns the KekRenameFormat field if non-nil, zero value otherwise.
+
+### GetKekRenameFormatOk
+
+`func (o *CreateExporterRequest) GetKekRenameFormatOk() (*string, bool)`
+
+GetKekRenameFormatOk returns a tuple with the KekRenameFormat field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKekRenameFormat
+
+`func (o *CreateExporterRequest) SetKekRenameFormat(v string)`
+
+SetKekRenameFormat sets KekRenameFormat field to given value.
+
+### HasKekRenameFormat
+
+`func (o *CreateExporterRequest) HasKekRenameFormat() bool`
+
+HasKekRenameFormat returns a boolean if a field has been set.
 
 ### GetSubjectRenameFormat
 

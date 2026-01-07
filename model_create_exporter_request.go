@@ -1,17 +1,3 @@
-// Copyright 2021 Confluent Inc. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /*
 Confluent Schema Registry
 
@@ -28,16 +14,13 @@ import (
 	"encoding/json"
 )
 
-import (
-	"reflect"
-)
-
 // CreateExporterRequest struct for CreateExporterRequest
 type CreateExporterRequest struct {
 	Name *string `json:"name,omitempty"`
 	Subjects *[]string `json:"subjects,omitempty"`
 	ContextType *string `json:"contextType,omitempty"`
 	Context *string `json:"context,omitempty"`
+	KekRenameFormat *string `json:"kekRenameFormat,omitempty"`
 	SubjectRenameFormat *string `json:"subjectRenameFormat,omitempty"`
 	Config *map[string]string `json:"config,omitempty"`
 }
@@ -187,6 +170,38 @@ func (o *CreateExporterRequest) SetContext(v string) {
 	o.Context = &v
 }
 
+// GetKekRenameFormat returns the KekRenameFormat field value if set, zero value otherwise.
+func (o *CreateExporterRequest) GetKekRenameFormat() string {
+	if o == nil || o.KekRenameFormat == nil {
+		var ret string
+		return ret
+	}
+	return *o.KekRenameFormat
+}
+
+// GetKekRenameFormatOk returns a tuple with the KekRenameFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateExporterRequest) GetKekRenameFormatOk() (*string, bool) {
+	if o == nil || o.KekRenameFormat == nil {
+		return nil, false
+	}
+	return o.KekRenameFormat, true
+}
+
+// HasKekRenameFormat returns a boolean if a field has been set.
+func (o *CreateExporterRequest) HasKekRenameFormat() bool {
+	if o != nil && o.KekRenameFormat != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKekRenameFormat gets a reference to the given string and assigns it to the KekRenameFormat field.
+func (o *CreateExporterRequest) SetKekRenameFormat(v string) {
+	o.KekRenameFormat = &v
+}
+
 // GetSubjectRenameFormat returns the SubjectRenameFormat field value if set, zero value otherwise.
 func (o *CreateExporterRequest) GetSubjectRenameFormat() string {
 	if o == nil || o.SubjectRenameFormat == nil {
@@ -251,46 +266,6 @@ func (o *CreateExporterRequest) SetConfig(v map[string]string) {
 	o.Config = &v
 }
 
-// Redact resets all sensitive fields to their zero value.
-func (o *CreateExporterRequest) Redact() {
-    o.recurseRedact(o.Name)
-    o.recurseRedact(o.Subjects)
-    o.recurseRedact(o.ContextType)
-    o.recurseRedact(o.Context)
-    o.recurseRedact(o.SubjectRenameFormat)
-    o.recurseRedact(o.Config)
-}
-
-func (o *CreateExporterRequest) recurseRedact(v interface{}) {
-    type redactor interface {
-        Redact()
-    }
-    if r, ok := v.(redactor); ok {
-        r.Redact()
-    } else {
-        val := reflect.ValueOf(v)
-        if val.Kind() == reflect.Ptr {
-            val = val.Elem()
-        }
-        switch val.Kind() {
-        case reflect.Slice, reflect.Array:
-            for i := 0; i < val.Len(); i++ {
-                // support data types declared without pointers
-                o.recurseRedact(val.Index(i).Interface())
-                // ... and data types that were declared without but need pointers (for Redact)
-                if val.Index(i).CanAddr() {
-                    o.recurseRedact(val.Index(i).Addr().Interface())
-                }
-            }
-        }
-    }
-}
-
-func (o CreateExporterRequest) zeroField(v interface{}) {
-    p := reflect.ValueOf(v).Elem()
-    p.Set(reflect.Zero(p.Type()))
-}
-
 func (o CreateExporterRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Name != nil {
@@ -304,6 +279,9 @@ func (o CreateExporterRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Context != nil {
 		toSerialize["context"] = o.Context
+	}
+	if o.KekRenameFormat != nil {
+		toSerialize["kekRenameFormat"] = o.KekRenameFormat
 	}
 	if o.SubjectRenameFormat != nil {
 		toSerialize["subjectRenameFormat"] = o.SubjectRenameFormat
