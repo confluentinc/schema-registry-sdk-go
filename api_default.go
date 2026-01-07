@@ -7472,8 +7472,15 @@ func (a *DefaultApiService) ListExecute(r ApiListRequest) ([]string, *_nethttp.R
 }
 
 type ApiListContextsRequest struct {
-	ctx        _context.Context
-	ApiService DefaultApi
+	ctx           _context.Context
+	ApiService    DefaultApi
+	contextPrefix *string
+}
+
+// Prefix filter for context names
+func (r ApiListContextsRequest) ContextPrefix(contextPrefix string) ApiListContextsRequest {
+	r.contextPrefix = &contextPrefix
+	return r
 }
 
 func (r ApiListContextsRequest) Execute() ([]string, *_nethttp.Response, error) {
@@ -7516,6 +7523,10 @@ func (a *DefaultApiService) ListContextsExecute(r ApiListContextsRequest) ([]str
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+
+	if r.contextPrefix != nil {
+		localVarQueryParams.Add("contextPrefix", parameterToString(*r.contextPrefix, ""))
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
