@@ -4,12 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Subject** | Pointer to **string** | Name of the subject | [optional] 
+**Version** | Pointer to **int32** | Version number | [optional] 
+**Guid** | Pointer to **string** | Globally unique identifier of the schema | [optional] 
 **SchemaType** | Pointer to **string** | Schema type | [optional] 
 **Schema** | Pointer to **string** | Schema string identified by the ID | [optional] 
 **References** | Pointer to [**[]SchemaReference**](SchemaReference.md) | Schema references | [optional] 
 **Metadata** | Pointer to [**NullableMetadata**](Metadata.md) |  | [optional] 
 **RuleSet** | Pointer to [**NullableRuleSet**](RuleSet.md) |  | [optional] 
+**SchemaTags** | Pointer to [**[]SchemaTags**](SchemaTags.md) | Schema tags | [optional] 
 **MaxId** | Pointer to **int32** | Maximum ID | [optional] 
+**Ts** | Pointer to **int64** | Timestamp when the schema was created | [optional] 
+**Deleted** | Pointer to **bool** | Whether the schema has been deleted | [optional] 
 
 ## Methods
 
@@ -29,6 +35,81 @@ will change when the set of required properties is changed
 NewSchemaStringWithDefaults instantiates a new SchemaString object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetSubject
+
+`func (o *SchemaString) GetSubject() string`
+
+GetSubject returns the Subject field if non-nil, zero value otherwise.
+
+### GetSubjectOk
+
+`func (o *SchemaString) GetSubjectOk() (*string, bool)`
+
+GetSubjectOk returns a tuple with the Subject field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubject
+
+`func (o *SchemaString) SetSubject(v string)`
+
+SetSubject sets Subject field to given value.
+
+### HasSubject
+
+`func (o *SchemaString) HasSubject() bool`
+
+HasSubject returns a boolean if a field has been set.
+
+### GetVersion
+
+`func (o *SchemaString) GetVersion() int32`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *SchemaString) GetVersionOk() (*int32, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *SchemaString) SetVersion(v int32)`
+
+SetVersion sets Version field to given value.
+
+### HasVersion
+
+`func (o *SchemaString) HasVersion() bool`
+
+HasVersion returns a boolean if a field has been set.
+
+### GetGuid
+
+`func (o *SchemaString) GetGuid() string`
+
+GetGuid returns the Guid field if non-nil, zero value otherwise.
+
+### GetGuidOk
+
+`func (o *SchemaString) GetGuidOk() (*string, bool)`
+
+GetGuidOk returns a tuple with the Guid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGuid
+
+`func (o *SchemaString) SetGuid(v string)`
+
+SetGuid sets Guid field to given value.
+
+### HasGuid
+
+`func (o *SchemaString) HasGuid() bool`
+
+HasGuid returns a boolean if a field has been set.
 
 ### GetSchemaType
 
@@ -175,6 +256,31 @@ HasRuleSet returns a boolean if a field has been set.
 `func (o *SchemaString) UnsetRuleSet()`
 
 UnsetRuleSet ensures that no value is present for RuleSet, not even an explicit nil
+### GetSchemaTags
+
+`func (o *SchemaString) GetSchemaTags() []SchemaTags`
+
+GetSchemaTags returns the SchemaTags field if non-nil, zero value otherwise.
+
+### GetSchemaTagsOk
+
+`func (o *SchemaString) GetSchemaTagsOk() (*[]SchemaTags, bool)`
+
+GetSchemaTagsOk returns a tuple with the SchemaTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemaTags
+
+`func (o *SchemaString) SetSchemaTags(v []SchemaTags)`
+
+SetSchemaTags sets SchemaTags field to given value.
+
+### HasSchemaTags
+
+`func (o *SchemaString) HasSchemaTags() bool`
+
+HasSchemaTags returns a boolean if a field has been set.
+
 ### GetMaxId
 
 `func (o *SchemaString) GetMaxId() int32`
@@ -199,6 +305,56 @@ SetMaxId sets MaxId field to given value.
 `func (o *SchemaString) HasMaxId() bool`
 
 HasMaxId returns a boolean if a field has been set.
+
+### GetTs
+
+`func (o *SchemaString) GetTs() int64`
+
+GetTs returns the Ts field if non-nil, zero value otherwise.
+
+### GetTsOk
+
+`func (o *SchemaString) GetTsOk() (*int64, bool)`
+
+GetTsOk returns a tuple with the Ts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTs
+
+`func (o *SchemaString) SetTs(v int64)`
+
+SetTs sets Ts field to given value.
+
+### HasTs
+
+`func (o *SchemaString) HasTs() bool`
+
+HasTs returns a boolean if a field has been set.
+
+### GetDeleted
+
+`func (o *SchemaString) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *SchemaString) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *SchemaString) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *SchemaString) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

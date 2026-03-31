@@ -6059,9 +6059,15 @@ type ApiGetSchemaByVersionRequest struct {
 	ApiService DefaultApi
 	subject string
 	version string
+	format *string
 	deleted *bool
 }
 
+// Desired output format, dependent on schema type
+func (r ApiGetSchemaByVersionRequest) Format(format string) ApiGetSchemaByVersionRequest {
+	r.format = &format
+	return r
+}
 func (r ApiGetSchemaByVersionRequest) Deleted(deleted bool) ApiGetSchemaByVersionRequest {
 	r.deleted = &deleted
 	return r
@@ -6113,6 +6119,9 @@ func (a *DefaultApiService) GetSchemaByVersionExecute(r ApiGetSchemaByVersionReq
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.format != nil {
+		localVarQueryParams.Add("format", parameterToString(*r.format, ""))
+	}
 	if r.deleted != nil {
 		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
 	}
@@ -6175,9 +6184,15 @@ type ApiGetSchemaOnlyRequest struct {
 	ApiService DefaultApi
 	subject string
 	version string
+	format *string
 	deleted *bool
 }
 
+// Desired output format, dependent on schema type
+func (r ApiGetSchemaOnlyRequest) Format(format string) ApiGetSchemaOnlyRequest {
+	r.format = &format
+	return r
+}
 func (r ApiGetSchemaOnlyRequest) Deleted(deleted bool) ApiGetSchemaOnlyRequest {
 	r.deleted = &deleted
 	return r
@@ -6229,6 +6244,9 @@ func (a *DefaultApiService) GetSchemaOnlyExecute(r ApiGetSchemaOnlyRequest) (str
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.format != nil {
+		localVarQueryParams.Add("format", parameterToString(*r.format, ""))
+	}
 	if r.deleted != nil {
 		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
 	}
@@ -7665,12 +7683,18 @@ type ApiLookUpSchemaUnderSubjectRequest struct {
 	ApiService DefaultApi
 	subject string
 	body *RegisterSchemaRequest
+	format *string
 	deleted *bool
 }
 
 // Schema
 func (r ApiLookUpSchemaUnderSubjectRequest) Body(body RegisterSchemaRequest) ApiLookUpSchemaUnderSubjectRequest {
 	r.body = &body
+	return r
+}
+// Desired output format, dependent on schema type
+func (r ApiLookUpSchemaUnderSubjectRequest) Format(format string) ApiLookUpSchemaUnderSubjectRequest {
+	r.format = &format
 	return r
 }
 func (r ApiLookUpSchemaUnderSubjectRequest) Deleted(deleted bool) ApiLookUpSchemaUnderSubjectRequest {
@@ -7722,6 +7746,9 @@ func (a *DefaultApiService) LookUpSchemaUnderSubjectExecute(r ApiLookUpSchemaUnd
 		return nil, reportError("body is required and must be specified")
 	}
 
+	if r.format != nil {
+		localVarQueryParams.Add("format", parameterToString(*r.format, ""))
+	}
 	if r.deleted != nil {
 		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
 	}
@@ -8432,6 +8459,7 @@ type ApiRegisterRequest struct {
 	subject string
 	body *RegisterSchemaRequest
 	normalize *bool
+	format *string
 }
 
 // Schema
@@ -8442,6 +8470,11 @@ func (r ApiRegisterRequest) Body(body RegisterSchemaRequest) ApiRegisterRequest 
 // Whether to register the normalized schema
 func (r ApiRegisterRequest) Normalize(normalize bool) ApiRegisterRequest {
 	r.normalize = &normalize
+	return r
+}
+// Desired output format, dependent on schema type
+func (r ApiRegisterRequest) Format(format string) ApiRegisterRequest {
+	r.format = &format
 	return r
 }
 
@@ -8497,6 +8530,9 @@ func (a *DefaultApiService) RegisterExecute(r ApiRegisterRequest) (RegisterSchem
 
 	if r.normalize != nil {
 		localVarQueryParams.Add("normalize", parameterToString(*r.normalize, ""))
+	}
+	if r.format != nil {
+		localVarQueryParams.Add("format", parameterToString(*r.format, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json", "application/json", "application/octet-stream"}

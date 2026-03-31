@@ -7,11 +7,15 @@ Name | Type | Description | Notes
 **Subject** | Pointer to **string** |  | [optional] 
 **Version** | Pointer to **int32** |  | [optional] 
 **Id** | Pointer to **int32** |  | [optional] 
+**Guid** | Pointer to **string** |  | [optional] 
 **SchemaType** | Pointer to **string** |  | [optional] 
 **References** | Pointer to [**[]SchemaReference**](SchemaReference.md) |  | [optional] 
 **Schema** | Pointer to **string** |  | [optional] 
 **Metadata** | Pointer to [**NullableMetadata**](Metadata.md) |  | [optional] 
 **RuleSet** | Pointer to [**NullableRuleSet**](RuleSet.md) |  | [optional] 
+**SchemaTags** | Pointer to [**[]SchemaTags**](SchemaTags.md) |  | [optional] 
+**Ts** | Pointer to **int64** |  | [optional] 
+**Deleted** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -106,6 +110,31 @@ SetId sets Id field to given value.
 `func (o *Schema) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetGuid
+
+`func (o *Schema) GetGuid() string`
+
+GetGuid returns the Guid field if non-nil, zero value otherwise.
+
+### GetGuidOk
+
+`func (o *Schema) GetGuidOk() (*string, bool)`
+
+GetGuidOk returns a tuple with the Guid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGuid
+
+`func (o *Schema) SetGuid(v string)`
+
+SetGuid sets Guid field to given value.
+
+### HasGuid
+
+`func (o *Schema) HasGuid() bool`
+
+HasGuid returns a boolean if a field has been set.
 
 ### GetSchemaType
 
@@ -252,6 +281,81 @@ HasRuleSet returns a boolean if a field has been set.
 `func (o *Schema) UnsetRuleSet()`
 
 UnsetRuleSet ensures that no value is present for RuleSet, not even an explicit nil
+### GetSchemaTags
+
+`func (o *Schema) GetSchemaTags() []SchemaTags`
+
+GetSchemaTags returns the SchemaTags field if non-nil, zero value otherwise.
+
+### GetSchemaTagsOk
+
+`func (o *Schema) GetSchemaTagsOk() (*[]SchemaTags, bool)`
+
+GetSchemaTagsOk returns a tuple with the SchemaTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemaTags
+
+`func (o *Schema) SetSchemaTags(v []SchemaTags)`
+
+SetSchemaTags sets SchemaTags field to given value.
+
+### HasSchemaTags
+
+`func (o *Schema) HasSchemaTags() bool`
+
+HasSchemaTags returns a boolean if a field has been set.
+
+### GetTs
+
+`func (o *Schema) GetTs() int64`
+
+GetTs returns the Ts field if non-nil, zero value otherwise.
+
+### GetTsOk
+
+`func (o *Schema) GetTsOk() (*int64, bool)`
+
+GetTsOk returns a tuple with the Ts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTs
+
+`func (o *Schema) SetTs(v int64)`
+
+SetTs sets Ts field to given value.
+
+### HasTs
+
+`func (o *Schema) HasTs() bool`
+
+HasTs returns a boolean if a field has been set.
+
+### GetDeleted
+
+`func (o *Schema) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *Schema) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *Schema) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *Schema) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

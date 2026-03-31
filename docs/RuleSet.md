@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **MigrationRules** | Pointer to [**[]Rule**](Rule.md) |  | [optional] 
 **DomainRules** | Pointer to [**[]Rule**](Rule.md) |  | [optional] 
 **EncodingRules** | Pointer to [**[]Rule**](Rule.md) |  | [optional] 
+**EnableAt** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetEncodingRules sets EncodingRules field to given value.
 `func (o *RuleSet) HasEncodingRules() bool`
 
 HasEncodingRules returns a boolean if a field has been set.
+
+### GetEnableAt
+
+`func (o *RuleSet) GetEnableAt() string`
+
+GetEnableAt returns the EnableAt field if non-nil, zero value otherwise.
+
+### GetEnableAtOk
+
+`func (o *RuleSet) GetEnableAtOk() (*string, bool)`
+
+GetEnableAtOk returns a tuple with the EnableAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableAt
+
+`func (o *RuleSet) SetEnableAt(v string)`
+
+SetEnableAt sets EnableAt field to given value.
+
+### HasEnableAt
+
+`func (o *RuleSet) HasEnableAt() bool`
+
+HasEnableAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

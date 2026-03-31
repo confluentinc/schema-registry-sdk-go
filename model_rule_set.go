@@ -14,11 +14,16 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // RuleSet Schema rule set
 type RuleSet struct {
 	MigrationRules *[]Rule `json:"migrationRules,omitempty"`
 	DomainRules *[]Rule `json:"domainRules,omitempty"`
 	EncodingRules *[]Rule `json:"encodingRules,omitempty"`
+	EnableAt *string `json:"enableAt,omitempty"`
 }
 
 // NewRuleSet instantiates a new RuleSet object
@@ -134,6 +139,76 @@ func (o *RuleSet) SetEncodingRules(v []Rule) {
 	o.EncodingRules = &v
 }
 
+// GetEnableAt returns the EnableAt field value if set, zero value otherwise.
+func (o *RuleSet) GetEnableAt() string {
+	if o == nil || o.EnableAt == nil {
+		var ret string
+		return ret
+	}
+	return *o.EnableAt
+}
+
+// GetEnableAtOk returns a tuple with the EnableAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RuleSet) GetEnableAtOk() (*string, bool) {
+	if o == nil || o.EnableAt == nil {
+		return nil, false
+	}
+	return o.EnableAt, true
+}
+
+// HasEnableAt returns a boolean if a field has been set.
+func (o *RuleSet) HasEnableAt() bool {
+	if o != nil && o.EnableAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableAt gets a reference to the given string and assigns it to the EnableAt field.
+func (o *RuleSet) SetEnableAt(v string) {
+	o.EnableAt = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *RuleSet) Redact() {
+    o.recurseRedact(o.MigrationRules)
+    o.recurseRedact(o.DomainRules)
+    o.recurseRedact(o.EncodingRules)
+    o.recurseRedact(o.EnableAt)
+}
+
+func (o *RuleSet) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o RuleSet) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
+}
+
 func (o RuleSet) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.MigrationRules != nil {
@@ -144,6 +219,9 @@ func (o RuleSet) MarshalJSON() ([]byte, error) {
 	}
 	if o.EncodingRules != nil {
 		toSerialize["encodingRules"] = o.EncodingRules
+	}
+	if o.EnableAt != nil {
+		toSerialize["enableAt"] = o.EnableAt
 	}
 	return json.Marshal(toSerialize)
 }
