@@ -1945,6 +1945,14 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Desired output format, dependent on schema type
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          type: string
+        style: form
       - explode: true
         in: query
         name: deleted
@@ -2068,6 +2076,14 @@ paths:
         required: false
         schema:
           type: boolean
+        style: form
+      - description: Desired output format, dependent on schema type
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          type: string
         style: form
       requestBody:
         content:
@@ -2224,6 +2240,14 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Desired output format, dependent on schema type
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          type: string
+        style: form
       - explode: true
         in: query
         name: deleted
@@ -2336,6 +2360,14 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Desired output format, dependent on schema type
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          type: string
+        style: form
       - explode: true
         in: query
         name: deleted
@@ -4068,6 +4100,18 @@ components:
       example:
         compatibilityLevel: BACKWARD
       properties:
+        alias:
+          type: string
+        aliasForDeks:
+          type: string
+        normalize:
+          type: boolean
+        validateFields:
+          type: boolean
+        validateNewSchemas:
+          type: boolean
+        validateRules:
+          type: boolean
         compatibilityLevel:
           description: Compatibility Level
           enum:
@@ -4079,6 +4123,8 @@ components:
           - FULL_TRANSITIVE
           - NONE
           example: FULL_TRANSITIVE
+          type: string
+        compatibilityPolicy:
           type: string
         compatibilityGroup:
           type: string
@@ -4096,6 +4142,18 @@ components:
       example:
         compatibility: BACKWARD
       properties:
+        alias:
+          type: string
+        aliasForDeks:
+          type: string
+        normalize:
+          type: boolean
+        validateFields:
+          type: boolean
+        validateNewSchemas:
+          type: boolean
+        validateRules:
+          type: boolean
         compatibility:
           description: Compatibility Level
           enum:
@@ -4107,6 +4165,8 @@ components:
           - FULL_TRANSITIVE
           - NONE
           example: FULL_TRANSITIVE
+          type: string
+        compatibilityPolicy:
           type: string
         compatibilityGroup:
           type: string
@@ -4192,6 +4252,35 @@ components:
           example: 100001
           format: int32
           type: integer
+        version:
+          description: Version number
+          format: int32
+          type: integer
+        guid:
+          description: Globally unique identifier of the schema
+          type: string
+        schemaType:
+          description: Schema type
+          type: string
+        references:
+          description: References to other schemas
+          items:
+            $ref: '#/components/schemas/SchemaReference'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        ruleSet:
+          $ref: '#/components/schemas/RuleSet'
+        schema:
+          description: Schema definition string
+          type: string
+        ts:
+          description: Timestamp when the schema was created
+          format: int64
+          type: integer
+        deleted:
+          description: Whether the schema has been deleted
+          type: boolean
       type: object
     Schema:
       example:
@@ -4216,6 +4305,8 @@ components:
         id:
           format: int32
           type: integer
+        guid:
+          type: string
         schemaType:
           type: string
         references:
@@ -4228,6 +4319,15 @@ components:
           $ref: '#/components/schemas/Metadata'
         ruleSet:
           $ref: '#/components/schemas/RuleSet'
+        schemaTags:
+          items:
+            $ref: '#/components/schemas/SchemaTags'
+          type: array
+        ts:
+          format: int64
+          type: integer
+        deleted:
+          type: boolean
       type: object
     SchemaReference:
       example:
@@ -4256,6 +4356,16 @@ components:
           version: 1
         schemaType: schemaType
       properties:
+        subject:
+          description: Name of the subject
+          type: string
+        version:
+          description: Version number
+          format: int32
+          type: integer
+        guid:
+          description: Globally unique identifier of the schema
+          type: string
         schemaType:
           description: Schema type
           type: string
@@ -4271,10 +4381,22 @@ components:
           $ref: '#/components/schemas/Metadata'
         ruleSet:
           $ref: '#/components/schemas/RuleSet'
+        schemaTags:
+          description: Schema tags
+          items:
+            $ref: '#/components/schemas/SchemaTags'
+          type: array
         maxId:
           description: Maximum ID
           format: int32
           type: integer
+        ts:
+          description: Timestamp when the schema was created
+          format: int64
+          type: integer
+        deleted:
+          description: Whether the schema has been deleted
+          type: boolean
       type: object
     ServerClusterId:
       example:
@@ -4393,6 +4515,14 @@ components:
           items:
             $ref: '#/components/schemas/Rule'
           type: array
+        enableAt:
+          enum:
+          - ALL
+          - CLIENT
+          - GATEWAY
+          - SERVER
+          - NONE
+          type: string
       type: object
     SchemaEntity:
       properties:
