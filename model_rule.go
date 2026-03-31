@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // Rule Rule
 type Rule struct {
 	// Rule name
@@ -407,6 +411,51 @@ func (o *Rule) HasDisabled() bool {
 // SetDisabled gets a reference to the given bool and assigns it to the Disabled field.
 func (o *Rule) SetDisabled(v bool) {
 	o.Disabled = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *Rule) Redact() {
+    o.recurseRedact(o.Name)
+    o.recurseRedact(o.Doc)
+    o.recurseRedact(o.Kind)
+    o.recurseRedact(o.Mode)
+    o.recurseRedact(o.Type)
+    o.recurseRedact(o.Tags)
+    o.recurseRedact(o.Params)
+    o.recurseRedact(o.Expr)
+    o.recurseRedact(o.OnSuccess)
+    o.recurseRedact(o.OnFailure)
+    o.recurseRedact(o.Disabled)
+}
+
+func (o *Rule) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o Rule) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o Rule) MarshalJSON() ([]byte, error) {

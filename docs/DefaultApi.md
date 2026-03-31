@@ -3161,7 +3161,7 @@ No authorization required
 
 ## GetSchemaByVersion
 
-> Schema GetSchemaByVersion(ctx, subject, version).Deleted(deleted).Execute()
+> Schema GetSchemaByVersion(ctx, subject, version).Format(format).Deleted(deleted).Execute()
 
 Get a specific version of the schema registered under this subject.
 
@@ -3180,11 +3180,12 @@ import (
 func main() {
     subject := "subject_example" // string | Name of the Subject
     version := "version_example" // string | Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    format := "format_example" // string | Desired output format, dependent on schema type (optional)
     deleted := true // bool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetSchemaByVersion(context.Background(), subject, version).Deleted(deleted).Execute()
+    resp, r, err := api_client.DefaultApi.GetSchemaByVersion(context.Background(), subject, version).Format(format).Deleted(deleted).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetSchemaByVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3212,6 +3213,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **format** | **string** | Desired output format, dependent on schema type | 
  **deleted** | **bool** |  | 
 
 ### Return type
@@ -3234,7 +3236,7 @@ No authorization required
 
 ## GetSchemaOnly
 
-> string GetSchemaOnly(ctx, subject, version).Deleted(deleted).Execute()
+> string GetSchemaOnly(ctx, subject, version).Format(format).Deleted(deleted).Execute()
 
 Get the schema for the specified version of this subject. The unescaped schema only is returned.
 
@@ -3253,11 +3255,12 @@ import (
 func main() {
     subject := "subject_example" // string | Name of the Subject
     version := "version_example" // string | Version of the schema to be returned. Valid values for versionId are between [1,2^31-1] or the string \"latest\". \"latest\" returns the last registered schema under the specified subject. Note that there may be a new latest schema that gets registered right after this request is served.
+    format := "format_example" // string | Desired output format, dependent on schema type (optional)
     deleted := true // bool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetSchemaOnly(context.Background(), subject, version).Deleted(deleted).Execute()
+    resp, r, err := api_client.DefaultApi.GetSchemaOnly(context.Background(), subject, version).Format(format).Deleted(deleted).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetSchemaOnly``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3285,6 +3288,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **format** | **string** | Desired output format, dependent on schema type | 
  **deleted** | **bool** |  | 
 
 ### Return type
@@ -4119,7 +4123,7 @@ No authorization required
 
 ## LookUpSchemaUnderSubject
 
-> LookUpSchemaUnderSubject(ctx, subject).Body(body).Deleted(deleted).Execute()
+> LookUpSchemaUnderSubject(ctx, subject).Body(body).Format(format).Deleted(deleted).Execute()
 
 Check if a schema has already been registered under the specified subject. If so, this returns the schema string along with its globally unique identifier, its version under this subject and the subject name.
 
@@ -4138,11 +4142,12 @@ import (
 func main() {
     subject := "subject_example" // string | Subject under which the schema will be registered
     body := *openapiclient.NewRegisterSchemaRequest() // RegisterSchemaRequest | Schema
+    format := "format_example" // string | Desired output format, dependent on schema type (optional)
     deleted := true // bool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.LookUpSchemaUnderSubject(context.Background(), subject).Body(body).Deleted(deleted).Execute()
+    resp, r, err := api_client.DefaultApi.LookUpSchemaUnderSubject(context.Background(), subject).Body(body).Format(format).Deleted(deleted).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.LookUpSchemaUnderSubject``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4167,6 +4172,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **body** | [**RegisterSchemaRequest**](RegisterSchemaRequest.md) | Schema | 
+ **format** | **string** | Desired output format, dependent on schema type | 
  **deleted** | **bool** |  | 
 
 ### Return type
@@ -4588,7 +4594,7 @@ No authorization required
 
 ## Register
 
-> RegisterSchemaResponse Register(ctx, subject).Body(body).Normalize(normalize).Execute()
+> RegisterSchemaResponse Register(ctx, subject).Body(body).Normalize(normalize).Format(format).Execute()
 
 Register schema under a subject
 
@@ -4610,10 +4616,11 @@ func main() {
     subject := "subject_example" // string | Name of the subject
     body := *openapiclient.NewRegisterSchemaRequest() // RegisterSchemaRequest | Schema
     normalize := true // bool | Whether to register the normalized schema (optional)
+    format := "format_example" // string | Desired output format, dependent on schema type (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.Register(context.Background(), subject).Body(body).Normalize(normalize).Execute()
+    resp, r, err := api_client.DefaultApi.Register(context.Background(), subject).Body(body).Normalize(normalize).Format(format).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.Register``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4641,6 +4648,7 @@ Name | Type | Description  | Notes
 
  **body** | [**RegisterSchemaRequest**](RegisterSchemaRequest.md) | Schema | 
  **normalize** | **bool** | Whether to register the normalized schema | 
+ **format** | **string** | Desired output format, dependent on schema type | 
 
 ### Return type
 

@@ -15,6 +15,10 @@ import (
 	"time"
 )
 
+import (
+	"reflect"
+)
+
 // AtlasBusinessMetadataDef struct for AtlasBusinessMetadataDef
 type AtlasBusinessMetadataDef struct {
 	Category *string `json:"category,omitempty"`
@@ -463,6 +467,53 @@ func (o *AtlasBusinessMetadataDef) HasAttributeDefs() bool {
 // SetAttributeDefs gets a reference to the given []AtlasAttributeDef and assigns it to the AttributeDefs field.
 func (o *AtlasBusinessMetadataDef) SetAttributeDefs(v []AtlasAttributeDef) {
 	o.AttributeDefs = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *AtlasBusinessMetadataDef) Redact() {
+    o.recurseRedact(o.Category)
+    o.recurseRedact(o.Guid)
+    o.recurseRedact(o.CreatedBy)
+    o.recurseRedact(o.UpdatedBy)
+    o.recurseRedact(o.CreateTime)
+    o.recurseRedact(o.UpdateTime)
+    o.recurseRedact(o.Version)
+    o.recurseRedact(o.Name)
+    o.recurseRedact(o.Description)
+    o.recurseRedact(o.TypeVersion)
+    o.recurseRedact(o.ServiceType)
+    o.recurseRedact(o.Options)
+    o.recurseRedact(o.AttributeDefs)
+}
+
+func (o *AtlasBusinessMetadataDef) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o AtlasBusinessMetadataDef) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AtlasBusinessMetadataDef) MarshalJSON() ([]byte, error) {

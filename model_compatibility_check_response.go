@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // CompatibilityCheckResponse struct for CompatibilityCheckResponse
 type CompatibilityCheckResponse struct {
 	IsCompatible *bool `json:"is_compatible,omitempty"`
@@ -99,6 +103,42 @@ func (o *CompatibilityCheckResponse) HasMessages() bool {
 // SetMessages gets a reference to the given []string and assigns it to the Messages field.
 func (o *CompatibilityCheckResponse) SetMessages(v []string) {
 	o.Messages = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CompatibilityCheckResponse) Redact() {
+    o.recurseRedact(o.IsCompatible)
+    o.recurseRedact(o.Messages)
+}
+
+func (o *CompatibilityCheckResponse) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o CompatibilityCheckResponse) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CompatibilityCheckResponse) MarshalJSON() ([]byte, error) {
