@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // AtlasTermAssignmentHeader struct for AtlasTermAssignmentHeader
 type AtlasTermAssignmentHeader struct {
 	TermGuid *string `json:"termGuid,omitempty"`
@@ -363,6 +367,50 @@ func (o *AtlasTermAssignmentHeader) HasStatus() bool {
 // SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *AtlasTermAssignmentHeader) SetStatus(v string) {
 	o.Status = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *AtlasTermAssignmentHeader) Redact() {
+    o.recurseRedact(o.TermGuid)
+    o.recurseRedact(o.RelationGuid)
+    o.recurseRedact(o.Description)
+    o.recurseRedact(o.DisplayText)
+    o.recurseRedact(o.Expression)
+    o.recurseRedact(o.CreatedBy)
+    o.recurseRedact(o.Steward)
+    o.recurseRedact(o.Source)
+    o.recurseRedact(o.Confidence)
+    o.recurseRedact(o.Status)
+}
+
+func (o *AtlasTermAssignmentHeader) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o AtlasTermAssignmentHeader) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AtlasTermAssignmentHeader) MarshalJSON() ([]byte, error) {

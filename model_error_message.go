@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // ErrorMessage struct for ErrorMessage
 type ErrorMessage struct {
 	ErrorCode *int32 `json:"error_code,omitempty"`
@@ -99,6 +103,42 @@ func (o *ErrorMessage) HasMessage() bool {
 // SetMessage gets a reference to the given string and assigns it to the Message field.
 func (o *ErrorMessage) SetMessage(v string) {
 	o.Message = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *ErrorMessage) Redact() {
+    o.recurseRedact(o.ErrorCode)
+    o.recurseRedact(o.Message)
+}
+
+func (o *ErrorMessage) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o ErrorMessage) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o ErrorMessage) MarshalJSON() ([]byte, error) {

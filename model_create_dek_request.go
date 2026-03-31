@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // CreateDekRequest struct for CreateDekRequest
 type CreateDekRequest struct {
 	Subject *string `json:"subject,omitempty"`
@@ -165,6 +169,44 @@ func (o *CreateDekRequest) HasEncryptedKeyMaterial() bool {
 // SetEncryptedKeyMaterial gets a reference to the given string and assigns it to the EncryptedKeyMaterial field.
 func (o *CreateDekRequest) SetEncryptedKeyMaterial(v string) {
 	o.EncryptedKeyMaterial = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CreateDekRequest) Redact() {
+    o.recurseRedact(o.Subject)
+    o.recurseRedact(o.Version)
+    o.recurseRedact(o.Algorithm)
+    o.recurseRedact(o.EncryptedKeyMaterial)
+}
+
+func (o *CreateDekRequest) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o CreateDekRequest) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CreateDekRequest) MarshalJSON() ([]byte, error) {

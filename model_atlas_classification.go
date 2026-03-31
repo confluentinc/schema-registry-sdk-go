@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // AtlasClassification struct for AtlasClassification
 type AtlasClassification struct {
 	TypeName *string `json:"typeName,omitempty"`
@@ -264,6 +268,47 @@ func (o *AtlasClassification) HasRemovePropagationsOnEntityDelete() bool {
 // SetRemovePropagationsOnEntityDelete gets a reference to the given bool and assigns it to the RemovePropagationsOnEntityDelete field.
 func (o *AtlasClassification) SetRemovePropagationsOnEntityDelete(v bool) {
 	o.RemovePropagationsOnEntityDelete = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *AtlasClassification) Redact() {
+    o.recurseRedact(o.TypeName)
+    o.recurseRedact(o.Attributes)
+    o.recurseRedact(o.EntityGuid)
+    o.recurseRedact(o.EntityStatus)
+    o.recurseRedact(o.Propagate)
+    o.recurseRedact(o.ValidityPeriods)
+    o.recurseRedact(o.RemovePropagationsOnEntityDelete)
+}
+
+func (o *AtlasClassification) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o AtlasClassification) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AtlasClassification) MarshalJSON() ([]byte, error) {

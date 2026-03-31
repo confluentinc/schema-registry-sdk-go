@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // AtlasEntity struct for AtlasEntity
 type AtlasEntity struct {
 	TypeName *string `json:"typeName,omitempty"`
@@ -726,6 +730,61 @@ func (o *AtlasEntity) HasProxy() bool {
 // SetProxy gets a reference to the given bool and assigns it to the Proxy field.
 func (o *AtlasEntity) SetProxy(v bool) {
 	o.Proxy = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *AtlasEntity) Redact() {
+    o.recurseRedact(o.TypeName)
+    o.recurseRedact(o.Attributes)
+    o.recurseRedact(o.Guid)
+    o.recurseRedact(o.HomeId)
+    o.recurseRedact(o.IsProxy)
+    o.recurseRedact(o.IsIncomplete)
+    o.recurseRedact(o.ProvenanceType)
+    o.recurseRedact(o.Status)
+    o.recurseRedact(o.CreatedBy)
+    o.recurseRedact(o.UpdatedBy)
+    o.recurseRedact(o.CreateTime)
+    o.recurseRedact(o.UpdateTime)
+    o.recurseRedact(o.Version)
+    o.recurseRedact(o.RelationshipAttributes)
+    o.recurseRedact(o.Classifications)
+    o.recurseRedact(o.Meanings)
+    o.recurseRedact(o.CustomAttributes)
+    o.recurseRedact(o.BusinessAttributes)
+    o.recurseRedact(o.Labels)
+    o.recurseRedact(o.PendingTasks)
+    o.recurseRedact(o.Proxy)
+}
+
+func (o *AtlasEntity) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o AtlasEntity) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o AtlasEntity) MarshalJSON() ([]byte, error) {

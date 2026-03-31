@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // Mode struct for Mode
 type Mode struct {
 	Mode *string `json:"mode,omitempty"`
@@ -66,6 +70,41 @@ func (o *Mode) HasMode() bool {
 // SetMode gets a reference to the given string and assigns it to the Mode field.
 func (o *Mode) SetMode(v string) {
 	o.Mode = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *Mode) Redact() {
+    o.recurseRedact(o.Mode)
+}
+
+func (o *Mode) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o Mode) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o Mode) MarshalJSON() ([]byte, error) {

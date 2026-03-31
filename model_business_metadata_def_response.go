@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // BusinessMetadataDefResponse struct for BusinessMetadataDefResponse
 type BusinessMetadataDefResponse struct {
 	Category *string `json:"category,omitempty"`
@@ -495,6 +499,54 @@ func (o *BusinessMetadataDefResponse) HasError() bool {
 // SetError gets a reference to the given ErrorMessage and assigns it to the Error field.
 func (o *BusinessMetadataDefResponse) SetError(v ErrorMessage) {
 	o.Error = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *BusinessMetadataDefResponse) Redact() {
+    o.recurseRedact(o.Category)
+    o.recurseRedact(o.Guid)
+    o.recurseRedact(o.CreatedBy)
+    o.recurseRedact(o.UpdatedBy)
+    o.recurseRedact(o.CreateTime)
+    o.recurseRedact(o.UpdateTime)
+    o.recurseRedact(o.Version)
+    o.recurseRedact(o.Name)
+    o.recurseRedact(o.Description)
+    o.recurseRedact(o.TypeVersion)
+    o.recurseRedact(o.ServiceType)
+    o.recurseRedact(o.Options)
+    o.recurseRedact(o.AttributeDefs)
+    o.recurseRedact(o.Error)
+}
+
+func (o *BusinessMetadataDefResponse) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o BusinessMetadataDefResponse) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BusinessMetadataDefResponse) MarshalJSON() ([]byte, error) {

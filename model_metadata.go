@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // Metadata User-defined metadata
 type Metadata struct {
 	Tags *map[string][]string `json:"tags,omitempty"`
@@ -132,6 +136,43 @@ func (o *Metadata) HasSensitive() bool {
 // SetSensitive gets a reference to the given []string and assigns it to the Sensitive field.
 func (o *Metadata) SetSensitive(v []string) {
 	o.Sensitive = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *Metadata) Redact() {
+    o.recurseRedact(o.Tags)
+    o.recurseRedact(o.Properties)
+    o.recurseRedact(o.Sensitive)
+}
+
+func (o *Metadata) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o Metadata) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o Metadata) MarshalJSON() ([]byte, error) {

@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // SchemaEntity struct for SchemaEntity
 type SchemaEntity struct {
 	EntityPath *string `json:"entityPath,omitempty"`
@@ -99,6 +103,42 @@ func (o *SchemaEntity) HasEntityType() bool {
 // SetEntityType gets a reference to the given string and assigns it to the EntityType field.
 func (o *SchemaEntity) SetEntityType(v string) {
 	o.EntityType = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *SchemaEntity) Redact() {
+    o.recurseRedact(o.EntityPath)
+    o.recurseRedact(o.EntityType)
+}
+
+func (o *SchemaEntity) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o SchemaEntity) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o SchemaEntity) MarshalJSON() ([]byte, error) {

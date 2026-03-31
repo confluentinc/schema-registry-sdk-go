@@ -4,7 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Alias** | Pointer to **string** |  | [optional] 
+**AliasForDeks** | Pointer to **string** |  | [optional] 
+**Normalize** | Pointer to **bool** |  | [optional] 
+**ValidateFields** | Pointer to **bool** |  | [optional] 
+**ValidateNewSchemas** | Pointer to **bool** |  | [optional] 
+**ValidateRules** | Pointer to **bool** |  | [optional] 
 **Compatibility** | Pointer to **string** | Compatibility Level | [optional] 
+**CompatibilityPolicy** | Pointer to **string** |  | [optional] 
 **CompatibilityGroup** | Pointer to **string** |  | [optional] 
 **DefaultMetadata** | Pointer to [**NullableMetadata**](Metadata.md) |  | [optional] 
 **OverrideMetadata** | Pointer to [**NullableMetadata**](Metadata.md) |  | [optional] 
@@ -30,6 +37,156 @@ NewConfigUpdateRequestWithDefaults instantiates a new ConfigUpdateRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetAlias
+
+`func (o *ConfigUpdateRequest) GetAlias() string`
+
+GetAlias returns the Alias field if non-nil, zero value otherwise.
+
+### GetAliasOk
+
+`func (o *ConfigUpdateRequest) GetAliasOk() (*string, bool)`
+
+GetAliasOk returns a tuple with the Alias field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlias
+
+`func (o *ConfigUpdateRequest) SetAlias(v string)`
+
+SetAlias sets Alias field to given value.
+
+### HasAlias
+
+`func (o *ConfigUpdateRequest) HasAlias() bool`
+
+HasAlias returns a boolean if a field has been set.
+
+### GetAliasForDeks
+
+`func (o *ConfigUpdateRequest) GetAliasForDeks() string`
+
+GetAliasForDeks returns the AliasForDeks field if non-nil, zero value otherwise.
+
+### GetAliasForDeksOk
+
+`func (o *ConfigUpdateRequest) GetAliasForDeksOk() (*string, bool)`
+
+GetAliasForDeksOk returns a tuple with the AliasForDeks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAliasForDeks
+
+`func (o *ConfigUpdateRequest) SetAliasForDeks(v string)`
+
+SetAliasForDeks sets AliasForDeks field to given value.
+
+### HasAliasForDeks
+
+`func (o *ConfigUpdateRequest) HasAliasForDeks() bool`
+
+HasAliasForDeks returns a boolean if a field has been set.
+
+### GetNormalize
+
+`func (o *ConfigUpdateRequest) GetNormalize() bool`
+
+GetNormalize returns the Normalize field if non-nil, zero value otherwise.
+
+### GetNormalizeOk
+
+`func (o *ConfigUpdateRequest) GetNormalizeOk() (*bool, bool)`
+
+GetNormalizeOk returns a tuple with the Normalize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNormalize
+
+`func (o *ConfigUpdateRequest) SetNormalize(v bool)`
+
+SetNormalize sets Normalize field to given value.
+
+### HasNormalize
+
+`func (o *ConfigUpdateRequest) HasNormalize() bool`
+
+HasNormalize returns a boolean if a field has been set.
+
+### GetValidateFields
+
+`func (o *ConfigUpdateRequest) GetValidateFields() bool`
+
+GetValidateFields returns the ValidateFields field if non-nil, zero value otherwise.
+
+### GetValidateFieldsOk
+
+`func (o *ConfigUpdateRequest) GetValidateFieldsOk() (*bool, bool)`
+
+GetValidateFieldsOk returns a tuple with the ValidateFields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateFields
+
+`func (o *ConfigUpdateRequest) SetValidateFields(v bool)`
+
+SetValidateFields sets ValidateFields field to given value.
+
+### HasValidateFields
+
+`func (o *ConfigUpdateRequest) HasValidateFields() bool`
+
+HasValidateFields returns a boolean if a field has been set.
+
+### GetValidateNewSchemas
+
+`func (o *ConfigUpdateRequest) GetValidateNewSchemas() bool`
+
+GetValidateNewSchemas returns the ValidateNewSchemas field if non-nil, zero value otherwise.
+
+### GetValidateNewSchemasOk
+
+`func (o *ConfigUpdateRequest) GetValidateNewSchemasOk() (*bool, bool)`
+
+GetValidateNewSchemasOk returns a tuple with the ValidateNewSchemas field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateNewSchemas
+
+`func (o *ConfigUpdateRequest) SetValidateNewSchemas(v bool)`
+
+SetValidateNewSchemas sets ValidateNewSchemas field to given value.
+
+### HasValidateNewSchemas
+
+`func (o *ConfigUpdateRequest) HasValidateNewSchemas() bool`
+
+HasValidateNewSchemas returns a boolean if a field has been set.
+
+### GetValidateRules
+
+`func (o *ConfigUpdateRequest) GetValidateRules() bool`
+
+GetValidateRules returns the ValidateRules field if non-nil, zero value otherwise.
+
+### GetValidateRulesOk
+
+`func (o *ConfigUpdateRequest) GetValidateRulesOk() (*bool, bool)`
+
+GetValidateRulesOk returns a tuple with the ValidateRules field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateRules
+
+`func (o *ConfigUpdateRequest) SetValidateRules(v bool)`
+
+SetValidateRules sets ValidateRules field to given value.
+
+### HasValidateRules
+
+`func (o *ConfigUpdateRequest) HasValidateRules() bool`
+
+HasValidateRules returns a boolean if a field has been set.
+
 ### GetCompatibility
 
 `func (o *ConfigUpdateRequest) GetCompatibility() string`
@@ -54,6 +211,31 @@ SetCompatibility sets Compatibility field to given value.
 `func (o *ConfigUpdateRequest) HasCompatibility() bool`
 
 HasCompatibility returns a boolean if a field has been set.
+
+### GetCompatibilityPolicy
+
+`func (o *ConfigUpdateRequest) GetCompatibilityPolicy() string`
+
+GetCompatibilityPolicy returns the CompatibilityPolicy field if non-nil, zero value otherwise.
+
+### GetCompatibilityPolicyOk
+
+`func (o *ConfigUpdateRequest) GetCompatibilityPolicyOk() (*string, bool)`
+
+GetCompatibilityPolicyOk returns a tuple with the CompatibilityPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompatibilityPolicy
+
+`func (o *ConfigUpdateRequest) SetCompatibilityPolicy(v string)`
+
+SetCompatibilityPolicy sets CompatibilityPolicy field to given value.
+
+### HasCompatibilityPolicy
+
+`func (o *ConfigUpdateRequest) HasCompatibilityPolicy() bool`
+
+HasCompatibilityPolicy returns a boolean if a field has been set.
 
 ### GetCompatibilityGroup
 
