@@ -14,10 +14,21 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // Config Config
 type Config struct {
+	Alias *string `json:"alias,omitempty"`
+	AliasForDeks *string `json:"aliasForDeks,omitempty"`
+	Normalize *bool `json:"normalize,omitempty"`
+	ValidateFields *bool `json:"validateFields,omitempty"`
+	ValidateNewSchemas *bool `json:"validateNewSchemas,omitempty"`
+	ValidateRules *bool `json:"validateRules,omitempty"`
 	// Compatibility Level
 	CompatibilityLevel *string `json:"compatibilityLevel,omitempty"`
+	CompatibilityPolicy *string `json:"compatibilityPolicy,omitempty"`
 	CompatibilityGroup *string `json:"compatibilityGroup,omitempty"`
 	DefaultMetadata NullableMetadata `json:"defaultMetadata,omitempty"`
 	OverrideMetadata NullableMetadata `json:"overrideMetadata,omitempty"`
@@ -40,6 +51,198 @@ func NewConfig() *Config {
 func NewConfigWithDefaults() *Config {
 	this := Config{}
 	return &this
+}
+
+// GetAlias returns the Alias field value if set, zero value otherwise.
+func (o *Config) GetAlias() string {
+	if o == nil || o.Alias == nil {
+		var ret string
+		return ret
+	}
+	return *o.Alias
+}
+
+// GetAliasOk returns a tuple with the Alias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Config) GetAliasOk() (*string, bool) {
+	if o == nil || o.Alias == nil {
+		return nil, false
+	}
+	return o.Alias, true
+}
+
+// HasAlias returns a boolean if a field has been set.
+func (o *Config) HasAlias() bool {
+	if o != nil && o.Alias != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAlias gets a reference to the given string and assigns it to the Alias field.
+func (o *Config) SetAlias(v string) {
+	o.Alias = &v
+}
+
+// GetAliasForDeks returns the AliasForDeks field value if set, zero value otherwise.
+func (o *Config) GetAliasForDeks() string {
+	if o == nil || o.AliasForDeks == nil {
+		var ret string
+		return ret
+	}
+	return *o.AliasForDeks
+}
+
+// GetAliasForDeksOk returns a tuple with the AliasForDeks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Config) GetAliasForDeksOk() (*string, bool) {
+	if o == nil || o.AliasForDeks == nil {
+		return nil, false
+	}
+	return o.AliasForDeks, true
+}
+
+// HasAliasForDeks returns a boolean if a field has been set.
+func (o *Config) HasAliasForDeks() bool {
+	if o != nil && o.AliasForDeks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAliasForDeks gets a reference to the given string and assigns it to the AliasForDeks field.
+func (o *Config) SetAliasForDeks(v string) {
+	o.AliasForDeks = &v
+}
+
+// GetNormalize returns the Normalize field value if set, zero value otherwise.
+func (o *Config) GetNormalize() bool {
+	if o == nil || o.Normalize == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Normalize
+}
+
+// GetNormalizeOk returns a tuple with the Normalize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Config) GetNormalizeOk() (*bool, bool) {
+	if o == nil || o.Normalize == nil {
+		return nil, false
+	}
+	return o.Normalize, true
+}
+
+// HasNormalize returns a boolean if a field has been set.
+func (o *Config) HasNormalize() bool {
+	if o != nil && o.Normalize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNormalize gets a reference to the given bool and assigns it to the Normalize field.
+func (o *Config) SetNormalize(v bool) {
+	o.Normalize = &v
+}
+
+// GetValidateFields returns the ValidateFields field value if set, zero value otherwise.
+func (o *Config) GetValidateFields() bool {
+	if o == nil || o.ValidateFields == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateFields
+}
+
+// GetValidateFieldsOk returns a tuple with the ValidateFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Config) GetValidateFieldsOk() (*bool, bool) {
+	if o == nil || o.ValidateFields == nil {
+		return nil, false
+	}
+	return o.ValidateFields, true
+}
+
+// HasValidateFields returns a boolean if a field has been set.
+func (o *Config) HasValidateFields() bool {
+	if o != nil && o.ValidateFields != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateFields gets a reference to the given bool and assigns it to the ValidateFields field.
+func (o *Config) SetValidateFields(v bool) {
+	o.ValidateFields = &v
+}
+
+// GetValidateNewSchemas returns the ValidateNewSchemas field value if set, zero value otherwise.
+func (o *Config) GetValidateNewSchemas() bool {
+	if o == nil || o.ValidateNewSchemas == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateNewSchemas
+}
+
+// GetValidateNewSchemasOk returns a tuple with the ValidateNewSchemas field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Config) GetValidateNewSchemasOk() (*bool, bool) {
+	if o == nil || o.ValidateNewSchemas == nil {
+		return nil, false
+	}
+	return o.ValidateNewSchemas, true
+}
+
+// HasValidateNewSchemas returns a boolean if a field has been set.
+func (o *Config) HasValidateNewSchemas() bool {
+	if o != nil && o.ValidateNewSchemas != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateNewSchemas gets a reference to the given bool and assigns it to the ValidateNewSchemas field.
+func (o *Config) SetValidateNewSchemas(v bool) {
+	o.ValidateNewSchemas = &v
+}
+
+// GetValidateRules returns the ValidateRules field value if set, zero value otherwise.
+func (o *Config) GetValidateRules() bool {
+	if o == nil || o.ValidateRules == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateRules
+}
+
+// GetValidateRulesOk returns a tuple with the ValidateRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Config) GetValidateRulesOk() (*bool, bool) {
+	if o == nil || o.ValidateRules == nil {
+		return nil, false
+	}
+	return o.ValidateRules, true
+}
+
+// HasValidateRules returns a boolean if a field has been set.
+func (o *Config) HasValidateRules() bool {
+	if o != nil && o.ValidateRules != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateRules gets a reference to the given bool and assigns it to the ValidateRules field.
+func (o *Config) SetValidateRules(v bool) {
+	o.ValidateRules = &v
 }
 
 // GetCompatibilityLevel returns the CompatibilityLevel field value if set, zero value otherwise.
@@ -72,6 +275,38 @@ func (o *Config) HasCompatibilityLevel() bool {
 // SetCompatibilityLevel gets a reference to the given string and assigns it to the CompatibilityLevel field.
 func (o *Config) SetCompatibilityLevel(v string) {
 	o.CompatibilityLevel = &v
+}
+
+// GetCompatibilityPolicy returns the CompatibilityPolicy field value if set, zero value otherwise.
+func (o *Config) GetCompatibilityPolicy() string {
+	if o == nil || o.CompatibilityPolicy == nil {
+		var ret string
+		return ret
+	}
+	return *o.CompatibilityPolicy
+}
+
+// GetCompatibilityPolicyOk returns a tuple with the CompatibilityPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Config) GetCompatibilityPolicyOk() (*string, bool) {
+	if o == nil || o.CompatibilityPolicy == nil {
+		return nil, false
+	}
+	return o.CompatibilityPolicy, true
+}
+
+// HasCompatibilityPolicy returns a boolean if a field has been set.
+func (o *Config) HasCompatibilityPolicy() bool {
+	if o != nil && o.CompatibilityPolicy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCompatibilityPolicy gets a reference to the given string and assigns it to the CompatibilityPolicy field.
+func (o *Config) SetCompatibilityPolicy(v string) {
+	o.CompatibilityPolicy = &v
 }
 
 // GetCompatibilityGroup returns the CompatibilityGroup field value if set, zero value otherwise.
@@ -274,10 +509,78 @@ func (o *Config) UnsetOverrideRuleSet() {
 	o.OverrideRuleSet.Unset()
 }
 
+// Redact resets all sensitive fields to their zero value.
+func (o *Config) Redact() {
+    o.recurseRedact(o.Alias)
+    o.recurseRedact(o.AliasForDeks)
+    o.recurseRedact(o.Normalize)
+    o.recurseRedact(o.ValidateFields)
+    o.recurseRedact(o.ValidateNewSchemas)
+    o.recurseRedact(o.ValidateRules)
+    o.recurseRedact(o.CompatibilityLevel)
+    o.recurseRedact(o.CompatibilityPolicy)
+    o.recurseRedact(o.CompatibilityGroup)
+    o.recurseRedact(o.DefaultMetadata)
+    o.recurseRedact(o.OverrideMetadata)
+    o.recurseRedact(o.DefaultRuleSet)
+    o.recurseRedact(o.OverrideRuleSet)
+}
+
+func (o *Config) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o Config) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
+}
+
 func (o Config) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Alias != nil {
+		toSerialize["alias"] = o.Alias
+	}
+	if o.AliasForDeks != nil {
+		toSerialize["aliasForDeks"] = o.AliasForDeks
+	}
+	if o.Normalize != nil {
+		toSerialize["normalize"] = o.Normalize
+	}
+	if o.ValidateFields != nil {
+		toSerialize["validateFields"] = o.ValidateFields
+	}
+	if o.ValidateNewSchemas != nil {
+		toSerialize["validateNewSchemas"] = o.ValidateNewSchemas
+	}
+	if o.ValidateRules != nil {
+		toSerialize["validateRules"] = o.ValidateRules
+	}
 	if o.CompatibilityLevel != nil {
 		toSerialize["compatibilityLevel"] = o.CompatibilityLevel
+	}
+	if o.CompatibilityPolicy != nil {
+		toSerialize["compatibilityPolicy"] = o.CompatibilityPolicy
 	}
 	if o.CompatibilityGroup != nil {
 		toSerialize["compatibilityGroup"] = o.CompatibilityGroup

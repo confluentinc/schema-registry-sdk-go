@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // UpdateKekRequest struct for UpdateKekRequest
 type UpdateKekRequest struct {
 	KmsProps *map[string]string `json:"kmsProps,omitempty"`
@@ -132,6 +136,43 @@ func (o *UpdateKekRequest) HasShared() bool {
 // SetShared gets a reference to the given bool and assigns it to the Shared field.
 func (o *UpdateKekRequest) SetShared(v bool) {
 	o.Shared = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *UpdateKekRequest) Redact() {
+    o.recurseRedact(o.KmsProps)
+    o.recurseRedact(o.Doc)
+    o.recurseRedact(o.Shared)
+}
+
+func (o *UpdateKekRequest) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o UpdateKekRequest) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o UpdateKekRequest) MarshalJSON() ([]byte, error) {

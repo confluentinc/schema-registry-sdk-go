@@ -116,6 +116,12 @@ type DefaultApi struct {
 	lockDeleteKekExecute sync.Mutex
 	DeleteKekExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteKekRequest) (*net_http.Response, error)
 
+	lockDeleteMode sync.Mutex
+	DeleteModeFunc func(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteModeRequest
+
+	lockDeleteModeExecute sync.Mutex
+	DeleteModeExecuteFunc func(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteModeRequest) (string, *net_http.Response, error)
+
 	lockDeleteSchemaVersion sync.Mutex
 	DeleteSchemaVersionFunc func(ctx context.Context, subject, version string) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteSchemaVersionRequest
 
@@ -628,6 +634,12 @@ type DefaultApi struct {
 		}
 		DeleteKekExecute []struct {
 			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteKekRequest
+		}
+		DeleteMode []struct {
+			Ctx context.Context
+		}
+		DeleteModeExecute []struct {
+			R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteModeRequest
 		}
 		DeleteSchemaVersion []struct {
 			Ctx     context.Context
@@ -2420,6 +2432,82 @@ func (m *DefaultApi) DeleteKekExecuteCalls() []struct {
 	defer m.lockDeleteKekExecute.Unlock()
 
 	return m.calls.DeleteKekExecute
+}
+
+// DeleteMode mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteMode(ctx context.Context) github_com_confluentinc_schema_registry_sdk_go.ApiDeleteModeRequest {
+	m.lockDeleteMode.Lock()
+	defer m.lockDeleteMode.Unlock()
+
+	if m.DeleteModeFunc == nil {
+		panic("mocker: DefaultApi.DeleteModeFunc is nil but DefaultApi.DeleteMode was called.")
+	}
+
+	call := struct {
+		Ctx context.Context
+	}{
+		Ctx: ctx,
+	}
+
+	m.calls.DeleteMode = append(m.calls.DeleteMode, call)
+
+	return m.DeleteModeFunc(ctx)
+}
+
+// DeleteModeCalled returns true if DeleteMode was called at least once.
+func (m *DefaultApi) DeleteModeCalled() bool {
+	m.lockDeleteMode.Lock()
+	defer m.lockDeleteMode.Unlock()
+
+	return len(m.calls.DeleteMode) > 0
+}
+
+// DeleteModeCalls returns the calls made to DeleteMode.
+func (m *DefaultApi) DeleteModeCalls() []struct {
+	Ctx context.Context
+} {
+	m.lockDeleteMode.Lock()
+	defer m.lockDeleteMode.Unlock()
+
+	return m.calls.DeleteMode
+}
+
+// DeleteModeExecute mocks base method by wrapping the associated func.
+func (m *DefaultApi) DeleteModeExecute(r github_com_confluentinc_schema_registry_sdk_go.ApiDeleteModeRequest) (string, *net_http.Response, error) {
+	m.lockDeleteModeExecute.Lock()
+	defer m.lockDeleteModeExecute.Unlock()
+
+	if m.DeleteModeExecuteFunc == nil {
+		panic("mocker: DefaultApi.DeleteModeExecuteFunc is nil but DefaultApi.DeleteModeExecute was called.")
+	}
+
+	call := struct {
+		R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteModeRequest
+	}{
+		R: r,
+	}
+
+	m.calls.DeleteModeExecute = append(m.calls.DeleteModeExecute, call)
+
+	return m.DeleteModeExecuteFunc(r)
+}
+
+// DeleteModeExecuteCalled returns true if DeleteModeExecute was called at least once.
+func (m *DefaultApi) DeleteModeExecuteCalled() bool {
+	m.lockDeleteModeExecute.Lock()
+	defer m.lockDeleteModeExecute.Unlock()
+
+	return len(m.calls.DeleteModeExecute) > 0
+}
+
+// DeleteModeExecuteCalls returns the calls made to DeleteModeExecute.
+func (m *DefaultApi) DeleteModeExecuteCalls() []struct {
+	R github_com_confluentinc_schema_registry_sdk_go.ApiDeleteModeRequest
+} {
+	m.lockDeleteModeExecute.Lock()
+	defer m.lockDeleteModeExecute.Unlock()
+
+	return m.calls.DeleteModeExecute
 }
 
 // DeleteSchemaVersion mocks base method by wrapping the associated func.
@@ -7722,6 +7810,12 @@ func (m *DefaultApi) Reset() {
 	m.lockDeleteKekExecute.Lock()
 	m.calls.DeleteKekExecute = nil
 	m.lockDeleteKekExecute.Unlock()
+	m.lockDeleteMode.Lock()
+	m.calls.DeleteMode = nil
+	m.lockDeleteMode.Unlock()
+	m.lockDeleteModeExecute.Lock()
+	m.calls.DeleteModeExecute = nil
+	m.lockDeleteModeExecute.Unlock()
 	m.lockDeleteSchemaVersion.Lock()
 	m.calls.DeleteSchemaVersion = nil
 	m.lockDeleteSchemaVersion.Unlock()

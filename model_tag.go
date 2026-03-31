@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // Tag struct for Tag
 type Tag struct {
 	TypeName *string `json:"typeName,omitempty"`
@@ -330,6 +334,49 @@ func (o *Tag) HasEntityName() bool {
 // SetEntityName gets a reference to the given string and assigns it to the EntityName field.
 func (o *Tag) SetEntityName(v string) {
 	o.EntityName = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *Tag) Redact() {
+    o.recurseRedact(o.TypeName)
+    o.recurseRedact(o.Attributes)
+    o.recurseRedact(o.EntityGuid)
+    o.recurseRedact(o.EntityStatus)
+    o.recurseRedact(o.Propagate)
+    o.recurseRedact(o.ValidityPeriods)
+    o.recurseRedact(o.RemovePropagationsOnEntityDelete)
+    o.recurseRedact(o.EntityType)
+    o.recurseRedact(o.EntityName)
+}
+
+func (o *Tag) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o Tag) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o Tag) MarshalJSON() ([]byte, error) {

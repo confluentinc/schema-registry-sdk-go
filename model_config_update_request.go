@@ -14,10 +14,21 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // ConfigUpdateRequest Config update request
 type ConfigUpdateRequest struct {
+	Alias *string `json:"alias,omitempty"`
+	AliasForDeks *string `json:"aliasForDeks,omitempty"`
+	Normalize *bool `json:"normalize,omitempty"`
+	ValidateFields *bool `json:"validateFields,omitempty"`
+	ValidateNewSchemas *bool `json:"validateNewSchemas,omitempty"`
+	ValidateRules *bool `json:"validateRules,omitempty"`
 	// Compatibility Level
 	Compatibility *string `json:"compatibility,omitempty"`
+	CompatibilityPolicy *string `json:"compatibilityPolicy,omitempty"`
 	CompatibilityGroup *string `json:"compatibilityGroup,omitempty"`
 	DefaultMetadata NullableMetadata `json:"defaultMetadata,omitempty"`
 	OverrideMetadata NullableMetadata `json:"overrideMetadata,omitempty"`
@@ -40,6 +51,198 @@ func NewConfigUpdateRequest() *ConfigUpdateRequest {
 func NewConfigUpdateRequestWithDefaults() *ConfigUpdateRequest {
 	this := ConfigUpdateRequest{}
 	return &this
+}
+
+// GetAlias returns the Alias field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetAlias() string {
+	if o == nil || o.Alias == nil {
+		var ret string
+		return ret
+	}
+	return *o.Alias
+}
+
+// GetAliasOk returns a tuple with the Alias field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetAliasOk() (*string, bool) {
+	if o == nil || o.Alias == nil {
+		return nil, false
+	}
+	return o.Alias, true
+}
+
+// HasAlias returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasAlias() bool {
+	if o != nil && o.Alias != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAlias gets a reference to the given string and assigns it to the Alias field.
+func (o *ConfigUpdateRequest) SetAlias(v string) {
+	o.Alias = &v
+}
+
+// GetAliasForDeks returns the AliasForDeks field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetAliasForDeks() string {
+	if o == nil || o.AliasForDeks == nil {
+		var ret string
+		return ret
+	}
+	return *o.AliasForDeks
+}
+
+// GetAliasForDeksOk returns a tuple with the AliasForDeks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetAliasForDeksOk() (*string, bool) {
+	if o == nil || o.AliasForDeks == nil {
+		return nil, false
+	}
+	return o.AliasForDeks, true
+}
+
+// HasAliasForDeks returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasAliasForDeks() bool {
+	if o != nil && o.AliasForDeks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAliasForDeks gets a reference to the given string and assigns it to the AliasForDeks field.
+func (o *ConfigUpdateRequest) SetAliasForDeks(v string) {
+	o.AliasForDeks = &v
+}
+
+// GetNormalize returns the Normalize field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetNormalize() bool {
+	if o == nil || o.Normalize == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Normalize
+}
+
+// GetNormalizeOk returns a tuple with the Normalize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetNormalizeOk() (*bool, bool) {
+	if o == nil || o.Normalize == nil {
+		return nil, false
+	}
+	return o.Normalize, true
+}
+
+// HasNormalize returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasNormalize() bool {
+	if o != nil && o.Normalize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNormalize gets a reference to the given bool and assigns it to the Normalize field.
+func (o *ConfigUpdateRequest) SetNormalize(v bool) {
+	o.Normalize = &v
+}
+
+// GetValidateFields returns the ValidateFields field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetValidateFields() bool {
+	if o == nil || o.ValidateFields == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateFields
+}
+
+// GetValidateFieldsOk returns a tuple with the ValidateFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetValidateFieldsOk() (*bool, bool) {
+	if o == nil || o.ValidateFields == nil {
+		return nil, false
+	}
+	return o.ValidateFields, true
+}
+
+// HasValidateFields returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasValidateFields() bool {
+	if o != nil && o.ValidateFields != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateFields gets a reference to the given bool and assigns it to the ValidateFields field.
+func (o *ConfigUpdateRequest) SetValidateFields(v bool) {
+	o.ValidateFields = &v
+}
+
+// GetValidateNewSchemas returns the ValidateNewSchemas field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetValidateNewSchemas() bool {
+	if o == nil || o.ValidateNewSchemas == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateNewSchemas
+}
+
+// GetValidateNewSchemasOk returns a tuple with the ValidateNewSchemas field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetValidateNewSchemasOk() (*bool, bool) {
+	if o == nil || o.ValidateNewSchemas == nil {
+		return nil, false
+	}
+	return o.ValidateNewSchemas, true
+}
+
+// HasValidateNewSchemas returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasValidateNewSchemas() bool {
+	if o != nil && o.ValidateNewSchemas != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateNewSchemas gets a reference to the given bool and assigns it to the ValidateNewSchemas field.
+func (o *ConfigUpdateRequest) SetValidateNewSchemas(v bool) {
+	o.ValidateNewSchemas = &v
+}
+
+// GetValidateRules returns the ValidateRules field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetValidateRules() bool {
+	if o == nil || o.ValidateRules == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateRules
+}
+
+// GetValidateRulesOk returns a tuple with the ValidateRules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetValidateRulesOk() (*bool, bool) {
+	if o == nil || o.ValidateRules == nil {
+		return nil, false
+	}
+	return o.ValidateRules, true
+}
+
+// HasValidateRules returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasValidateRules() bool {
+	if o != nil && o.ValidateRules != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateRules gets a reference to the given bool and assigns it to the ValidateRules field.
+func (o *ConfigUpdateRequest) SetValidateRules(v bool) {
+	o.ValidateRules = &v
 }
 
 // GetCompatibility returns the Compatibility field value if set, zero value otherwise.
@@ -72,6 +275,38 @@ func (o *ConfigUpdateRequest) HasCompatibility() bool {
 // SetCompatibility gets a reference to the given string and assigns it to the Compatibility field.
 func (o *ConfigUpdateRequest) SetCompatibility(v string) {
 	o.Compatibility = &v
+}
+
+// GetCompatibilityPolicy returns the CompatibilityPolicy field value if set, zero value otherwise.
+func (o *ConfigUpdateRequest) GetCompatibilityPolicy() string {
+	if o == nil || o.CompatibilityPolicy == nil {
+		var ret string
+		return ret
+	}
+	return *o.CompatibilityPolicy
+}
+
+// GetCompatibilityPolicyOk returns a tuple with the CompatibilityPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigUpdateRequest) GetCompatibilityPolicyOk() (*string, bool) {
+	if o == nil || o.CompatibilityPolicy == nil {
+		return nil, false
+	}
+	return o.CompatibilityPolicy, true
+}
+
+// HasCompatibilityPolicy returns a boolean if a field has been set.
+func (o *ConfigUpdateRequest) HasCompatibilityPolicy() bool {
+	if o != nil && o.CompatibilityPolicy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCompatibilityPolicy gets a reference to the given string and assigns it to the CompatibilityPolicy field.
+func (o *ConfigUpdateRequest) SetCompatibilityPolicy(v string) {
+	o.CompatibilityPolicy = &v
 }
 
 // GetCompatibilityGroup returns the CompatibilityGroup field value if set, zero value otherwise.
@@ -274,10 +509,78 @@ func (o *ConfigUpdateRequest) UnsetOverrideRuleSet() {
 	o.OverrideRuleSet.Unset()
 }
 
+// Redact resets all sensitive fields to their zero value.
+func (o *ConfigUpdateRequest) Redact() {
+    o.recurseRedact(o.Alias)
+    o.recurseRedact(o.AliasForDeks)
+    o.recurseRedact(o.Normalize)
+    o.recurseRedact(o.ValidateFields)
+    o.recurseRedact(o.ValidateNewSchemas)
+    o.recurseRedact(o.ValidateRules)
+    o.recurseRedact(o.Compatibility)
+    o.recurseRedact(o.CompatibilityPolicy)
+    o.recurseRedact(o.CompatibilityGroup)
+    o.recurseRedact(o.DefaultMetadata)
+    o.recurseRedact(o.OverrideMetadata)
+    o.recurseRedact(o.DefaultRuleSet)
+    o.recurseRedact(o.OverrideRuleSet)
+}
+
+func (o *ConfigUpdateRequest) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o ConfigUpdateRequest) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
+}
+
 func (o ConfigUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Alias != nil {
+		toSerialize["alias"] = o.Alias
+	}
+	if o.AliasForDeks != nil {
+		toSerialize["aliasForDeks"] = o.AliasForDeks
+	}
+	if o.Normalize != nil {
+		toSerialize["normalize"] = o.Normalize
+	}
+	if o.ValidateFields != nil {
+		toSerialize["validateFields"] = o.ValidateFields
+	}
+	if o.ValidateNewSchemas != nil {
+		toSerialize["validateNewSchemas"] = o.ValidateNewSchemas
+	}
+	if o.ValidateRules != nil {
+		toSerialize["validateRules"] = o.ValidateRules
+	}
 	if o.Compatibility != nil {
 		toSerialize["compatibility"] = o.Compatibility
+	}
+	if o.CompatibilityPolicy != nil {
+		toSerialize["compatibilityPolicy"] = o.CompatibilityPolicy
 	}
 	if o.CompatibilityGroup != nil {
 		toSerialize["compatibilityGroup"] = o.CompatibilityGroup
