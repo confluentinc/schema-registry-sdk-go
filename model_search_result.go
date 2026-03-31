@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // SearchResult struct for SearchResult
 type SearchResult struct {
 	SearchParameters *SearchParams `json:"searchParameters,omitempty"`
@@ -165,6 +169,44 @@ func (o *SearchResult) HasReferredEntities() bool {
 // SetReferredEntities gets a reference to the given map[string]AtlasEntityHeader and assigns it to the ReferredEntities field.
 func (o *SearchResult) SetReferredEntities(v map[string]AtlasEntityHeader) {
 	o.ReferredEntities = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *SearchResult) Redact() {
+    o.recurseRedact(o.SearchParameters)
+    o.recurseRedact(o.Types)
+    o.recurseRedact(o.Entities)
+    o.recurseRedact(o.ReferredEntities)
+}
+
+func (o *SearchResult) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o SearchResult) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o SearchResult) MarshalJSON() ([]byte, error) {

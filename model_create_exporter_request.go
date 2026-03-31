@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // CreateExporterRequest struct for CreateExporterRequest
 type CreateExporterRequest struct {
 	Name *string `json:"name,omitempty"`
@@ -264,6 +268,47 @@ func (o *CreateExporterRequest) HasConfig() bool {
 // SetConfig gets a reference to the given map[string]string and assigns it to the Config field.
 func (o *CreateExporterRequest) SetConfig(v map[string]string) {
 	o.Config = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *CreateExporterRequest) Redact() {
+    o.recurseRedact(o.Name)
+    o.recurseRedact(o.Subjects)
+    o.recurseRedact(o.ContextType)
+    o.recurseRedact(o.Context)
+    o.recurseRedact(o.KekRenameFormat)
+    o.recurseRedact(o.SubjectRenameFormat)
+    o.recurseRedact(o.Config)
+}
+
+func (o *CreateExporterRequest) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o CreateExporterRequest) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o CreateExporterRequest) MarshalJSON() ([]byte, error) {

@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // RegisterSchemaRequest Schema register request
 type RegisterSchemaRequest struct {
 	// Version number
@@ -388,6 +392,50 @@ func (o *RegisterSchemaRequest) HasSchema() bool {
 // SetSchema gets a reference to the given string and assigns it to the Schema field.
 func (o *RegisterSchemaRequest) SetSchema(v string) {
 	o.Schema = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *RegisterSchemaRequest) Redact() {
+    o.recurseRedact(o.Version)
+    o.recurseRedact(o.Id)
+    o.recurseRedact(o.SchemaType)
+    o.recurseRedact(o.References)
+    o.recurseRedact(o.Metadata)
+    o.recurseRedact(o.RuleSet)
+    o.recurseRedact(o.SchemaTagsToAdd)
+    o.recurseRedact(o.SchemaTagsToRemove)
+    o.recurseRedact(o.PropagateSchemaTags)
+    o.recurseRedact(o.Schema)
+}
+
+func (o *RegisterSchemaRequest) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o RegisterSchemaRequest) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o RegisterSchemaRequest) MarshalJSON() ([]byte, error) {

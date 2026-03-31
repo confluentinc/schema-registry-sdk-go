@@ -14,6 +14,10 @@ import (
 	"encoding/json"
 )
 
+import (
+	"reflect"
+)
+
 // BusinessMetadataResponse struct for BusinessMetadataResponse
 type BusinessMetadataResponse struct {
 	TypeName *string `json:"typeName,omitempty"`
@@ -198,6 +202,45 @@ func (o *BusinessMetadataResponse) HasError() bool {
 // SetError gets a reference to the given ErrorMessage and assigns it to the Error field.
 func (o *BusinessMetadataResponse) SetError(v ErrorMessage) {
 	o.Error = &v
+}
+
+// Redact resets all sensitive fields to their zero value.
+func (o *BusinessMetadataResponse) Redact() {
+    o.recurseRedact(o.TypeName)
+    o.recurseRedact(o.Attributes)
+    o.recurseRedact(o.EntityType)
+    o.recurseRedact(o.EntityName)
+    o.recurseRedact(o.Error)
+}
+
+func (o *BusinessMetadataResponse) recurseRedact(v interface{}) {
+    type redactor interface {
+        Redact()
+    }
+    if r, ok := v.(redactor); ok {
+        r.Redact()
+    } else {
+        val := reflect.ValueOf(v)
+        if val.Kind() == reflect.Ptr {
+            val = val.Elem()
+        }
+        switch val.Kind() {
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < val.Len(); i++ {
+                // support data types declared without pointers
+                o.recurseRedact(val.Index(i).Interface())
+                // ... and data types that were declared without but need pointers (for Redact)
+                if val.Index(i).CanAddr() {
+                    o.recurseRedact(val.Index(i).Addr().Interface())
+                }
+            }
+        }
+    }
+}
+
+func (o BusinessMetadataResponse) zeroField(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
 }
 
 func (o BusinessMetadataResponse) MarshalJSON() ([]byte, error) {
