@@ -114,6 +114,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**GetDekByVersion**](docs/DefaultApi.md#getdekbyversion) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} | Get a dek by subject and version.
 *DefaultApi* | [**GetDekSubjects**](docs/DefaultApi.md#getdeksubjects) | **Get** /dek-registry/v1/keks/{name}/deks | Get a list of dek subjects.
 *DefaultApi* | [**GetDekVersions**](docs/DefaultApi.md#getdekversions) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions | List versions of dek.
+*DefaultApi* | [**GetExporterAssociationFilterConfig**](docs/DefaultApi.md#getexporterassociationfilterconfig) | **Get** /exporters/{name}/association-filter-config | Get the Cluster Link association filter config derived from an exporter.
 *DefaultApi* | [**GetExporterConfig**](docs/DefaultApi.md#getexporterconfig) | **Get** /exporters/{name}/config | Get the config for an exporter.
 *DefaultApi* | [**GetExporterInfo**](docs/DefaultApi.md#getexporterinfo) | **Get** /exporters/{name} | Get the info for an exporter.
 *DefaultApi* | [**GetExporterStatus**](docs/DefaultApi.md#getexporterstatus) | **Get** /exporters/{name}/status | Get the status for an exporter.
@@ -166,6 +167,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AssociationFilterConfig](docs/AssociationFilterConfig.md)
  - [AtlasAttributeDef](docs/AtlasAttributeDef.md)
  - [AtlasBusinessMetadataDef](docs/AtlasBusinessMetadataDef.md)
  - [AtlasClassification](docs/AtlasClassification.md)
