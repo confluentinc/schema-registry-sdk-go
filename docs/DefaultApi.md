@@ -40,6 +40,7 @@ Method | HTTP request | Description
 [**GetDekByVersion**](DefaultApi.md#GetDekByVersion) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} | Get a dek by subject and version.
 [**GetDekSubjects**](DefaultApi.md#GetDekSubjects) | **Get** /dek-registry/v1/keks/{name}/deks | Get a list of dek subjects.
 [**GetDekVersions**](DefaultApi.md#GetDekVersions) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions | List versions of dek.
+[**GetExporterClusterLinkConfig**](DefaultApi.md#GetExporterClusterLinkConfig) | **Get** /exporters/{name}/config/clusterlink | Get the Cluster Link config(s) derived from an exporter.
 [**GetExporterConfig**](DefaultApi.md#GetExporterConfig) | **Get** /exporters/{name}/config | Get the config for an exporter.
 [**GetExporterInfo**](DefaultApi.md#GetExporterInfo) | **Get** /exporters/{name} | Get the info for an exporter.
 [**GetExporterStatus**](DefaultApi.md#GetExporterStatus) | **Get** /exporters/{name}/status | Get the status for an exporter.
@@ -2532,6 +2533,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 **[]int32**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json; qs=0.9, application/json; qs=0.5
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetExporterClusterLinkConfig
+
+> map[string]string GetExporterClusterLinkConfig(ctx, name).Execute()
+
+Get the Cluster Link config(s) derived from an exporter.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    name := "name_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DefaultApi.GetExporterClusterLinkConfig(context.Background(), name).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetExporterClusterLinkConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetExporterClusterLinkConfig`: map[string]string
+    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetExporterClusterLinkConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**name** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetExporterClusterLinkConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+**map[string]string**
 
 ### Authorization
 

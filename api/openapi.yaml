@@ -2657,6 +2657,40 @@ paths:
           description: Error code 40450 -- Exporter not found
       summary: Alters the config of an exporter.
       x-codegen-request-body-name: body
+  /exporters/{name}/config/clusterlink:
+    get:
+      operationId: getExporterClusterLinkConfig
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/vnd.schemaregistry.v1+json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            application/vnd.schemaregistry+json; qs=0.9:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+            application/json; qs=0.5:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+          description: successful operation
+        "404":
+          content: {}
+          description: Error code 40450 -- Exporter not found
+      summary: Get the Cluster Link config(s) derived from an exporter.
   /exporters/{name}/pause:
     put:
       operationId: pauseExporter

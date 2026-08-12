@@ -518,6 +518,19 @@ type DefaultApi interface {
 	GetDekVersionsExecute(r ApiGetDekVersionsRequest) ([]int32, *_nethttp.Response, error)
 
 	/*
+	GetExporterClusterLinkConfig Get the Cluster Link config(s) derived from an exporter.
+
+	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 @param name
+	 @return ApiGetExporterClusterLinkConfigRequest
+	*/
+	GetExporterClusterLinkConfig(ctx _context.Context, name string) ApiGetExporterClusterLinkConfigRequest
+
+	// GetExporterClusterLinkConfigExecute executes the request
+	//  @return map[string]string
+	GetExporterClusterLinkConfigExecute(r ApiGetExporterClusterLinkConfigRequest) (map[string]string, *_nethttp.Response, error)
+
+	/*
 	GetExporterConfig Get the config for an exporter.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -5018,6 +5031,110 @@ func (a *DefaultApiService) GetDekVersionsExecute(r ApiGetDekVersionsRequest) ([
 	if r.deleted != nil {
 		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
 	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.schemaregistry.v1+json", "application/vnd.schemaregistry+json; qs=0.9", "application/json; qs=0.5"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetExporterClusterLinkConfigRequest struct {
+	ctx _context.Context
+	ApiService DefaultApi
+	name string
+}
+
+
+func (r ApiGetExporterClusterLinkConfigRequest) Execute() (map[string]string, *_nethttp.Response, error) {
+	return r.ApiService.GetExporterClusterLinkConfigExecute(r)
+}
+
+/*
+GetExporterClusterLinkConfig Get the Cluster Link config(s) derived from an exporter.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param name
+ @return ApiGetExporterClusterLinkConfigRequest
+*/
+func (a *DefaultApiService) GetExporterClusterLinkConfig(ctx _context.Context, name string) ApiGetExporterClusterLinkConfigRequest {
+	return ApiGetExporterClusterLinkConfigRequest{
+		ApiService: a,
+		ctx: ctx,
+		name: name,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]string
+func (a *DefaultApiService) GetExporterClusterLinkConfigExecute(r ApiGetExporterClusterLinkConfigRequest) (map[string]string, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  map[string]string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.GetExporterClusterLinkConfig")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/exporters/{name}/config/clusterlink"
+	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
