@@ -2657,9 +2657,9 @@ paths:
           description: Error code 40450 -- Exporter not found
       summary: Alters the config of an exporter.
       x-codegen-request-body-name: body
-  /exporters/{name}/association-filter-config:
+  /exporters/{name}/config/clusterlink:
     get:
-      operationId: getExporterAssociationFilterConfig
+      operationId: getExporterClusterLinkConfig
       parameters:
       - explode: false
         in: path
@@ -2673,18 +2673,24 @@ paths:
           content:
             application/vnd.schemaregistry.v1+json:
               schema:
-                $ref: '#/components/schemas/AssociationFilterConfig'
+                additionalProperties:
+                  type: string
+                type: object
             application/vnd.schemaregistry+json; qs=0.9:
               schema:
-                $ref: '#/components/schemas/AssociationFilterConfig'
+                additionalProperties:
+                  type: string
+                type: object
             application/json; qs=0.5:
               schema:
-                $ref: '#/components/schemas/AssociationFilterConfig'
+                additionalProperties:
+                  type: string
+                type: object
           description: successful operation
         "404":
           content: {}
           description: Error code 40450 -- Exporter not found
-      summary: Get the Cluster Link association filter config derived from an exporter.
+      summary: Get the Cluster Link config(s) derived from an exporter.
   /exporters/{name}/pause:
     put:
       operationId: pauseExporter
@@ -4647,54 +4653,6 @@ components:
           additionalProperties:
             type: string
           type: object
-      type: object
-    AssociationFilterConfig:
-      example:
-        subjectRenameFormat: subjectRenameFormat
-        topicsToInclude:
-        - topicsToInclude
-        - topicsToInclude
-        topicsToExclude:
-        - topicsToExclude
-        - topicsToExclude
-        contextType: NONE
-        context: context
-        sourceSRDeployment: CONFLUENT_CLOUD
-        sourceLSRC: sourceLSRC
-        sourceSRBackingKafkaId: sourceSRBackingKafkaId
-        sourceSRGroupId: sourceSRGroupId
-      properties:
-        topicsToInclude:
-          items:
-            type: string
-          type: array
-        topicsToExclude:
-          items:
-            type: string
-          type: array
-        subjectRenameFormat:
-          type: string
-        contextType:
-          enum:
-          - NONE
-          - AUTO
-          - CUSTOM
-          - REPLACE
-          - DEFAULT
-          type: string
-        context:
-          type: string
-        sourceSRDeployment:
-          enum:
-          - CONFLUENT_CLOUD
-          - CONFLUENT_PLATFORM
-          type: string
-        sourceLSRC:
-          type: string
-        sourceSRBackingKafkaId:
-          type: string
-        sourceSRGroupId:
-          type: string
       type: object
     ExporterStatus:
       example:

@@ -40,7 +40,7 @@ Method | HTTP request | Description
 [**GetDekByVersion**](DefaultApi.md#GetDekByVersion) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions/{version} | Get a dek by subject and version.
 [**GetDekSubjects**](DefaultApi.md#GetDekSubjects) | **Get** /dek-registry/v1/keks/{name}/deks | Get a list of dek subjects.
 [**GetDekVersions**](DefaultApi.md#GetDekVersions) | **Get** /dek-registry/v1/keks/{name}/deks/{subject}/versions | List versions of dek.
-[**GetExporterAssociationFilterConfig**](DefaultApi.md#GetExporterAssociationFilterConfig) | **Get** /exporters/{name}/association-filter-config | Get the Cluster Link association filter config derived from an exporter.
+[**GetExporterClusterLinkConfig**](DefaultApi.md#GetExporterClusterLinkConfig) | **Get** /exporters/{name}/config/clusterlink | Get the Cluster Link config(s) derived from an exporter.
 [**GetExporterConfig**](DefaultApi.md#GetExporterConfig) | **Get** /exporters/{name}/config | Get the config for an exporter.
 [**GetExporterInfo**](DefaultApi.md#GetExporterInfo) | **Get** /exporters/{name} | Get the info for an exporter.
 [**GetExporterStatus**](DefaultApi.md#GetExporterStatus) | **Get** /exporters/{name}/status | Get the status for an exporter.
@@ -2548,11 +2548,11 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## GetExporterAssociationFilterConfig
+## GetExporterClusterLinkConfig
 
-> AssociationFilterConfig GetExporterAssociationFilterConfig(ctx, name).Execute()
+> map[string]string GetExporterClusterLinkConfig(ctx, name).Execute()
 
-Get the Cluster Link association filter config derived from an exporter.
+Get the Cluster Link config(s) derived from an exporter.
 
 ### Example
 
@@ -2571,13 +2571,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetExporterAssociationFilterConfig(context.Background(), name).Execute()
+    resp, r, err := api_client.DefaultApi.GetExporterClusterLinkConfig(context.Background(), name).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetExporterAssociationFilterConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetExporterClusterLinkConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetExporterAssociationFilterConfig`: AssociationFilterConfig
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetExporterAssociationFilterConfig`: %v\n", resp)
+    // response from `GetExporterClusterLinkConfig`: map[string]string
+    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetExporterClusterLinkConfig`: %v\n", resp)
 }
 ```
 
@@ -2591,7 +2591,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetExporterAssociationFilterConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetExporterClusterLinkConfigRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2600,7 +2600,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssociationFilterConfig**](AssociationFilterConfig.md)
+**map[string]string**
 
 ### Authorization
 

@@ -518,17 +518,17 @@ type DefaultApi interface {
 	GetDekVersionsExecute(r ApiGetDekVersionsRequest) ([]int32, *_nethttp.Response, error)
 
 	/*
-	GetExporterAssociationFilterConfig Get the Cluster Link association filter config derived from an exporter.
+	GetExporterClusterLinkConfig Get the Cluster Link config(s) derived from an exporter.
 
 	 @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 @param name
-	 @return ApiGetExporterAssociationFilterConfigRequest
+	 @return ApiGetExporterClusterLinkConfigRequest
 	*/
-	GetExporterAssociationFilterConfig(ctx _context.Context, name string) ApiGetExporterAssociationFilterConfigRequest
+	GetExporterClusterLinkConfig(ctx _context.Context, name string) ApiGetExporterClusterLinkConfigRequest
 
-	// GetExporterAssociationFilterConfigExecute executes the request
-	//  @return AssociationFilterConfig
-	GetExporterAssociationFilterConfigExecute(r ApiGetExporterAssociationFilterConfigRequest) (AssociationFilterConfig, *_nethttp.Response, error)
+	// GetExporterClusterLinkConfigExecute executes the request
+	//  @return map[string]string
+	GetExporterClusterLinkConfigExecute(r ApiGetExporterClusterLinkConfigRequest) (map[string]string, *_nethttp.Response, error)
 
 	/*
 	GetExporterConfig Get the config for an exporter.
@@ -5085,26 +5085,26 @@ func (a *DefaultApiService) GetDekVersionsExecute(r ApiGetDekVersionsRequest) ([
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetExporterAssociationFilterConfigRequest struct {
+type ApiGetExporterClusterLinkConfigRequest struct {
 	ctx _context.Context
 	ApiService DefaultApi
 	name string
 }
 
 
-func (r ApiGetExporterAssociationFilterConfigRequest) Execute() (AssociationFilterConfig, *_nethttp.Response, error) {
-	return r.ApiService.GetExporterAssociationFilterConfigExecute(r)
+func (r ApiGetExporterClusterLinkConfigRequest) Execute() (map[string]string, *_nethttp.Response, error) {
+	return r.ApiService.GetExporterClusterLinkConfigExecute(r)
 }
 
 /*
-GetExporterAssociationFilterConfig Get the Cluster Link association filter config derived from an exporter.
+GetExporterClusterLinkConfig Get the Cluster Link config(s) derived from an exporter.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param name
- @return ApiGetExporterAssociationFilterConfigRequest
+ @return ApiGetExporterClusterLinkConfigRequest
 */
-func (a *DefaultApiService) GetExporterAssociationFilterConfig(ctx _context.Context, name string) ApiGetExporterAssociationFilterConfigRequest {
-	return ApiGetExporterAssociationFilterConfigRequest{
+func (a *DefaultApiService) GetExporterClusterLinkConfig(ctx _context.Context, name string) ApiGetExporterClusterLinkConfigRequest {
+	return ApiGetExporterClusterLinkConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 		name: name,
@@ -5112,23 +5112,23 @@ func (a *DefaultApiService) GetExporterAssociationFilterConfig(ctx _context.Cont
 }
 
 // Execute executes the request
-//  @return AssociationFilterConfig
-func (a *DefaultApiService) GetExporterAssociationFilterConfigExecute(r ApiGetExporterAssociationFilterConfigRequest) (AssociationFilterConfig, *_nethttp.Response, error) {
+//  @return map[string]string
+func (a *DefaultApiService) GetExporterClusterLinkConfigExecute(r ApiGetExporterClusterLinkConfigRequest) (map[string]string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  AssociationFilterConfig
+		localVarReturnValue  map[string]string
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.GetExporterAssociationFilterConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.GetExporterClusterLinkConfig")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/exporters/{name}/association-filter-config"
+	localVarPath := localBasePath + "/exporters/{name}/config/clusterlink"
 	localVarPath = strings.Replace(localVarPath, "{"+"name"+"}", _neturl.PathEscape(parameterToString(r.name, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
