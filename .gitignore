@@ -251,6 +251,7 @@ flycheck_*.el
 # Code coverage profiles and other test artifacts
 *.out
 coverage.*
+!coverage.go
 *.coverprofile
 profile.cov
 
